@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <h1 className="read-the-docs">
-      PNWS
+      PNWS new wbsite
       </h1>
     </>
   )
