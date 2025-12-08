@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const PapularProducts = ()=>{
     return (<Stl>
-    <h1>Papular Products</h1>
+    <h4>Papular Products</h4>
     </Stl>)
  
 }
@@ -12,5 +12,8 @@ const PapularProducts = ()=>{
 export default PapularProducts;
 
 const Stl = styled.section `
-width : 94%;
+margin : 0 auto;
+width : 98%;
+margin-top : 1rem;
+color : red;
 `;
