@@ -1,15 +1,20 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Home, PapularProducts } from './pages';
 
 
 function App() {
   
-
-  return (
-    <>
-      <h1 className="read-the-docs">
-      PNWS new wbsite
-      </h1>
-    </>
-  )
+const router = createBrowserRouter([
+  {
+    path : '/pnws', 
+    element : < Home />,
+    children : [{
+      index : true,
+      element : <PapularProducts />
+    }]
+  },
+])
+  return < RouterProvider router={router} />
 }
 
 export default App
