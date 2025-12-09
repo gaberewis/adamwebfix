@@ -1,0 +1,13 @@
+export {default as AddProudct } from './AddProudct';
+export {default as AllProudcts } from './AllProudcts';
+export {default as Admin } from './Admin';
+export {default as Dashboard } from './Dashboard';
+export {default as DeleteProudct } from './DeleteProudct';
+export {default as EditProudct } from './EditProudct';
+export {default as Landing } from './Landing';
+export {default as Login } from './Login';
+export {default as Register } from './Register';
+export {default as Profile } from './Profile';
+export {default as HomeLayout } from './HomeLayout';
+export {default as Stats } from './Stats';
+export {default as Error } from './Error';

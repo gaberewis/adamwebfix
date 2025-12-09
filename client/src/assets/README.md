@@ -78,7 +78,7 @@ export default App;
 - won't need to stop/start server
 
 ```sh
-npm install @tanstack/react-query@4.29.5 @tanstack/react-query-devtools@4.29.6 axios@1.3.6 dayjs@1.11.7 react-icons@4.8.0 react-router-dom@6.10.0 react-toastify@9.1.2 recharts@2.5.0 styled-components@5.3.10
+npm install 
 
 ```
 
@@ -96,7 +96,7 @@ npm install @tanstack/react-query@4.29.5 @tanstack/react-query-devtools@4.29.6 a
 - all my examples will include version !!!
 
 ```sh
-npm i react-router-dom@6.10.0
+npm 
 ```
 
 App.jsx
@@ -302,6 +302,7 @@ App.jsx
 {
     path: '/',
     element: <HomeLayout />,
+    errorElement : <Error />
     children: [
       {
         index: true,
@@ -576,7 +577,7 @@ const Error = () => {
       <Wrapper>
         <div>
           <img src={img} alt='not found' />
-          <h3>Ohh! page not found</h3>
+          return <h3>Ohh! page not found</h3>
           <p>We can't seem to find the page you're looking for</p>
           <Link to='/dashboard'>back home</Link>
         </div>
@@ -586,7 +587,7 @@ const Error = () => {
   return (
     <Wrapper>
       <div>
-        <h3>something went wrong</h3>
+        return <h3>something went wrong</h3>
       </div>
     </Wrapper>
   );
@@ -1003,7 +1004,7 @@ export default Dashboard;
 
 [React Icons](https://react-icons.github.io/react-icons/)
 
-```sh
+  ```sh
 npm install react-icons@4.8.0
 ```
 
@@ -1067,8 +1068,6 @@ const Wrapper = styled.nav`
   box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.1);
   background: var(--background-secondary-color);
   .logo {
-    display: flex;
-    align-items: center;
     width: 100px;
   }
   .nav-center {
@@ -1911,7 +1910,7 @@ server.js
 ```js
 import { nanoid } from 'nanoid';
 
-let Proudcts = [
+let Proudcts =  [
   { id: nanoid(), company: 'apple', position: 'front-end' },
   { id: nanoid(), company: 'google', position: 'back-end' },
 ];
@@ -3746,7 +3745,8 @@ export const action = async ({ request }) => {
     toast.success('Login successful');
     return redirect('/dashboard');
   } catch (error) {
-   return { error: error?.response?.data?.msg };
+    toast.error(error?.response?.data?.msg);
+    return error;
   }
 };
 
@@ -4254,9 +4254,10 @@ npm i dayjs@1.11.7
 
 ```js
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
-import { Link, Form } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/Proudct';
 import ProudctInfo from './ProudctInfo';
+import { Form } from 'react-router-dom';
 import day from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 day.extend(advancedFormat);
@@ -4696,7 +4697,6 @@ const StatItem = ({ count, title, icon, color, bcg }) => {
         <span className='icon'>{icon}</span>
       </header>
       <h5 className='title'>{title}</h5>
-      
     </Wrapper>
   );
 };
@@ -4819,9 +4819,9 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
-const goo = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.use(express.static(path.resolve(goo, './public')));
+app.use(express.static(path.resolve(__dirname, './public')));
 ```
 
 - http://localhost:5100/imageName
@@ -5182,14 +5182,14 @@ export const checkForTestUser = (req, res, next) => {
 [Mockaroo ](https://www.mockaroo.com/)
 
 ```json
-{
+``{
   "company": "Cogidoo",
   "position": "Help Desk Technician",
   "ProudctLocation": "Vyksa",
   "ProudctStatus": "pending",
   "ProudctType": "part-time",
   "createdAt": "2022-07-25T21:26:23Z"
-}
+}``
 ```
 
 - rename and save json in utils
@@ -5240,15 +5240,12 @@ ProudctController.js
 import mongoose from 'mongoose';
 import day from 'dayjs';
 
-
-
 export const showStats = async (req, res) => {
   const defaultStats = {
     pending: 22,
     interview: 11,
     declined: 4,
   };
-
 
   let monthlyApplications = [
     {
@@ -5294,10 +5291,6 @@ export const showStats = async (req, res) => {
     declined: stats.declined || 0,
   };
 
-
-
-
-
   let monthlyApplications = await Proudct.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     {
@@ -5309,7 +5302,6 @@ export const showStats = async (req, res) => {
     { $sort: { '_id.year': -1, '_id.month': -1 } },
     { $limit: 6 },
   ]);
-
   monthlyApplications = monthlyApplications
     .map((item) => {
       const {
@@ -5585,8 +5577,9 @@ export const getAllProudcts = async (req, res) => {
 
   if (search) {
     queryObject.$or = [
+      { position: { $regex: search, $options: 'i' } },
       { company: { $regex: search, $options: 'i' } },
-  { position: { $regex: search, $options: 'i' } }
+    ];
   }
   if (ProudctStatus && ProudctStatus !== 'all') {
     queryObject.ProudctStatus = ProudctStatus;
@@ -5607,7 +5600,6 @@ export const getAllProudcts = async (req, res) => {
   // setup pagination
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;
-  
   const skip = (page - 1) * limit;
 
   const Proudcts = await Proudct.find(queryObject)
