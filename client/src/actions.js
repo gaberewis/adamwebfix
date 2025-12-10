@@ -39,10 +39,12 @@ export const loginAction = async({ request })=>{
 
 export const addProudctAction = async({ request })=>{
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+  const file = formData.get('image');
+
+  if(file && file.size > 1000000)  { return {error : 'File must be less than 1 MB'}};
 
 try {
-  await axios.post('/api/Proudcts', data);
+  await axios.post('/api/Proudcts', formData);
   return redirect('/dashboard');
 } catch (error) {
  console.log('BACKEND ERROR:', error.response?.data);
@@ -55,10 +57,11 @@ const errorMsg = error.response?.data?.msg || 'Adding Proudct failed';
 export const editAction = async({ request, params })=>{
 
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+  const file = formData.get('image');
 
+  if(file && file.size > 1000000)  { return {error : 'File must be less than 1 MB'}};
   try {
-await axios.patch(`/api/Proudcts/${params.id}`, data);
+await axios.patch(`/api/Proudcts/${params.id}`, formData);
 return redirect('/dashboard');
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data);

@@ -4,8 +4,6 @@ const UserSchema = new mongoose.Schema({
 name : String,
 email : String,
 password : String,
-lastName : String,
-location : String,
 role : {
     type : String,
     enum : ['admin', 'user'],
@@ -17,7 +15,5 @@ UserSchema.methods.toJSON = function() {
     delete userObject.password;
     return userObject;
 }
-
-
 
 export default mongoose.model('User', UserSchema);

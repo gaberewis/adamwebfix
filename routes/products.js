@@ -14,7 +14,7 @@ const router = Router();
 
 
 router.route('/').get( getProudcts).post(createProudctValidation,craeteProudct);
-router.route('/stats').get(showStates);
+
 
 router.route('/:id').get(paramValidation, getProudct).patch(checkIsDemo, updateProudct).delete(checkIsDemo, deleteProudct);
 

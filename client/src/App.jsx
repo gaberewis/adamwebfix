@@ -1,9 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
-  AddProudct, AllProudcts, Admin, Dashboard, DeleteProudct,
-  EditProudct, Landing, Login, Register, Profile, HomeLayout,
-  Stats, Error
-} from './pages'
+  AddProudct, AllProudcts, Admin, Dashboard,
+   Equipment, Accessories, 
+  Accessories, Parts,
+  EditProudct,  Login, Register, 
+  Error
+} from './pages';
 import { ErrorElement } from "./components";
 
 import * as loader from './loaders';
@@ -22,28 +24,31 @@ const router = createBrowserRouter([
 
   {
     path: '/',
-     element: <Landing />,
-    errorElement: <Error />,
-    
-  },
-  {
-    path: 'register',
-    element: <Register />,
-    action: action.registerAction
-
-  },
-  {
-    path: 'login',
-    element: <Login />,
-    action: action.loginAction,
-  },
-  {
-    path: 'dashboard',
     element: <Dashboard />,
     loader: loader.dashboardloader,
-
+     ErrorElement: <Error />,
 
     children: [
+         {
+        index: 'equipment',
+        element: <Equipment />,
+       
+      },
+         {
+        index: 'accessories',
+        element: <Accessories />,
+       
+      },
+         {
+        index: 'supplies',
+        element: <Supplies />,
+       
+      },
+            {
+        index: 'parts',
+        element: <Parts />,
+       
+      },
       {
         index: true,
         element: <AllProudcts />,
@@ -67,18 +72,7 @@ const router = createBrowserRouter([
         path: 'delete-Proudct/:id',
         action: action.deleteProudctAction
       },
-      {
-        path: 'profile',
-        element: <Profile />,
-        action: action.profileAction
-      },
-      {
-        path: 'stats',
-        element: <Stats />,
-        loader: loader.satatsLoader,
-        errorElement: <ErrorElement />
-
-      },
+     
       {
         path: 'admin',
         element: <Admin />,
@@ -86,6 +80,17 @@ const router = createBrowserRouter([
       },
 
     ]
+  },
+    {
+    path: 'register',
+    element: <Register />,
+    action: action.registerAction
+
+  },
+  {
+    path: 'login',
+    element: <Login />,
+    action: action.loginAction,
   },
 
 ])

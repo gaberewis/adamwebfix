@@ -5,8 +5,6 @@ import {
     login,
     logout,  
 } from '../controllers/auth.js';
-import { authenticateUser } from '../middleware/funcs.js';
-
 
 const router = Router();
 

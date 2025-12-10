@@ -6,7 +6,11 @@ import { ImProfile } from 'react-icons/im';
 import { MdAdminPanelSettings } from 'react-icons/md';
 
 const links = [
-  { text: 'all Proudcts', path: '.', icon: <MdQueryStats /> },
+  { text: 'Papular Proudcts', path: '.', icon: <MdQueryStats /> },
+   { text: 'Equipment', path: 'equipment', icon: <MdQueryStats /> },
+    { text: 'Accessories', path: 'accessories', icon: <MdQueryStats /> },
+     { text: 'Supplies', path: 'supplies', icon: <MdQueryStats /> },
+      { text: 'parts', path: 'parts', icon: <MdQueryStats /> },
   { text: 'add Proudct', path: 'add-Proudct', icon: <FaWpforms /> },
   { text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
   { text: 'profile', path: 'profile', icon: <ImProfile /> },

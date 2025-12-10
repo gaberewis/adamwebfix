@@ -11,8 +11,6 @@ export const registerUser = async (req, res) => {
     res.status(201).json({ msg: 'user registred', user });
 };
 
-
-
 export const login = async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     const validPassword = await comparePassword(req.body.password, user.password);
@@ -20,7 +18,6 @@ export const login = async (req, res) => {
    
     const token = createToken({ userId: user._id, userRole: user.role, userName : user.name });
  
-   
     res.cookie(
         'token', token, {
         httpOnly: true,

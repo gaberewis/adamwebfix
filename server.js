@@ -12,13 +12,11 @@ import helmet from 'helmet';
 
 
 import ProudctRoute from './routes/Proudcts.js';
-import userRoute from './routes/user.js';
 import authRoute from './routes/auth.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
 
 import { authenticateUser } from './middleware/funcs.js';
 
@@ -53,9 +51,8 @@ app.get('/', (req, res) => {
   res.send('Hello Worllld');
 });
 
-app.use('/api/auth', authRoute);
-app.use('/api/Proudcts', authenticateUser, ProudctRoute);
-app.use('/api/users', authenticateUser, userRoute);
+app.use('/auth', authRoute);
+app.use('/Proudcts', authenticateUser, ProudctRoute);
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));

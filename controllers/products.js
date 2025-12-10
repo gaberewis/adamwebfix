@@ -1,21 +1,22 @@
 import Proudct from '../models/Proudct.js';
 import mongoose from 'mongoose';
 import day from 'dayjs';
+import cloudinary from 'cloudinary';
+import { formatImage } from '../middleware/multer.js';
 
 
 export const getProudcts = async (req, res) => {
 
-  const { sort, ProudctType, ProudctStatus, search } = req.query;
+  const { sort, section, catagory, search } = req.query;
 
   const queryFields = { createdBy: req.user.userId };
 
   if (search) {queryFields.$or = [
-    { company: { $regex: search, $options: 'i' } },
-    { position: { $regex: search, $options: 'i' } }
+    { name: { $regex: search, $options: 'i' } },
   ]};
 
-  if (ProudctType && ProudctType !== 'all') queryFields.ProudctType = ProudctType;
-  if (ProudctStatus && ProudctStatus !== 'all') queryFields.ProudctStatus = ProudctStatus;
+  if (section ) queryFields.section = section;
+  if (catagory ) queryFields.catagory = catagory;
 
   const limit = Number(req.query.limit) || 10;
   const page = Number(req.query.page) || 1;
@@ -38,12 +39,19 @@ export const getProudcts = async (req, res) => {
 }
 
 
-
 export const craeteProudct = async (req, res) => {
-  req.body.createdBy = req.user.userId;
+
+if(req.file){
+  const response = await cloudinary.v2.uploader.upload(formatImage(req.file));
+  req.body.image = response.secure_url;
+  req.body.imageId = response.public_id;
+
+}
   const Proudct = await Proudct.create(req.body);
-  res.status(201).json({ msg: 'Proudcte created', Proudct })
+  res.status(201).json({ msg: 'Proudcte created'})
 };
+
+
 export const getProudct = async (req, res) => {
   const { id } = req.params;
   const Proudct = await Proudct.findById(id);
@@ -51,11 +59,23 @@ export const getProudct = async (req, res) => {
 };
 
 export const updateProudct = async (req, res) => {
+
+
+
+const newProduct = {...req.body}
+
+if(req.file){
+  const response = await cloudinary.v2.uploader.upload(formatImage(req.file));
+  newProduct.image = response.secure_url;
+  newProduct.imageId = response.public_id;
+}
   const { id } = req.params;
-  const updatedProudct = await Proudct.findByIdAndUpdate(id, req.body, {
-    new: true
-  });
-  res.status(200).json({ updatedProudct });
+  const updatedProudct = await Proudct.findByIdAndUpdate(id, newProduct);
+if(req.file && updatedProudct.imageId){
+  await cloudinary.v2.uploader.destroy(updateProudct.imageId)
+}
+
+  res.status(200).json({ msg : 'product updated'});
 };
 
 export const deleteProudct = async (req, res) => {
@@ -65,7 +85,6 @@ export const deleteProudct = async (req, res) => {
   res.status(200).json({ msg: 'Proudct deleted' });
 
 };
-
 
 export const showStates = async (req, res) => {
 
@@ -113,3 +132,22 @@ export const showStates = async (req, res) => {
 };
 
 
+
+
+ // export const updateUser = async (req, res) => {
+//   const newUser = { ...req.body };
+//   delete newUser.password;
+//   if (req.file) {
+   
+//     const response = await cloudinary.v2.uploader.upload(formatImage(req.file));
+
+//     newUser.avatar = response.secure_url;
+//     newUser.avatarPublicId = response.public_id;
+//   }
+//   const updatedUser = await User.findByIdAndUpdate(req.user.userId, newUser);
+
+//   if (req.file && updatedUser.avatarPublicId) {
+//     await cloudinary.v2.uploader.destroy(updatedUser.avatarPublicId);
+//   }
+//   res.status(200).json({ msg: 'update user' });
+// };
