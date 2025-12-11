@@ -1,15 +1,16 @@
 import mongoose from "mongoose";
 
-const ProudctSchema = new mongoose.Schema({
+const productschema = new mongoose.Schema({
     name: String,
     productType: String,
     section: {
         type: String,
         enum: ['equipment', 'accessories', 'supplies', 'parts', 'other']
     },
-    catagory: String,
+    catagory:  String,
+    catId : String,
     images: [
-        { imageUrl: String }, { imageId: String }
+        { imageUrl: String ,  imageId: String }
     ],
     image : String,
     imageId : String,
@@ -18,4 +19,11 @@ const ProudctSchema = new mongoose.Schema({
     papular: { type: String, enum: ['true', 'false'], default: true }
 }, { timestamps: true });
 
-export default mongoose.model('Proudct', ProudctSchema);
+productschema.pre("save", function(next){
+    if(req.body.catagory){
+        return catId = req.body.catagory.toLowerCase().replace(/\s+/g,"");
+    }
+next();
+});
+
+export default mongoose.model('Proudct', productschema);

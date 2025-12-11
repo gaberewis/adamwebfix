@@ -4,7 +4,7 @@ const CssStl = styled.main`
 width : 90%;
 margin : 0 auto;
 
-.Proudcts-container{
+.products-container{
 display : grid;
 grid-template-columns: 1fr;
 gap : 1rem;
@@ -12,7 +12,7 @@ gap : 1rem;
 }
 
 @media (min-width : 992px){
-.Proudcts-container {
+.products-container {
  grid-template-columns: 1fr 1fr 1fr;
 }
 }
@@ -21,7 +21,7 @@ gap : 1rem;
     font-weight: 500;
     margin-bottom: 1.5rem;
   }
-  .Proudcts {
+  .products {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 2rem;

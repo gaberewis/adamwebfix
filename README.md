@@ -132,7 +132,7 @@ export default App;
 
   AddProudct.jsx
   Admin.jsx
-  AllProudcts.jsx
+  Allproducts.jsx
   DashboardLayout.jsx
   DeleteProudct.jsx
   EditProudct.jsx
@@ -169,7 +169,7 @@ export { default as Register } from './Register';
 export { default as Login } from './Login';
 export { default as Error } from './Error';
 export { default as Stats } from './Stats';
-export { default as AllProudcts } from './AllProudcts';
+export { default as Allproducts } from './Allproducts';
 export { default as AddProudct } from './AddProudct';
 export { default as EditProudct } from './EditProudct';
 export { default as Profile } from './Profile';
@@ -844,8 +844,8 @@ App.jsx
           },
           { path: 'stats', element: <Stats /> },
           {
-            path: 'all-Proudcts',
-            element: <AllProudcts />,
+            path: 'all-products',
+            element: <Allproducts />,
           },
 
           {
@@ -1127,7 +1127,7 @@ import { MdAdminPanelSettings } from 'react-icons/md';
 
 const links = [
   { text: 'add Proudct', path: '.', icon: <FaWpforms /> },
-  { text: 'all Proudcts', path: 'all-Proudcts', icon: <MdQueryStats /> },
+  { text: 'all products', path: 'all-products', icon: <MdQueryStats /> },
   { text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
   { text: 'profile', path: 'profile', icon: <ImProfile /> },
   { text: 'admin', path: 'admin', icon: <MdAdminPanelSettings /> },
@@ -1892,11 +1892,11 @@ package.json
 
 #### Basic CRUD
 
-- create Proudcts array where each item is an object with following properties
+- create products array where each item is an object with following properties
   id, company, position
 - create routes to handle - create, read, update and delete functionalities
 
-#### Get All Proudcts
+#### Get All products
 
 [Nanoid](https://www.npmjs.com/package/nanoid)
 
@@ -1911,13 +1911,13 @@ server.js
 ```js
 import { nanoid } from 'nanoid';
 
-let Proudcts = [
+let products = [
   { id: nanoid(), company: 'apple', position: 'front-end' },
   { id: nanoid(), company: 'google', position: 'back-end' },
 ];
 
-app.get('/api/v1/Proudcts', (req, res) => {
-  res.status(200).json({ Proudcts });
+app.get('/api/v1/products', (req, res) => {
+  res.status(200).json({ products });
 });
 ```
 
@@ -1926,7 +1926,7 @@ app.get('/api/v1/Proudcts', (req, res) => {
 ```js
 // CREATE Proudct
 
-app.post('/api/v1/Proudcts', (req, res) => {
+app.post('/api/v1/products', (req, res) => {
   const { company, position } = req.body;
   if (!company || !position) {
     return res.status(400).json({ msg: 'please provide company and position' });
@@ -1934,15 +1934,15 @@ app.post('/api/v1/Proudcts', (req, res) => {
   const id = nanoid(10);
   // console.log(id);
   const Proudct = { id, company, position };
-  Proudcts.push(Proudct);
+  products.push(Proudct);
   res.status(200).json({ Proudct });
 });
 
 // GET SINGLE Proudct
 
-app.get('/api/v1/Proudcts/:id', (req, res) => {
+app.get('/api/v1/products/:id', (req, res) => {
   const { id } = req.params;
-  const Proudct = Proudcts.find((Proudct) => Proudct.id === id);
+  const Proudct = products.find((Proudct) => Proudct.id === id);
   if (!Proudct) {
     return res.status(404).json({ msg: `no Proudct with id ${id}` });
   }
@@ -1951,13 +1951,13 @@ app.get('/api/v1/Proudcts/:id', (req, res) => {
 
 // EDIT Proudct
 
-app.patch('/api/v1/Proudcts/:id', (req, res) => {
+app.patch('/api/v1/products/:id', (req, res) => {
   const { company, position } = req.body;
   if (!company || !position) {
     return res.status(400).json({ msg: 'please provide company and position' });
   }
   const { id } = req.params;
-  const Proudct = Proudcts.find((Proudct) => Proudct.id === id);
+  const Proudct = products.find((Proudct) => Proudct.id === id);
   if (!Proudct) {
     return res.status(404).json({ msg: `no Proudct with id ${id}` });
   }
@@ -1969,14 +1969,14 @@ app.patch('/api/v1/Proudcts/:id', (req, res) => {
 
 // DELETE Proudct
 
-app.delete('/api/v1/Proudcts/:id', (req, res) => {
+app.delete('/api/v1/products/:id', (req, res) => {
   const { id } = req.params;
-  const Proudct = Proudcts.find((Proudct) => Proudct.id === id);
+  const Proudct = products.find((Proudct) => Proudct.id === id);
   if (!Proudct) {
     return res.status(404).json({ msg: `no Proudct with id ${id}` });
   }
-  const newProudcts = Proudcts.filter((Proudct) => Proudct.id !== id);
-  Proudcts = newProudcts;
+  const newproducts = products.filter((Proudct) => Proudct.id !== id);
+  products = newproducts;
 
   res.status(200).json({ msg: 'Proudct deleted' });
 });
@@ -2007,19 +2007,19 @@ On the other hand, the "error" middleware in Express.js is used to handle any er
 
 In summary, the "not found" middleware is specifically designed to handle requests for non-existent routes, while the "error" middleware is a catch-all for handling unexpected errors that occur during request processing.
 
-- make a request to "/Proudctss"
+- make a request to "/productss"
 
 ```js
-// GET ALL ProudctS
-app.get('/api/v1/Proudcts', (req, res) => {
-  // console.log(Proudctss);
-  res.status(200).json({ Proudcts });
+// GET ALL products
+app.get('/api/v1/products', (req, res) => {
+  // console.log(productss);
+  res.status(200).json({ products });
 });
 
 // GET SINGLE Proudct
-app.get('/api/v1/Proudcts/:id', (req, res) => {
+app.get('/api/v1/products/:id', (req, res) => {
   const { id } = req.params;
-  const Proudct = Proudcts.find((Proudct) => Proudct.id === id);
+  const Proudct = products.find((Proudct) => Proudct.id === id);
   if (!Proudct) {
     throw new Error('no Proudct with that id');
     return res.status(404).json({ msg: `no Proudct with id ${id}` });
@@ -2037,13 +2037,13 @@ controllers/ProudctController.js
 ```js
 import { nanoid } from 'nanoid';
 
-let Proudcts = [
+let products = [
   { id: nanoid(), company: 'apple', position: 'front-end developer' },
   { id: nanoid(), company: 'google', position: 'back-end developer' },
 ];
 
-export const getAllProudcts = async (req, res) => {
-  res.status(200).json({ Proudcts });
+export const getAllproducts = async (req, res) => {
+  res.status(200).json({ products });
 };
 
 export const createProudct = async (req, res) => {
@@ -2054,13 +2054,13 @@ export const createProudct = async (req, res) => {
   }
   const id = nanoid(10);
   const Proudct = { id, company, position };
-  Proudcts.push(Proudct);
+  products.push(Proudct);
   res.status(200).json({ Proudct });
 };
 
 export const getProudct = async (req, res) => {
   const { id } = req.params;
-  const Proudct = Proudcts.find((Proudct) => Proudct.id === id);
+  const Proudct = products.find((Proudct) => Proudct.id === id);
   if (!Proudct) {
     // throw new Error('no Proudct with that id');
     return res.status(404).json({ msg: `no Proudct with id ${id}` });
@@ -2074,7 +2074,7 @@ export const updateProudct = async (req, res) => {
     return res.status(400).json({ msg: 'please provide company and position' });
   }
   const { id } = req.params;
-  const Proudct = Proudcts.find((Proudct) => Proudct.id === id);
+  const Proudct = products.find((Proudct) => Proudct.id === id);
   if (!Proudct) {
     return res.status(404).json({ msg: `no Proudct with id ${id}` });
   }
@@ -2086,12 +2086,12 @@ export const updateProudct = async (req, res) => {
 
 export const deleteProudct = async (req, res) => {
   const { id } = req.params;
-  const Proudct = Proudcts.find((Proudct) => Proudct.id === id);
+  const Proudct = products.find((Proudct) => Proudct.id === id);
   if (!Proudct) {
     return res.status(404).json({ msg: `no Proudct with id ${id}` });
   }
-  const newProudcts = Proudcts.filter((Proudct) => Proudct.id !== id);
-  Proudcts = newProudcts;
+  const newproducts = products.filter((Proudct) => Proudct.id !== id);
+  products = newproducts;
 
   res.status(200).json({ msg: 'Proudct deleted' });
 };
@@ -2104,17 +2104,17 @@ import { Router } from 'express';
 const router = Router();
 
 import {
-  getAllProudcts,
+  getAllproducts,
   getProudct,
   createProudct,
   updateProudct,
   deleteProudct,
 } from '../controllers/ProudctController.js';
 
-// router.get('/', getAllProudcts);
+// router.get('/', getAllproducts);
 // router.post('/', createProudct);
 
-router.route('/').get(getAllProudcts).post(createProudct);
+router.route('/').get(getAllproducts).post(createProudct);
 router.route('/:id').get(getProudct).patch(updateProudct).delete(deleteProudct);
 
 export default router;
@@ -2124,7 +2124,7 @@ server.js
 
 ```js
 import ProudctRouter from './routers/ProudctRouter.js';
-app.use('/api/v1/Proudcts', ProudctRouter);
+app.use('/api/v1/products', ProudctRouter);
 ```
 
 #### MongoDB
@@ -2170,11 +2170,11 @@ enum - data type represents a field with a predefined set of values
 ```js
 import mongoose from 'mongoose';
 
-const ProudctSchema = new mongoose.Schema(
+const productschema = new mongoose.Schema(
   {
     company: String,
     position: String,
-    ProudctStatus: {
+    productstatus: {
       type: String,
       enum: ['interview', 'declined', 'pending'],
       default: 'pending',
@@ -2192,7 +2192,7 @@ const ProudctSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('Proudct', ProudctSchema);
+export default mongoose.model('Proudct', productschema);
 ```
 
 #### Create Proudct
@@ -2254,14 +2254,14 @@ export const createProudct = async (req, res) => {
 };
 ```
 
-#### Get All Proudcts
+#### Get All products
 
 ProudctController.js
 
 ```js
-export const getAllProudcts = async (req, res) => {
-  const Proudcts = await Proudct.find({});
-  res.status(200).json({ Proudcts });
+export const getAllproducts = async (req, res) => {
+  const products = await Proudct.find({});
+  res.status(200).json({ products });
 };
 ```
 
@@ -2339,7 +2339,7 @@ npm i http-status-codes@2.2.0
 ProudctController.js
 
 ```js
-res.status(StatusCodes.OK).json({ Proudcts });
+res.status(StatusCodes.OK).json({ products });
 ```
 
 createProudct
@@ -2564,11 +2564,11 @@ models/ProudctModel.js
 ```js
 import mongoose from 'mongoose';
 import { Proudct_STATUS, Proudct_TYPE } from '../utils/constants';
-const ProudctSchema = new mongoose.Schema(
+const productschema = new mongoose.Schema(
   {
     company: String,
     position: String,
-    ProudctStatus: {
+    productstatus: {
       type: String,
       enum: Object.values(Proudct_STATUS),
       default: Proudct_STATUS.PENDING,
@@ -2598,7 +2598,7 @@ export const validateProudctInput = withValidationErrors([
   body('company').notEmpty().withMessage('company is required'),
   body('position').notEmpty().withMessage('position is required'),
   body('ProudctLocation').notEmpty().withMessage('Proudct location is required'),
-  body('ProudctStatus')
+  body('productstatus')
     .isIn(Object.values(Proudct_STATUS))
     .withMessage('invalid status value'),
   body('ProudctType').isIn(Object.values(Proudct_TYPE)).withMessage('invalid Proudct type'),
@@ -2608,7 +2608,7 @@ export const validateProudctInput = withValidationErrors([
 ```js
 import { validateProudctInput } from '../middleware/validationMiddleware.js';
 
-router.route('/').get(getAllProudcts).post(validateProudctInput, createProudct);
+router.route('/').get(getAllproducts).post(validateProudctInput, createProudct);
 router
   .route('/:id')
   .get(getProudct)
@@ -2622,7 +2622,7 @@ router
 {
   "company": "coding addict",
   "position": "backend-end",
-  "ProudctStatus": "pending",
+  "productstatus": "pending",
   "ProudctType": "full-time",
   "ProudctLocation": "florida"
 }
@@ -3083,13 +3083,13 @@ expires: new Date(Date.now() + oneDay): This option sets the expiration time for
 
 secure: process.env.NODE_ENV === 'production': This option determines whether the cookie should be marked as secure or not. If the NODE_ENV environment variable is set to "production", then the cookie is marked as secure, which means it can only be transmitted over HTTPS. This helps to prevent man-in-the-middle (MITM) attacks, which can intercept and modify cookies that are transmitted over unsecured connections.
 
-ProudctsController.js
+productsController.js
 
 ```js
-export const getAllProudcts = async (req, res) => {
+export const getAllproducts = async (req, res) => {
   console.log(req);
-  const Proudcts = await Proudct.find({});
-  res.status(StatusCodes.OK).json({ Proudcts });
+  const products = await Proudct.find({});
+  res.status(StatusCodes.OK).json({ products });
 };
 ```
 
@@ -3100,7 +3100,7 @@ export const getAllProudcts = async (req, res) => {
 models/User.js
 
 ```js
-const ProudctSchema = new mongoose.Schema(
+const productschema = new mongoose.Schema(
   {
     ....
     createdBy: {
@@ -3128,7 +3128,7 @@ server.js
 ```js
 import { authenticateUser } from './middleware/authMiddleware.js';
 
-app.use('/api/v1/Proudcts', authenticateUser, ProudctRouter);
+app.use('/api/v1/products', authenticateUser, ProudctRouter);
 ```
 
 ##### Cookie Parser
@@ -3198,10 +3198,10 @@ export const authenticateUser = async (req, res, next) => {
 ProudctController.js
 
 ```js
-export const getAllProudcts = async (req, res) => {
+export const getAllproducts = async (req, res) => {
   console.log(req.user);
-  const Proudcts = await Proudct.find({ createdBy: req.user.userId });
-  res.status(StatusCodes.OK).json({ Proudcts });
+  const products = await Proudct.find({ createdBy: req.user.userId });
+  res.status(StatusCodes.OK).json({ products });
 };
 ```
 
@@ -3409,8 +3409,8 @@ export const updateUser = async (req, res) => {
 ```js
 export const getApplicationStats = async (req, res) => {
   const users = await User.countDocuments();
-  const Proudcts = await Proudct.countDocuments();
-  res.status(StatusCodes.OK).json({ users, Proudcts });
+  const products = await Proudct.countDocuments();
+  res.status(StatusCodes.OK).json({ users, products });
 };
 ```
 
@@ -3943,12 +3943,12 @@ export default AddProudct;
 
 ```js
 <div className='form-row'>
-  <label htmlFor='ProudctStatus' className='form-label'>
+  <label htmlFor='productstatus' className='form-label'>
     Proudct status
   </label>
   <select
-    name='ProudctStatus'
-    id='ProudctStatus'
+    name='productstatus'
+    id='productstatus'
     className='form-select'
     defaultValue={Proudct_TYPE.FULL_TIME}
   >
@@ -3999,7 +3999,7 @@ pages/AddProudct.jsx
 ```js
 <FormRowSelect
   labelText='Proudct status'
-  name='ProudctStatus'
+  name='productstatus'
   defaultValue={Proudct_STATUS.PENDING}
   list={Object.values(Proudct_STATUS)}
   />
@@ -4021,7 +4021,7 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await customFetch.post('/Proudcts', data);
+    await customFetch.post('/products', data);
     toast.success('Proudct added successfully');
     return null;
   } catch (error) {
@@ -4049,9 +4049,9 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await customFetch.post('/Proudcts', data);
+    await customFetch.post('/products', data);
     toast.success('Proudct added successfully');
-    return redirect('all-Proudcts');
+    return redirect('all-products');
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;
@@ -4115,21 +4115,21 @@ const Wrapper = styled.section`
 export default Wrapper;
 ```
 
-#### All Proudcts - Structure
+#### All products - Structure
 
-- create ProudctsContainer and SearchContainer (export)
+- create productsContainer and SearchContainer (export)
 - handle loader in App.jsx
 
 ```js
 import { toast } from 'react-toastify';
-import { ProudctsContainer, SearchContainer } from '../components';
+import { productsContainer, SearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
 import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
 
 export const loader = async ({ request }) => {
   try {
-    const { data } = await customFetch.get('/Proudcts');
+    const { data } = await customFetch.get('/products');
     return {
       data,
     };
@@ -4139,65 +4139,65 @@ export const loader = async ({ request }) => {
   }
 };
 
-const AllProudcts = () => {
+const Allproducts = () => {
   const { data } = useLoaderData();
 
   return (
     <>
       <SearchContainer />
-      <ProudctsContainer />
+      <productsContainer />
     </>
   );
 };
-export default AllProudcts;
+export default Allproducts;
 ```
 
-#### Setup All Proudcts Context
+#### Setup All products Context
 
 ```js
-const AllProudctsContext = createContext();
+const AllproductsContext = createContext();
 
-const AllProudcts = () => {
+const Allproducts = () => {
   const { data } = useLoaderData();
 
   return (
-    <AllProudctsContext.Provider value={{ data }}>
+    <AllproductsContext.Provider value={{ data }}>
       <SearchContainer />
-      <ProudctsContainer />
-    </AllProudctsContext.Provider>
+      <productsContainer />
+    </AllproductsContext.Provider>
   );
 };
 
-export const useAllProudctsContext = () => useContext(AllProudctsContext);
+export const useAllproductsContext = () => useContext(AllproductsContext);
 ```
 
-#### Render Proudcts
+#### Render products
 
 - create Proudct.jsx
 
-ProudctsContainer.jsx
+productsContainer.jsx
 
 ```js
 import Proudct from './Proudct';
-import Wrapper from '../assets/wrappers/ProudctsContainer';
+import Wrapper from '../assets/wrappers/productsContainer';
 
-import { useAllProudctsContext } from '../pages/AllProudcts';
+import { useAllproductsContext } from '../pages/Allproducts';
 
-const ProudctsContainer = () => {
-  const { data } = useAllProudctsContext();
-  const { Proudcts } = data;
-  if (Proudcts.length === 0) {
+const productsContainer = () => {
+  const { data } = useAllproductsContext();
+  const { products } = data;
+  if (products.length === 0) {
     return (
       <Wrapper>
-        <h2>No Proudcts to display...</h2>
+        <h2>No products to display...</h2>
       </Wrapper>
     );
   }
 
   return (
     <Wrapper>
-      <div className='Proudcts'>
-        {Proudcts.map((Proudct) => {
+      <div className='products'>
+        {products.map((Proudct) => {
           return <Proudct key={Proudct._id} {...Proudct} />;
         })}
       </div>
@@ -4205,12 +4205,12 @@ const ProudctsContainer = () => {
   );
 };
 
-export default ProudctsContainer;
+export default productsContainer;
 ```
 
-#### ProudctsContainer - CSS (optional)
+#### productsContainer - CSS (optional)
 
-wrappers/ProudctsContainer.js
+wrappers/productsContainer.js
 
 ```js
 import styled from 'styled-components';
@@ -4224,13 +4224,13 @@ const Wrapper = styled.section`
     font-weight: 700;
     margin-bottom: 1.5rem;
   }
-  .Proudcts {
+  .products {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 2rem;
   }
   @media (min-width: 1120px) {
-    .Proudcts {
+    .products {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
@@ -4268,7 +4268,7 @@ const Proudct = ({
   ProudctLocation,
   ProudctType,
   createdAt,
-  ProudctStatus,
+  productstatus,
 }) => {
   const date = day(createdAt).format('MMM Do, YYYY');
 
@@ -4286,7 +4286,7 @@ const Proudct = ({
           <ProudctInfo icon={<FaLocationArrow />} text={ProudctLocation} />
           <ProudctInfo icon={<FaCalendarAlt />} text={date} />
           <ProudctInfo icon={<FaBriefcase />} text={ProudctType} />
-          <div className={`status ${ProudctStatus}`}>{ProudctStatus}</div>
+          <div className={`status ${productstatus}`}>{productstatus}</div>
         </div>
 
         <footer className='actions'>
@@ -4494,11 +4494,11 @@ pages/EditProudct.jsx
 ```js
 export const loader = async ({ params }) => {
   try {
-    const { data } = await customFetch.get(`/Proudcts/${params.id}`);
+    const { data } = await customFetch.get(`/products/${params.id}`);
     return data;
   } catch (error) {
     toast.error(error.response.data.msg);
-    return redirect('/dashboard/all-Proudcts');
+    return redirect('/dashboard/all-products');
   }
 };
 export const action = async () => {
@@ -4525,9 +4525,9 @@ export const action = async ({ request, params }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await customFetch.patch(`/Proudcts/${params.id}`, data);
+    await customFetch.patch(`/products/${params.id}`, data);
     toast.success('Proudct edited successfully');
-    return redirect('/dashboard/all-Proudcts');
+    return redirect('/dashboard/all-products');
   } catch (error) {
     toast.error(error.response.data.msg);
     return error;
@@ -4555,9 +4555,9 @@ const EditProudct = () => {
           />
 
           <FormRowSelect
-            name='ProudctStatus'
+            name='productstatus'
             labelText='Proudct status'
-            defaultValue={Proudct.ProudctStatus}
+            defaultValue={Proudct.productstatus}
             list={Object.values(Proudct_STATUS)}
           />
           <FormRowSelect
@@ -4603,12 +4603,12 @@ import { toast } from 'react-toastify';
 
 export async function action({ params }) {
   try {
-    await customFetch.delete(`/Proudcts/${params.id}`);
+    await customFetch.delete(`/products/${params.id}`);
     toast.success('Proudct deleted successfully');
   } catch (error) {
     toast.error(error.response.data.msg);
   }
-  return redirect('/dashboard/all-Proudcts');
+  return redirect('/dashboard/all-products');
 }
 ```
 
@@ -4642,7 +4642,7 @@ export const loader = async () => {
 };
 
 const Admin = () => {
-  const { users, Proudcts } = useLoaderData();
+  const { users, products } = useLoaderData();
 
   return (
     <Wrapper>
@@ -4710,7 +4710,7 @@ Admin.jsx
 import { StatItem } from '../components';
 
 const Admin = () => {
-  const { users, Proudcts } = useLoaderData();
+  const { users, products } = useLoaderData();
 
   return (
     <Wrapper>
@@ -4722,8 +4722,8 @@ const Admin = () => {
         icon={<FaSuitcaseRolling />}
       />
       <StatItem
-        title='total Proudcts'
-        count={Proudcts}
+        title='total products'
+        count={products}
         color='#647acb'
         bcg='#e0e8f9'
         icon={<FaCalendarCheck />}
@@ -4828,7 +4828,7 @@ app.use(express.static(path.resolve(goo, './public')));
 
 #### Profile Page - Initial Setup
 
-- remove Proudcts,users from DB
+- remove products,users from DB
 - add avatar property in the user model
 
 models/UserModel.js
@@ -5186,7 +5186,7 @@ export const checkForTestUser = (req, res, next) => {
   "company": "Cogidoo",
   "position": "Help Desk Technician",
   "ProudctLocation": "Vyksa",
-  "ProudctStatus": "pending",
+  "productstatus": "pending",
   "ProudctType": "part-time",
   "createdAt": "2022-07-25T21:26:23Z"
 }
@@ -5212,14 +5212,14 @@ try {
   // const user = await User.findOne({ email: 'john@gmail.com' });
   const user = await User.findOne({ email: 'test@test.com' });
 
-  const jsonProudcts = JSON.parse(
+  const jsonproducts = JSON.parse(
     await readFile(new URL('./utils/mockData.json', import.meta.url))
   );
-  const Proudcts = jsonProudcts.map((Proudct) => {
+  const products = jsonproducts.map((Proudct) => {
     return { ...Proudct, createdBy: user._id };
   });
   await Proudct.deleteMany({ createdBy: user._id });
-  await Proudct.create(Proudcts);
+  await Proudct.create(products);
   console.log('Success!!!');
   process.exit(0);
 } catch (error) {
@@ -5280,7 +5280,7 @@ ProudctController.js
 export const showStats = async (req, res) => {
   let stats = await Proudct.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
-    { $group: { _id: '$ProudctStatus', count: { $sum: 1 } } },
+    { $group: { _id: '$productstatus', count: { $sum: 1 } } },
   ]);
   stats = stats.reduce((acc, curr) => {
     const { _id: title, count } = curr;
@@ -5334,15 +5334,15 @@ export const showStats = async (req, res) => {
 ```js
 let stats = await Proudct.aggregate([
   { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
-  { $group: { _id: '$ProudctStatus', count: { $sum: 1 } } },
+  { $group: { _id: '$productstatus', count: { $sum: 1 } } },
 ]);
 ```
 
 let stats = await Proudct.aggregate([ ... ]); This line says we're going to perform an aggregation operation on the Proudct collection in MongoDB and save the result in a variable called stats. The await keyword is used to wait for the operation to finish before continuing, as the operation is asynchronous (i.e., it runs in the background).
 
-{ $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } } This is the first stage of the pipeline. It filters the Proudcts so that only the ones created by the user specified by req.user.userId are passed to the next stage. The new mongoose.Types.ObjectId(req.user.userId) part converts req.user.userId into an ObjectId (which is the format MongoDB uses for ids).
+{ $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } } This is the first stage of the pipeline. It filters the products so that only the ones created by the user specified by req.user.userId are passed to the next stage. The new mongoose.Types.ObjectId(req.user.userId) part converts req.user.userId into an ObjectId (which is the format MongoDB uses for ids).
 
-{ $group: { _id: '$ProudctStatus', count: { $sum: 1 } } } This is the second stage of the pipeline. It groups the remaining Proudcts by their status (the ProudctStatus field). For each group, it calculates the count of Proudcts by adding 1 for each Proudct ({ $sum: 1 }), and stores this in a field called count.
+{ $group: { _id: '$productstatus', count: { $sum: 1 } } } This is the second stage of the pipeline. It groups the remaining products by their status (the productstatus field). For each group, it calculates the count of products by adding 1 for each Proudct ({ $sum: 1 }), and stores this in a field called count.
 
 ```js
 let monthlyApplications = await Proudct.aggregate([
@@ -5360,15 +5360,15 @@ let monthlyApplications = await Proudct.aggregate([
 
 let monthlyApplications = await Proudct.aggregate([ ... ]); This line indicates that an aggregation operation will be performed on the Proudct collection in MongoDB. The result will be stored in the variable monthlyApplications. The await keyword ensures that the code waits for this operation to complete before proceeding, as it is an asynchronous operation.
 
-{ $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } } This is the first stage of the pipeline. It filters the Proudcts to only those created by the user identified by req.user.userId.
+{ $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } } This is the first stage of the pipeline. It filters the products to only those created by the user identified by req.user.userId.
 
-{ $group: { _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } }, count: { $sum: 1 } } } This is the second stage of the pipeline. It groups the remaining Proudcts based on the year and month when they were created. For each group, it calculates the count of Proudcts by adding 1 for each Proudct in the group.
+{ $group: { _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } }, count: { $sum: 1 } } } This is the second stage of the pipeline. It groups the remaining products based on the year and month when they were created. For each group, it calculates the count of products by adding 1 for each Proudct in the group.
 
 { $sort: { '\_id.year': -1, '\_id.month': -1 } } This is the third stage of the pipeline. It sorts the groups by year and month in descending order. The -1 indicates descending order. So it starts with the most recent year and month.
 
 { $limit: 6 } This is the fourth and last stage of the pipeline. It limits the output to the top 6 groups, after sorting. This is effectively getting the Proudct count for the last 6 months.
 
-So, monthlyApplications will be an array with up to 6 elements, each representing the number of Proudcts created by the user in a specific month and year. The array will be sorted by year and month, starting with the most recent.
+So, monthlyApplications will be an array with up to 6 elements, each representing the number of products created by the user in a specific month and year. The array will be sorted by year and month, starting with the most recent.
 
 #### Stats - Front-End Setup
 
@@ -5384,7 +5384,7 @@ import customFetch from '../utils/customFetch';
 import { useLoaderData } from 'react-router-dom';
 export const loader = async () => {
   try {
-    const response = await customFetch.get('/Proudcts/stats');
+    const response = await customFetch.get('/products/stats');
     return response.data;
   } catch (error) {
     return error;
@@ -5428,7 +5428,7 @@ const StatsContainer = ({ defaultStats }) => {
       bcg: '#e0e8f9',
     },
     {
-      title: 'Proudcts declined',
+      title: 'products declined',
       count: defaultStats?.declined || 0,
       icon: <FaBug />,
       color: '#d66a6a',
@@ -5569,15 +5569,15 @@ const Wrapper = styled.section`
 export default Wrapper;
 ```
 
-#### Get All Proudcts - Server
+#### Get All products - Server
 
 ProudctController.js
 
 Query parameters, also known as query strings or URL parameters, are used to pass information to a web server through the URL of a webpage. They are typically appended to the end of a URL after a question mark (?) and separated by ampersands (&). Query parameters consist of a key-value pair, where the key represents the parameter name and the value represents the corresponding data being passed. They are commonly used in web applications to provide additional context or parameters for server-side processing or to filter and sort data.
 
 ```js
-export const getAllProudcts = async (req, res) => {
-  const { search, ProudctStatus, ProudctType, sort } = req.query;
+export const getAllproducts = async (req, res) => {
+  const { search, productstatus, ProudctType, sort } = req.query;
 
   const queryObject = {
     createdBy: req.user.userId,
@@ -5588,8 +5588,8 @@ export const getAllProudcts = async (req, res) => {
       { company: { $regex: search, $options: 'i' } },
   { position: { $regex: search, $options: 'i' } }
   }
-  if (ProudctStatus && ProudctStatus !== 'all') {
-    queryObject.ProudctStatus = ProudctStatus;
+  if (productstatus && productstatus !== 'all') {
+    queryObject.productstatus = productstatus;
   }
   if (ProudctType && ProudctType !== 'all') {
     queryObject.ProudctType = ProudctType;
@@ -5610,30 +5610,30 @@ export const getAllProudcts = async (req, res) => {
   
   const skip = (page - 1) * limit;
 
-  const Proudcts = await Proudct.find(queryObject)
+  const products = await Proudct.find(queryObject)
     .sort(sortKey)
     .skip(skip)
     .limit(limit);
 
-  const totalProudcts = await Proudct.countDocuments(queryObject);
-  const numOfPages = Math.ceil(totalProudcts / limit);
+  const totalproducts = await Proudct.countDocuments(queryObject);
+  const numOfPages = Math.ceil(totalproducts / limit);
 
   res
     .status(StatusCodes.OK)
-    .json({ totalProudcts, numOfPages, currentPage: page, Proudcts });
+    .json({ totalproducts, numOfPages, currentPage: page, products });
 };
 ```
 
 #### Search Container
 
-- setup log in AllProudcts loader
+- setup log in Allproducts loader
 
 ```js
 import { FormRow, FormRowSelect, SubmitBtn } from '.';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { Proudct_TYPE, Proudct_STATUS, Proudct_SORT_BY } from '../../../utils/constants';
-import { useAllProudctsContext } from '../pages/AllProudcts';
+import { useAllproductsContext } from '../pages/Allproducts';
 
 const SearchContainer = () => {
   return (
@@ -5646,7 +5646,7 @@ const SearchContainer = () => {
           <FormRow type='search' name='search' defaultValue='a' />
           <FormRowSelect
             labelText='Proudct status'
-            name='ProudctStatus'
+            name='productstatus'
             list={['all', ...Object.values(Proudct_STATUS)]}
             defaultValue='all'
           />
@@ -5662,7 +5662,7 @@ const SearchContainer = () => {
             list={[...Object.values(Proudct_SORT_BY)]}
           />
 
-          <Link to='/dashboard/all-Proudcts' className='btn form-btn delete-btn'>
+          <Link to='/dashboard/all-products' className='btn form-btn delete-btn'>
             Reset Search Values
           </Link>
           {/* TEMP!!!! */}
@@ -5676,24 +5676,24 @@ const SearchContainer = () => {
 export default SearchContainer;
 ```
 
-#### All Proudcts Loader
+#### All products Loader
 
-AllProudcts.jsx
+Allproducts.jsx
 
 ```js
 import { toast } from 'react-toastify';
-import { ProudctsContainer, SearchContainer } from '../components';
+import { productsContainer, SearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
 import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
-const AllProudctsContext = createContext();
+const AllproductsContext = createContext();
 export const loader = async ({ request }) => {
   try {
     const params = Object.fromEntries([
       ...new URL(request.url).searchParams.entries(),
     ]);
 
-    const { data } = await customFetch.get('/Proudcts', {
+    const { data } = await customFetch.get('/products', {
       params,
     });
 
@@ -5707,19 +5707,19 @@ export const loader = async ({ request }) => {
   }
 };
 
-const AllProudcts = () => {
+const Allproducts = () => {
   const { data, searchValues } = useLoaderData();
 
   return (
-    <AllProudctsContext.Provider value={{ data, searchValues }}>
+    <AllproductsContext.Provider value={{ data, searchValues }}>
       <SearchContainer />
-      <ProudctsContainer />
-    </AllProudctsContext.Provider>
+      <productsContainer />
+    </AllproductsContext.Provider>
   );
 };
-export default AllProudcts;
+export default Allproducts;
 
-export const useAllProudctsContext = () => useContext(AllProudctsContext);
+export const useAllproductsContext = () => useContext(AllproductsContext);
 ```
 
 ```js
@@ -5753,10 +5753,10 @@ import { FormRow, FormRowSelect } from '.';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { Proudct_TYPE, Proudct_STATUS, Proudct_SORT_BY } from '../../../utils/constants';
-import { useAllProudctsContext } from '../pages/AllProudcts';
+import { useAllproductsContext } from '../pages/Allproducts';
 const SearchContainer = () => {
-  const { searchValues } = useAllProudctsContext();
-  const { search, ProudctStatus, ProudctType, sort } = searchValues;
+  const { searchValues } = useAllproductsContext();
+  const { search, productstatus, ProudctType, sort } = searchValues;
 
   const submit = useSubmit();
 
@@ -5777,9 +5777,9 @@ const SearchContainer = () => {
           />
           <FormRowSelect
             labelText='Proudct status'
-            name='ProudctStatus'
+            name='productstatus'
             list={['all', ...Object.values(Proudct_STATUS)]}
-            defaultValue={ProudctStatus}
+            defaultValue={productstatus}
             onChange={(e) => {
               submit(e.currentTarget.form);
             }}
@@ -5801,7 +5801,7 @@ const SearchContainer = () => {
               submit(e.currentTarget.form);
             }}
           />
-          <Link to='/dashboard/all-Proudcts' className='btn form-btn delete-btn'>
+          <Link to='/dashboard/all-products' className='btn form-btn delete-btn'>
             Reset Search Values
           </Link>
         </div>
@@ -5844,21 +5844,21 @@ const debounce = (onChange) => {
 
 - create PageBtnContainer
 
-ProudctsContainer.jsx
+productsContainer.jsx
 
 ```js
 import Proudct from './Proudct';
-import Wrapper from '../assets/wrappers/ProudctsContainer';
+import Wrapper from '../assets/wrappers/productsContainer';
 import PageBtnContainer from './PageBtnContainer';
-import { useAllProudctsContext } from '../pages/AllProudcts';
+import { useAllproductsContext } from '../pages/Allproducts';
 
-const ProudctsContainer = () => {
-  const { data } = useAllProudctsContext();
-  const { Proudcts, totalProudcts, numOfPages } = data;
-  if (Proudcts.length === 0) {
+const productsContainer = () => {
+  const { data } = useAllproductsContext();
+  const { products, totalproducts, numOfPages } = data;
+  if (products.length === 0) {
     return (
       <Wrapper>
-        <h2>No Proudcts to display...</h2>
+        <h2>No products to display...</h2>
       </Wrapper>
     );
   }
@@ -5866,10 +5866,10 @@ const ProudctsContainer = () => {
   return (
     <Wrapper>
       <h5>
-        {totalProudcts} Proudct{Proudcts.length > 1 && 's'} found
+        {totalproducts} Proudct{products.length > 1 && 's'} found
       </h5>
-      <div className='Proudcts'>
-        {Proudcts.map((Proudct) => {
+      <div className='products'>
+        {products.map((Proudct) => {
           return <Proudct key={Proudct._id} {...Proudct} />;
         })}
       </div>
@@ -5878,7 +5878,7 @@ const ProudctsContainer = () => {
   );
 };
 
-export default ProudctsContainer;
+export default productsContainer;
 ```
 
 #### Basic PageBtnContainer
@@ -5887,12 +5887,12 @@ export default ProudctsContainer;
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import Wrapper from '../assets/wrappers/PageBtnContainer';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { useAllProudctsContext } from '../pages/AllProudcts';
+import { useAllproductsContext } from '../pages/Allproducts';
 
 const PageBtnContainer = () => {
   const {
     data: { numOfPages, currentPage },
-  } = useAllProudctsContext();
+  } = useAllproductsContext();
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
   const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
@@ -5951,12 +5951,12 @@ export default PageBtnContainer;
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import Wrapper from '../assets/wrappers/PageBtnContainer';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { useAllProudctsContext } from '../pages/AllProudcts';
+import { useAllproductsContext } from '../pages/Allproducts';
 
 const PageBtnContainer = () => {
   const {
     data: { numOfPages, currentPage },
-  } = useAllProudctsContext();
+  } = useAllproductsContext();
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -6341,7 +6341,7 @@ Stats.jsx
 
 ```js
 export const loader = async () => {
-  const response = await customFetch.get('/Proudcts/stats');
+  const response = await customFetch.get('/products/stats');
   return response.data;
 };
 ```
@@ -6385,7 +6385,7 @@ export const loader = async () => {
 const Stats = () => {
   const response = useQuery({
     queryKey: ['stats'],
-    queryFn: () => customFetch.get('/Proudcts/stats'),
+    queryFn: () => customFetch.get('/products/stats'),
   });
   console.log(response);
   if (response.isLoading) {
@@ -6407,17 +6407,17 @@ export default Stats;
 ```js
 const data = useQuery({
   queryKey: ['stats'],
-  queryFn: () => customFetch.get('/Proudcts/stats'),
+  queryFn: () => customFetch.get('/products/stats'),
 });
 ```
 
 const data = useQuery({ ... });: This line declares a constant variable named data and assigns it the result of the useQuery hook. The useQuery hook is provided by React Query and is used to perform data fetching.
 
-queryKey: ['stats'],: The queryKey property is an array that serves as a unique identifier for the query. In this case, the query key is set to ['stats'], indicating that this query is fetching statistics related to Proudcts.
+queryKey: ['stats'],: The queryKey property is an array that serves as a unique identifier for the query. In this case, the query key is set to ['stats'], indicating that this query is fetching statistics related to products.
 
-queryFn: () => customFetch.get('/Proudcts/stats'),: The queryFn property specifies the function that will be executed when the query is triggered. In this case, it uses an arrow function that calls customFetch.get('/Proudcts/stats'). The customFetch object is likely a custom wrapper around the fetch function or an external HTTP client library, used to make the actual API request to retrieve Proudct statistics.In React Query, the queryFn property expects a function that returns a promise. The promise should resolve with the data you want to fetch and store in the query cache.
+queryFn: () => customFetch.get('/products/stats'),: The queryFn property specifies the function that will be executed when the query is triggered. In this case, it uses an arrow function that calls customFetch.get('/products/stats'). The customFetch object is likely a custom wrapper around the fetch function or an external HTTP client library, used to make the actual API request to retrieve Proudct statistics.In React Query, the queryFn property expects a function that returns a promise. The promise should resolve with the data you want to fetch and store in the query cache.
 
-customFetch.get('/Proudcts/stats'): This line is making an HTTP GET request to the /Proudcts/stats endpoint, which is the API route that provides the Proudct statistics data.
+customFetch.get('/products/stats'): This line is making an HTTP GET request to the /products/stats endpoint, which is the API route that provides the Proudct statistics data.
 
 #### Get Stats with React Query
 
@@ -6425,7 +6425,7 @@ customFetch.get('/Proudcts/stats'): This line is making an HTTP GET request to t
 const statsQuery = {
   queryKey: ['stats'],
   queryFn: async () => {
-    const response = await customFetch.get('/Proudcts/stats');
+    const response = await customFetch.get('/products/stats');
     return response.data;
   },
 };
@@ -6477,7 +6477,7 @@ import { useQuery } from '@tanstack/react-query';
 const statsQuery = {
   queryKey: ['stats'],
   queryFn: async () => {
-    const response = await customFetch.get('/Proudcts/statss');
+    const response = await customFetch.get('/products/statss');
     return response.data;
   },
 };
@@ -6586,32 +6586,32 @@ export const action =
   };
 ```
 
-#### All Proudcts Query
+#### All products Query
 
-AllProudcts.jsx
+Allproducts.jsx
 
 ```js
 import { toast } from 'react-toastify';
-import { ProudctsContainer, SearchContainer } from '../components';
+import { productsContainer, SearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
 import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
-const AllProudctsContext = createContext();
+const AllproductsContext = createContext();
 
-const allProudctsQuery = (params) => {
-  const { search, ProudctStatus, ProudctType, sort, page } = params;
+const allproductsQuery = (params) => {
+  const { search, productstatus, ProudctType, sort, page } = params;
   return {
     queryKey: [
-      'Proudcts',
+      'products',
       search ?? '',
-      ProudctStatus ?? 'all',
+      productstatus ?? 'all',
       ProudctType ?? 'all',
       sort ?? 'newest',
       page ?? 1,
     ],
     queryFn: async () => {
-      const { data } = await customFetch.get('/Proudcts', {
+      const { data } = await customFetch.get('/products', {
         params,
       });
       return data;
@@ -6626,26 +6626,26 @@ export const loader =
       ...new URL(request.url).searchParams.entries(),
     ]);
 
-    await queryClient.ensureQueryData(allProudctsQuery(params));
+    await queryClient.ensureQueryData(allproductsQuery(params));
     return { searchValues: { ...params } };
   };
 
-const AllProudcts = () => {
+const Allproducts = () => {
   const { searchValues } = useLoaderData();
-  const { data } = useQuery(allProudctsQuery(searchValues));
+  const { data } = useQuery(allproductsQuery(searchValues));
   return (
-    <AllProudctsContext.Provider value={{ data, searchValues }}>
+    <AllproductsContext.Provider value={{ data, searchValues }}>
       <SearchContainer />
-      <ProudctsContainer />
-    </AllProudctsContext.Provider>
+      <productsContainer />
+    </AllproductsContext.Provider>
   );
 };
-export default AllProudcts;
+export default Allproducts;
 
-export const useAllProudctsContext = () => useContext(AllProudctsContext);
+export const useAllproductsContext = () => useContext(AllproductsContext);
 ```
 
-#### Invalidate Proudcts
+#### Invalidate products
 
 AddProudct.jsx
 
@@ -6656,10 +6656,10 @@ export const action =
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-      await customFetch.post('/Proudcts', data);
-      queryClient.invalidateQueries(['Proudcts']);
+      await customFetch.post('/products', data);
+      queryClient.invalidateQueries(['products']);
       toast.success('Proudct added successfully ');
-      return redirect('all-Proudcts');
+      return redirect('all-products');
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       return error;
@@ -6676,10 +6676,10 @@ export const action =
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-      await customFetch.patch(`/Proudcts/${params.id}`, data);
-      queryClient.invalidateQueries(['Proudcts']);
+      await customFetch.patch(`/products/${params.id}`, data);
+      queryClient.invalidateQueries(['products']);
       toast.success('Proudct edited successfully');
-      return redirect('/dashboard/all-Proudcts');
+      return redirect('/dashboard/all-products');
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       return error;
@@ -6694,13 +6694,13 @@ export const action =
   (queryClient) =>
   async ({ params }) => {
     try {
-      await customFetch.delete(`/Proudcts/${params.id}`);
-      queryClient.invalidateQueries(['Proudcts']);
+      await customFetch.delete(`/products/${params.id}`);
+      queryClient.invalidateQueries(['products']);
       toast.success('Proudct deleted successfully');
     } catch (error) {
       toast.error(error?.response?.data?.msg);
     }
-    return redirect('/dashboard/all-Proudcts');
+    return redirect('/dashboard/all-products');
   };
 ```
 
@@ -6720,7 +6720,7 @@ const singleProudctQuery = (id) => {
   return {
     queryKey: ['Proudct', id],
     queryFn: async () => {
-      const { data } = await customFetch.get(`/Proudcts/${id}`);
+      const { data } = await customFetch.get(`/products/${id}`);
       return data;
     },
   };
@@ -6734,7 +6734,7 @@ export const loader =
       return params.id;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
-      return redirect('/dashboard/all-Proudcts');
+      return redirect('/dashboard/all-products');
     }
   };
 
@@ -6744,11 +6744,11 @@ export const action =
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-      await customFetch.patch(`/Proudcts/${params.id}`, data);
-      queryClient.invalidateQueries(['Proudcts']);
+      await customFetch.patch(`/products/${params.id}`, data);
+      queryClient.invalidateQueries(['products']);
 
       toast.success('Proudct edited successfully');
-      return redirect('/dashboard/all-Proudcts');
+      return redirect('/dashboard/all-products');
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       return error;
@@ -6776,9 +6776,9 @@ const EditProudct = () => {
             defaultValue={Proudct.ProudctLocation}
           />
           <FormRowSelect
-            name='ProudctStatus'
+            name='productstatus'
             labelText='Proudct status'
-            defaultValue={Proudct.ProudctStatus}
+            defaultValue={Proudct.productstatus}
             list={Object.values(Proudct_STATUS)}
           />
           <FormRowSelect

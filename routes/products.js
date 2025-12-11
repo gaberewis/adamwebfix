@@ -1,19 +1,19 @@
 import { Router } from 'express';
 import { createProudctValidation, paramValidation} from '../middleware/validation.js';
 import {
-    getProudcts,
+    getproducts,
     craeteProudct,
     getProudct,
     updateProudct,
     deleteProudct,
     showStates
-} from '../controllers/Proudcts.js';
+} from '../controllers/products.js';
 import { checkIsDemo } from '../controllers/auth.js';
 
 const router = Router();
 
 
-router.route('/').get( getProudcts).post(createProudctValidation,craeteProudct);
+router.route('/').get( getproducts).post(createProudctValidation,craeteProudct);
 
 
 router.route('/:id').get(paramValidation, getProudct).patch(checkIsDemo, updateProudct).delete(checkIsDemo, deleteProudct);

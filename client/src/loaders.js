@@ -1,65 +1,45 @@
 import axios from "axios";
-import { redirect} from "react-router-dom";
+
 
 export const dashboardloader = async () => {
   try {
-    const { data } = await axios.get('/api/users/current');
+    const { data } = await axios.get('/api/auth/current');
     return data;
   } catch (error) {
-    return redirect('/');
+    console.error("Loader Error: ", error.response?.data || error.message);
+    return { error: true, meg: error.response?.data };
   }
 };
 
+export const allproductsLoader = async ({ request }) => {
 
-export const allProudctsLoader = async({ request })=>{
-  
- const params = Object.fromEntries([
-  ...new URL(request.url).searchParams.entries(),
- ]);
+  // const params = Object.fromEntries([
+  //   ...new URL(request.url).searchParams.entries(),
+  // ]);
+
+  const url = new URL(request.url);
+  const params = Object.fromEntries(url.searchParams);
   try {
-     const { data } = await axios.get('/api/Proudcts', { params });
-    return { data, searchValues : {...params} };
-    
+    const { data } = await axios.get('/api/products', { params });
+    return { data, searchValues: { ...params } };
+
   } catch (error) {
-    console,console.log(error.response?.data);
-    
-    return redirect ('/dashboard');
+    console.error("Loader Error: ", error.response?.data || error.message);
+    return { error: true, meg: error.response?.data };
   }
 };
 
-export const editProudctLoader = async({ params })=>{
+export const editProudctLoader = async ({ params }) => {
 
   try {
-    const { data } = await axios.get(`/api/Proudcts/${params.id}`);
+    const { data } = await axios.get(`/api/products/${params.id}`);
     return data;
   } catch (error) {
-    console.log(error.response?.data);
-      return redirect ('/dashboard');
+    console.error("Loader Error: ", error.response?.data || error.message);
+    return { error: true, meg: error.response?.data };
   }
 
 }
 
 
-export const adminLoader = async()=>{
 
-  try {
-   const { data } = await axios.get('/api/users/app-stats');
-   return data;
-  } catch (error) {
-      console.log(error.response?.data);
-      return redirect ('/dashboard');
-  }
-};
-
-export const satatsLoader = async()=>{
-try {
-    const { data } = await axios.get('/api/Proudcts/stats');
-    
-  return data;
- 
-} catch (error) {
-     console.log(error.response?.data);
-      return redirect ('/dashboard');
-}
-
-}

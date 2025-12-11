@@ -1,5 +1,5 @@
 export {default as AddProudct } from './AddProudct';
-export {default as AllProudcts } from './AllProudcts';
+export {default as Allproducts } from './Allproducts';
 export {default as Admin } from './Admin';
 export {default as Dashboard } from './Dashboard';
 export {default as Equipment } from './Equipment';

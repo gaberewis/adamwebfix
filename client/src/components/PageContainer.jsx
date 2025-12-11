@@ -1,11 +1,11 @@
 import CssStl from '../css-pocket/PageContainer'
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
-import { useProudctsContext } from '../pages/AllProudcts';
+import { useproductsContext } from '../pages/Allproducts';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const PageContainer = () => {
 
-    const { data: { page, pages } } = useProudctsContext();
+    const { data: { page, pages } } = useproductsContext();
     
     const { search, pathname } = useLocation()
     const navigate = useNavigate()

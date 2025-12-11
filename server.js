@@ -11,14 +11,13 @@ import helmet from 'helmet';
 
 
 
-import ProudctRoute from './routes/Proudcts.js';
+import ProudctRoute from './routes/products.js';
 import authRoute from './routes/auth.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-import { authenticateUser } from './middleware/funcs.js';
 
 
 cloudinary.config({
@@ -52,7 +51,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authRoute);
-app.use('/Proudcts', authenticateUser, ProudctRoute);
+app.use('/products',ProudctRoute);
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));

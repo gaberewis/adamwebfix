@@ -40,7 +40,7 @@ export const createProudctValidation = validateData(
         body('company').notEmpty().withMessage('company is required'),
         body('position').notEmpty().withMessage('position is required'),
         body('ProudctLocation').notEmpty().withMessage('Proudct location is required'),
-        // body('ProudctStatus').isIn(['interview', 'declined', 'pending']).withMessage('invalid Proudct status'),
+        // body('productstatus').isIn(['interview', 'declined', 'pending']).withMessage('invalid Proudct status'),
         // body('ProudctType').isIn(['full-time', 'part-time', 'internship']).withMessage('invalid Proudct type'),
     ]
 );

@@ -2,14 +2,14 @@ import { Form, Link, useSubmit } from 'react-router-dom';
 import FormRow from './FormRow';
 import ForRowSelect from './FormRowSelect';
 import SubmitButton from './SubmitButton';
-import { useProudctsContext } from '../pages/AllProudcts';
+import { useproductsContext } from '../pages/Allproducts';
 
 const FilterContainer = () => {
     const submit = useSubmit();
-    const { searchValues } = useProudctsContext();
-    const { search, ProudctStatus, ProudctType, sort } = searchValues;
+    const { searchValues } = useproductsContext();
+    const { search, productstatus, ProudctType, sort } = searchValues;
 
-    const ProudctStatusArr = ['all', 'pending', 'interview', 'declined'];
+    const productstatusArr = ['all', 'pending', 'interview', 'declined'];
     const ProudctTypeArr = ['all', 'full-time', 'part-time', 'internship'];
 
 
@@ -31,7 +31,7 @@ const FilterContainer = () => {
     return (
         <Form className='form'>
             <div className='form-center'>
-                <h4 className='title'>filter Proudcts</h4>
+                <h4 className='title'>filter products</h4>
 
                 <FormRow
                     type='search'
@@ -39,7 +39,7 @@ const FilterContainer = () => {
                     defaultValue={search}
                     onChange={debounce((form)=> submit(form))}
                 />
-                <ForRowSelect name='ProudctStatus' labelText='Proudct status' list={ProudctStatusArr} defaultValue={ProudctStatus}
+                <ForRowSelect name='productstatus' labelText='Proudct status' list={productstatusArr} defaultValue={productstatus}
                     onChange={(e) => submit(e.currentTarget.form)}
                 />
                 <ForRowSelect name='ProudctType' list={ProudctTypeArr} labelText='Proudct type' defaultValue={ProudctType}

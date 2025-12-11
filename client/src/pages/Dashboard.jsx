@@ -1,5 +1,6 @@
 import { Outlet, useNavigate, useLoaderData, useNavigation } from "react-router-dom";
-import { Navbar, BigBar, SmallBar, Loading } from '../components';
+import { Navbar, BigBar, Loading } from '../components';
+import CssSTL from "../css-pocket/Dashboard";
 import { useState, createContext, useContext } from 'react';
 import { checkIsDark } from '../App';
 import axios from 'axios';
@@ -46,14 +47,15 @@ const Dashboard = () => {
                 logoutUser
             }}
         >
-            <main className="dashboard">
-                <SmallBar />
+            <CssSTL>
+             
                 < BigBar />
-                <div>
+                <div className="dashboard-page">
                     <Navbar />
                     {isLoading ? <Loading /> : <Outlet context={{ user }} />}
+                    <div className="footer">FOOTER</div>
                 </div>
-            </main>
+            </CssSTL>
         </DashboardContext.Provider>
     )
 }

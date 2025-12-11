@@ -1,27 +1,27 @@
 import { useLoaderData } from "react-router-dom";
 import { useContext, createContext } from "react";
-import { ProudctsContainer, FilterContainer,PageContainer } from '../components';
+import { productsContainer, FilterContainer,PageContainer } from '../components';
 import CssStl from '../css-pocket/ProudctContainer';
 
-const ProudctsContext = createContext();
+const productsContext = createContext();
 
-const AllProudcts = () => {
+const Allproducts = () => {
   const { data, searchValues } = useLoaderData();
-  const { totalProudcts, pages } = data;
+  const { totalproducts, pages } = data;
  
 
   return (
 <CssStl>
-    <ProudctsContext.Provider value={{ data, searchValues }}>
+    <productsContext.Provider value={{ data, searchValues }}>
      
       <FilterContainer />
-      <ProudctsContainer />
+      <productsContainer />
       {pages > 1 && <PageContainer />}
-    </ProudctsContext.Provider>
+    </productsContext.Provider>
 </CssStl>
   )
 }
 
-export const useProudctsContext = () => useContext(ProudctsContext);
+export const useproductsContext = () => useContext(productsContext);
 
-export default AllProudcts;
+export default Allproducts;

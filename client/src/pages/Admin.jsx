@@ -3,7 +3,7 @@ import { useLoaderData, redirect } from 'react-router-dom';
 import CssStl from '../css-pocket/Admin';
 
 const Admin = () => {
-  const { Proudcts, users } = useLoaderData();
+  const { products, users } = useLoaderData();
   return (
     <CssStl >
     
@@ -16,11 +16,11 @@ const Admin = () => {
         </div>
         <div className='stat-container' >
           <header>
-           <h2><span className='count'>{Proudcts}</span>
+           <h2><span className='count'>{products}</span>
             <span className='icon'><FaCalendarCheck /></span></h2>
             
           </header>
-          <h2 className='a-title'>Proudcts</h2>
+          <h2 className='a-title'>products</h2>
         </div>
     
      

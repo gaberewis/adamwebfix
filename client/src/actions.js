@@ -44,7 +44,7 @@ export const addProudctAction = async({ request })=>{
   if(file && file.size > 1000000)  { return {error : 'File must be less than 1 MB'}};
 
 try {
-  await axios.post('/api/Proudcts', formData);
+  await axios.post('/api/products', formData);
   return redirect('/dashboard');
 } catch (error) {
  console.log('BACKEND ERROR:', error.response?.data);
@@ -61,7 +61,7 @@ export const editAction = async({ request, params })=>{
 
   if(file && file.size > 1000000)  { return {error : 'File must be less than 1 MB'}};
   try {
-await axios.patch(`/api/Proudcts/${params.id}`, formData);
+await axios.patch(`/api/products/${params.id}`, formData);
 return redirect('/dashboard');
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data);
@@ -74,7 +74,7 @@ return redirect('/dashboard');
 
 export const deleteProudctAction = async({ params })=>{
   try {
-    await axios.delete(`/api/Proudcts/${params.id}`);
+    await axios.delete(`/api/products/${params.id}`);
     return redirect('/dashboard');
   } catch (error) {
     console.log('BACKEND ERROR', error.response?.data );

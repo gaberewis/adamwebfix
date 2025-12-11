@@ -1,17 +1,17 @@
 import { Link, Form } from 'react-router-dom';
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
-import { useProudctsContext } from '../pages/AllProudcts';
+import { useproductsContext } from '../pages/Allproducts';
 
 
 import day from 'dayjs';
 
-const ProudctsContainer = () => {
-  const { data: { Proudcts, totalProudcts } } = useProudctsContext();
+const productsContainer = () => {
+  const { data: { products, totalproducts } } = useproductsContext();
 
-  const hasProudcts = totalProudcts > 0;
-  if (!hasProudcts) {
+  const hasproducts = totalproducts > 0;
+  if (!hasproducts) {
     return (
-      <h4 className='Proudct-count'> No Proudcts available </h4>
+      <h4 className='Proudct-count'> No products available </h4>
     );
   };
 
@@ -19,12 +19,12 @@ const ProudctsContainer = () => {
 
     <>
       <h5 className='Proudct-count' >
-        {totalProudcts} Proudct{totalProudcts > 1 && 's'} found
+        {totalproducts} Proudct{totalproducts > 1 && 's'} found
       </h5>
-      <div className='Proudcts-container'>
+      <div className='products-container'>
 
-        {Proudcts.map(Proudct => {
-          const { _id, position, company, ProudctLocation, ProudctType, createdAt, ProudctStatus, createdBy } = Proudct;
+        {products.map(Proudct => {
+          const { _id, position, company, ProudctLocation, ProudctType, createdAt, productstatus, createdBy } = Proudct;
           const date = day(createdAt).format('MMM DD, YYYY');
 
           return (
@@ -55,7 +55,7 @@ const ProudctsContainer = () => {
                     <span className='Proudct-text'>{ProudctType}</span>
                   </div>
 
-                  <div className={`status`}>{ProudctStatus}</div>
+                  <div className={`status`}>{productstatus}</div>
                 </div>
                 <footer className='actions'>
                   <Link className='btn edit-btn' to={`./edit-Proudct/${_id}`} >Edit</Link>
@@ -87,7 +87,7 @@ const ProudctsContainer = () => {
   )
 };
 
-export default ProudctsContainer;
+export default productsContainer;
 
 
 

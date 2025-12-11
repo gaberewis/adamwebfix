@@ -38,7 +38,7 @@ if(isloading){
     <CssStl>
 
         <div className='info'>
-           <img src={Logo} alt="HrProudctStatus" className='logo' />
+           <img src={Logo} alt="Hrproductstatus" className='logo' />
           <h1>
             Proudct <span>Status</span> app
           </h1>

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
-  AddProudct, AllProudcts, Admin, Dashboard,
+  AddProudct, Allproducts, Admin, Dashboard,
    Equipment, Accessories, 
   Accessories, Parts,
   EditProudct,  Login, Register, 
@@ -51,8 +51,8 @@ const router = createBrowserRouter([
       },
       {
         index: true,
-        element: <AllProudcts />,
-        loader: loader.allProudctsLoader
+        element: <Allproducts />,
+        loader: loader.allproductsLoader
       },
       {
         path: 'add-Proudct',

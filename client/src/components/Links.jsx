@@ -6,7 +6,7 @@ import { ImProfile } from 'react-icons/im';
 import { MdAdminPanelSettings } from 'react-icons/md';
 
 const links = [
-  { text: 'Papular Proudcts', path: '.', icon: <MdQueryStats /> },
+  { text: 'Papular products', path: '.', icon: <MdQueryStats /> },
    { text: 'Equipment', path: 'equipment', icon: <MdQueryStats /> },
     { text: 'Accessories', path: 'accessories', icon: <MdQueryStats /> },
      { text: 'Supplies', path: 'supplies', icon: <MdQueryStats /> },

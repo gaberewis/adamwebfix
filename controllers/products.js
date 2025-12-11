@@ -5,7 +5,7 @@ import cloudinary from 'cloudinary';
 import { formatImage } from '../middleware/multer.js';
 
 
-export const getProudcts = async (req, res) => {
+export const getproducts = async (req, res) => {
 
   const { sort, section, catagory, search } = req.query;
 
@@ -23,18 +23,18 @@ export const getProudcts = async (req, res) => {
   const skip = (page - 1) * limit;
 
   const sortFields = {
-    newProudcts: '-createdAt',
-    oldProudcts: 'createdAt',
+    newproducts: '-createdAt',
+    oldproducts: 'createdAt',
     aToz: 'position',
     zToa: '-position'
   }
-  const sortDocs = sortFields[sort] || sortFields.newProudcts;
+  const sortDocs = sortFields[sort] || sortFields.newproducts;
 
-  const Proudcts = await Proudct.find(queryFields).limit(limit).sort(sortDocs).skip(skip);
-  const totalProudcts = await Proudct.countDocuments(queryFields);
-  const pages = Math.ceil(totalProudcts / limit);
+  const products = await Proudct.find(queryFields).limit(limit).sort(sortDocs).skip(skip);
+  const totalproducts = await Proudct.countDocuments(queryFields);
+  const pages = Math.ceil(totalproducts / limit);
 
-  res.status(200).json({ Proudcts, page, pages, totalProudcts });
+  res.status(200).json({ products, page, pages, totalproducts });
 
 }
 
@@ -47,9 +47,50 @@ if(req.file){
   req.body.imageId = response.public_id;
 
 }
+   if (req.body.category) {
+      req.body.category = req.body.category.trim();
+    }
   const Proudct = await Proudct.create(req.body);
   res.status(201).json({ msg: 'Proudcte created'})
 };
+
+
+
+//check for download one or more images
+// export const createProduct = async (req, res) => {
+//   try {
+//     // -----------------------------
+//     // 1. If only ONE image is uploaded
+//     // -----------------------------
+//     if (req.file) {
+//       const upload = await cloudinary.v2.uploader.upload(
+//         formatImage(req.file)
+//       );
+
+//       req.body.image = upload.secure_url;
+//       req.body.imageId = upload.public_id;
+//     }
+
+//     // -----------------------------
+//     // 2. If MULTIPLE images uploaded (req.files)
+//     // -----------------------------
+//     if (req.files && req.files.length > 0) {
+//       req.body.images = [];
+
+//       for (let file of req.files) {
+//         const upload = await cloudinary.v2.uploader.upload(formatImage(file));
+
+//         req.body.images.push({
+//           imageUrl: upload.secure_url,
+//           imageId: upload.public_id,
+//         });
+//       }
+//     }
+
+
+
+
+
 
 
 export const getProudct = async (req, res) => {
@@ -90,7 +131,7 @@ export const showStates = async (req, res) => {
 
   let stats = await Proudct.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
-    { $group: { _id: '$ProudctStatus', count: { $sum: 1 } } },
+    { $group: { _id: '$productstatus', count: { $sum: 1 } } },
   ]);
 
   stats = stats.reduce((acc, curr) => {
