@@ -21,13 +21,13 @@ const AddProudct = () => {
       <Form method='post' className='form' encType='multipart/form-data' >
 
         <h4 className="title">add Proudct</h4>
-        <div className='form-raw'>
-          <label htmlFor='avatar' className='form-label'>
-            Select an image file (max 1 MB):
-          </label>
-          <input type='file' id='images' name='avatar' className='form-input' accept='image/*' />
-          {actionData?.error ? <p className='error'>{actionData.error}</p> : ''}
 
+        <div className='form-raw'>
+          <label htmlFor='images' className='form-label'>
+            Select product images image less than 1MB:
+          </label>
+          <input type='file' id='images' name='images' className='form-input' accept='image/*' multiple />
+          {actionData?.error ? <p className='error'>{actionData.error}</p> : ''}
         </div>
 
         <div className="form-center">

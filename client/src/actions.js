@@ -1,5 +1,6 @@
 import { redirect } from 'react-router-dom';
 import axios from 'axios';
+import { error } from 'console';
 
 
 
@@ -15,7 +16,7 @@ export const registerAction = async ({ request }) => {
   console.log(error.response?.data?.msg);
    console.log('BACKEND ERROR:', error.response?.data);
    const errorMsg = error.response?.data?.msg || 'Registration failed';
-     return {errorMsg};
+  return {errorMsg};
     
   } 
 };
@@ -27,7 +28,7 @@ export const loginAction = async({ request })=>{
   try {
     
     await axios.post('/api/auth/login', data);
-    return redirect('/dashboard');
+    return redirect('/');
 
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data.msg);
@@ -39,13 +40,18 @@ export const loginAction = async({ request })=>{
 
 export const addProudctAction = async({ request })=>{
   const formData = await request.formData();
-  const file = formData.get('image');
 
-  if(file && file.size > 1000000)  { return {error : 'File must be less than 1 MB'}};
+  const files = formData.getAll('images');
+for(const oneFile of files ){
+  if(oneFile.size > 1000000){
+    return {error : 'File must be less than 1 MB' }
+  }
+}
+
 
 try {
   await axios.post('/api/products', formData);
-  return redirect('/dashboard');
+  return redirect('/');
 } catch (error) {
  console.log('BACKEND ERROR:', error.response?.data);
 const errorMsg = error.response?.data?.msg || 'Adding Proudct failed';
@@ -57,12 +63,18 @@ const errorMsg = error.response?.data?.msg || 'Adding Proudct failed';
 export const editAction = async({ request, params })=>{
 
   const formData = await request.formData();
-  const file = formData.get('image');
+ 
+const files = formData.getAll('images');
+for(const oneFile of files ){
+  if(oneFile.size > 1000000){
+    return {error : 'File must be less than 1 MB' }
+  }
+}
 
-  if(file && file.size > 1000000)  { return {error : 'File must be less than 1 MB'}};
+
   try {
 await axios.patch(`/api/products/${params.id}`, formData);
-return redirect('/dashboard');
+return redirect('/');
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data);
     const errorMsg = error.response?.data.msg || 'Editing Proudct failed';
@@ -75,7 +87,7 @@ return redirect('/dashboard');
 export const deleteProudctAction = async({ params })=>{
   try {
     await axios.delete(`/api/products/${params.id}`);
-    return redirect('/dashboard');
+    return redirect('/');
   } catch (error) {
     console.log('BACKEND ERROR', error.response?.data );
     const errorMsg = error.response?.data.msg || 'Proudct cannot be deleted';

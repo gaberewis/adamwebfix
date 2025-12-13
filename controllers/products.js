@@ -40,58 +40,67 @@ export const getproducts = async (req, res) => {
 
 
 export const craeteProudct = async (req, res) => {
+ 
+    let uploadedImages = [];
 
-if(req.file){
-  const response = await cloudinary.v2.uploader.upload(formatImage(req.file));
-  req.body.image = response.secure_url;
-  req.body.imageId = response.public_id;
+    if (req.files && req.files.length > 0) {
+      uploadedImages = await Promise.all(
+        req.files.map((image) => {
+          return cloudinary.v2.uploader.upload(
+            formatImage(image)
+          );
+        })
+      );
+    }
 
-}
-   if (req.body.category) {
+    req.body.images = uploadedImages.map((img) => ({
+      imageUrl: img.secure_url,
+      imageId: img.public_id,
+    }));
+
+    if (req.body.category) {
       req.body.category = req.body.category.trim();
     }
-  const Proudct = await Proudct.create(req.body);
-  res.status(201).json({ msg: 'Proudcte created'})
+
+    const product = await Proudct.create(req.body);
+
+    res.status(201).json({ msg: 'Product created' });
+
 };
 
+export const updateProudct = async (req, res) => {
+
+const { id } = req.params;
+const newProduct = {...req.body}
+
+if(req.files && req.files.length > 0 ){
+
+  const uploadedImages = await Promise.all(
+    req.files.map((image)=>{
+      cloudinary.v2.uploader.upload(formatImage(image))
+    }));
+
+    newProduct.images = uploadedImages.map((img)=>({
+     imageUrl : img.secure_url,
+     imageId : img.public_id,
+    }));
+
+  const updatedProudct = await Proudct.findByIdAndUpdate(id, newProduct, { new: true });
+
+ if (!updatedProduct) {
+      return res.status(404).json({ msg: 'Product not found', updatedProduct });
+    }
 
 
-//check for download one or more images
-// export const createProduct = async (req, res) => {
-//   try {
-//     // -----------------------------
-//     // 1. If only ONE image is uploaded
-//     // -----------------------------
-//     if (req.file) {
-//       const upload = await cloudinary.v2.uploader.upload(
-//         formatImage(req.file)
-//       );
+if (updatedProudct.images && updatedProudct.images.length > 0) {
+  for (const img of updatedProudct.images) {
+    await cloudinary.v2.uploader.destroy(img.imageId);
+  }
+}
+  res.status(200).json({ msg : 'product updated'});
+}
 
-//       req.body.image = upload.secure_url;
-//       req.body.imageId = upload.public_id;
-//     }
-
-//     // -----------------------------
-//     // 2. If MULTIPLE images uploaded (req.files)
-//     // -----------------------------
-//     if (req.files && req.files.length > 0) {
-//       req.body.images = [];
-
-//       for (let file of req.files) {
-//         const upload = await cloudinary.v2.uploader.upload(formatImage(file));
-
-//         req.body.images.push({
-//           imageUrl: upload.secure_url,
-//           imageId: upload.public_id,
-//         });
-//       }
-//     }
-
-
-
-
-
-
+};
 
 export const getProudct = async (req, res) => {
   const { id } = req.params;
@@ -99,25 +108,6 @@ export const getProudct = async (req, res) => {
   res.status(200).json({ Proudct });
 };
 
-export const updateProudct = async (req, res) => {
-
-
-
-const newProduct = {...req.body}
-
-if(req.file){
-  const response = await cloudinary.v2.uploader.upload(formatImage(req.file));
-  newProduct.image = response.secure_url;
-  newProduct.imageId = response.public_id;
-}
-  const { id } = req.params;
-  const updatedProudct = await Proudct.findByIdAndUpdate(id, newProduct);
-if(req.file && updatedProudct.imageId){
-  await cloudinary.v2.uploader.destroy(updateProudct.imageId)
-}
-
-  res.status(200).json({ msg : 'product updated'});
-};
 
 export const deleteProudct = async (req, res) => {
 
@@ -175,20 +165,3 @@ export const showStates = async (req, res) => {
 
 
 
- // export const updateUser = async (req, res) => {
-//   const newUser = { ...req.body };
-//   delete newUser.password;
-//   if (req.file) {
-   
-//     const response = await cloudinary.v2.uploader.upload(formatImage(req.file));
-
-//     newUser.avatar = response.secure_url;
-//     newUser.avatarPublicId = response.public_id;
-//   }
-//   const updatedUser = await User.findByIdAndUpdate(req.user.userId, newUser);
-
-//   if (req.file && updatedUser.avatarPublicId) {
-//     await cloudinary.v2.uploader.destroy(updatedUser.avatarPublicId);
-//   }
-//   res.status(200).json({ msg: 'update user' });
-// };
