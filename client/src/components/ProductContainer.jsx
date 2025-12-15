@@ -11,25 +11,25 @@ const productsContainer = () => {
   const hasproducts = totalproducts > 0;
   if (!hasproducts) {
     return (
-      <h4 className='Proudct-count'> No products available </h4>
+      <h4 className='Product-count'> No products available </h4>
     );
   };
 
   return (
 
     <>
-      <h5 className='Proudct-count' >
-        {totalproducts} Proudct{totalproducts > 1 && 's'} found
+      <h5 className='Product-count' >
+        {totalproducts} Product{totalproducts > 1 && 's'} found
       </h5>
       <div className='products-container'>
 
-        {products.map(Proudct => {
-          const { _id, position, company, ProudctLocation, ProudctType, createdAt, productstatus, createdBy } = Proudct;
+        {products.map(Product => {
+          const { _id, position, company, ProductLocation, ProductType, createdAt, productstatus, createdBy } = Product;
           const date = day(createdAt).format('MMM DD, YYYY');
 
           return (
 
-            <div key={_id} className='Proudct box-radius'>
+            <div key={_id} className='Product box-radius'>
               <header>
                 <div className='main-icon'>{company.charAt(0)}</div>
                 <div className='info'>
@@ -41,31 +41,31 @@ const productsContainer = () => {
                 <div className='content-center'>
 
                   <div>
-                    <span className='Proudct-icon'><FaLocationArrow /></span>
-                    <span className='Proudct-text'>{ProudctLocation}</span>
+                    <span className='Product-icon'><FaLocationArrow /></span>
+                    <span className='Product-text'>{ProductLocation}</span>
                   </div>
 
                   <div>
-                    <span className='Proudct-icon'><FaCalendarAlt /></span>
-                    <span className='Proudct-text'>{date}</span>
+                    <span className='Product-icon'><FaCalendarAlt /></span>
+                    <span className='Product-text'>{date}</span>
                   </div>
 
                   <div>
-                    <span className='Proudct-icon' ><FaBriefcase /></span>
-                    <span className='Proudct-text'>{ProudctType}</span>
+                    <span className='Product-icon' ><FaBriefcase /></span>
+                    <span className='Product-text'>{ProductType}</span>
                   </div>
 
                   <div className={`status`}>{productstatus}</div>
                 </div>
                 <footer className='actions'>
-                  <Link className='btn edit-btn' to={`./edit-Proudct/${_id}`} >Edit</Link>
+                  <Link className='btn edit-btn' to={`./edit-Product/${_id}`} >Edit</Link>
 
                   {
                     createdBy === '68f29702a2e57c84a596d70e' ? (<Form >
                       <button type='submit' className='btn delete-btn' onClick={() => window.alert('Demo User Read Only')}>
                         Delete
-                      </button></Form>) : (<Form method='post' action={`./delete-Proudct/${_id}`} onSubmit={(e) => {
-                        if (!window.confirm("Are you sure you want to delete this Proudct?")) {
+                      </button></Form>) : (<Form method='post' action={`./delete-Product/${_id}`} onSubmit={(e) => {
+                        if (!window.confirm("Are you sure you want to delete this Product?")) {
                           e.preventDefault();
                         }
                       }}>

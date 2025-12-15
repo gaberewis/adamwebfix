@@ -1,5 +1,5 @@
 import { body, validationResult } from 'express-validator';
-import Proudct from '../models/Proudct.js';
+import Product from '../models/Product.js';
 import mongoose from 'mongoose';
 import { param } from 'express-validator';
 import User from '../models/User.js';
@@ -22,26 +22,23 @@ const validateData = (validationArray) => {
 };
 
 export const paramValidation = validateData([
-    param('id').custom(async (value, { req }) => {
+    param('id').custom(async (value) => {
 
         const isValidId = mongoose.Types.ObjectId.isValid(value);
         if (!isValidId) throw new CustomError(400, "bad request");
-        const Proudct = await Proudct.findById(value);
-        if (!Proudct) throw new CustomError(404, "Proudct not found");
-        const isCreator = req.user.userId = Proudct.createdBy;
-        const isAdmin = req.user.userRole = 'admin';
-        if (!isCreator && !isAdmin) throw new CustomError(401, 'not authorized to access this route');
-
+        const product = await Product.findById(value);
+        if (!product) throw new CustomError(404, "Product not found");
+    
     }),
 ])
 
-export const createProudctValidation = validateData(
+export const createProductValidation = validateData(
     [
-        body('company').notEmpty().withMessage('company is required'),
-        body('position').notEmpty().withMessage('position is required'),
-        body('ProudctLocation').notEmpty().withMessage('Proudct location is required'),
-        // body('productstatus').isIn(['interview', 'declined', 'pending']).withMessage('invalid Proudct status'),
-        // body('ProudctType').isIn(['full-time', 'part-time', 'internship']).withMessage('invalid Proudct type'),
+        body('name').notEmpty().withMessage('Name is required'),
+       // body('position').notEmpty().withMessage('position is required'),
+       // body('ProductLocation').notEmpty().withMessage('Product location is required'),
+        // body('productstatus').isIn(['interview', 'declined', 'pending']).withMessage('invalid Product status'),
+        // body('ProductType').isIn(['full-time', 'part-time', 'internship']).withMessage('invalid Product type'),
     ]
 );
 
@@ -68,13 +65,3 @@ export const loginValidation = validateData(
 );
 
 
-export const updateUserValidation = validateData([
-     body('name').notEmpty().withMessage('name is required'),
-     body('email').notEmpty().withMessage('email is required').isEmail().withMessage('invalid email adress').custom(async(value , { req })=>{
-const user = await User.findOne({email : value});
-if(user && user._id.toString() !== req.user.userId ) throw new CustomError(400, 'email already exist');
-     }),
-       body('lastName').notEmpty().withMessage('last name is required'),
-         body('location').notEmpty().withMessage('location is required'),
-
-]);

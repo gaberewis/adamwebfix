@@ -1,22 +1,25 @@
-import Proudct from '../models/Proudct.js';
-import mongoose from 'mongoose';
-import day from 'dayjs';
+import Product from '../models/Product.js';
 import cloudinary from 'cloudinary';
 import { formatImage } from '../middleware/multer.js';
+import User from '../models/User.js';
 
 
 export const getproducts = async (req, res) => {
 
   const { sort, section, catagory, search } = req.query;
 
+  let user = User.findById(req.user.userId);
+
   const queryFields = { createdBy: req.user.userId };
 
-  if (search) {queryFields.$or = [
-    { name: { $regex: search, $options: 'i' } },
-  ]};
+  if (search) {
+    queryFields.$or = [
+      { name: { $regex: search, $options: 'i' } },
+    ]
+  };
 
-  if (section ) queryFields.section = section;
-  if (catagory ) queryFields.catagory = catagory;
+  if (section) queryFields.section = section;
+  if (catagory) queryFields.catagory = catagory;
 
   const limit = Number(req.query.limit) || 10;
   const page = Number(req.query.page) || 1;
@@ -29,136 +32,84 @@ export const getproducts = async (req, res) => {
     zToa: '-position'
   }
   const sortDocs = sortFields[sort] || sortFields.newproducts;
-
-  const products = await Proudct.find(queryFields).limit(limit).sort(sortDocs).skip(skip);
-  const totalproducts = await Proudct.countDocuments(queryFields);
+  const products = await Product.find(queryFields).limit(limit).sort(sortDocs).skip(skip);
+  const totalproducts = await Product.countDocuments(queryFields);
   const pages = Math.ceil(totalproducts / limit);
 
-  res.status(200).json({ products, page, pages, totalproducts });
+  res.status(200).json({ products, page, pages, totalproducts, user });
 
-}
+};
 
+export const craeteProduct = async (req, res) => {
 
-export const craeteProudct = async (req, res) => {
- 
-    let uploadedImages = [];
+  let uploadedImages = [];
 
-    if (req.files && req.files.length > 0) {
-      uploadedImages = await Promise.all(
-        req.files.map((image) => {
-          return cloudinary.v2.uploader.upload(
-            formatImage(image)
-          );
-        })
-      );
-    }
+  if (req.files && req.files.length > 0) {
+    uploadedImages = await Promise.all(
+      req.files.map((image) => {
+        return cloudinary.v2.uploader.upload(
+          formatImage(image)
+        );
+      })
+    );
+  }
 
-    req.body.images = uploadedImages.map((img) => ({
+  req.body.images = uploadedImages.map((img) => ({
+    imageUrl: img.secure_url,
+    imageId: img.public_id,
+  }));
+
+  if (req.body.category) {
+    req.body.category = req.body.category.trim();
+  }
+
+  const product = await Product.create(req.body);
+
+  res.status(201).json({ msg: 'Product created' });
+};
+
+export const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const newProduct = { ...req.body }
+  let uploadedImages = [];
+
+  if (req.files && req.files.length > 0) {
+
+    uploadedImages = await Promise.all(
+      req.files.map((image) => {
+      return  cloudinary.v2.uploader.upload(formatImage(image))
+      }));
+    newProduct.images = uploadedImages.map((img) => ({
       imageUrl: img.secure_url,
       imageId: img.public_id,
     }));
 
-    if (req.body.category) {
-      req.body.category = req.body.category.trim();
+    const updatedProduct = await Product.findByIdAndUpdate(id, newProduct);
+
+    if (!updatedProduct) {
+      return res.status(404).json({ msg: 'Product not found' });
     }
 
-    const product = await Proudct.create(req.body);
-
-    res.status(201).json({ msg: 'Product created' });
-
-};
-
-export const updateProudct = async (req, res) => {
-
-const { id } = req.params;
-const newProduct = {...req.body}
-
-if(req.files && req.files.length > 0 ){
-
-  const uploadedImages = await Promise.all(
-    req.files.map((image)=>{
-      cloudinary.v2.uploader.upload(formatImage(image))
-    }));
-
-    newProduct.images = uploadedImages.map((img)=>({
-     imageUrl : img.secure_url,
-     imageId : img.public_id,
-    }));
-
-  const updatedProudct = await Proudct.findByIdAndUpdate(id, newProduct, { new: true });
-
- if (!updatedProduct) {
-      return res.status(404).json({ msg: 'Product not found', updatedProduct });
-    }
-
-
-if (updatedProudct.images && updatedProudct.images.length > 0) {
-  for (const img of updatedProudct.images) {
-    await cloudinary.v2.uploader.destroy(img.imageId);
-  }
-}
-  res.status(200).json({ msg : 'product updated'});
-}
-
-};
-
-export const getProudct = async (req, res) => {
-  const { id } = req.params;
-  const Proudct = await Proudct.findById(id);
-  res.status(200).json({ Proudct });
-};
-
-
-export const deleteProudct = async (req, res) => {
-
-  const { id } = req.params;
-  const removedProudct = await Proudct.findByIdAndDelete(id);
-  res.status(200).json({ msg: 'Proudct deleted' });
-
-};
-
-export const showStates = async (req, res) => {
-
-  let stats = await Proudct.aggregate([
-    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
-    { $group: { _id: '$productstatus', count: { $sum: 1 } } },
-  ]);
-
-  stats = stats.reduce((acc, curr) => {
-    const { _id: title, count } = curr;
-    acc[title] = count;
-    return acc;
-  }, {});
-  const defaultStats = {
-    pending: stats.pending || 0,
-    interview: stats.interview || 0,
-    declined: stats.declined || 0,
-  };
-
-
-  let monthlyChart = await Proudct.aggregate([
-    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
-    {
-      $group: {
-        _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
-        count: { $sum: 1 }
+    if (updatedProduct.images && updatedProduct.images.length > 0) {
+      for (const img of updatedProduct.images) {
+        await cloudinary.v2.uploader.destroy(img.imageId);
       }
-    },
-    { $sort: { '_id.year': -1, '_id.month': -1 } }
+    }
+    res.status(200).json({ msg: 'product updated' });
+  }
+};
 
-  ]);
+export const getProduct = async (req, res) => {
+  const { id } = req.params;
+  const Product = await Product.findById(id);
+  res.status(200).json({ Product });
+};
 
-  monthlyChart = monthlyChart.map(item => {
+export const deleteProduct = async (req, res) => {
 
-    const { _id: { year, month }, count } = item;
-
-    const date = day().month(month - 1).year(year).format('MMM YY');
-    return { date, count };
-
-  });
-
-
-  res.status(200).json({ defaultStats, monthlyChart });
+  const { id } = req.params;
+  const removedProduct = await Product.findByIdAndDelete(id);
+  res.status(200).json({ msg: 'Product deleted' });
 
 };
 

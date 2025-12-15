@@ -3,25 +3,25 @@ import { Form } from "react-router-dom";
 import { FormRow, FormRowSelect, SubmitButton } from "../components";
 
 
-const EditProudct = () => {
+const EditProduct = () => {
   const productstatusArr = ['pending', 'interview', 'declined'];
-  const ProudctTypeArr = ['full-time', 'part-time', 'internship'];
-  const { Proudct } = useLoaderData();
-  const { position, company, ProudctLocation, ProudctType, productstatus } = Proudct;
+  const ProductTypeArr = ['full-time', 'part-time', 'internship'];
+  const { Product } = useLoaderData();
+  const { position, company, ProductLocation, ProductType, productstatus } = Product;
   const actionData = useActionData();
 
   return (
     <Form method="post" className="form">
-      <h4 className="title">edit Proudct</h4>
+      <h4 className="title">edit Product</h4>
       <FormRow type='text' name='company' defaultValue={company} />
       <FormRow type='text' name='position' defaultValue={position} />
-      <FormRow type='text' name='ProudctLocation' labelText='user location' defaultValue={ProudctLocation} />
-      < FormRowSelect name='ProudctType' labelText='jop type' defaultValue={ProudctType} list={productstatusArr} />
-      < FormRowSelect name='productstatus' defaultValue={productstatus} labelText='Proudct status' list={ProudctTypeArr} />
+      <FormRow type='text' name='ProductLocation' labelText='user location' defaultValue={ProductLocation} />
+      < FormRowSelect name='ProductType' labelText='jop type' defaultValue={ProductType} list={productstatusArr} />
+      < FormRowSelect name='productstatus' defaultValue={productstatus} labelText='Product status' list={ProductTypeArr} />
       {actionData?.errorMsg && <p className="error">{actionData.errorMsg}</p>}
       <SubmitButton />
     </Form>
   )
 }
 
-export default EditProudct;
+export default EditProduct;

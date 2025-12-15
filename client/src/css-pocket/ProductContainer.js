@@ -95,14 +95,14 @@ gap : 1rem;
   .edit-btn {
     margin-right: 0.5rem;
   }
-    .Proudct{
+    .Product{
      background: var(--background-secondary-color);
   border-radius: var(--border-radius);
   display: grid;
   grid-template-rows: 1fr auto;
   box-shadow: var(--shadow-2);
     }
-  .Proudct-icon {
+  .Product-icon {
     font-size: 1rem;
     margin-right: 1rem;
     display: flex;
@@ -111,7 +111,7 @@ gap : 1rem;
     svg {
       color: var(--text-secondary-color);
     }
-        .Proudct-text {
+        .Product-text {
     text-transform: capitalize;
     letter-spacing: var(--letter-spacing);
   }

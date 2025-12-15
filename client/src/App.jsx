@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import {
-  AddProudct, Allproducts, Admin, Dashboard,
+import { Home,
+  AddProduct, Allproducts, Admin, Dashboard,
    Equipment, Accessories, 
   Accessories, Parts,
-  EditProudct,  Login, Register, 
-  Error
+  EditProduct,  Login, Register, 
+  Error,
+  Landing
 } from './pages';
 import { ErrorElement } from "./components";
 
@@ -12,40 +13,41 @@ import * as loader from './loaders';
 
 import * as action from './actions';
 
-export const checkIsDark = () => {
-  const isDarkTheme =
-    localStorage.getItem('darkTheme') === 'true'
-  document.body.classList.toggle('dark-theme', isDarkTheme);
-  return isDarkTheme;
-};
-checkIsDark();
 
 const router = createBrowserRouter([
+  {
+     path: '/',
+    element: <Home />,
+     ErrorElement: <Error />,
+  },
 
   {
-    path: '/',
+    path: '/pnws',
     element: <Dashboard />,
     loader: loader.dashboardloader,
-     ErrorElement: <Error />,
-
     children: [
+        {
+        index: true,
+        element: <Landing />,
+       
+      },
          {
-        index: 'equipment',
+        path: 'equipment',
         element: <Equipment />,
        
       },
          {
-        index: 'accessories',
+        path: 'accessories',
         element: <Accessories />,
        
       },
          {
-        index: 'supplies',
+        path: 'supplies',
         element: <Supplies />,
        
       },
             {
-        index: 'parts',
+        path: 'parts',
         element: <Parts />,
        
       },
@@ -55,27 +57,27 @@ const router = createBrowserRouter([
         loader: loader.allproductsLoader
       },
       {
-        path: 'add-Proudct',
-        element: <AddProudct />,
-        action: action.addProudctAction,
+        path: 'add-Product',
+        element: <AddProduct />,
+        action: action.addProductAction,
 
       },
       {
-        path: 'edit-Proudct/:id',
-        element: <EditProudct />,
-        loader: loader.editProudctLoader,
+        path: 'edit-Product/:id',
+        element: <EditProduct />,
+        loader: loader.editProductLoader,
         action: action.editAction
 
 
       },
       {
-        path: 'delete-Proudct/:id',
-        action: action.deleteProudctAction
+        path: 'delete-Product/:id',
+        action: action.deleteProductAction
       },
      
       {
         path: 'admin',
-        element: <Admin />,
+        element: <Dashboard />,
         loader: loader.adminLoader
       },
 

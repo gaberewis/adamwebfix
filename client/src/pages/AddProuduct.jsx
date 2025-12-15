@@ -3,12 +3,11 @@ import { useOutletContext, Form } from "react-router-dom";
 import { FormRowSelect, SubmitButton, FormRow } from '../components';
 
 
-const AddProudct = () => {
+const AddProduct = () => {
 
   const { user } = useOutletContext();
-  const productstatus = ['pending', 'interview', 'declined'];
-  const ProudctType = ['full-time', 'part-time', 'internship'];
 
+  const productSection = ['equipment', 'accessories', 'supplies', 'parts', 'other'];
 
 
 
@@ -20,7 +19,7 @@ const AddProudct = () => {
 
       <Form method='post' className='form' encType='multipart/form-data' >
 
-        <h4 className="title">add Proudct</h4>
+        <h4 className="title">Add Product</h4>
 
         <div className='form-raw'>
           <label htmlFor='images' className='form-label'>
@@ -31,11 +30,24 @@ const AddProudct = () => {
         </div>
 
         <div className="form-center">
-          <FormRow type='text' name='company' />
-          <FormRow type='text' name='position' />
-          <FormRow type='text' name='ProudctLocation' labelText='user location' defaultValue={user?.location} />
-          <FormRowSelect name='productstatus' id='productstatus' list={productstatus} labelText='Proudct Status' defaultValue="pending" />
-          <FormRowSelect name='ProudctType' id='ProudctType' list={ProudctType} labelText='Proudct Type' defaultValue='full-time' />
+          <FormRow type='text' name='name' />
+          <FormRow type='text' name='catagory' />
+          <FormRow type='radio' name='popular' lableText='Yes' defaultValue='yse' />
+          <FormRow type='radio' name='popular' lableText='No' defaultValue='no' />
+
+          <textarea
+            maxLength="1000"
+            name="shortDescription" className="short-description"
+            placeholder="Add a brief product description"
+          ></textarea>
+          <textarea
+            maxLength="10000"
+            name="fullDescription" className="full-description"
+            placeholder="Add the full product description"
+          ></textarea>
+
+          <FormRowSelect name='section' labelText='Product Type' id='section' list={productSection} defaultValue="equipment" />
+
           <SubmitButton />
         </div>
       </Form>
@@ -43,7 +55,7 @@ const AddProudct = () => {
 
   )
 };
-export default AddProudct;
+export default AddProduct;
 
 
 

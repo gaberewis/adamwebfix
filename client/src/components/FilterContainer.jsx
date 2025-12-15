@@ -7,10 +7,10 @@ import { useproductsContext } from '../pages/Allproducts';
 const FilterContainer = () => {
     const submit = useSubmit();
     const { searchValues } = useproductsContext();
-    const { search, productstatus, ProudctType, sort } = searchValues;
+    const { search, productstatus, ProductType, sort } = searchValues;
 
     const productstatusArr = ['all', 'pending', 'interview', 'declined'];
-    const ProudctTypeArr = ['all', 'full-time', 'part-time', 'internship'];
+    const ProductTypeArr = ['all', 'full-time', 'part-time', 'internship'];
 
 
 
@@ -39,13 +39,13 @@ const FilterContainer = () => {
                     defaultValue={search}
                     onChange={debounce((form)=> submit(form))}
                 />
-                <ForRowSelect name='productstatus' labelText='Proudct status' list={productstatusArr} defaultValue={productstatus}
+                <ForRowSelect name='productstatus' labelText='Product status' list={productstatusArr} defaultValue={productstatus}
                     onChange={(e) => submit(e.currentTarget.form)}
                 />
-                <ForRowSelect name='ProudctType' list={ProudctTypeArr} labelText='Proudct type' defaultValue={ProudctType}
+                <ForRowSelect name='ProductType' list={ProductTypeArr} labelText='Product type' defaultValue={ProductType}
                     onChange={(e) => submit(e.currentTarget.form)} />
                 <h5>
-                    <Link to='/dashboard' >reset</Link>
+                    <Link to='/pnws' >reset</Link>
                 </h5>
                 <SubmitButton />
             </div>

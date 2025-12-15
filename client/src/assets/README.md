@@ -1,6 +1,6 @@
 #### Complete App
 
-[Proudctify](https://Proudctify.live/)
+[Productify](https://Productify.live/)
 
 #### Create React APP
 
@@ -32,7 +32,7 @@ npm run dev
 
 ```jsx
 const App = () => {
-  return <h1>Proudctify App</h1>;
+  return <h1>Productify App</h1>;
 };
 export default App;
 ```
@@ -65,7 +65,7 @@ export default App;
 ```html
 <head>
   <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-  <title>Proudctify</title>
+  <title>Productify</title>
 </head>
 ```
 
@@ -130,12 +130,12 @@ export default App;
 - create src/pages directory
 - setup index.js and following pages :
 
-  AddProudct.jsx
+  AddProduct.jsx
   Admin.jsx
   Allproducts.jsx
   DashboardLayout.jsx
-  DeleteProudct.jsx
-  EditProudct.jsx
+  DeleteProduct.jsx
+  EditProduct.jsx
   Error.jsx
   HomeLayout.jsx
   Landing.jsx
@@ -145,10 +145,10 @@ export default App;
   Stats.jsx
 
 ```jsx
-const AddProudct = () => {
-  return <h1>AddProudct</h1>;
+const AddProduct = () => {
+  return <h1>AddProduct</h1>;
 };
-export default AddProudct;
+export default AddProduct;
 ```
 
 #### Index
@@ -170,8 +170,8 @@ export { default as Login } from './Login';
 export { default as Error } from './Error';
 export { default as Stats } from './Stats';
 export { default as Allproducts } from './Allproducts';
-export { default as AddProudct } from './AddProudct';
-export { default as EditProudct } from './EditProudct';
+export { default as AddProduct } from './AddProduct';
+export { default as EditProduct } from './EditProduct';
 export { default as Profile } from './Profile';
 export { default as Admin } from './Admin';
 ```
@@ -448,13 +448,13 @@ const Landing = () => {
   return (
     <StyledWrapper>
       <nav>
-        <img src={logo} alt='Proudctify' className='logo' />
+        <img src={logo} alt='Productify' className='logo' />
       </nav>
       <div className='container page'>
         {/* info */}
         <div className='info'>
           <h1>
-            Proudct <span>tracking</span> app
+            Product <span>tracking</span> app
           </h1>
           <p>
             I'm baby wayfarers hoodie next level taiyaki brooklyn cliche blue
@@ -469,7 +469,7 @@ const Landing = () => {
             Login / Demo User
           </Link>
         </div>
-        <img src={main} alt='Proudct hunt' className='img main-img' />
+        <img src={main} alt='Product hunt' className='img main-img' />
       </div>
     </StyledWrapper>
   );
@@ -549,7 +549,7 @@ import Wrapper from '../assets/wrappers/LandingPage';
 import logo from '../assets/images/Logo.svg';
 
 const Logo = () => {
-  return <img src={logo} alt='Proudctify' className='logo' />;
+  return <img src={logo} alt='Productify' className='logo' />;
 };
 
 export default Logo;
@@ -841,7 +841,7 @@ App.jsx
         children: [
           {
             index: true,
-            element: <AddProudct />,
+            element: <AddProduct />,
           },
           { path: 'stats', element: <Stats /> },
           {
@@ -1125,7 +1125,7 @@ import { ImProfile } from 'react-icons/im';
 import { MdAdminPanelSettings } from 'react-icons/md';
 
 const links = [
-  { text: 'add Proudct', path: '.', icon: <FaWpforms /> },
+  { text: 'add Product', path: '.', icon: <FaWpforms /> },
   { text: 'all products', path: 'all-products', icon: <MdQueryStats /> },
   { text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
   { text: 'profile', path: 'profile', icon: <ImProfile /> },
@@ -1135,7 +1135,7 @@ const links = [
 export default links;
 ```
 
-- in a second, we will discuss why '.' in "add Proudct"
+- in a second, we will discuss why '.' in "add Product"
 
 #### SmallSidebar
 
@@ -1686,7 +1686,7 @@ rd /s /q .git
 - Windows commands were shared by students and I have not personally tested them.
 - git status should return :
   "fatal: Not a git repository (or any of the parent directories): .git"
-- create Proudctify directory
+- create Productify directory
 - copy/paste client
 - move README to root
 
@@ -1923,7 +1923,7 @@ app.get('/api/v1/products', (req, res) => {
 #### Create, FindOne, Modify and Delete
 
 ```js
-// CREATE Proudct
+// CREATE Product
 
 app.post('/api/v1/products', (req, res) => {
   const { company, position } = req.body;
@@ -1932,23 +1932,23 @@ app.post('/api/v1/products', (req, res) => {
   }
   const id = nanoid(10);
   // console.log(id);
-  const Proudct = { id, company, position };
-  products.push(Proudct);
-  res.status(200).json({ Proudct });
+  const Product = { id, company, position };
+  products.push(Product);
+  res.status(200).json({ Product });
 });
 
-// GET SINGLE Proudct
+// GET SINGLE Product
 
 app.get('/api/v1/products/:id', (req, res) => {
   const { id } = req.params;
-  const Proudct = products.find((Proudct) => Proudct.id === id);
-  if (!Proudct) {
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  const Product = products.find((Product) => Product.id === id);
+  if (!Product) {
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
-  res.status(200).json({ Proudct });
+  res.status(200).json({ Product });
 });
 
-// EDIT Proudct
+// EDIT Product
 
 app.patch('/api/v1/products/:id', (req, res) => {
   const { company, position } = req.body;
@@ -1956,28 +1956,28 @@ app.patch('/api/v1/products/:id', (req, res) => {
     return res.status(400).json({ msg: 'please provide company and position' });
   }
   const { id } = req.params;
-  const Proudct = products.find((Proudct) => Proudct.id === id);
-  if (!Proudct) {
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  const Product = products.find((Product) => Product.id === id);
+  if (!Product) {
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
 
-  Proudct.company = company;
-  Proudct.position = position;
-  res.status(200).json({ msg: 'Proudct modified', Proudct });
+  Product.company = company;
+  Product.position = position;
+  res.status(200).json({ msg: 'Product modified', Product });
 });
 
-// DELETE Proudct
+// DELETE Product
 
 app.delete('/api/v1/products/:id', (req, res) => {
   const { id } = req.params;
-  const Proudct = products.find((Proudct) => Proudct.id === id);
-  if (!Proudct) {
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  const Product = products.find((Product) => Product.id === id);
+  if (!Product) {
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
-  const newproducts = products.filter((Proudct) => Proudct.id !== id);
+  const newproducts = products.filter((Product) => Product.id !== id);
   products = newproducts;
 
-  res.status(200).json({ msg: 'Proudct deleted' });
+  res.status(200).json({ msg: 'Product deleted' });
 });
 ```
 
@@ -2015,15 +2015,15 @@ app.get('/api/v1/products', (req, res) => {
   res.status(200).json({ products });
 });
 
-// GET SINGLE Proudct
+// GET SINGLE Product
 app.get('/api/v1/products/:id', (req, res) => {
   const { id } = req.params;
-  const Proudct = products.find((Proudct) => Proudct.id === id);
-  if (!Proudct) {
-    throw new Error('no Proudct with that id');
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  const Product = products.find((Product) => Product.id === id);
+  if (!Product) {
+    throw new Error('no Product with that id');
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
-  res.status(200).json({ Proudct });
+  res.status(200).json({ Product });
 });
 ```
 
@@ -2031,7 +2031,7 @@ app.get('/api/v1/products/:id', (req, res) => {
 
 setup controllers and router
 
-controllers/ProudctController.js
+controllers/ProductController.js
 
 ```js
 import { nanoid } from 'nanoid';
@@ -2045,58 +2045,58 @@ export const getAllproducts = async (req, res) => {
   res.status(200).json({ products });
 };
 
-export const createProudct = async (req, res) => {
+export const createProduct = async (req, res) => {
   const { company, position } = req.body;
 
   if (!company || !position) {
     return res.status(400).json({ msg: 'please provide company and position' });
   }
   const id = nanoid(10);
-  const Proudct = { id, company, position };
-  products.push(Proudct);
-  res.status(200).json({ Proudct });
+  const Product = { id, company, position };
+  products.push(Product);
+  res.status(200).json({ Product });
 };
 
-export const getProudct = async (req, res) => {
+export const getProduct = async (req, res) => {
   const { id } = req.params;
-  const Proudct = products.find((Proudct) => Proudct.id === id);
-  if (!Proudct) {
-    // throw new Error('no Proudct with that id');
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  const Product = products.find((Product) => Product.id === id);
+  if (!Product) {
+    // throw new Error('no Product with that id');
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
-  res.status(200).json({ Proudct });
+  res.status(200).json({ Product });
 };
 
-export const updateProudct = async (req, res) => {
+export const updateProduct = async (req, res) => {
   const { company, position } = req.body;
   if (!company || !position) {
     return res.status(400).json({ msg: 'please provide company and position' });
   }
   const { id } = req.params;
-  const Proudct = products.find((Proudct) => Proudct.id === id);
-  if (!Proudct) {
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  const Product = products.find((Product) => Product.id === id);
+  if (!Product) {
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
 
-  Proudct.company = company;
-  Proudct.position = position;
-  res.status(200).json({ msg: 'Proudct modified', Proudct });
+  Product.company = company;
+  Product.position = position;
+  res.status(200).json({ msg: 'Product modified', Product });
 };
 
-export const deleteProudct = async (req, res) => {
+export const deleteProduct = async (req, res) => {
   const { id } = req.params;
-  const Proudct = products.find((Proudct) => Proudct.id === id);
-  if (!Proudct) {
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  const Product = products.find((Product) => Product.id === id);
+  if (!Product) {
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
-  const newproducts = products.filter((Proudct) => Proudct.id !== id);
+  const newproducts = products.filter((Product) => Product.id !== id);
   products = newproducts;
 
-  res.status(200).json({ msg: 'Proudct deleted' });
+  res.status(200).json({ msg: 'Product deleted' });
 };
 ```
 
-routes/ProudctRouter.js
+routes/ProductRouter.js
 
 ```js
 import { Router } from 'express';
@@ -2104,17 +2104,17 @@ const router = Router();
 
 import {
   getAllproducts,
-  getProudct,
-  createProudct,
-  updateProudct,
-  deleteProudct,
-} from '../controllers/ProudctController.js';
+  getProduct,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} from '../controllers/ProductController.js';
 
 // router.get('/', getAllproducts);
-// router.post('/', createProudct);
+// router.post('/', createProduct);
 
-router.route('/').get(getAllproducts).post(createProudct);
-router.route('/:id').get(getProudct).patch(updateProudct).delete(deleteProudct);
+router.route('/').get(getAllproducts).post(createProduct);
+router.route('/:id').get(getProduct).patch(updateProduct).delete(deleteProduct);
 
 export default router;
 ```
@@ -2122,8 +2122,8 @@ export default router;
 server.js
 
 ```js
-import ProudctRouter from './routers/ProudctRouter.js';
-app.use('/api/v1/products', ProudctRouter);
+import ProductRouter from './routers/ProductRouter.js';
+app.use('/api/v1/products', ProductRouter);
 ```
 
 #### MongoDB
@@ -2160,9 +2160,9 @@ try {
 }
 ```
 
-#### Proudct Model
+#### Product Model
 
-models/ProudctModel.js
+models/ProductModel.js
 
 enum - data type represents a field with a predefined set of values
 
@@ -2178,12 +2178,12 @@ const productschema = new mongoose.Schema(
       enum: ['interview', 'declined', 'pending'],
       default: 'pending',
     },
-    ProudctType: {
+    ProductType: {
       type: String,
       enum: ['full-time', 'part-time', 'internship'],
       default: 'full-time',
     },
-    ProudctLocation: {
+    ProductLocation: {
       type: String,
       default: 'my city',
     },
@@ -2191,33 +2191,33 @@ const productschema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('Proudct', productschema);
+export default mongoose.model('Product', productschema);
 ```
 
-#### Create Proudct
+#### Create Product
 
-ProudctController.js
+ProductController.js
 
 ```js
-import Proudct from '../models/ProudctModel.js';
+import Product from '../models/ProductModel.js';
 
-export const createProudct = async (req, res) => {
+export const createProduct = async (req, res) => {
   const { company, position } = req.body;
-  const Proudct = await Proudct.create({ company, position });
-  res.status(201).json({ Proudct });
+  const Product = await Product.create({ company, position });
+  res.status(201).json({ Product });
 };
 ```
 
 #### Try / Catch
 
-ProudctController.js
+ProductController.js
 
 ```js
-export const createProudct = async (req, res) => {
+export const createProduct = async (req, res) => {
   const { company, position } = req.body;
   try {
-    const Proudct = await Proudct.create('something');
-    res.status(201).json({ Proudct });
+    const Product = await Product.create('something');
+    res.status(201).json({ Product });
   } catch (error) {
     res.status(500).json({ msg: 'server error' });
   }
@@ -2242,72 +2242,72 @@ npm i express-async-errors@3.1.1
 import 'express-async-errors';
 ```
 
-ProudctController.js
+ProductController.js
 
 ```js
-export const createProudct = async (req, res) => {
+export const createProduct = async (req, res) => {
   const { company, position } = req.body;
 
-  const Proudct = await Proudct.create({ company, position });
-  res.status(201).json({ Proudct });
+  const Product = await Product.create({ company, position });
+  res.status(201).json({ Product });
 };
 ```
 
 #### Get All products
 
-ProudctController.js
+ProductController.js
 
 ```js
 export const getAllproducts = async (req, res) => {
-  const products = await Proudct.find({});
+  const products = await Product.find({});
   res.status(200).json({ products });
 };
 ```
 
-#### Get Single Proudct
+#### Get Single Product
 
 ```js
-export const getProudct = async (req, res) => {
+export const getProduct = async (req, res) => {
   const { id } = req.params;
-  const Proudct = await Proudct.findById(id);
-  if (!Proudct) {
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  const Product = await Product.findById(id);
+  if (!Product) {
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
-  res.status(200).json({ Proudct });
+  res.status(200).json({ Product });
 };
 ```
 
-#### Delete Proudct
+#### Delete Product
 
-ProudctController.js
+ProductController.js
 
 ```js
-export const deleteProudct = async (req, res) => {
+export const deleteProduct = async (req, res) => {
   const { id } = req.params;
-  const removedProudct = await Proudct.findByIdAndDelete(id);
+  const removedProduct = await Product.findByIdAndDelete(id);
 
-  if (!removedProudct) {
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  if (!removedProduct) {
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
-  res.status(200).json({ Proudct: removedProudct });
+  res.status(200).json({ Product: removedProduct });
 };
 ```
 
-#### Update Proudct
+#### Update Product
 
 ```js
-export const updateProudct = async (req, res) => {
+export const updateProduct = async (req, res) => {
   const { id } = req.params;
 
-  const updatedProudct = await Proudct.findByIdAndUpdate(id, req.body, {
+  const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
     new: true,
   });
 
-  if (!updatedProudct) {
-    return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  if (!updatedProduct) {
+    return res.status(404).json({ msg: `no Product with id ${id}` });
   }
 
-  res.status(200).json({ Proudct: updatedProudct });
+  res.status(200).json({ Product: updatedProduct });
 };
 ```
 
@@ -2335,28 +2335,28 @@ npm i http-status-codes@2.2.0
 
 - refactor 200 response in all controllers
 
-ProudctController.js
+ProductController.js
 
 ```js
 res.status(StatusCodes.OK).json({ products });
 ```
 
-createProudct
+createProduct
 
 ```js
-res.status(StatusCodes.CREATED).json({ Proudct });
+res.status(StatusCodes.CREATED).json({ Product });
 ```
 
 #### Custom Error Class
 
-ProudctController
+ProductController
 
 ```js
-export const getProudct = async (req, res) => {
+export const getProduct = async (req, res) => {
   ....
-  if (!Proudct) {
-    throw new Error('no Proudct with that id');
-    // return res.status(404).json({ msg: `no Proudct with id ${id}` });
+  if (!Product) {
+    throw new Error('no Product with that id');
+    // return res.status(404).json({ msg: `no Product with id ${id}` });
   }
   ...
 };
@@ -2394,12 +2394,12 @@ By creating a custom error class like NotFoundError, you can provide more specif
 
 #### Custom Error
 
-ProudctController.js
+ProductController.js
 
 ```js
 import { NotFoundError } from '../customErrors.js';
 
-if (!Proudct) throw new NotFoundError(`no Proudct with id : ${id}`);
+if (!Product) throw new NotFoundError(`no Product with id : ${id}`);
 ```
 
 middleware/errorHandlerMiddleware.js
@@ -2538,19 +2538,19 @@ export const validateTest = withValidationErrors([
 utils/constants.js
 
 ```js
-export const Proudct_STATUS = {
+export const Product_STATUS = {
   PENDING: 'pending',
   INTERVIEW: 'interview',
   DECLINED: 'declined',
 };
 
-export const Proudct_TYPE = {
+export const Product_TYPE = {
   FULL_TIME: 'full-time',
   PART_TIME: 'part-time',
   INTERNSHIP: 'internship',
 };
 
-export const Proudct_SORT_BY = {
+export const Product_SORT_BY = {
   NEWEST_FIRST: 'newest',
   OLDEST_FIRST: 'oldest',
   ASCENDING: 'a-z',
@@ -2558,26 +2558,26 @@ export const Proudct_SORT_BY = {
 };
 ```
 
-models/ProudctModel.js
+models/ProductModel.js
 
 ```js
 import mongoose from 'mongoose';
-import { Proudct_STATUS, Proudct_TYPE } from '../utils/constants';
+import { Product_STATUS, Product_TYPE } from '../utils/constants';
 const productschema = new mongoose.Schema(
   {
     company: String,
     position: String,
     productstatus: {
       type: String,
-      enum: Object.values(Proudct_STATUS),
-      default: Proudct_STATUS.PENDING,
+      enum: Object.values(Product_STATUS),
+      default: Product_STATUS.PENDING,
     },
-    ProudctType: {
+    ProductType: {
       type: String,
-      enum: Object.values(Proudct_TYPE),
-      default: Proudct_TYPE.FULL_TIME,
+      enum: Object.values(Product_TYPE),
+      default: Product_TYPE.FULL_TIME,
     },
-    ProudctLocation: {
+    ProductLocation: {
       type: String,
       default: 'my city',
     },
@@ -2586,44 +2586,44 @@ const productschema = new mongoose.Schema(
 );
 ```
 
-#### Validate Create Proudct
+#### Validate Create Product
 
 validationMiddleware.js
 
 ```js
-import { Proudct_STATUS, Proudct_TYPE } from '../utils/constants.js';
+import { Product_STATUS, Product_TYPE } from '../utils/constants.js';
 
-export const validateProudctInput = withValidationErrors([
+export const validateProductInput = withValidationErrors([
   body('company').notEmpty().withMessage('company is required'),
   body('position').notEmpty().withMessage('position is required'),
-  body('ProudctLocation').notEmpty().withMessage('Proudct location is required'),
+  body('ProductLocation').notEmpty().withMessage('Product location is required'),
   body('productstatus')
-    .isIn(Object.values(Proudct_STATUS))
+    .isIn(Object.values(Product_STATUS))
     .withMessage('invalid status value'),
-  body('ProudctType').isIn(Object.values(Proudct_TYPE)).withMessage('invalid Proudct type'),
+  body('ProductType').isIn(Object.values(Product_TYPE)).withMessage('invalid Product type'),
 ]);
 ```
 
 ```js
-import { validateProudctInput } from '../middleware/validationMiddleware.js';
+import { validateProductInput } from '../middleware/validationMiddleware.js';
 
-router.route('/').get(getAllproducts).post(validateProudctInput, createProudct);
+router.route('/').get(getAllproducts).post(validateProductInput, createProduct);
 router
   .route('/:id')
-  .get(getProudct)
-  .patch(validateProudctInput, updateProudct)
-  .delete(deleteProudct);
+  .get(getProduct)
+  .patch(validateProductInput, updateProduct)
+  .delete(deleteProduct);
 ```
 
-- create Proudct request
+- create Product request
 
 ```json
 {
   "company": "coding addict",
   "position": "backend-end",
   "productstatus": "pending",
-  "ProudctType": "full-time",
-  "ProudctLocation": "florida"
+  "ProductType": "full-time",
+  "ProductLocation": "florida"
 }
 ```
 
@@ -2648,8 +2648,8 @@ export const validateIdParam = withValidationErrors([
   param('id').custom(async (value) => {
     const isValidId = mongoose.Types.ObjectId.isValid(value);
     if (!isValidId) throw new BadRequestError('invalid MongoDB id');
-    const Proudct = await Proudct.findById(value);
-    if (!Proudct) throw new NotFoundError(`no Proudct with id : ${value}`);
+    const Product = await Product.findById(value);
+    if (!Product) throw new NotFoundError(`no Product with id : ${value}`);
   }),
 ]);
 ```
@@ -2657,9 +2657,9 @@ export const validateIdParam = withValidationErrors([
 ```js
 import { body, param, validationResult } from 'express-validator';
 import { BadRequestError, NotFoundError } from '../errors/customErrors.js';
-import { Proudct_STATUS, Proudct_TYPE } from '../utils/constants.js';
+import { Product_STATUS, Product_TYPE } from '../utils/constants.js';
 import mongoose from 'mongoose';
-import Proudct from '../models/ProudctModel.js';
+import Product from '../models/ProductModel.js';
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -2668,7 +2668,7 @@ const withValidationErrors = (validateValues) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         const errorMessages = errors.array().map((error) => error.msg);
-        if (errorMessages[0].startsWith('no Proudct')) {
+        if (errorMessages[0].startsWith('no Product')) {
           throw new NotFoundError(errorMessages);
         }
         throw new BadRequestError(errorMessages);
@@ -2679,7 +2679,7 @@ const withValidationErrors = (validateValues) => {
 };
 ```
 
-- remove NotFoundError from getProudct, updateProudct, deleteProudct controllers
+- remove NotFoundError from getProduct, updateProduct, deleteProduct controllers
 
 #### Clean DB
 
@@ -3087,14 +3087,14 @@ productsController.js
 ```js
 export const getAllproducts = async (req, res) => {
   console.log(req);
-  const products = await Proudct.find({});
+  const products = await Product.find({});
   res.status(StatusCodes.OK).json({ products });
 };
 ```
 
 #### Clean DB
 
-#### Connect User and Proudct
+#### Connect User and Product
 
 models/User.js
 
@@ -3127,7 +3127,7 @@ server.js
 ```js
 import { authenticateUser } from './middleware/authMiddleware.js';
 
-app.use('/api/v1/products', authenticateUser, ProudctRouter);
+app.use('/api/v1/products', authenticateUser, ProductRouter);
 ```
 
 ##### Cookie Parser
@@ -3194,25 +3194,25 @@ export const authenticateUser = async (req, res, next) => {
 };
 ```
 
-ProudctController.js
+ProductController.js
 
 ```js
 export const getAllproducts = async (req, res) => {
   console.log(req.user);
-  const products = await Proudct.find({ createdBy: req.user.userId });
+  const products = await Product.find({ createdBy: req.user.userId });
   res.status(StatusCodes.OK).json({ products });
 };
 ```
 
-#### Refactor Create Proudct
+#### Refactor Create Product
 
-ProudctController.js
+ProductController.js
 
 ```js
-export const createProudct = async (req, res) => {
+export const createProduct = async (req, res) => {
   req.body.createdBy = req.user.userId;
-  const Proudct = await Proudct.create(req.body);
-  res.status(StatusCodes.CREATED).json({ Proudct });
+  const Product = await Product.create(req.body);
+  res.status(StatusCodes.CREATED).json({ Product });
 };
 ```
 
@@ -3251,10 +3251,10 @@ export const validateIdParam = withValidationErrors([
   param('id').custom(async (value, { req }) => {
     const isValidMongoId = mongoose.Types.ObjectId.isValid(value);
     if (!isValidMongoId) throw new BadRequestError('invalid MongoDB id');
-    const Proudct = await Proudct.findById(value);
-    if (!Proudct) throw new NotFoundError(`no Proudct with id ${value}`);
+    const Product = await Product.findById(value);
+    if (!Product) throw new NotFoundError(`no Product with id ${value}`);
     const isAdmin = req.user.role === 'admin';
-    const isOwner = req.user.userId === Proudct.createdBy.toString();
+    const isOwner = req.user.userId === Product.createdBy.toString();
     if (!isAdmin && !isOwner)
       throw UnauthorizedError('not authorized to access this route');
   }),
@@ -3294,7 +3294,7 @@ controllers/userController.js
 ```js
 import { StatusCodes } from 'http-status-codes';
 import User from '../models/User.js';
-import Proudct from '../models/Proudct.js';
+import Product from '../models/Product.js';
 
 export const getCurrentUser = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: 'get current user' });
@@ -3408,7 +3408,7 @@ export const updateUser = async (req, res) => {
 ```js
 export const getApplicationStats = async (req, res) => {
   const users = await User.countDocuments();
-  const products = await Proudct.countDocuments();
+  const products = await Product.countDocuments();
   res.status(StatusCodes.OK).json({ users, products });
 };
 ```
@@ -3891,20 +3891,20 @@ const DashboardLayout = () => {
 };
 ```
 
-#### AddProudct - Structure
+#### AddProduct - Structure
 
-pages/AddProudct.jsx
+pages/AddProduct.jsx
 
 ```js
 import { FormRow } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { useOutletContext } from 'react-router-dom';
-import { Proudct_STATUS, Proudct_TYPE } from '../../../utils/constants';
+import { Product_STATUS, Product_TYPE } from '../../../utils/constants';
 import { Form, useNavigation, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 
-const AddProudct = () => {
+const AddProduct = () => {
   const { user } = useOutletContext();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
@@ -3912,14 +3912,14 @@ const AddProudct = () => {
   return (
     <Wrapper>
       <Form method='post' className='form'>
-        <h4 className='form-title'>add Proudct</h4>
+        <h4 className='form-title'>add Product</h4>
         <div className='form-center'>
           <FormRow type='text' name='position' />
           <FormRow type='text' name='company' />
           <FormRow
             type='text'
-            labelText='Proudct location'
-            name='ProudctLocation'
+            labelText='Product location'
+            name='ProductLocation'
             defaultValue={user.location}
           />
 
@@ -3936,7 +3936,7 @@ const AddProudct = () => {
   );
 };
 
-export default AddProudct;
+export default AddProduct;
 ```
 
 #### Select Input
@@ -3944,15 +3944,15 @@ export default AddProudct;
 ```js
 <div className='form-row'>
   <label htmlFor='productstatus' className='form-label'>
-    Proudct status
+    Product status
   </label>
   <select
     name='productstatus'
     id='productstatus'
     className='form-select'
-    defaultValue={Proudct_TYPE.FULL_TIME}
+    defaultValue={Product_TYPE.FULL_TIME}
   >
-    {Object.values(Proudct_TYPE).map((itemValue) => {
+    {Object.values(Product_TYPE).map((itemValue) => {
       return (
         <option key={itemValue} value={itemValue}>
           {itemValue}
@@ -3994,26 +3994,26 @@ const FormRowSelect = ({ name, labelText, list, defaultValue = '' }) => {
 export default FormRowSelect;
 ```
 
-pages/AddProudct.jsx
+pages/AddProduct.jsx
 
 ```js
 <FormRowSelect
-  labelText='Proudct status'
+  labelText='Product status'
   name='productstatus'
-  defaultValue={Proudct_STATUS.PENDING}
-  list={Object.values(Proudct_STATUS)}
+  defaultValue={Product_STATUS.PENDING}
+  list={Object.values(Product_STATUS)}
   />
 <FormRowSelect
-  name='ProudctType'
-  labelText='Proudct type'
-  defaultValue={Proudct_TYPE.FULL_TIME}
-  list={Object.values(Proudct_TYPE)}
+  name='ProductType'
+  labelText='Product type'
+  defaultValue={Product_TYPE.FULL_TIME}
+  list={Object.values(Product_TYPE)}
   />
 ```
 
-#### Create Proudct
+#### Create Product
 
-AddProudct.jsx
+AddProduct.jsx
 
 ```js
 export const action = async ({ request }) => {
@@ -4022,7 +4022,7 @@ export const action = async ({ request }) => {
 
   try {
     await customFetch.post('/products', data);
-    toast.success('Proudct added successfully');
+    toast.success('Product added successfully');
     return null;
   } catch (error) {
     toast.error(error?.response?.data?.msg);
@@ -4041,7 +4041,7 @@ wrappers/BigSidebar.js
 }
 ```
 
-AddProudct.jsx
+AddProduct.jsx
 
 ```js
 export const action = async ({ request }) => {
@@ -4050,7 +4050,7 @@ export const action = async ({ request }) => {
 
   try {
     await customFetch.post('/products', data);
-    toast.success('Proudct added successfully');
+    toast.success('Product added successfully');
     return redirect('all-products');
   } catch (error) {
     toast.error(error?.response?.data?.msg);
@@ -4059,7 +4059,7 @@ export const action = async ({ request }) => {
 };
 ```
 
-#### Add Proudct - CSS(optional)
+#### Add Product - CSS(optional)
 
 wrappers/DashboardFormPage.js
 
@@ -4173,12 +4173,12 @@ export const useAllproductsContext = () => useContext(AllproductsContext);
 
 #### Render products
 
-- create Proudct.jsx
+- create Product.jsx
 
 productsContainer.jsx
 
 ```js
-import Proudct from './Proudct';
+import Product from './Product';
 import Wrapper from '../assets/wrappers/productsContainer';
 
 import { useAllproductsContext } from '../pages/Allproducts';
@@ -4197,8 +4197,8 @@ const productsContainer = () => {
   return (
     <Wrapper>
       <div className='products'>
-        {products.map((Proudct) => {
-          return <Proudct key={Proudct._id} {...Proudct} />;
+        {products.map((Product) => {
+          return <Product key={Product._id} {...Product} />;
         })}
       </div>
     </Wrapper>
@@ -4248,26 +4248,26 @@ npm i dayjs@1.11.7
 
 [Dayjs Docs](https://day.js.org/docs/en/installation/installation)
 
-#### Proudct Component
+#### Product Component
 
-- create ProudctInfo component
+- create ProductInfo component
 
 ```js
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Wrapper from '../assets/wrappers/Proudct';
-import ProudctInfo from './ProudctInfo';
+import Wrapper from '../assets/wrappers/Product';
+import ProductInfo from './ProductInfo';
 import { Form } from 'react-router-dom';
 import day from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 day.extend(advancedFormat);
 
-const Proudct = ({
+const Product = ({
   _id,
   position,
   company,
-  ProudctLocation,
-  ProudctType,
+  ProductLocation,
+  ProductType,
   createdAt,
   productstatus,
 }) => {
@@ -4284,9 +4284,9 @@ const Proudct = ({
       </header>
       <div className='content'>
         <div className='content-center'>
-          <ProudctInfo icon={<FaLocationArrow />} text={ProudctLocation} />
-          <ProudctInfo icon={<FaCalendarAlt />} text={date} />
-          <ProudctInfo icon={<FaBriefcase />} text={ProudctType} />
+          <ProductInfo icon={<FaLocationArrow />} text={ProductLocation} />
+          <ProductInfo icon={<FaCalendarAlt />} text={date} />
+          <ProductInfo icon={<FaBriefcase />} text={ProductType} />
           <div className={`status ${productstatus}`}>{productstatus}</div>
         </div>
 
@@ -4303,29 +4303,29 @@ const Proudct = ({
   );
 };
 
-export default Proudct;
+export default Product;
 ```
 
-#### ProudctInfo Component
+#### ProductInfo Component
 
 ```js
-import Wrapper from '../assets/wrappers/ProudctInfo';
+import Wrapper from '../assets/wrappers/ProductInfo';
 
-const ProudctInfo = ({ icon, text }) => {
+const ProductInfo = ({ icon, text }) => {
   return (
     <Wrapper>
-      <span className='Proudct-icon'>{icon}</span>
-      <span className='Proudct-text'>{text}</span>
+      <span className='Product-icon'>{icon}</span>
+      <span className='Product-text'>{text}</span>
     </Wrapper>
   );
 };
 
-export default ProudctInfo;
+export default ProductInfo;
 ```
 
-#### ProudctInfo - CSS (optional)
+#### ProductInfo - CSS (optional)
 
-wrappers/ProudctInfo.js
+wrappers/ProductInfo.js
 
 ```js
 import styled from 'styled-components';
@@ -4334,7 +4334,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
 
-  .Proudct-icon {
+  .Product-icon {
     font-size: 1rem;
     margin-right: 1rem;
     display: flex;
@@ -4343,7 +4343,7 @@ const Wrapper = styled.div`
       color: var(--text-secondary-color);
     }
   }
-  .Proudct-text {
+  .Product-text {
     text-transform: capitalize;
     letter-spacing: var(--letter-spacing);
   }
@@ -4351,7 +4351,7 @@ const Wrapper = styled.div`
 export default Wrapper;
 ```
 
-#### Proudct - CSS (optional)
+#### Product - CSS (optional)
 
 ```js
 import styled from 'styled-components';
@@ -4440,23 +4440,23 @@ const Wrapper = styled.article`
 export default Wrapper;
 ```
 
-#### Edit Proudct - Setup
+#### Edit Product - Setup
 
-Proudct.jsx
+Product.jsx
 
 ```js
-<Link to={`../edit-Proudct/${_id}`} className='btn edit-btn'>
+<Link to={`../edit-Product/${_id}`} className='btn edit-btn'>
   Edit
 </Link>
 ```
 
-pages/EditProudct.jsx
+pages/EditProduct.jsx
 
 ```js
 import { FormRow, FormRowSelect } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { useLoaderData } from 'react-router-dom';
-import { Proudct_STATUS, Proudct_TYPE } from '../../../utils/constants';
+import { Product_STATUS, Product_TYPE } from '../../../utils/constants';
 import { Form, useNavigation, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
@@ -4468,29 +4468,29 @@ export const action = async () => {
   return null;
 };
 
-const EditProudct = () => {
-  return <h1>EditProudct Page</h1>;
+const EditProduct = () => {
+  return <h1>EditProduct Page</h1>;
 };
-export default EditProudct;
+export default EditProduct;
 ```
 
-- import EditProudct page
+- import EditProduct page
   App.jsx
 
 ```js
-import { loader as editProudctLoader } from './pages/EditProudct';
-import { action as editProudctAction } from './pages/EditProudct';
+import { loader as editProductLoader } from './pages/EditProduct';
+import { action as editProductAction } from './pages/EditProduct';
 
 
 {
-  path: 'edit-Proudct/:id',
-  element: <EditProudct />,
-  loader: editProudctLoader,
-  action: editProudctAction,
+  path: 'edit-Product/:id',
+  element: <EditProduct />,
+  loader: editProductLoader,
+  action: editProductAction,
 },
 ```
 
-pages/EditProudct.jsx
+pages/EditProduct.jsx
 
 ```js
 export const loader = async ({ params }) => {
@@ -4506,19 +4506,19 @@ export const action = async () => {
   return null;
 };
 
-const EditProudct = () => {
+const EditProduct = () => {
   const params = useParams();
   console.log(params);
-  const { Proudct } = useLoaderData();
+  const { Product } = useLoaderData();
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-  return <h1>EditProudct Page</h1>;
+  return <h1>EditProduct Page</h1>;
 };
-export default EditProudct;
+export default EditProduct;
 ```
 
-#### Edit Proudct - Complete
+#### Edit Product - Complete
 
 ```js
 export const action = async ({ request, params }) => {
@@ -4527,7 +4527,7 @@ export const action = async ({ request, params }) => {
 
   try {
     await customFetch.patch(`/products/${params.id}`, data);
-    toast.success('Proudct edited successfully');
+    toast.success('Product edited successfully');
     return redirect('/dashboard/all-products');
   } catch (error) {
     toast.error(error.response.data.msg);
@@ -4535,8 +4535,8 @@ export const action = async ({ request, params }) => {
   }
 };
 
-const EditProudct = () => {
-  const { Proudct } = useLoaderData();
+const EditProduct = () => {
+  const { Product } = useLoaderData();
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
@@ -4544,28 +4544,28 @@ const EditProudct = () => {
   return (
     <Wrapper>
       <Form method='post' className='form'>
-        <h4 className='form-title'>edit Proudct</h4>
+        <h4 className='form-title'>edit Product</h4>
         <div className='form-center'>
-          <FormRow type='text' name='position' defaultValue={Proudct.position} />
-          <FormRow type='text' name='company' defaultValue={Proudct.company} />
+          <FormRow type='text' name='position' defaultValue={Product.position} />
+          <FormRow type='text' name='company' defaultValue={Product.company} />
           <FormRow
             type='text'
-            labelText='Proudct location'
-            name='ProudctLocation'
-            defaultValue={Proudct.ProudctLocation}
+            labelText='Product location'
+            name='ProductLocation'
+            defaultValue={Product.ProductLocation}
           />
 
           <FormRowSelect
             name='productstatus'
-            labelText='Proudct status'
-            defaultValue={Proudct.productstatus}
-            list={Object.values(Proudct_STATUS)}
+            labelText='Product status'
+            defaultValue={Product.productstatus}
+            list={Object.values(Product_STATUS)}
           />
           <FormRowSelect
-            name='ProudctType'
-            labelText='Proudct type'
-            defaultValue={Proudct.ProudctType}
-            list={Object.values(Proudct_TYPE)}
+            name='ProductType'
+            labelText='Product type'
+            defaultValue={Product.ProductType}
+            list={Object.values(Product_TYPE)}
           />
           <button
             type='submit'
@@ -4580,22 +4580,22 @@ const EditProudct = () => {
   );
 };
 
-export default EditProudct;
+export default EditProduct;
 ```
 
-#### Delete Proudct
+#### Delete Product
 
-Proudct.jsx
+Product.jsx
 
 ```js
-<Form method='post' action={`../delete-Proudct/${_id}`}>
+<Form method='post' action={`../delete-Product/${_id}`}>
   <button type='submit' className='btn delete-btn'>
     Delete
   </button>
 </Form>
 ```
 
-pages/DeleteProudct.jsx
+pages/DeleteProduct.jsx
 
 ```js
 import { redirect } from 'react-router-dom';
@@ -4605,7 +4605,7 @@ import { toast } from 'react-toastify';
 export async function action({ params }) {
   try {
     await customFetch.delete(`/products/${params.id}`);
-    toast.success('Proudct deleted successfully');
+    toast.success('Product deleted successfully');
   } catch (error) {
     toast.error(error.response.data.msg);
   }
@@ -4616,9 +4616,9 @@ export async function action({ params }) {
 App.jsx
 
 ```js
-import { action as deleteProudctAction } from './pages/DeleteProudct';
+import { action as deleteProductAction } from './pages/DeleteProduct';
 
- { path: 'delete-Proudct/:id', action: deleteProudctAction },
+ { path: 'delete-Product/:id', action: deleteProductAction },
 ```
 
 #### Admin Page
@@ -5052,7 +5052,7 @@ export const updateUser = async (req, res) => {
 
 - create component SubmitBtn (export/import)
 - add all classes, including'.form-btn'
-- setup in Register,Login, AddProudct, EditProudct, Profile
+- setup in Register,Login, AddProduct, EditProduct, Profile
 - make sure to add formBtn prop
 
 ```js
@@ -5175,7 +5175,7 @@ export const checkForTestUser = (req, res, next) => {
 
 ```
 
-- add to updateUser, createProudct, updateProudct, deleteProudct
+- add to updateUser, createProduct, updateProduct, deleteProduct
 
 #### Mock Data
 
@@ -5185,9 +5185,9 @@ export const checkForTestUser = (req, res, next) => {
 ``{
   "company": "Cogidoo",
   "position": "Help Desk Technician",
-  "ProudctLocation": "Vyksa",
+  "ProductLocation": "Vyksa",
   "productstatus": "pending",
-  "ProudctType": "part-time",
+  "ProductType": "part-time",
   "createdAt": "2022-07-25T21:26:23Z"
 }``
 ```
@@ -5205,7 +5205,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import Proudct from './models/ProudctModel.js';
+import Product from './models/ProductModel.js';
 import User from './models/UserModel.js';
 try {
   await mongoose.connect(process.env.MONGO_URL);
@@ -5215,11 +5215,11 @@ try {
   const jsonproducts = JSON.parse(
     await readFile(new URL('./utils/mockData.json', import.meta.url))
   );
-  const products = jsonproducts.map((Proudct) => {
-    return { ...Proudct, createdBy: user._id };
+  const products = jsonproducts.map((Product) => {
+    return { ...Product, createdBy: user._id };
   });
-  await Proudct.deleteMany({ createdBy: user._id });
-  await Proudct.create(products);
+  await Product.deleteMany({ createdBy: user._id });
+  await Product.create(products);
   console.log('Success!!!');
   process.exit(0);
 } catch (error) {
@@ -5234,7 +5234,7 @@ try {
 - setup route and thunder client
 - install/setup dayjs on the server
 
-ProudctController.js
+ProductController.js
 
 ```js
 import mongoose from 'mongoose';
@@ -5271,11 +5271,11 @@ export const showStats = async (req, res) => {
 
 The MongoDB aggregation pipeline is like a factory line for data. Data enters, it goes through different stages like cleaning, sorting, or grouping, and comes out at the end changed in some way. It's a way to process data inside MongoDB.
 
-ProudctController.js
+ProductController.js
 
 ```js
 export const showStats = async (req, res) => {
-  let stats = await Proudct.aggregate([
+  let stats = await Product.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     { $group: { _id: '$productstatus', count: { $sum: 1 } } },
   ]);
@@ -5291,7 +5291,7 @@ export const showStats = async (req, res) => {
     declined: stats.declined || 0,
   };
 
-  let monthlyApplications = await Proudct.aggregate([
+  let monthlyApplications = await Product.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     {
       $group: {
@@ -5324,20 +5324,20 @@ export const showStats = async (req, res) => {
 #### Commentary
 
 ```js
-let stats = await Proudct.aggregate([
+let stats = await Product.aggregate([
   { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
   { $group: { _id: '$productstatus', count: { $sum: 1 } } },
 ]);
 ```
 
-let stats = await Proudct.aggregate([ ... ]); This line says we're going to perform an aggregation operation on the Proudct collection in MongoDB and save the result in a variable called stats. The await keyword is used to wait for the operation to finish before continuing, as the operation is asynchronous (i.e., it runs in the background).
+let stats = await Product.aggregate([ ... ]); This line says we're going to perform an aggregation operation on the Product collection in MongoDB and save the result in a variable called stats. The await keyword is used to wait for the operation to finish before continuing, as the operation is asynchronous (i.e., it runs in the background).
 
 { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } } This is the first stage of the pipeline. It filters the products so that only the ones created by the user specified by req.user.userId are passed to the next stage. The new mongoose.Types.ObjectId(req.user.userId) part converts req.user.userId into an ObjectId (which is the format MongoDB uses for ids).
 
-{ $group: { _id: '$productstatus', count: { $sum: 1 } } } This is the second stage of the pipeline. It groups the remaining products by their status (the productstatus field). For each group, it calculates the count of products by adding 1 for each Proudct ({ $sum: 1 }), and stores this in a field called count.
+{ $group: { _id: '$productstatus', count: { $sum: 1 } } } This is the second stage of the pipeline. It groups the remaining products by their status (the productstatus field). For each group, it calculates the count of products by adding 1 for each Product ({ $sum: 1 }), and stores this in a field called count.
 
 ```js
-let monthlyApplications = await Proudct.aggregate([
+let monthlyApplications = await Product.aggregate([
   { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
   {
     $group: {
@@ -5350,15 +5350,15 @@ let monthlyApplications = await Proudct.aggregate([
 ]);
 ```
 
-let monthlyApplications = await Proudct.aggregate([ ... ]); This line indicates that an aggregation operation will be performed on the Proudct collection in MongoDB. The result will be stored in the variable monthlyApplications. The await keyword ensures that the code waits for this operation to complete before proceeding, as it is an asynchronous operation.
+let monthlyApplications = await Product.aggregate([ ... ]); This line indicates that an aggregation operation will be performed on the Product collection in MongoDB. The result will be stored in the variable monthlyApplications. The await keyword ensures that the code waits for this operation to complete before proceeding, as it is an asynchronous operation.
 
 { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } } This is the first stage of the pipeline. It filters the products to only those created by the user identified by req.user.userId.
 
-{ $group: { _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } }, count: { $sum: 1 } } } This is the second stage of the pipeline. It groups the remaining products based on the year and month when they were created. For each group, it calculates the count of products by adding 1 for each Proudct in the group.
+{ $group: { _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } }, count: { $sum: 1 } } } This is the second stage of the pipeline. It groups the remaining products based on the year and month when they were created. For each group, it calculates the count of products by adding 1 for each Product in the group.
 
 { $sort: { '\_id.year': -1, '\_id.month': -1 } } This is the third stage of the pipeline. It sorts the groups by year and month in descending order. The -1 indicates descending order. So it starts with the most recent year and month.
 
-{ $limit: 6 } This is the fourth and last stage of the pipeline. It limits the output to the top 6 groups, after sorting. This is effectively getting the Proudct count for the last 6 months.
+{ $limit: 6 } This is the fourth and last stage of the pipeline. It limits the output to the top 6 groups, after sorting. This is effectively getting the Product count for the last 6 months.
 
 So, monthlyApplications will be an array with up to 6 elements, each representing the number of products created by the user in a specific month and year. The array will be sorted by year and month, starting with the most recent.
 
@@ -5563,13 +5563,13 @@ export default Wrapper;
 
 #### Get All products - Server
 
-ProudctController.js
+ProductController.js
 
 Query parameters, also known as query strings or URL parameters, are used to pass information to a web server through the URL of a webpage. They are typically appended to the end of a URL after a question mark (?) and separated by ampersands (&). Query parameters consist of a key-value pair, where the key represents the parameter name and the value represents the corresponding data being passed. They are commonly used in web applications to provide additional context or parameters for server-side processing or to filter and sort data.
 
 ```js
 export const getAllproducts = async (req, res) => {
-  const { search, productstatus, ProudctType, sort } = req.query;
+  const { search, productstatus, ProductType, sort } = req.query;
 
   const queryObject = {
     createdBy: req.user.userId,
@@ -5584,8 +5584,8 @@ export const getAllproducts = async (req, res) => {
   if (productstatus && productstatus !== 'all') {
     queryObject.productstatus = productstatus;
   }
-  if (ProudctType && ProudctType !== 'all') {
-    queryObject.ProudctType = ProudctType;
+  if (ProductType && ProductType !== 'all') {
+    queryObject.ProductType = ProductType;
   }
 
   const sortOptions = {
@@ -5602,12 +5602,12 @@ export const getAllproducts = async (req, res) => {
   const limit = Number(req.query.limit) || 10;
   const skip = (page - 1) * limit;
 
-  const products = await Proudct.find(queryObject)
+  const products = await Product.find(queryObject)
     .sort(sortKey)
     .skip(skip)
     .limit(limit);
 
-  const totalproducts = await Proudct.countDocuments(queryObject);
+  const totalproducts = await Product.countDocuments(queryObject);
   const numOfPages = Math.ceil(totalproducts / limit);
 
   res
@@ -5624,7 +5624,7 @@ export const getAllproducts = async (req, res) => {
 import { FormRow, FormRowSelect, SubmitBtn } from '.';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
-import { Proudct_TYPE, Proudct_STATUS, Proudct_SORT_BY } from '../../../utils/constants';
+import { Product_TYPE, Product_STATUS, Product_SORT_BY } from '../../../utils/constants';
 import { useAllproductsContext } from '../pages/Allproducts';
 
 const SearchContainer = () => {
@@ -5637,21 +5637,21 @@ const SearchContainer = () => {
 
           <FormRow type='search' name='search' defaultValue='a' />
           <FormRowSelect
-            labelText='Proudct status'
+            labelText='Product status'
             name='productstatus'
-            list={['all', ...Object.values(Proudct_STATUS)]}
+            list={['all', ...Object.values(Product_STATUS)]}
             defaultValue='all'
           />
           <FormRowSelect
-            labelText='Proudct type'
-            name='ProudctType'
-            list={['all', ...Object.values(Proudct_TYPE)]}
+            labelText='Product type'
+            name='ProductType'
+            list={['all', ...Object.values(Product_TYPE)]}
             defaultValue='all'
           />
           <FormRowSelect
             name='sort'
             defaultValue='newest'
-            list={[...Object.values(Proudct_SORT_BY)]}
+            list={[...Object.values(Product_SORT_BY)]}
           />
 
           <Link to='/dashboard/all-products' className='btn form-btn delete-btn'>
@@ -5744,11 +5744,11 @@ SearchContainer.js
 import { FormRow, FormRowSelect } from '.';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
-import { Proudct_TYPE, Proudct_STATUS, Proudct_SORT_BY } from '../../../utils/constants';
+import { Product_TYPE, Product_STATUS, Product_SORT_BY } from '../../../utils/constants';
 import { useAllproductsContext } from '../pages/Allproducts';
 const SearchContainer = () => {
   const { searchValues } = useAllproductsContext();
-  const { search, productstatus, ProudctType, sort } = searchValues;
+  const { search, productstatus, ProductType, sort } = searchValues;
 
   const submit = useSubmit();
 
@@ -5768,19 +5768,19 @@ const SearchContainer = () => {
             }}
           />
           <FormRowSelect
-            labelText='Proudct status'
+            labelText='Product status'
             name='productstatus'
-            list={['all', ...Object.values(Proudct_STATUS)]}
+            list={['all', ...Object.values(Product_STATUS)]}
             defaultValue={productstatus}
             onChange={(e) => {
               submit(e.currentTarget.form);
             }}
           />
           <FormRowSelect
-            labelText='Proudct type'
-            name='ProudctType'
-            defaultValue={ProudctType}
-            list={['all', ...Object.values(Proudct_TYPE)]}
+            labelText='Product type'
+            name='ProductType'
+            defaultValue={ProductType}
+            list={['all', ...Object.values(Product_TYPE)]}
             onChange={(e) => {
               submit(e.currentTarget.form);
             }}
@@ -5788,7 +5788,7 @@ const SearchContainer = () => {
           <FormRowSelect
             name='sort'
             defaultValue={sort}
-            list={[...Object.values(Proudct_SORT_BY)]}
+            list={[...Object.values(Product_SORT_BY)]}
             onChange={(e) => {
               submit(e.currentTarget.form);
             }}
@@ -5839,7 +5839,7 @@ const debounce = (onChange) => {
 productsContainer.jsx
 
 ```js
-import Proudct from './Proudct';
+import Product from './Product';
 import Wrapper from '../assets/wrappers/productsContainer';
 import PageBtnContainer from './PageBtnContainer';
 import { useAllproductsContext } from '../pages/Allproducts';
@@ -5858,11 +5858,11 @@ const productsContainer = () => {
   return (
     <Wrapper>
       <h5>
-        {totalproducts} Proudct{products.length > 1 && 's'} found
+        {totalproducts} Product{products.length > 1 && 's'} found
       </h5>
       <div className='products'>
-        {products.map((Proudct) => {
-          return <Proudct key={Proudct._id} {...Proudct} />;
+        {products.map((Product) => {
+          return <Product key={Product._id} {...Product} />;
         })}
       </div>
       {numOfPages > 1 && <PageBtnContainer />}
@@ -6407,9 +6407,9 @@ const data = useQuery({ ... });: This line declares a constant variable named da
 
 queryKey: ['stats'],: The queryKey property is an array that serves as a unique identifier for the query. In this case, the query key is set to ['stats'], indicating that this query is fetching statistics related to products.
 
-queryFn: () => customFetch.get('/products/stats'),: The queryFn property specifies the function that will be executed when the query is triggered. In this case, it uses an arrow function that calls customFetch.get('/products/stats'). The customFetch object is likely a custom wrapper around the fetch function or an external HTTP client library, used to make the actual API request to retrieve Proudct statistics.In React Query, the queryFn property expects a function that returns a promise. The promise should resolve with the data you want to fetch and store in the query cache.
+queryFn: () => customFetch.get('/products/stats'),: The queryFn property specifies the function that will be executed when the query is triggered. In this case, it uses an arrow function that calls customFetch.get('/products/stats'). The customFetch object is likely a custom wrapper around the fetch function or an external HTTP client library, used to make the actual API request to retrieve Product statistics.In React Query, the queryFn property expects a function that returns a promise. The promise should resolve with the data you want to fetch and store in the query cache.
 
-customFetch.get('/products/stats'): This line is making an HTTP GET request to the /products/stats endpoint, which is the API route that provides the Proudct statistics data.
+customFetch.get('/products/stats'): This line is making an HTTP GET request to the /products/stats endpoint, which is the API route that provides the Product statistics data.
 
 #### Get Stats with React Query
 
@@ -6592,13 +6592,13 @@ import { useQuery } from '@tanstack/react-query';
 const AllproductsContext = createContext();
 
 const allproductsQuery = (params) => {
-  const { search, productstatus, ProudctType, sort, page } = params;
+  const { search, productstatus, ProductType, sort, page } = params;
   return {
     queryKey: [
       'products',
       search ?? '',
       productstatus ?? 'all',
-      ProudctType ?? 'all',
+      ProductType ?? 'all',
       sort ?? 'newest',
       page ?? 1,
     ],
@@ -6639,7 +6639,7 @@ export const useAllproductsContext = () => useContext(AllproductsContext);
 
 #### Invalidate products
 
-AddProudct.jsx
+AddProduct.jsx
 
 ```js
 export const action =
@@ -6650,7 +6650,7 @@ export const action =
     try {
       await customFetch.post('/products', data);
       queryClient.invalidateQueries(['products']);
-      toast.success('Proudct added successfully ');
+      toast.success('Product added successfully ');
       return redirect('all-products');
     } catch (error) {
       toast.error(error?.response?.data?.msg);
@@ -6659,7 +6659,7 @@ export const action =
   };
 ```
 
-EditProudct.jsx
+EditProduct.jsx
 
 ```js
 export const action =
@@ -6670,7 +6670,7 @@ export const action =
     try {
       await customFetch.patch(`/products/${params.id}`, data);
       queryClient.invalidateQueries(['products']);
-      toast.success('Proudct edited successfully');
+      toast.success('Product edited successfully');
       return redirect('/dashboard/all-products');
     } catch (error) {
       toast.error(error?.response?.data?.msg);
@@ -6679,7 +6679,7 @@ export const action =
   };
 ```
 
-DeleteProudct.jsx
+DeleteProduct.jsx
 
 ```js
 export const action =
@@ -6688,7 +6688,7 @@ export const action =
     try {
       await customFetch.delete(`/products/${params.id}`);
       queryClient.invalidateQueries(['products']);
-      toast.success('Proudct deleted successfully');
+      toast.success('Product deleted successfully');
     } catch (error) {
       toast.error(error?.response?.data?.msg);
     }
@@ -6696,21 +6696,21 @@ export const action =
   };
 ```
 
-#### Edit Proudct Loader
+#### Edit Product Loader
 
 ```js
 import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { useLoaderData, useParams } from 'react-router-dom';
-import { Proudct_STATUS, Proudct_TYPE } from '../../../utils/constants';
+import { Product_STATUS, Product_TYPE } from '../../../utils/constants';
 import { Form, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useQuery } from '@tanstack/react-query';
 
-const singleProudctQuery = (id) => {
+const singleProductQuery = (id) => {
   return {
-    queryKey: ['Proudct', id],
+    queryKey: ['Product', id],
     queryFn: async () => {
       const { data } = await customFetch.get(`/products/${id}`);
       return data;
@@ -6722,7 +6722,7 @@ export const loader =
   (queryClient) =>
   async ({ params }) => {
     try {
-      await queryClient.ensureQueryData(singleProudctQuery(params.id));
+      await queryClient.ensureQueryData(singleProductQuery(params.id));
       return params.id;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
@@ -6739,7 +6739,7 @@ export const action =
       await customFetch.patch(`/products/${params.id}`, data);
       queryClient.invalidateQueries(['products']);
 
-      toast.success('Proudct edited successfully');
+      toast.success('Product edited successfully');
       return redirect('/dashboard/all-products');
     } catch (error) {
       toast.error(error?.response?.data?.msg);
@@ -6747,37 +6747,37 @@ export const action =
     }
   };
 
-const EditProudct = () => {
+const EditProduct = () => {
   const id = useLoaderData();
 
   const {
-    data: { Proudct },
-  } = useQuery(singleProudctQuery(id));
+    data: { Product },
+  } = useQuery(singleProductQuery(id));
 
   return (
     <Wrapper>
       <Form method='post' className='form'>
-        <h4 className='form-title'>edit Proudct</h4>
+        <h4 className='form-title'>edit Product</h4>
         <div className='form-center'>
-          <FormRow type='text' name='position' defaultValue={Proudct.position} />
-          <FormRow type='text' name='company' defaultValue={Proudct.company} />
+          <FormRow type='text' name='position' defaultValue={Product.position} />
+          <FormRow type='text' name='company' defaultValue={Product.company} />
           <FormRow
             type='text'
-            name='ProudctLocation'
-            labelText='Proudct location'
-            defaultValue={Proudct.ProudctLocation}
+            name='ProductLocation'
+            labelText='Product location'
+            defaultValue={Product.ProductLocation}
           />
           <FormRowSelect
             name='productstatus'
-            labelText='Proudct status'
-            defaultValue={Proudct.productstatus}
-            list={Object.values(Proudct_STATUS)}
+            labelText='Product status'
+            defaultValue={Product.productstatus}
+            list={Object.values(Product_STATUS)}
           />
           <FormRowSelect
-            name='ProudctType'
-            labelText='Proudct type'
-            defaultValue={Proudct.ProudctType}
-            list={Object.values(Proudct_TYPE)}
+            name='ProductType'
+            labelText='Product type'
+            defaultValue={Product.ProductType}
+            list={Object.values(Product_TYPE)}
           />
           <SubmitBtn formBtn />
         </div>
@@ -6785,7 +6785,7 @@ const EditProudct = () => {
     </Wrapper>
   );
 };
-export default EditProudct;
+export default EditProduct;
 ```
 
 #### Axios Interceptors

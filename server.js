@@ -11,7 +11,7 @@ import helmet from 'helmet';
 
 
 
-import ProudctRoute from './routes/products.js';
+import ProductRoute from './routes/products.js';
 import authRoute from './routes/auth.js';
 
 import path from 'path';
@@ -50,8 +50,8 @@ app.get('/', (req, res) => {
   res.send('Hello Worllld');
 });
 
-app.use('/auth', authRoute);
-app.use('/products',ProudctRoute);
+app.use('/pnws/auth', authRoute);
+app.use('/pnws/products',ProductRoute);
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));

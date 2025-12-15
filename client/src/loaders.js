@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const dashboardloader = async () => {
   try {
-    const { data } = await axios.get('/api/auth/current');
+    const { data } = await axios.get('/api/pnws/auth/current');
     return data;
   } catch (error) {
     console.error("Loader Error: ", error.response?.data || error.message);
@@ -20,7 +20,7 @@ export const allproductsLoader = async ({ request }) => {
   const url = new URL(request.url);
   const params = Object.fromEntries(url.searchParams);
   try {
-    const { data } = await axios.get('/api/products', { params });
+    const { data } = await axios.get('/api/pnws/products', { params });
     return { data, searchValues: { ...params } };
 
   } catch (error) {
@@ -29,17 +29,27 @@ export const allproductsLoader = async ({ request }) => {
   }
 };
 
-export const editProudctLoader = async ({ params }) => {
+export const admin = async ({ request }) => {
+  const url = new URL(request.url);
+  const params = Object.fromEntries(url.searchParams);
+  try {
+    const { data } = await axios.get('/api/pnws/admin/products', { params });
+    return { data, searchValues: { ...params } };
+
+  } catch (error) {
+    console.error("Loader Error: ", error.response?.data || error.message);
+    return { error: true, meg: error.response?.data };
+  }
+};
+
+export const editProductLoader = async ({ params }) => {
 
   try {
-    const { data } = await axios.get(`/api/products/${params.id}`);
+    const { data } = await axios.get(`/api/pnws/products/${params.id}`);
     return data;
   } catch (error) {
     console.error("Loader Error: ", error.response?.data || error.message);
     return { error: true, meg: error.response?.data };
   }
-
-}
-
-
+};
 

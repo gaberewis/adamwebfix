@@ -1,5 +1,5 @@
-const DeleteProudct = ()=>{
-    return <h3>DeleteProudct</h3>
+const DeleteProduct = ()=>{
+    return <h3>DeleteProduct</h3>
 }
 
-export default DeleteProudct;
+export default DeleteProduct;

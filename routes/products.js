@@ -1,23 +1,22 @@
 import { Router } from 'express';
-import { createProudctValidation, paramValidation} from '../middleware/validation.js';
+import { createProductValidation, paramValidation} from '../middleware/validation.js';
 import {
     getproducts,
-    craeteProudct,
-    getProudct,
-    updateProudct,
-    deleteProudct,
+    craeteProduct,
+    getProduct,
+    updateProduct,
+    deleteProduct,
    
 } from '../controllers/products.js';
 import upload from '../middleware/multer.js';
-import { checkIsDemo } from '../controllers/auth.js';
+import { authenticateUser } from '../middleware/funcs.js';
 
 const router = Router();
 
 
-router.route('/').get( getproducts).post(createProudctValidation, upload.array('images', 7) , craeteProudct);
-
-
-router.route('/:id').get(paramValidation, getProudct).patch(checkIsDemo, updateProudct).delete(checkIsDemo, deleteProudct);
+router.route('/').get(getproducts);
+router.route('/admin').get(authenticateUser, getproducts).post(createProductValidation ,authenticateUser , upload.array('images', 7) , craeteProduct);
+router.route('/:id').get(paramValidation, getProduct).patch(updateProduct).delete(deleteProduct);
 
 
 

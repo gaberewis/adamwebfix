@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const productschema = new mongoose.Schema({
     name: String,
-    productType: String,
     section: {
         type: String,
         enum: ['equipment', 'accessories', 'supplies', 'parts', 'other']
@@ -14,8 +13,7 @@ const productschema = new mongoose.Schema({
     ],
     shortDescription: String,
     fullDescription: String,
-    extraDescription: String,
-    papular: { type: String, enum: ['true', 'false'], default: true }
+    popular: { type: String, enum: ['yes', 'no'], default: 'yes' }
 }, { timestamps: true });
 
 productschema.pre("save", function (next) {
@@ -25,4 +23,4 @@ productschema.pre("save", function (next) {
     next();
 });
 
-export default mongoose.model('Proudct', productschema);
+export default mongoose.model('Product', productschema);

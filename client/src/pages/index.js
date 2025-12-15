@@ -1,4 +1,4 @@
-export {default as AddProudct } from './AddProudct';
+export {default as AddProduct } from './AddProduct';
 export {default as Allproducts } from './Allproducts';
 export {default as Admin } from './Admin';
 export {default as Dashboard } from './Dashboard';
@@ -6,8 +6,8 @@ export {default as Equipment } from './Equipment';
 export {default as Accessories } from './Accessories';
 export {default as Supplies } from './Supplies';
 export {default as Parts } from './Parts';
-export {default as DeleteProudct } from './DeleteProudct';
-export {default as EditProudct } from './EditProudct';
+export {default as DeleteProduct } from './DeleteProduct';
+export {default as EditProduct } from './EditProduct';
 export {default as Landing } from './Landing';
 export {default as Login } from './Login';
 export {default as Register } from './Register';

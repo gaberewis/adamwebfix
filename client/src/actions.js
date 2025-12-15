@@ -1,16 +1,11 @@
 import { redirect } from 'react-router-dom';
 import axios from 'axios';
-import { error } from 'console';
-
-
-
-
 
 export const registerAction = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
-    await axios.post('/api/auth/register', data);
+    await axios.post('/api/pnws/auth/register', data);
     return redirect('/login');
   } catch (error) {
   console.log(error.response?.data?.msg);
@@ -27,8 +22,8 @@ export const loginAction = async({ request })=>{
   const data = Object.fromEntries(formData);
   try {
     
-    await axios.post('/api/auth/login', data);
-    return redirect('/');
+    await axios.post('/api/pnws/auth/login', data);
+    return redirect('/pnws');
 
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data.msg);
@@ -38,7 +33,7 @@ export const loginAction = async({ request })=>{
 
 }
 
-export const addProudctAction = async({ request })=>{
+export const addProductAction = async({ request })=>{
   const formData = await request.formData();
 
   const files = formData.getAll('images');
@@ -50,11 +45,11 @@ for(const oneFile of files ){
 
 
 try {
-  await axios.post('/api/products', formData);
-  return redirect('/');
+  await axios.post('/api/pnws/products', formData);
+  return redirect('/pnws');
 } catch (error) {
  console.log('BACKEND ERROR:', error.response?.data);
-const errorMsg = error.response?.data?.msg || 'Adding Proudct failed';
+const errorMsg = error.response?.data?.msg || 'Adding Product failed';
  return {errorMsg}
  
 }
@@ -73,24 +68,24 @@ for(const oneFile of files ){
 
 
   try {
-await axios.patch(`/api/products/${params.id}`, formData);
-return redirect('/');
+await axios.patch(`/api/pnws/products/${params.id}`, formData);
+return redirect('/pnws');
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data);
-    const errorMsg = error.response?.data.msg || 'Editing Proudct failed';
+    const errorMsg = error.response?.data.msg || 'Editing Product failed';
     return {errorMsg};
   }
 
 };
 
 
-export const deleteProudctAction = async({ params })=>{
+export const deleteProductAction = async({ params })=>{
   try {
-    await axios.delete(`/api/products/${params.id}`);
-    return redirect('/');
+    await axios.delete(`/api/pnws/products/${params.id}`);
+    return redirect('/pnws');
   } catch (error) {
     console.log('BACKEND ERROR', error.response?.data );
-    const errorMsg = error.response?.data.msg || 'Proudct cannot be deleted';
+    const errorMsg = error.response?.data.msg || 'Product cannot be deleted';
     return{errorMsg}
   }
 };

@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { useContext, createContext } from "react";
 import { productsContainer, FilterContainer,PageContainer } from '../components';
-import CssStl from '../css-pocket/ProudctContainer';
+import CssStl from '../css-pocket/ProductContainer';
 
 const productsContext = createContext();
 
