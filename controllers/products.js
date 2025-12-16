@@ -8,8 +8,6 @@ export const getproducts = async (req, res) => {
 
   const { sort, section, catagory, search } = req.query;
 
-  let user = User.findById(req.user.userId);
-
   const queryFields = { createdBy: req.user.userId };
 
   if (search) {
@@ -36,7 +34,7 @@ export const getproducts = async (req, res) => {
   const totalproducts = await Product.countDocuments(queryFields);
   const pages = Math.ceil(totalproducts / limit);
 
-  res.status(200).json({ products, page, pages, totalproducts, user });
+  res.status(200).json({ products, page, pages, totalproducts });
 
 };
 

@@ -3,7 +3,7 @@ import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import { useproductsContext } from '../pages/Allproducts';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const PageContainer = () => {
+const ButtonsContainer = () => {
 
     const { data: { page, pages } } = useproductsContext();
     
@@ -78,5 +78,5 @@ const PageContainer = () => {
 
 
 
-export default PageContainer;
+export default ButtonsContainer;
 

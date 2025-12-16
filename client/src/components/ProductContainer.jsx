@@ -18,13 +18,11 @@ const productsContainer = () => {
   return (
 
     <>
-      <h5 className='Product-count' >
-        {totalproducts} Product{totalproducts > 1 && 's'} found
-      </h5>
+     
       <div className='products-container'>
 
         {products.map(Product => {
-          const { _id, position, company, ProductLocation, ProductType, createdAt, productstatus, createdBy } = Product;
+          const { _id, name, images, shortDescription, section, catagory, popular, createdAt } = Product;
           const date = day(createdAt).format('MMM DD, YYYY');
 
           return (
@@ -33,8 +31,8 @@ const productsContainer = () => {
               <header>
                 <div className='main-icon'>{company.charAt(0)}</div>
                 <div className='info'>
-                  <h5>{position}</h5>
-                  <p>{company}</p>
+                  <h5>{name}</h5>
+                  <p>{shortDescription}</p>
                 </div>
               </header>
               <div className='content'>
@@ -42,7 +40,7 @@ const productsContainer = () => {
 
                   <div>
                     <span className='Product-icon'><FaLocationArrow /></span>
-                    <span className='Product-text'>{ProductLocation}</span>
+                    <span className='Product-text'>{section}</span>
                   </div>
 
                   <div>
@@ -52,27 +50,22 @@ const productsContainer = () => {
 
                   <div>
                     <span className='Product-icon' ><FaBriefcase /></span>
-                    <span className='Product-text'>{ProductType}</span>
+                    <span className='Product-text'>{catagory}</span>
                   </div>
 
-                  <div className={`status`}>{productstatus}</div>
+                  <div className={`status`}>{popular}</div>
                 </div>
                 <footer className='actions'>
                   <Link className='btn edit-btn' to={`./edit-Product/${_id}`} >Edit</Link>
 
-                  {
-                    createdBy === '68f29702a2e57c84a596d70e' ? (<Form >
-                      <button type='submit' className='btn delete-btn' onClick={() => window.alert('Demo User Read Only')}>
-                        Delete
-                      </button></Form>) : (<Form method='post' action={`./delete-Product/${_id}`} onSubmit={(e) => {
+                  <Form method='post' action={`./delete-Product/${_id}`} onSubmit={(e) => {
                         if (!window.confirm("Are you sure you want to delete this Product?")) {
                           e.preventDefault();
                         }
                       }}>
                         <button type='submit' className='btn delete-btn' >
                           Delete
-                        </button></Form>)
-                  }
+                        </button></Form>
 
                 </footer>
               </div>

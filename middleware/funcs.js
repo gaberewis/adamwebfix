@@ -30,13 +30,24 @@ export const varifyToken = (token) => {
   return decoded;
 };
 
+export const getUser = (req, res, next) => {
+  const { token } = req.cookies;
+  //if (!token) throw new CustomError(401, 'authentication invalid ....');
+  const { userId, userRole, userName } = varifyToken(token);
+ // const isDemo = userId === '68f29702a2e57c84a596d70e';
+
+  req.user = { userId, userRole, userName};
+
+  next();
+}
+
 export const authenticateUser = (req, res, next) => {
   const { token } = req.cookies;
- // if (!token) throw new CustomError(401, 'authentication invalid ....');
+  if (!token) throw new CustomError(401, 'authentication invalid ....');
   const { userId, userRole, userName } = varifyToken(token);
-  const isDemo = userId === '68f29702a2e57c84a596d70e';
+ // const isDemo = userId === '68f29702a2e57c84a596d70e';
 
-  req.user = { userId, userRole, userName, isDemo };
+  req.user = { userId, userRole, userName};
 
   next();
 }

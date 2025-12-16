@@ -30,9 +30,12 @@ export const login = async (req, res) => {
 };
 
 
-export const currentUser =  (req, res)=>{
-
-    const user = User.findById(req.user.userId);
+export const currentUser = async(req, res)=>{
+    let user;
+if(req.user){
+    user = await User.findById(req.user.userId);
+}
+ 
     res.status(200).json({ user });
 }
 

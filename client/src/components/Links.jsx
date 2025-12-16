@@ -7,10 +7,10 @@ import { MdAdminPanelSettings } from 'react-icons/md';
 
 const links = [
   { text: 'Papular products', path: '.', icon: <MdQueryStats /> },
-   { text: 'Equipment', path: 'equipment', icon: <MdQueryStats /> },
-    { text: 'Accessories', path: 'accessories', icon: <MdQueryStats /> },
-     { text: 'Supplies', path: 'supplies', icon: <MdQueryStats /> },
-      { text: 'parts', path: 'parts', icon: <MdQueryStats /> },
+  { text: 'Equipment', path: 'equipment', icon: <MdQueryStats /> },
+  { text: 'Accessories', path: 'accessories', icon: <MdQueryStats /> },
+  { text: 'Supplies', path: 'supplies', icon: <MdQueryStats /> },
+  { text: 'parts', path: 'parts', icon: <MdQueryStats /> },
   { text: 'add Product', path: 'add-Product', icon: <FaWpforms /> },
   { text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
   { text: 'profile', path: 'profile', icon: <ImProfile /> },
