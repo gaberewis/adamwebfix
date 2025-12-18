@@ -13,7 +13,7 @@ const Error = () => {
                 <img src={img} alt='not-found' />
                 <h3>Page not found</h3>
                 <p>We can not find the page you are looking for</p>
-                <Link to='/pnws'>back home</Link>
+                <Link to='/'>Home Page</Link>
             </div>
         </CssStl>)
     }

@@ -48,8 +48,3 @@ export const logout = (req, res) => {
    
 };
 
-export const checkIsDemo = (req, res, next)=>{
- 
-    if(req.user?.isDemo) throw new CustomError(401, 'Demo User Read Only');
-    next();
-}

@@ -1,5 +1,5 @@
 
-import { useOutletContext, Form } from "react-router-dom";
+import { useOutletContext, Form, useActionData } from "react-router-dom";
 import { FormRowSelect, SubmitButton, FormRow } from '../components';
 
 
@@ -7,10 +7,10 @@ const AddProduct = () => {
 
   const { user } = useOutletContext();
 
-  const productSection = ['equipment', 'accessories', 'supplies', 'parts', 'other'];
+  const actionData = useActionData();
 
-
-
+  const sectionList = ['equipment', 'accessories', 'supplies', 'parts', 'other'];
+  const popularList = ['yes', 'no'];
 
 
   return (
@@ -46,8 +46,9 @@ const AddProduct = () => {
             placeholder="Add the full product description"
           ></textarea>
 
-          <FormRowSelect name='section' labelText='Product Type' id='section' list={productSection} defaultValue="equipment" />
-
+          <FormRowSelect name='section' labelText='Product Type' id='section' list={sectionList} defaultValue="equipment" />
+          <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList} defaultValue={popular} />
+          {actionData?.error ? <p className="error">{actionData.errorMsg} </p> : ''}
           <SubmitButton />
         </div>
       </Form>

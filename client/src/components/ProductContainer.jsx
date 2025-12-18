@@ -1,6 +1,6 @@
 import { Link, Form } from 'react-router-dom';
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
-import { useproductsContext } from '../pages/Allproducts';
+
 
 
 import day from 'dayjs';

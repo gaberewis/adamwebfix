@@ -18,12 +18,13 @@ const router = createBrowserRouter([
   {
      path: '/',
     element: <Home />,
-     ErrorElement: <Error />,
+    
   },
 
   {
     path: '/pnws',
     element: <Dashboard />,
+     ErrorElement: <Error />,
     loader: loader.dashboardloader,
     children: [
         {
@@ -31,26 +32,7 @@ const router = createBrowserRouter([
         element: <Landing />,
        
       },
-         {
-        path: 'equipment',
-        element: <Equipment />,
-       
-      },
-         {
-        path: 'accessories',
-        element: <Accessories />,
-       
-      },
-         {
-        path: 'supplies',
-        element: <Supplies />,
-       
-      },
-            {
-        path: 'parts',
-        element: <Parts />,
-       
-      },
+     
       {
         index: true,
         element: <Allproducts />,
