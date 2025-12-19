@@ -1,8 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home,
-  AddProduct, Allproducts, Admin, Dashboard,
-   Equipment, Accessories, 
-  Accessories, Parts,
+  AddProduct, Allproducts,Dashboard,
   EditProduct,  Login, Register, 
   Error,
   Landing

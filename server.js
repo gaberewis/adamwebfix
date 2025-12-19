@@ -67,7 +67,7 @@ app.use(errorHandler);
   const port = process.env.PORT || 5100;
 
   try{
-  await mongoose.connect(process.env.MON_DB);
+  await mongoose.connect(process.env.MONGO_URI);
   app.listen(port, () => {
   console.log(`server running on PORT ${port}....`);
     console.log('connected to DB successfuly');
@@ -78,8 +78,14 @@ app.use(errorHandler);
   }
 
 
-
-
+// PORT=5100
+// NODE_ENV=development
+// MON_DB=mongodb+srv://pnws:143212@pnws.iw2tqul.mongodb.net/pnws
+// JWT_SECRET=gaber143adam
+// JWT_EXPIRE=1d
+// CLOUD_NAME=dk4ictbos
+// CLOUD_API_KEY=126768646293766
+// CLOUD_API_SECRET=CLOUDINARY_URL=cCLOUDINARY_URL=cloudinary://126768646293766:SSWvEtLN1znVkNDs0bVyg87Y_Ek@dk4ictbos
 
 
 

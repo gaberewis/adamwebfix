@@ -1,1 +1,3 @@
 pnws to connect with atlas and for cloudinary also 
+
+cloudinary and atlas mongoDb using dokany.stores account

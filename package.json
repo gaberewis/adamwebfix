@@ -10,7 +10,7 @@
     "server": "nodemon server",
     "client": "cd client && npm run dev",
     "setup-app": "npm i && cd client && npm i && npm run build",
-    "dev": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "keywords": [
     "application",
@@ -25,7 +25,6 @@
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
-    "concurrently": "^9.2.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "datauri": "^4.1.0",
@@ -43,6 +42,8 @@
     "nanoid": "^5.1.5",
     "nodemon": "^3.1.10",
     "react-toastify": "^11.0.5"
-   
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

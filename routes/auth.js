@@ -6,14 +6,14 @@ import {
     logout,  
 } from '../controllers/auth.js';
 
-import { getUser } from './middleware/funcs.js';
+import { getUser } from '../middleware/funcs.js';
 
 
 const router = Router();
 
 router.post('/register', registerValidation, registerUser);
 router.post('/login', loginValidation, login);
-router.get('/current', getUser, currentUser);
+router.get('/current', getUser);
 router.get('/logout', logout);
 
 
