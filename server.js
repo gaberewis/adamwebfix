@@ -80,7 +80,7 @@ app.use(errorHandler);
 
 // PORT=5100
 // NODE_ENV=development
-// MON_DB=mongodb+srv://pnws:143212@pnws.iw2tqul.mongodb.net/pnws
+// MONGO_URI=mongodb+srv://pnwx:143212@pnwx.zbjezpr.mongodb.net/pnwx
 // JWT_SECRET=gaber143adam
 // JWT_EXPIRE=1d
 // CLOUD_NAME=dk4ictbos
