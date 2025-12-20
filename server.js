@@ -50,8 +50,8 @@ app.get('/', (req, res) => {
   res.send('Hello Worllld');
 });
 
-app.use('/pnws/auth', authRoute);
-app.use('/pnws/products',ProductRoute);
+app.use('/pnwx/auth', authRoute);
+app.use('/pnwx/products',ProductRoute);
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));

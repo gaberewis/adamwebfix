@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const dashboardloader = async () => {
   try {
-    const { data } = await axios.get('/api/pnws/auth/current');
+    const { data } = await axios.get('/api/pnwx/auth/current');
     return data;
   } catch (error) {
     console.error("Loader Error: ", error.response?.data || error.message);
@@ -20,7 +20,7 @@ export const allproductsLoader = async ({ request }) => {
   const url = new URL(request.url);
   const params = Object.fromEntries(url.searchParams);
   try {
-    const { data } = await axios.get('/api/pnws/products', { params });
+    const { data } = await axios.get('/api/pnwx/products', { params });
     return { data, searchValues: { ...params } };
 
   } catch (error) {
@@ -33,7 +33,7 @@ export const admin = async ({ request }) => {
   const url = new URL(request.url);
   const params = Object.fromEntries(url.searchParams);
   try {
-    const { data } = await axios.get('/api/pnws/admin/products', { params });
+    const { data } = await axios.get('/api/pnwx/admin/products', { params });
     return { data, searchValues: { ...params } };
 
   } catch (error) {
@@ -45,7 +45,7 @@ export const admin = async ({ request }) => {
 export const editProductLoader = async ({ params }) => {
 
   try {
-    const { data } = await axios.get(`/api/pnws/products/${params.id}`);
+    const { data } = await axios.get(`/api/pnwx/products/${params.id}`);
     return data;
   } catch (error) {
     console.error("Loader Error: ", error.response?.data || error.message);

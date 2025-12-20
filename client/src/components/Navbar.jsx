@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import Logo from '../assets/images/logo.svg';
 import { useDashboardContext } from '../pages/Dashboard';
-import ToggleDarkTheme from './ToggleDarkTheme';
+
 
 const Navbar = () => {
 

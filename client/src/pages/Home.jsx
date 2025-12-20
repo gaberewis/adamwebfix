@@ -1,5 +1,5 @@
 const Home = ()=>{
-    return  <h4>Home Pge</h4>
+    return  <h2>Adam Web Fix</h2>
 }
 
 export default Home;

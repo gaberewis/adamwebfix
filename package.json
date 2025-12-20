@@ -1,8 +1,8 @@
 {
-  "name": "pnws",
+  "name": "pnwx",
   "version": "1.0.0",
   "type": "module",
-  "description": "pnws x-ray pruducts",
+  "description": "pnwx x-ray pruducts",
   "main": "server.js",
   "scripts": {
     "watch": "node --watch server.js ",

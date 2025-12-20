@@ -3,7 +3,7 @@ import { Home,
   AddProduct, Allproducts,Dashboard,
   EditProduct,  Login, Register, 
   Error,
-  Landing
+  
 } from './pages';
 import { ErrorElement } from "./components";
 
@@ -20,16 +20,11 @@ const router = createBrowserRouter([
   },
 
   {
-    path: '/pnws',
+    path: '/pnwx',
     element: <Dashboard />,
      ErrorElement: <Error />,
     loader: loader.dashboardloader,
     children: [
-        {
-        index: true,
-        element: <Landing />,
-       
-      },
      
       {
         index: true,

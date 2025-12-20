@@ -1,12 +1,11 @@
 import { Form, Link } from "react-router-dom";
-import CssStl from "../css-pocket/FormCss";
 import Logo from '../assets/images/logo.svg';
 import { SubmitButton, FormRow } from "../components";
 import { useActionData } from 'react-router-dom';
 
 const Login = () => {
     const actionData = useActionData();
-    return (<CssStl>
+    return (
 
         <Form method='post' className="form">
             <img src={Logo} alt="logo" className="logo" />
@@ -18,7 +17,7 @@ const Login = () => {
 
         </Form>
 
-    </CssStl>)
+    )
 }
 
 export default Login;

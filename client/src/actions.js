@@ -5,7 +5,7 @@ export const registerAction = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
-    await axios.post('/api/pnws/auth/register', data);
+    await axios.post('/api/pnwx/auth/register', data);
     return redirect('/login');
   } catch (error) {
   console.log(error.response?.data?.msg);
@@ -22,8 +22,8 @@ export const loginAction = async({ request })=>{
   const data = Object.fromEntries(formData);
   try {
     
-    await axios.post('/api/pnws/auth/login', data);
-    return redirect('/pnws');
+    await axios.post('/api/pnwx/auth/login', data);
+    return redirect('/pnwx');
 
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data.msg);
@@ -45,8 +45,8 @@ for(const oneFile of files ){
 
 
 try {
-  await axios.post('/api/pnws/products', formData);
-  return redirect('/pnws');
+  await axios.post('/api/pnwx/products', formData);
+  return redirect('/pnwx');
 } catch (error) {
  console.log('BACKEND ERROR:', error.response?.data);
 const errorMsg = error.response?.data?.msg || 'Adding Product failed';
@@ -68,8 +68,8 @@ for(const oneFile of files ){
 
 
   try {
-await axios.patch(`/api/pnws/products/${params.id}`, formData);
-return redirect('/pnws');
+await axios.patch(`/api/pnwx/products/${params.id}`, formData);
+return redirect('/pnwx');
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data);
     const errorMsg = error.response?.data.msg || 'Editing Product failed';
@@ -81,8 +81,8 @@ return redirect('/pnws');
 
 export const deleteProductAction = async({ params })=>{
   try {
-    await axios.delete(`/api/pnws/products/${params.id}`);
-    return redirect('/pnws');
+    await axios.delete(`/api/pnwx/products/${params.id}`);
+    return redirect('/pnwx');
   } catch (error) {
     console.log('BACKEND ERROR', error.response?.data );
     const errorMsg = error.response?.data.msg || 'Product cannot be deleted';

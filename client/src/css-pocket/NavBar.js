@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.nav`
+const CssStl = styled.nav`
   height: var(--nav-height);
   display: flex;
   align-items: center;
@@ -48,4 +48,4 @@ const Wrapper = styled.nav`
     }
   }
 `;
-export default Wrapper;
+export default CssStl;

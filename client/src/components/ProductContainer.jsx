@@ -5,7 +5,7 @@ import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 
 import day from 'dayjs';
 
-const productsContainer = () => {
+const productContainer = () => {
   const { data: { products, totalproducts } } = useproductsContext();
 
   const hasproducts = totalproducts > 0;
@@ -80,7 +80,4 @@ const productsContainer = () => {
   )
 };
 
-export default productsContainer;
-
-
-
+export default productContainer;
