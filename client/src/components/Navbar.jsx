@@ -1,7 +1,6 @@
 import CssStl from '../css-pocket/Navbar';
 import { useState } from 'react';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
-import Logo from '../assets/images/logo.svg';
 import { useDashboardContext } from '../pages/Dashboard';
 
 
@@ -17,7 +16,7 @@ const Navbar = () => {
         < FaAlignLeft />
       </button>
       <div  >
-        <img src={Logo} alt='logo' className='logo' />
+    
         <h3 className='logo-text' >dashboard</h3>
       </div>
       <div className='btn-container' >

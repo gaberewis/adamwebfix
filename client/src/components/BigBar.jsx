@@ -2,7 +2,6 @@
 import { NavLink } from 'react-router-dom';
 import links from './Links';
 import CssStl from '../css-pocket/BigBar';
-import Logo from '../assets/images/logo.svg';
 import { useDashboardContext } from '../pages/Dashboard';
 
 
@@ -18,7 +17,7 @@ const BigBar = () => {
             >
                 <div className='content'>
 <header>
-    <img src={Logo} alt='logo' className='logo' />
+
 </header>
        <div className='nav-links' >
                         

@@ -1,5 +1,4 @@
 import { Form, Link } from "react-router-dom";
-import Logo from '../assets/images/logo.svg'
 import { FormRow, SubmitButton } from '../components';
 import { useActionData } from 'react-router-dom';
 
@@ -7,7 +6,6 @@ const Register = () => {
     const actionData = useActionData();
     return (
         <Form method="post" className="form">
-            <img src={Logo} alt='logo' className="logo" />
             <FormRow type='text' name='name' />
             <FormRow type='text' name='lastName' />
             <FormRow type='text' name='location' />
