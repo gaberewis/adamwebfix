@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
- app.use(express.static(path.resolve(__dirname, './client/dist')));
+ //app.use(express.static(path.resolve(__dirname, './client/dist')));
 app.use(cookieParser());
 app.use(express.json());
 app.use(
@@ -53,13 +53,18 @@ app.get('/', (req, res) => {
 app.use('/pnwx/auth', authRoute);
 app.use('/pnwx/products',ProductRoute);
 
-app.get(/.*/, (req, res) => {
-  res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
-});
+// app.get(/.*/, (req, res) => {
+//   res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
+// });
 
 app.use(/.*/, (req, res) => {
   res.status(404).json({ msg: 'not found' });
 });
+
+app.get('/coco', (req, res) => {
+  res.send('coco');
+});
+
 
 app.use(errorHandler);
 

@@ -34,7 +34,7 @@ export const paramValidation = validateData([
 
 export const createProductValidation = validateData(
     [
-        body('name').notEmpty().withMessage('Name is required'),
+       // body('name').notEmpty().withMessage('Name is required'),
        // body('position').notEmpty().withMessage('position is required'),
        // body('ProductLocation').notEmpty().withMessage('Product location is required'),
         // body('productstatus').isIn(['interview', 'declined', 'pending']).withMessage('invalid Product status'),

@@ -16,11 +16,15 @@ const productschema = new mongoose.Schema({
     popular: { type: String, enum: ['yes', 'no'], default: 'yes' }
 }, { timestamps: true });
 
+
+
 productschema.pre("save", function (next) {
-    if (req.body.catagory) {
-        return catId = req.body.catagory.toLowerCase().replace(/\s+/g, "");
-    }
-    next();
+  if (this.catagory) {
+    this.catId = this.catagory
+      .toLowerCase()
+      .replace(/\s+/g, "");
+  }
+  next();
 });
 
 export default mongoose.model('Product', productschema);

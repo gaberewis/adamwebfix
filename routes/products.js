@@ -15,6 +15,7 @@ const router = Router();
 
 
 router.route('/').get(getproducts);
+
 router.route('/admin').get(authenticateUser, getproducts).post(createProductValidation ,authenticateUser , upload.array('images', 7) , craeteProduct);
 router.route('/:id').get(paramValidation, getProduct).patch(updateProduct).delete(deleteProduct);
 

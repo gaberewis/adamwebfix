@@ -32,8 +32,7 @@ const AddProduct = () => {
         <div className="form-center">
           <FormRow type='text' name='name' />
           <FormRow type='text' name='catagory' />
-          <FormRow type='radio' name='popular' lableText='Yes' defaultValue='yse' />
-          <FormRow type='radio' name='popular' lableText='No' defaultValue='no' />
+         
 
           <textarea
             maxLength="1000"
@@ -47,7 +46,7 @@ const AddProduct = () => {
           ></textarea>
 
           <FormRowSelect name='section' labelText='Product Type' id='section' list={sectionList} defaultValue="equipment" />
-          <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList} defaultValue={popular} />
+          <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList}  />
           {actionData?.error ? <p className="error">{actionData.errorMsg} </p> : ''}
           <SubmitButton />
         </div>

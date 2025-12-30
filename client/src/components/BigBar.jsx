@@ -7,7 +7,7 @@ import { useDashboardContext } from '../pages/Dashboard';
 
 
 const BigBar = () => {
-    const {user, showBar, toggleBar } = useDashboardContext();
+    const { showBar, toggleBar } = useDashboardContext();
     return (
         <CssStl>
             <div

@@ -38,6 +38,12 @@ export const getproducts = async (req, res) => {
 
 };
 
+
+
+
+
+
+
 export const craeteProduct = async (req, res) => {
 
   let uploadedImages = [];
@@ -65,6 +71,21 @@ export const craeteProduct = async (req, res) => {
 
   res.status(201).json({ msg: 'Product created' });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const updateProduct = async (req, res) => {
   const { id } = req.params;

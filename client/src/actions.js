@@ -43,9 +43,8 @@ for(const oneFile of files ){
   }
 }
 
-
 try {
-  await axios.post('/api/pnwx/products', formData);
+  await axios.post('/api/pnwx/products/admin', formData);
   return redirect('/pnwx');
 } catch (error) {
  console.log('BACKEND ERROR:', error.response?.data);

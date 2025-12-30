@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const dashboardloader = async () => {
   try {
-    const { data } = await axios.get('/api/pnwx/auth/current');
+    const { data } = await axios.get('/pnwx/auth/current');
     return data;
   } catch (error) {
     console.error("Loader Error: ", error.response?.data || error.message);

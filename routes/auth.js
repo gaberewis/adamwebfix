@@ -10,11 +10,12 @@ import { getUser } from '../middleware/funcs.js';
 
 
 const router = Router();
-
-router.post('/register', registerValidation, registerUser);
-router.post('/login', loginValidation, login);
 router.get('/current', getUser);
 router.get('/logout', logout);
+router.post('/register', registerValidation, registerUser);
+router.post('/login', loginValidation, login);
+
+
 
 
 export default router;
