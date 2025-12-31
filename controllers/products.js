@@ -6,41 +6,26 @@ import User from '../models/User.js';
 
 export const getproducts = async (req, res) => {
 
-  const { sort, section, catagory, search } = req.query;
+  const { section, catagory, search, skipProducts } = req.query;
 
-  const queryFields = { createdBy: req.user.userId };
+  const queryFields = {};
 
-  if (search) {
-    queryFields.$or = [
-      { name: { $regex: search, $options: 'i' } },
-    ]
-  };
-
+  if (search) queryFields.name = { $regex: search, $options: 'i' };
   if (section) queryFields.section = section;
   if (catagory) queryFields.catagory = catagory;
 
-  const limit = Number(req.query.limit) || 10;
-  const page = Number(req.query.page) || 1;
-  const skip = (page - 1) * limit;
+  const limit = Number(req.query.limit) || 24;
 
-  const sortFields = {
-    newproducts: '-createdAt',
-    oldproducts: 'createdAt',
-    aToz: 'position',
-    zToa: '-position'
-  }
-  const sortDocs = sortFields[sort] || sortFields.newproducts;
-  const products = await Product.find(queryFields).limit(limit).sort(sortDocs).skip(skip);
+  const skip = Number(req.query.skip )|| 0;
+
+const products = await Product.find(queryFields).limit(limit).skip(skip);
+ 
   const totalproducts = await Product.countDocuments(queryFields);
-  const pages = Math.ceil(totalproducts / limit);
+  
 
-  res.status(200).json({ products, page, pages, totalproducts });
+  res.status(200).json({ products, totalproducts });
 
 };
-
-
-
-
 
 
 
@@ -96,7 +81,7 @@ export const updateProduct = async (req, res) => {
 
     uploadedImages = await Promise.all(
       req.files.map((image) => {
-      return  cloudinary.v2.uploader.upload(formatImage(image))
+        return cloudinary.v2.uploader.upload(formatImage(image))
       }));
     newProduct.images = uploadedImages.map((img) => ({
       imageUrl: img.secure_url,

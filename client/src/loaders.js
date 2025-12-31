@@ -13,12 +13,12 @@ export const dashboardloader = async () => {
 
 export const allproductsLoader = async ({ request }) => {
 
-  // const params = Object.fromEntries([
-  //   ...new URL(request.url).searchParams.entries(),
-  // ]);
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ]);
 
-  const url = new URL(request.url);
-  const params = Object.fromEntries(url.searchParams);
+  // const url = new URL(request.url);
+  // const params = Object.fromEntries(url.searchParams);
   try {
     const { data } = await axios.get('/api/pnwx/products', { params });
     return { data, searchValues: { ...params } };
