@@ -7,12 +7,12 @@ import { useDashboardContext } from '../pages/Dashboard';
 
 
 const BigBar = () => {
-    const { showBar, toggleBar } = useDashboardContext();
+    const { bigBar, toggleBar } = useDashboardContext();
     return (
         <CssStl>
             <div
                 className={
-                    showBar ?  'sidebar-container show-sidebar' : 'sidebar-container ' 
+                    bigBar ?  'sidebar-container show-sidebar' : 'sidebar-container ' 
                 }
             >
                 <div className='content'>

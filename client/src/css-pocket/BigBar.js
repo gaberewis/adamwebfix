@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
 const CssStl = styled.aside`
-  display: none;
-  @media (min-width: 992px) {
-    display: block;
-    box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
+ 
     .sidebar-container {
       background: var(--background-secondary-color);
       min-height: 100vh;
@@ -17,18 +14,11 @@ const CssStl = styled.aside`
       position: sticky;
       top: 0;
     }
-   .logo{max-width : 100px;
-   margin-top : 3rem; 
-   }
+ 
     .show-sidebar {
       margin-left: 0;
     }
-    header {
-      height: 6rem;
-      display: flex;
-      align-items: center;
-      padding-left: 2.5rem;
-    }
+  
     .nav-links {
       padding-top: 2rem;
       display: flex;

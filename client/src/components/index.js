@@ -8,4 +8,5 @@ export { default as ButtonsContainer } from './ButtonsContainer'
 export { default as SubmitButton } from './SubmitButton'
 export { default as ErrorElement } from './ErrorElement'
 export { default as Loading } from './Loading'
+export { default as Footer } from './FooterComponent'
 

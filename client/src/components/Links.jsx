@@ -12,9 +12,8 @@ const links = [
   { text: 'Supplies', path: 'supplies', icon: <MdQueryStats /> },
   { text: 'parts', path: 'parts', icon: <MdQueryStats /> },
   { text: 'add Product', path: 'add-Product', icon: <FaWpforms /> },
-  { text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
-  { text: 'profile', path: 'profile', icon: <ImProfile /> },
-  { text: 'admin', path: 'admin', icon: <MdAdminPanelSettings /> },
+
+
 ];
 
 export default links;

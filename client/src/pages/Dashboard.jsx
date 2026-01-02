@@ -1,7 +1,7 @@
 import { Outlet, useNavigate, useLoaderData, useNavigation } from "react-router-dom";
-import { Navbar, BigBar, Loading } from '../components';
+import { Navbar, BigBar, Loading, Footer } from '../components';
 import CssSTL from "../css-pocket/Dashboard";
-import { createContext, useContext } from 'react';
+import { createContext, useContext,useState } from 'react';
 
 import axios from 'axios';
 
@@ -12,10 +12,13 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const navigation = useNavigation();
     const isLoading = navigation.state === 'loading';
+    const [bigBar, setBigBar] = useState(false);
 
     const { user } = useLoaderData();
 
-
+  const toggleBar = ()=>{
+    setBigBar(!bigBar);
+  }
     const logoutUser = async () => {
         navigate('/');
         await axios.get('/api/auth/logout');
@@ -26,18 +29,26 @@ const Dashboard = () => {
         <DashboardContext.Provider
             value={{
                 user,
-                logoutUser
+                logoutUser, 
+                toggleBar,
+                bigBar
             }}
         >
             <CssSTL>
+                 < BigBar />
              
-                < BigBar />
-                <div className="dashboard-page">
+                <div >
                     <Navbar />
-                    {isLoading ? <Loading /> : <Outlet context={{ user }} />}
-                    <div className="footer">FOOTER</div>
+                    <div className="dashboard-page">
+
+                         {isLoading ? <Loading /> : <Outlet context={{ user }} />}
+                    </div>
+                   
+              <Footer />
                 </div>
+    
             </CssSTL>
+             
         </DashboardContext.Provider>
     )
 }

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const CssStl = styled.nav`
   height: var(--nav-height);
+  min-height : 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,9 +10,10 @@ const CssStl = styled.nav`
   background: var(--background-secondary-color);
   .nav-center {
     display: flex;
-    width: 90vw;
+    width: 96vw;
     align-items: center;
     justify-content: space-between;
+   
   }
   .toggle-btn {
     background: transparent;
@@ -22,30 +24,11 @@ const CssStl = styled.nav`
     display: flex;
     align-items: center;
   }
-  .logo-text {
-    display: none;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    width: 100px;
-  }
+
   .btn-container {
     display: flex;
     align-items: center;
   }
-  @media (min-width: 992px) {
-    position: sticky;
-    top: 0;
-    .nav-center {
-      width: 90%;
-    }
-    .logo {
-      display: none;
-    }
-    .logo-text {
-      display: block;
-    }
-  }
+
 `;
 export default CssStl;
