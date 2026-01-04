@@ -53,9 +53,9 @@ const { products, totalproducts } = data;
                   <div className={`status`}></div>
                 </div>
                 <footer className='actions'>
-                  <Link className='btn edit-btn' to={`./edit-Product/${_id}`} >Edit</Link>
+                  <Link className='btn edit-btn' to={`./edit-product/${_id}`} >Edit</Link>
 
-                  <Form method='post' action={`./delete-Product/${_id}`} onSubmit={(e) => {
+                  <Form method='post' action={`./delete-product/${_id}`} onSubmit={(e) => {
                         if (!window.confirm("Are you sure you want to delete this Product?")) {
                           e.preventDefault();
                         }

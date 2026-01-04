@@ -4,28 +4,6 @@ import { formatImage } from '../middleware/multer.js';
 import User from '../models/User.js';
 
 
-export const getproducts = async (req, res) => {
-
-  const { section, catagory, search, skipProducts } = req.query;
-
-  const queryFields = {};
-
-  if (search) queryFields.name = { $regex: search, $options: 'i' };
-  if (section) queryFields.section = section;
-  if (catagory) queryFields.catagory = catagory;
-
-  const limit = Number(req.query.limit) || 24;
-
-  const skip = Number(req.query.skip )|| 0;
-
-const products = await Product.find(queryFields).limit(limit).skip(skip);
- 
-  const totalproducts = await Product.countDocuments(queryFields);
-  
-
-  res.status(200).json({ products, totalproducts });
-
-};
 
 
 
@@ -59,14 +37,28 @@ export const craeteProduct = async (req, res) => {
 
 
 
+export const getproducts = async (req, res) => {
 
+  const { section, catagory, search, skipProducts } = req.query;
 
+  const queryFields = {};
 
+  if (search) queryFields.name = { $regex: search, $options: 'i' };
+  if (section) queryFields.section = section;
+  if (catagory) queryFields.catagory = catagory;
 
+  const limit = Number(req.query.limit) || 24;
 
+  const skip = Number(req.query.skip )|| 0;
 
+const products = await Product.find(queryFields).limit(limit).skip(skip);
+ 
+  const totalproducts = await Product.countDocuments(queryFields);
+  
 
+  res.status(200).json({ products, totalproducts });
 
+};
 
 
 
@@ -105,8 +97,11 @@ export const updateProduct = async (req, res) => {
 
 export const getProduct = async (req, res) => {
   const { id } = req.params;
-  const Product = await Product.findById(id);
-  res.status(200).json({ Product });
+  const product = await Product.findById(id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+  res.status(200).json({ product });
 };
 
 export const deleteProduct = async (req, res) => {

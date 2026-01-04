@@ -8,7 +8,7 @@ const ProductsContext = createContext();
 const Allproducts = () => {
   const { data, searchValues } = useLoaderData();
   const { totalproducts } = data;
- console.log(data.products);
+
   return (
 <CssStl>
     <ProductsContext.Provider value={{ data, searchValues }}>

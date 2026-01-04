@@ -10,12 +10,16 @@ const EditProduct = () => {
 
   const popularList = ['yes', 'no'];
   const sectioList = ['equipment', 'accessories', 'supplies', 'parts', 'other'];
+ 
+
+  const  { product } = useLoaderData();
+  
+ 
 
 
-  const actionData = useActionData();
-
-  const { data: { _id, name,  shortDescription, fullDescription, section, catagory, popular } } = actionData;
-
+ 
+  const { _id, name,  shortDescription, fullDescription, section, catagory, popular  } = product ;
+const actionData = useActionData();
 
 
   return (

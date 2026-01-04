@@ -38,7 +38,7 @@ const router = createBrowserRouter([
 
       },
       {
-        path: 'edit-Product/:id',
+        path: 'edit-product/:id',
         element: <EditProduct />,
         loader: loader.editProductLoader,
         action: action.editAction
@@ -46,16 +46,11 @@ const router = createBrowserRouter([
 
       },
       {
-        path: 'delete-Product/:id',
+        path: 'delete-product/:id',
         action: action.deleteProductAction
       },
      
-      {
-        path: 'admin',
-        element: <Dashboard />,
-        loader: loader.adminLoader
-      },
-
+      
     ]
   },
     {
