@@ -83,16 +83,14 @@ app.use(errorHandler);
   }
 
 
-// PORT=5100
-// NODE_ENV=development
-// MONGO_URI=mongodb+srv://pnwx:143212@pnwx.zbjezpr.mongodb.net/pnwx
-// JWT_SECRET=gaber143adam
-// JWT_EXPIRE=1d
-// CLOUD_NAME=dk4ictbos
-// CLOUD_API_KEY=126768646293766
-// CLOUD_API_SECRET=CLOUDINARY_URL=SSWvEtLN1znVkNDs0bVyg87Y_Ek   
-
-
+//  PORT=5100
+//  NODE_ENV=development
+//  MONGO_URI=mongodb+srv://pnwx:143212@pnwx.zbjezpr.mongodb.net/pnwx
+//  JWT_SECRET=gaber143adam
+//  JWT_EXPIRE=1d
+//  CLOUDINARY_CLOUD_NAME=dk4ictbos
+//  CLOUDINARY_API_KEY=126768646293766    
+//  CLOUDINARY_API_SECRET=SSWvEtLN1znVkNDs0bVyg87Y_Ek
 
 
 
