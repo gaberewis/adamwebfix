@@ -31,6 +31,12 @@ const { products, totalproducts } = data;
               <header>
               
                 <div className='info'>
+
+{images && images.map((image)=>{
+   return <img src={image.imageUrl} alt='product image' ke={image._id} />
+}) }
+
+
                   <h5>{name}</h5>
                   <p>{shortDescription}</p>
                 </div>

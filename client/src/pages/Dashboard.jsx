@@ -36,7 +36,7 @@ const Dashboard = () => {
         >
             <CssSTL>
                  < BigBar />
-             
+            
                 <div >
                     <Navbar />
                     <div className="dashboard-page">

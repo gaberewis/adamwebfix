@@ -63,37 +63,117 @@ const products = await Product.find(queryFields).limit(limit).skip(skip);
 
 
 
+// export const updateProduct = async (req, res) => {
+//   const { id } = req.params;
+//   const newProduct = { ...req.body };
+
+//   let uploadedImages = [];
+
+//   if (req.files && req.files.length > 0) {
+//     uploadedImages = await Promise.all(
+//       req.files.map((image) =>
+//         cloudinary.v2.uploader.upload(formatImage(image))
+//       )
+//     );
+
+//     newProduct.images = uploadedImages.map((img) => ({
+//       imageUrl: img.secure_url,
+//       imageId: img.public_id,
+//     }));
+//   }
+
+//   const updatedProduct = await Product.findByIdAndUpdate(id, newProduct);
+
+//   if (!updatedProduct) {
+//     return res.status(404).json({ msg: 'Product not found' });
+//   }
+
+//   // delete old images ONLY if new ones were uploaded
+//   if (uploadedImages.length > 0 && updatedProduct.images?.length > 0) {
+//     for (const img of updatedProduct.images) {
+//       await cloudinary.v2.uploader.destroy(img.imageId);
+//     }
+//   }
+
+//    res.status(200).json({
+//     msg: 'Product updated',
+    
+//   });
+// };
+
+
 
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
-  const newProduct = { ...req.body }
-  let uploadedImages = [];
+  const newProduct = { ...req.body };
+  const files = req.files || []; // always safe
 
-  if (req.files && req.files.length > 0) {
+  try {
+    let uploadedImages = [];
 
-    uploadedImages = await Promise.all(
-      req.files.map((image) => {
-        return cloudinary.v2.uploader.upload(formatImage(image))
+    if (files.length > 0) {
+      uploadedImages = await Promise.all(
+        files.map(file => cloudinary.v2.uploader.upload(formatImage(file)))
+      );
+
+      newProduct.images = uploadedImages.map(img => ({
+        imageUrl: img.secure_url,
+        imageId: img.public_id,
       }));
-    newProduct.images = uploadedImages.map((img) => ({
-      imageUrl: img.secure_url,
-      imageId: img.public_id,
-    }));
-
-    const updatedProduct = await Product.findByIdAndUpdate(id, newProduct);
-
-    if (!updatedProduct) {
-      return res.status(404).json({ msg: 'Product not found' });
     }
 
-    if (updatedProduct.images && updatedProduct.images.length > 0) {
-      for (const img of updatedProduct.images) {
-        await cloudinary.v2.uploader.destroy(img.imageId);
-      }
-    }
-    res.status(200).json({ msg: 'product updated' });
+    const updatedProduct = await Product.findByIdAndUpdate(id, newProduct, { new: true });
+    if (!updatedProduct) return res.status(404).json({ msg: 'Product not found' });
+
+    res.status(200).json({ msg: 'Product updated', product: updatedProduct });
+  } catch (err) {
+    console.error("Update product error:", err);
+    res.status(500).json({ msg: "Update failed" });
   }
 };
+
+
+
+
+// export const updateProduct = async (req, res) => {
+//   const { id } = req.params;
+//   const newProduct = { ...req.body }
+//   let uploadedImages = [];
+
+//   if (req.files && req.files.length > 0) {
+
+//     uploadedImages = await Promise.all(
+//       req.files.map((image) => {
+//         return cloudinary.v2.uploader.upload(formatImage(image.path))
+//       }));
+//     newProduct.images = uploadedImages.map((img) => ({
+//       imageUrl: img.secure_url,
+//       imageId: img.public_id,
+//     }));}
+
+//     const updatedProduct = await Product.findByIdAndUpdate(id, newProduct);
+
+//     if (!updatedProduct) {
+//       return res.status(404).json({ msg: 'Product not found' });
+//     }
+
+//     if (updatedProduct.images && updatedProduct.images.length > 0) {
+//       for (const img of updatedProduct.images) {
+//         await cloudinary.v2.uploader.destroy(img.imageId);
+//       }
+//     }
+  
+
+//     res.status(200).json({ msg: 'product updated' });
+// };
+
+
+
+
+
+
+
+
 
 export const getProduct = async (req, res) => {
   const { id } = req.params;

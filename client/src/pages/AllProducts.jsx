@@ -9,6 +9,12 @@ const Allproducts = () => {
   const { data, searchValues } = useLoaderData();
   const { totalproducts } = data;
 
+
+
+  if(!data){
+    return <h4>Lodding data ....</h4>
+  }
+
   return (
 <CssStl>
     <ProductsContext.Provider value={{ data, searchValues }}>

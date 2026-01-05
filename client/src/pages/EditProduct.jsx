@@ -15,10 +15,7 @@ const EditProduct = () => {
   const  { product } = useLoaderData();
   
  
-
-
- 
-  const { _id, name,  shortDescription, fullDescription, section, catagory, popular  } = product ;
+  const {  name,  shortDescription, fullDescription, section, catagory, popular  } = product ;
 const actionData = useActionData();
 
 
@@ -26,7 +23,7 @@ const actionData = useActionData();
     <div>
       <Form method='post' className='form' encType='multipart/form-data' >
 
-        <h4 className="title">Edd Product</h4>
+        <h4 className="title">Edit Product</h4>
 
         <div className='form-raw'>
           <label htmlFor='images' className='form-label'>

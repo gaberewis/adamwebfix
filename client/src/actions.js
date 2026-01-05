@@ -44,7 +44,7 @@ for(const oneFile of files ){
 }
 
 try {
-  await axios.post('/api/pnwx/products/admin', formData);
+  await axios.post('/api/pnwx/products', formData);
   return redirect('/pnwx');
 } catch (error) {
  console.log('BACKEND ERROR:', error.response?.data);
@@ -54,27 +54,48 @@ const errorMsg = error.response?.data?.msg || 'Adding Product failed';
 }
 };
 
-export const editAction = async({ request, params })=>{
+// export const editAction = async({ request, params })=>{
 
-  const formData = await request.formData();
+//   const formData = await request.formData();
+//  const files = formData.getAll('images').filter(f => f.size > 0);
+
+// for(const oneFile of files ){
+//   if(oneFile.size > 1000000){
+//     return {error : 'File must be less than 1 MB' }
+//   }
+// }
+
+//   try {
+// await axios.patch(`/api/pnwx/products/${params.id}`, formData);
+// return redirect('/pnwx');
+//   } catch (error) {
  
-const files = formData.getAll('images');
-for(const oneFile of files ){
-  if(oneFile.size > 1000000){
-    return {error : 'File must be less than 1 MB' }
-  }
-}
+//     const errorMsg = error.response?.data.msg || 'Editing Product failed';
+//     return {errorMsg};
+//   }
 
+// };
+
+
+
+
+export const editAction = async ({ request, params }) => {
+  const formData = await request.formData();
+  const files = formData.getAll('images').filter(f => f.size > 0);
+
+  for (const file of files) {
+    if (file.size > 1000000) return { error: 'File must be less than 1 MB' };
+  }
 
   try {
-await axios.patch(`/api/pnwx/products/${params.id}`, formData);
-return redirect('/pnwx');
-  } catch (error) {
-     console.log('BACKEND ERROR:', error.response?.data);
-    const errorMsg = error.response?.data.msg || 'Editing Product failed';
-    return {errorMsg};
+    await axios.patch(`/api/pnwx/products/${params.id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return redirect('/pnwx');
+  } catch (err) {
+    console.error('EDIT BACKEND ERROR:', err.response?.data);
+    return { errorMsg: err.response?.data?.msg || 'Editing Product failed' };
   }
-
 };
 
 

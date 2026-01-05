@@ -21,9 +21,9 @@ import { dirname } from 'path';
 
 
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -90,7 +90,7 @@ app.use(errorHandler);
 // JWT_EXPIRE=1d
 // CLOUD_NAME=dk4ictbos
 // CLOUD_API_KEY=126768646293766
-// CLOUD_API_SECRET=CLOUDINARY_URL=cCLOUDINARY_URL=cloudinary://126768646293766:SSWvEtLN1znVkNDs0bVyg87Y_Ek@dk4ictbos
+// CLOUD_API_SECRET=CLOUDINARY_URL=SSWvEtLN1znVkNDs0bVyg87Y_Ek   
 
 
 
