@@ -61,9 +61,6 @@ app.use(/.*/, (req, res) => {
   res.status(404).json({ msg: 'not found' });
 });
 
-app.get('/coco', (req, res) => {
-  res.send('coco');
-});
 
 
 app.use(errorHandler);

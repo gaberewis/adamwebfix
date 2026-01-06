@@ -115,7 +115,7 @@ gap : 1rem;
     text-transform: capitalize;
     letter-spacing: var(--letter-spacing);
   }
-
+   
 
 `;
 export default CssStl;

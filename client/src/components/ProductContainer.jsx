@@ -33,7 +33,7 @@ const { products, totalproducts } = data;
                 <div className='info'>
 
 {images && images.map((image)=>{
-   return <img src={image.imageUrl} alt='product image' ke={image._id} />
+   return <img src={image.imageUrl}  alt='product image' ke={image._id} />
 }) }
 
 

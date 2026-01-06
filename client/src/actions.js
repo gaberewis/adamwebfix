@@ -54,28 +54,6 @@ const errorMsg = error.response?.data?.msg || 'Adding Product failed';
 }
 };
 
-// export const editAction = async({ request, params })=>{
-
-//   const formData = await request.formData();
-//  const files = formData.getAll('images').filter(f => f.size > 0);
-
-// for(const oneFile of files ){
-//   if(oneFile.size > 1000000){
-//     return {error : 'File must be less than 1 MB' }
-//   }
-// }
-
-//   try {
-// await axios.patch(`/api/pnwx/products/${params.id}`, formData);
-// return redirect('/pnwx');
-//   } catch (error) {
- 
-//     const errorMsg = error.response?.data.msg || 'Editing Product failed';
-//     return {errorMsg};
-//   }
-
-// };
-
 
 
 
@@ -84,13 +62,13 @@ export const editAction = async ({ request, params }) => {
   const files = formData.getAll('images').filter(f => f.size > 0);
 
   for (const file of files) {
-    if (file.size > 1000000) return { error: 'File must be less than 1 MB' };
+    if (file.size > 1000000) {
+      return { error: 'File must be less than 1 MB' };
+    }
   }
 
   try {
-    await axios.patch(`/api/pnwx/products/${params.id}`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    await axios.patch(`/api/pnwx/products/${params.id}`, formData);
     return redirect('/pnwx');
   } catch (err) {
     console.error('EDIT BACKEND ERROR:', err.response?.data);

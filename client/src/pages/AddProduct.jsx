@@ -17,7 +17,7 @@ const AddProduct = () => {
     <div>
 
 
-      <Form method='post' className='form' encType='multipart/form-data' >
+      <Form method='post' className='form' encType="multipart/form-data" >
 
         <h4 className="title">Add Product</h4>
 
