@@ -2,19 +2,10 @@ import { useLoaderData, useActionData } from "react-router-dom";
 import { Form } from "react-router-dom";
 import { FormRow, FormRowSelect, SubmitButton } from "../components";
 
-
-
-
 const EditProduct = () => {
-
-
   const popularList = ['yes', 'no'];
   const sectioList = ['equipment', 'accessories', 'supplies', 'parts', 'other'];
- 
-
   const  { product } = useLoaderData();
-  
- 
   const {  name,  shortDescription, fullDescription, section, catagory, popular  } = product ;
 const actionData = useActionData();
 
@@ -29,10 +20,16 @@ const actionData = useActionData();
           <label htmlFor='images' className='form-label'>
             Select product images image less than 1MB:
           </label>
-          <input type='file' id='images' name='images' className='form-input' accept='image/*' multiple />
-          {actionData?.error ? <p className='error'>{actionData.error}</p> : ''}
+         <input
+  type="file"
+  id="images"
+  name="images"
+  accept="image/*"
+  multiple
+  onChange={handleFiles}
+/>
+    {actionData?.error ? <p className='error'>{actionData.error}</p> : ''}
         </div>
-
         <div className="form-center">
           <FormRow type='text' name='name' defaultValue={name} />
           <FormRow type='text' name='catagory' defaultValue={catagory} />

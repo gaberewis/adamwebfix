@@ -5,12 +5,10 @@ import User from '../models/User.js';
 
 
 
-
-
 export const craeteProduct = async (req, res) => {
   let uploadedImages = [];
   const files = req.files || []; // always safe
-  if (req.files && req.files.length > 0) {
+  if (files && files.length > 0) {
     uploadedImages = await Promise.all(
       req.files.map((image) => {
         return cloudinary.v2.uploader.upload(
@@ -31,7 +29,7 @@ export const craeteProduct = async (req, res) => {
 
   const product = await Product.create(req.body);
 
-  res.status(201).json({ msg: 'Product created' });
+  res.status(201).json({ msg: 'Product created', product });
 };
 
 
