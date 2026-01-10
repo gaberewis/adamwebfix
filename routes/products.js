@@ -14,6 +14,6 @@ import { authenticateUser } from '../middleware/funcs.js';
 const router = Router();
 
 router.route('/').get(getproducts).post(createProductValidation, upload.array('images', 7) , craeteProduct);
-router.route('/:id').get(getProduct).patch(upload.array('images') ,updateProduct).delete(deleteProduct);
+router.route('/:id').get(getProduct).patch(upload.array('images', 7) ,updateProduct).delete(deleteProduct);
 
 export default router;

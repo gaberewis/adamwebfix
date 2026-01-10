@@ -60,7 +60,9 @@ const errorMsg = error.response?.data?.msg || 'Adding Product failed';
 export const editAction = async ({ request, params }) => {
   const formData = await request.formData();
   const files = formData.getAll('images').filter(f => f.size > 0);
-
+if(files.length > 2){
+   return { error: 'Maximum number of files: 7' };
+}
   for (const file of files) {
     if (file.size > 1000000) {
       return { error: 'File must be less than 1 MB' };

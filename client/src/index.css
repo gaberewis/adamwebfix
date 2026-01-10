@@ -384,12 +384,9 @@ button:disabled {
   margin: 1rem;
 }
 
-.dashboard {
-  display: grid;
+.small-text{
+  font-size: var(---small-text);
 }
 
-@media (min-width : 992px) {
-  .dashboard {
-    grid-template-columns: auto 1fr;
-  }
-}
+
+
