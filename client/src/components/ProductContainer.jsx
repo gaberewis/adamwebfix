@@ -1,43 +1,39 @@
 import { Link, Form } from 'react-router-dom';
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { useproductsContext } from '../pages/AllProducts';
+import CssStl from '../css-pocket/ProductContainer';
 
 
 
 
 const ProductContainer = () => {
   const { data } = useproductsContext();
-const { products, totalproducts } = data;
-  const hasproducts = totalproducts > 0;
-  if (!hasproducts) {
+const { products } = data;
+
+  if (!products) {
     return (
-      <h4 className='Product-count'> No products available </h4>
+      <h4 className='Product-count'> No products are available </h4>
     );
   };
 
   return (
 
-    <>
-     
+    <CssStl>
       <div className='products-container'>
 
         {products.map(product => {
           const { _id, name, images, shortDescription, section, catagory, popular } = product;
-
-
           return (
 
             <div key={_id} className='Product box-radius'>
               <header>
               
                 <div className='info'>
-
-{images && images.map((image)=>{
-   return <img src={image.imageUrl}  alt='product image' key={image._id} />
-}) }
-
-
-                  <h5>{name}</h5>
+<div className='image-container'>
+{images && 
+    <img src={images[0].imageUrl}  alt='product image' />
+}</div>
+      <h5>{name}</h5>
                   <p>{shortDescription}</p>
                 </div>
               </header>
@@ -79,7 +75,7 @@ const { products, totalproducts } = data;
 
         }
       </div>
-    </>
+    </CssStl>
   )
 };
 

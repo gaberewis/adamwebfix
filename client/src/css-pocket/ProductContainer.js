@@ -115,6 +115,15 @@ gap : 1rem;
     text-transform: capitalize;
     letter-spacing: var(--letter-spacing);
   }
+
+
+  .image-container{
+  background-color : #777;
+  aligin-items : center;
+img{
+  height : 100%;
+  }
+  }
    
 
 `;
@@ -122,13 +131,3 @@ export default CssStl;
 
 
 
-//   margin-top: 3rem;
-//   display: grid;
-// grid-template-columns: 1fr ;
-// gap: 1rem;
-
-
-// @media (min-width: 992px) {
-//       grid-template-columns: 1fr 1fr 1fr;
-//   }
-  
