@@ -32,9 +32,13 @@ const { products, totalproducts } = data;
               
                 <div className='info'>
 
-{images && images.map((image)=>{
+{/* {images && images.map((image)=>{
    return <img src={image.imageUrl}  alt='product image' key={image._id} />
-}) }
+}) } */}
+
+{images && images.length > 0 &&
+    <img src={images[0].imageUrl || '#'}  alt='product image' />
+ }
 
 
                   <h5>{name}</h5>
