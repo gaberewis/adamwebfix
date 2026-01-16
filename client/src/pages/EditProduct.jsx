@@ -4,9 +4,9 @@ import { FormRow, FormRowSelect, SubmitButton } from "../components";
 
 const EditProduct = () => {
   const popularList = ['yes', 'no'];
-  const sectioList = ['equipment', 'accessories', 'supplies', 'parts', 'other'];
+  const categoryList = ['equipment', 'accessories', 'supplies', 'parts'];
   const { product } = useLoaderData();
-  const { name, shortDescription, fullDescription, section, catagory, popular } = product;
+  const { name, shortDescription, fullDescription, category, popular } = product;
   const actionData = useActionData();
 
 
@@ -26,7 +26,7 @@ const EditProduct = () => {
         </div>
         <div className="form-center">
           <FormRow type='text' name='name' defaultValue={name} />
-          <FormRow type='text' name='catagory' defaultValue={catagory} />
+          
 
           <textarea
             maxLength="1000"
@@ -38,7 +38,7 @@ const EditProduct = () => {
             name="fullDescription" className="full-description"
             placeholder="Add the full product description"
             defaultValue={fullDescription} ></textarea>
-          <FormRowSelect name='section' labelText='Product Type' id='section' list={sectioList} defaultValue={section} />
+          <FormRowSelect name='category' labelText='category' id='category' list={categoryList} defaultValue={category} />
           <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList} defaultValue={popular} />
           {actionData?.errorMsg ? <p className="error">{actionData.errorMsg} </p> : ''}
           <SubmitButton />

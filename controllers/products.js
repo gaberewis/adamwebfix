@@ -23,9 +23,6 @@ export const craeteProduct = async (req, res) => {
     imageId: img.public_id,
   }));
 
-  if (req.body.category) {
-    req.body.category = req.body.category.trim();
-  }
 
   const product = await Product.create(req.body);
 
@@ -35,14 +32,10 @@ export const craeteProduct = async (req, res) => {
 
 
 export const getproducts = async (req, res) => {
-
-  const { section, catagory, search, skip } = req.query;
-
+  const { category, search, skip } = req.query;
   const queryFields = {};
-
   if (search) queryFields.name = { $regex: search, $options: 'i' };
-  if (section) queryFields.section = section;
-  if (catagory) queryFields.catagory = catagory;
+  if (category) queryFields.category = category;
 
   const limit = Number(req.query.limit) || 24;
 

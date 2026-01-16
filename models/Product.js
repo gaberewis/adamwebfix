@@ -2,12 +2,11 @@ import mongoose from "mongoose";
 
 const productschema = new mongoose.Schema({
     name: String,
-    section: {
+    category: {
         type: String,
-        enum: ['equipment', 'accessories', 'supplies', 'parts', 'other']
+        enum: ['equipment', 'accessories', 'supplies', 'parts']
     },
-    catagory: String,
-    catId: String,
+  
     images: [
         { imageUrl: String, imageId: String }
     ],
@@ -18,13 +17,13 @@ const productschema = new mongoose.Schema({
 
 
 
-productschema.pre("save", function (next) {
-  if (this.catagory) {
-    this.catId = this.catagory
-      .toLowerCase()
-      .replace(/\s+/g, "");
-  }
-  next();
-});
+// productschema.pre("save", function (next) {
+//   if (this.category) {
+//     this.catId = this.category
+//       .toLowerCase()
+//       .replace(/\s+/g, "");
+//   }
+//   next();
+// });
 
 export default mongoose.model('Product', productschema);

@@ -9,7 +9,7 @@ const AddProduct = () => {
 
   const actionData = useActionData();
 
-  const sectionList = ['equipment', 'accessories', 'supplies', 'parts', 'other'];
+  const categoryList = ['equipment', 'accessories', 'supplies', 'parts'];
   const popularList = ['yes', 'no'];
 
 
@@ -31,9 +31,7 @@ const AddProduct = () => {
 
         <div className="form-center">
           <FormRow type='text' name='name' />
-          <FormRow type='text' name='catagory' />
-         
-
+        
           <textarea
             maxLength="1000"
             name="shortDescription" className="short-description"
@@ -45,8 +43,8 @@ const AddProduct = () => {
             placeholder="Add the full product description"
           ></textarea>
 
-          <FormRowSelect name='section' labelText='Product Type' id='section' list={sectionList} defaultValue="equipment" />
-          <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList}  />
+          <FormRowSelect name='category' labelText='category' id='category' list={categoryList} defaultValue="equipment" />
+          <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList} />
           {actionData?.error ? <p className="error">{actionData.errorMsg} </p> : ''}
           <SubmitButton />
         </div>

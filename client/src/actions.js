@@ -23,7 +23,7 @@ export const loginAction = async({ request })=>{
   try {
     
     await axios.post('/api/pnwx/auth/login', data);
-    return redirect('/pnwx');
+    return redirect('/dashboard');
 
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data.msg);
@@ -45,7 +45,7 @@ for(const File of files ){
 
 try {
   await axios.post('/api/pnwx/products', formData);
-  return redirect('/pnwx');
+  return redirect('/dashboard');
 } catch (error) {
  console.log('BACKEND ERROR:', error.response?.data);
 const errorMsg = error.response?.data?.msg || 'Adding Product failed';
@@ -60,7 +60,7 @@ const errorMsg = error.response?.data?.msg || 'Adding Product failed';
 export const editAction = async ({ request, params }) => {
   const formData = await request.formData();
   const files = formData.getAll('images').filter(f => f.size > 0);
-if(files.length > 2){
+if(files.length > 7){
    return { error: 'Maximum number of files: 7' };
 }
   for (const file of files) {
@@ -71,7 +71,7 @@ if(files.length > 2){
 
   try {
     await axios.patch(`/api/pnwx/products/${params.id}`, formData);
-    return redirect('/pnwx');
+    return redirect('/dashboard');
   } catch (err) {
     console.error('EDIT BACKEND ERROR:', err.response?.data);
     return { errorMsg: err.response?.data?.msg || 'Editing Product failed' };
@@ -82,7 +82,7 @@ if(files.length > 2){
 export const deleteProductAction = async({ params })=>{
   try {
     await axios.delete(`/api/pnwx/products/${params.id}`);
-    return redirect('/pnwx');
+    return redirect('/dashboard');
   } catch (error) {
     console.log('BACKEND ERROR', error.response?.data );
     const errorMsg = error.response?.data.msg || 'Product cannot be deleted';

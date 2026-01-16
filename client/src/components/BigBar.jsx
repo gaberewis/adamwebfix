@@ -1,5 +1,5 @@
 
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import links from './Links';
 import CssStl from '../css-pocket/BigBar';
 import { useDashboardContext } from '../pages/Dashboard';
@@ -20,11 +20,13 @@ const BigBar = () => {
 
 </header>
        <div className='nav-links' >
+        
                         
                         {
                             links.map(link => {
                                 const { path, text, icon } = link;
                                 return (
+                                    
                                     <NavLink
                                         to={path}
                                         key={text}

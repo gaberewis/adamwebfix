@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path: '/pnwx',
+    path: '/dashboard',
     element: <Dashboard />,
      ErrorElement: <Error />,
     loader: loader.dashboardloader,
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         loader: loader.allproductsLoader
       },
       {
-        path: 'add-Product',
+        path: 'add-product',
         element: <AddProduct />,
         action: action.addProductAction,
 
