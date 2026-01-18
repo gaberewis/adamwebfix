@@ -4,14 +4,14 @@ import {
     registerUser,
     login,
     logout,  
+    currentUser
 } from '../controllers/auth.js';
-
-import { getUser } from '../middleware/funcs.js';
+import { authenticateUser } from '../middleware/funcs.js';
 
 
 const router = Router();
-router.get('/current', getUser);
-router.get('/logout', logout);
+router.get('/current', authenticateUser, currentUser);
+router.get('/logout', authenticateUser, logout);
 router.post('/register', registerValidation, registerUser);
 router.post('/login', loginValidation, login);
 

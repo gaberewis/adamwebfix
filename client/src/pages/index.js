@@ -1,5 +1,6 @@
 export {default as AddProduct } from './AddProduct';
-export {default as Allproducts } from './Allproducts';
+export {default as AllProducts } from './AllProducts';
+export {default as FullDescription } from './FullDescription';
 export {default as Dashboard } from './Dashboard';
 export {default as EditProduct } from './EditProduct';
 export {default as Login } from './Login';

@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home,
-  AddProduct, Allproducts,Dashboard,
+  AddProduct, AllProducts,Dashboard,
   EditProduct,  Login, Register, 
-  Error,
+  Error,FullDescription
   
 } from './pages';
 import { ErrorElement } from "./components";
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
      
       {
         index: true,
-        element: <Allproducts />,
+        element: <AllProducts />,
         loader: loader.allproductsLoader
       },
       {
@@ -45,12 +45,17 @@ const router = createBrowserRouter([
 
 
       },
+        {
+      path: 'full-description/:id',
+      element : <FullDescription />,
+      loader : loader.fullDescription
+     },
+      
       {
         path: 'delete-product/:id',
         action: action.deleteProductAction
       },
-     
-      
+   
     ]
   },
     {

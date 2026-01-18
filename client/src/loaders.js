@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const dashboardloader = async () => {
   try {
-    const { data } = await axios.get('/pnwx/auth/current');
+    const { data } = await axios.get('/api/pnwx/auth/current');
     return data;
   } catch (error) {
     console.error("Loader Error: ", error.response?.data || error.message);
@@ -36,3 +36,14 @@ export const editProductLoader = async ({ params }) => {
   }
 };
 
+export const fullDescription = async({ params })=>{
+try {
+  const { data } = await axios.get(`/api/pnwx/products/${params.id}`);
+  return data;
+} catch (error) {
+  console.log("Loader Error : ", error.response.data || error.message)
+  return {error : true , msg : error.response?.data}
+}
+  
+
+}

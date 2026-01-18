@@ -15,13 +15,17 @@ const Dashboard = () => {
     const [bigBar, setBigBar] = useState(false);
 
     const { user } = useLoaderData();
+    console.log(user);
 
   const toggleBar = ()=>{
     setBigBar(!bigBar);
   }
     const logoutUser = async () => {
-        navigate('/');
-        await axios.get('/api/auth/logout');
+         navigate('/');
+        await axios.get('/api/pnwx/auth/logout' , {
+      withCredentials: true
+    });
+       
     };
 
 

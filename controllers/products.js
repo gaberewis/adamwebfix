@@ -1,7 +1,7 @@
 import Product from '../models/Product.js';
 import cloudinary from 'cloudinary';
 import { formatImage } from '../middleware/multer.js';
-import User from '../models/User.js';
+
 
 
 

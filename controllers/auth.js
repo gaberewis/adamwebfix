@@ -30,11 +30,20 @@ export const login = async (req, res) => {
 };
 
 
+// export const currentUser = async(req, res)=>{
+//     let user;
+// if(req.user){
+//     user = await User.findById(req.user.userId);
+// }
+ 
+//     res.status(200).json({ user });
+// }
+
 export const currentUser = async(req, res)=>{
-    let user;
-if(req.user){
-    user = await User.findById(req.user.userId);
-}
+   
+
+     const user = await User.findOne({ _id: req.user.userId });
+
  
     res.status(200).json({ user });
 }

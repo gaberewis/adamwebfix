@@ -2,12 +2,11 @@ import { Link, Form } from 'react-router-dom';
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { useproductsContext } from '../pages/AllProducts';
 import CssStl from '../css-pocket/ProductContainer';
-
-
-
+import { useDashboardContext } from '../pages/Dashboard';
 
 const ProductContainer = () => {
   const { data } = useproductsContext();
+  const { user } = useDashboardContext();
   const { products, totalproducts } = data;
   const hasproducts = totalproducts > 0;
   if (!hasproducts) {
@@ -50,7 +49,10 @@ const ProductContainer = () => {
                   </div>
 
                 </div>
-                <footer className='actions'>
+<Link to={`./full-description/${_id}`} >full description</Link>
+
+
+                {user &&    <footer className='actions'>
                   <Link className='btn edit-btn' to={`./edit-product/${_id}`} >Edit</Link>
 
                   <Form method='post' action={`./delete-product/${_id}`} onSubmit={(e) => {
@@ -62,7 +64,8 @@ const ProductContainer = () => {
                       Delete
                     </button></Form>
 
-                </footer>
+                </footer>}
+             
               </div>
 
             </div>
