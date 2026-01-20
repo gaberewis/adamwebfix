@@ -39,7 +39,8 @@ export const addProductAction = async({ request })=>{
   const files = formData.getAll('images').filter(f => f.size > 0);
 for(const File of files ){
   if(File.size > 1000000){
-    return {error : 'File must be less than 1 MB' }
+    return {error : 'File must be less than 1 MB' };
+     
   }
 }
 

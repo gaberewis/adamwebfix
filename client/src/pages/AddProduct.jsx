@@ -29,23 +29,20 @@ const AddProduct = () => {
           {actionData?.error ? <p className='error'>{actionData.error}</p> : ''}
         </div>
 
-        <div className="form-center">
-          <FormRow type='text' name='name' />
-        
+          <div className="form-center">
+            <FormRow type='text' name='name' required />
           <textarea
-            maxLength="1000"
             name="shortDescription" className="short-description"
             placeholder="Add a brief product description"
-          ></textarea>
+         required ></textarea>
           <textarea
-            maxLength="10000"
             name="fullDescription" className="full-description"
             placeholder="Add the full product description"
-          ></textarea>
+          required ></textarea>
 
           <FormRowSelect name='category' labelText='category' id='category' list={categoryList} defaultValue="equipment" />
           <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList} />
-          {actionData?.error ? <p className="error">{actionData.errorMsg} </p> : ''}
+          {actionData?.errorMsg ? <p className="error">{actionData.errorMsg} </p> : ''}
           <SubmitButton />
         </div>
       </Form>

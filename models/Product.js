@@ -16,14 +16,4 @@ const productschema = new mongoose.Schema({
 }, { timestamps: true });
 
 
-
-// productschema.pre("save", function (next) {
-//   if (this.category) {
-//     this.catId = this.category
-//       .toLowerCase()
-//       .replace(/\s+/g, "");
-//   }
-//   next();
-// });
-
 export default mongoose.model('Product', productschema);
