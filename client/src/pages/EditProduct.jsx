@@ -32,12 +32,12 @@ const EditProduct = () => {
             maxLength="1000"
             name="shortDescription" className="short-description"
             placeholder="Add a brief product description"
-            defaultValue={shortDescription} ></textarea>
+            defaultValue={shortDescription} required ></textarea>
           <textarea
             maxLength="10000"
             name="fullDescription" className="full-description"
             placeholder="Add the full product description"
-            defaultValue={fullDescription} ></textarea>
+            defaultValue={fullDescription}  required ></textarea>
           <FormRowSelect name='category' labelText='category' id='category' list={categoryList} defaultValue={category} />
           <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList} defaultValue={popular} />
           {actionData?.errorMsg ? <p className="error">{actionData.errorMsg} </p> : ''}

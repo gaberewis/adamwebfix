@@ -13,7 +13,7 @@ const validateData = (validationArray) => {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 const firstMsg = errors.array().map(error => error.msg);
-                return res.status(400).json({ msg : firstMsg[0]});
+                return res.status(400).json({ msg: firstMsg[0] });
             }
             next();
 
@@ -52,17 +52,17 @@ export const paramValidation = validateData([
         if (!isValidId) throw new CustomError(400, "bad request");
         const product = await Product.findById(value);
         if (!product) throw new CustomError(404, "Product not found");
-    
+
     }),
 ])
 
 export const createProductValidation = validateData(
     [
-        body('name').notEmpty().withMessage('Product name is required').isLength({max : 300}).withMessage('Name is too long'),
-        body('shortDescription').notEmpty().withMessage('Short description is required').isLength({max : 1000}).withMessage('Short description is too long'),
-        body('fullDescription').notEmpty().withMessage('Full description is required').isLength({max : 10000}).withMessage('Short description is too long'),
+        body('name').notEmpty().withMessage('Product name is required').isLength({ max: 300 }).withMessage('Name is too long'),
+        body('shortDescription').notEmpty().withMessage('Short description is required').isLength({ max: 1000 }).withMessage('Short description is too long'),
+        body('fullDescription').notEmpty().withMessage('Full description is required').isLength({ max: 10000 }).withMessage('Full description is too long'),
         body('category').isIn(['equipment', 'accessories', 'supplies', 'parts']).withMessage('invalid category'),
-        body('popular').isIn(['yes', 'no', 'internship']).withMessage('invalid choice'),
+        body('popular').isIn(['yes', 'no']).withMessage('invalid choice'),
     ]
 );
 

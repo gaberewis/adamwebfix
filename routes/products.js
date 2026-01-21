@@ -14,11 +14,11 @@ const router = Router();
 
 router.route('/')
 .get(getproducts)
-.post(authenticateUser,  upload.array('images', 7), craeteProduct);
+.post(authenticateUser,  upload.array('images', 7),createProductValidation, craeteProduct);
 
 router.route('/:id')
 .get(paramValidation, getProduct)
-.patch(paramValidation, authenticateUser, upload.array('images', 7), updateProduct)
+.patch(authenticateUser, upload.array('images', 7),paramValidation, createProductValidation, updateProduct)
 .delete(paramValidation, authenticateUser, deleteProduct);
 
 export default router;

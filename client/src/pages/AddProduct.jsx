@@ -30,7 +30,7 @@ const AddProduct = () => {
         </div>
 
           <div className="form-center">
-            <FormRow type='text' name='name' required />
+            <FormRow type='text' name='name' />
           <textarea
             name="shortDescription" className="short-description"
             placeholder="Add a brief product description"
