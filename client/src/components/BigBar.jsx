@@ -7,7 +7,8 @@ import { useDashboardContext } from '../pages/Dashboard';
 
 
 const BigBar = () => {
-    const { bigBar, toggleBar } = useDashboardContext();
+    const { bigBar, toggleBar, logoutUser, user } = useDashboardContext();
+   
     return (
         <CssStl>
             <div
@@ -21,7 +22,7 @@ const BigBar = () => {
 </header>
        <div className='nav-links' >
         
-                        
+                       
                         {
                             links.map(link => {
                                 const { path, text, icon } = link;
@@ -38,9 +39,13 @@ const BigBar = () => {
                                             {icon}
                                         </span> {text}
                                     </NavLink>
+                                    
                                 )
                             })
+                           
                         }
+                     {user && ( <NavLink to='/dashboard/add-product' className='nav-link' onClick={ toggleBar} >Add product</NavLink>)}  
+                        {user && (<NavLink className='nav-link' onClick={logoutUser}>logout</NavLink>)}
 
                     </div>
                 </div>
