@@ -25,7 +25,7 @@ background : #fff;
 width : 90%;
 margin: 0 auto;
 margin-bottom : 1rem;
-font-weight : 500;
+font-weight : 500; 
 }
 `;
 export default CssSTL;

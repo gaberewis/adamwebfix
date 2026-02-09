@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import links from './Links';
 import CssStl from '../css-pocket/BigBar';
 import { useDashboardContext } from '../pages/Dashboard';
+import { IoAddCircle } from "react-icons/io5";
 
 
 
@@ -44,7 +45,9 @@ const BigBar = () => {
                             })
                            
                         }
-                     {user && ( <NavLink to='/dashboard/add-product' className='nav-link' onClick={ toggleBar} >Add product</NavLink>)}  
+                     {user && ( <NavLink to='/dashboard/add-product' className='nav-link' onClick={ toggleBar} ><span className='icon' >
+                                            < IoAddCircle />
+                                        </span>Add product</NavLink>)}  
                         {user && (<NavLink className='nav-link' onClick={logoutUser}>logout</NavLink>)}
 
                     </div>
