@@ -3,6 +3,8 @@ import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { useproductsContext } from '../pages/AllProducts';
 import CssStl from '../css-pocket/ProductContainer';
 import { useDashboardContext } from '../pages/Dashboard';
+import { MdOutlineFullscreenExit } from "react-icons/md";
+
 
 const ProductContainer = () => {
   const { data } = useproductsContext();
@@ -31,28 +33,27 @@ const ProductContainer = () => {
               <header>
 
                 <div className='info'>
-
-                  {images && images.length > 0 &&
-                    <img src={images[0].imageUrl || '#'} alt='product image' />
-                  }
+<div className='image-container'>
+  <img
+                    src={images?.[0]?.imageUrl || "/bgimage.jpg"}
+                    alt="product image"
+                  />
+</div>
+                  
 
                   <h5>{name}</h5>
                   <p>{shortDescription}</p>
                 </div>
               </header>
-              <div className='content'>
+              <div className='content'> 
                 <div className='content-center'>
 
-                  <div>
-                    <span className='Product-icon'><FaLocationArrow /></span>
-                    <span className='Product-text'>{category}</span>
-                  </div>
-
+                 
                 </div>
-<Link to={`./full-description/${_id}`} >full description</Link>
+                <Link to={`./full-description/${_id}`} ><span><MdOutlineFullscreenExit/></span> full description</Link>
 
 
-                {user &&    <footer className='actions'>
+                {user && <footer className='actions'>
                   <Link className='btn edit-btn' to={`./edit-product/${_id}`} >Edit</Link>
 
                   <Form method='post' action={`./delete-product/${_id}`} onSubmit={(e) => {
@@ -65,7 +66,7 @@ const ProductContainer = () => {
                     </button></Form>
 
                 </footer>}
-             
+
               </div>
 
             </div>

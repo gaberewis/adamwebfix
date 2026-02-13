@@ -1,5 +1,4 @@
-
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from "react-router-dom";
 import links from './Links';
 import CssStl from '../css-pocket/BigBar';
 import { useDashboardContext } from '../pages/Dashboard';
@@ -9,7 +8,8 @@ import { IoAddCircle } from "react-icons/io5";
 
 const BigBar = () => {
     const { bigBar, toggleBar, logoutUser, user } = useDashboardContext();
-   
+  const { pathname, search } = useLocation();
+const currentUrl = pathname + search;
     return (
         <CssStl>
             <div
@@ -28,27 +28,28 @@ const BigBar = () => {
                             links.map(link => {
                                 const { path, text, icon } = link;
                                 return (
-                                    
-                                    <NavLink
-                                        to={path}
-                                        key={text}
-                                        className='nav-link'
-                                        onClick={ toggleBar}
-                                        end
-                                    >
-                                         <span className='icon' >
-                                            {icon}
-                                        </span> {text}
-                                    </NavLink>
+                                      <Link
+        key={text}
+        to={path}
+        onClick={toggleBar}
+        className={
+          currentUrl === path
+            ? "nav-link active"
+            : "nav-link"
+        }
+      >
+        <span className="icon">{icon}</span>
+        {text}
+      </Link>
                                     
                                 )
                             })
                            
                         }
-                     {user && ( <NavLink to='/dashboard/add-product' className='nav-link' onClick={ toggleBar} ><span className='icon' >
+                     {user && ( <NavLink to='/dashboard/add-product' className='nav-link' onClick={ toggleBar} end ><span className='icon' >
                                             < IoAddCircle />
                                         </span>Add product</NavLink>)}  
-                        {user && (<NavLink className='nav-link' onClick={logoutUser}>logout</NavLink>)}
+                        {user && (<Link className='nav-link' onClick={logoutUser} end >logout</Link>)}
 
                     </div>
                 </div>

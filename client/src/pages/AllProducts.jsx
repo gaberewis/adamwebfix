@@ -22,7 +22,7 @@ const Allproducts = () => {
       clearTimeout(timeOute);
       timeOute = setTimeout(() => {
         onChangeFunc(formToSubmit);
-      }, 2000)
+      }, 1200)
 
     }
 
