@@ -14,22 +14,21 @@ const CssStl = styled.main`
     .products-container {
       grid-template-columns: 1fr 1fr 1fr;
     }
-     
   }
 
   .Product {
     background: var(--background-secondary-color);
     border-radius: var(--border-radius);
-    display: grid;
-    grid-template-rows: auto 1fr;
+    display: flex;
+    flex-direction: column; /* makes footer stay at bottom */
     box-shadow: var(--shadow-2);
-    text-align: left; 
+    text-align: left;
+    padding: 1rem;
   }
 
   header {
     padding: 1rem 1.5rem;
   }
-
 
   .image-container {
     display: flex;
@@ -45,44 +44,39 @@ const CssStl = styled.main`
   }
 
   .info {
+    margin-left: 1rem;
     h5 {
       font-weight: 500;
       margin-bottom: 0.8rem;
     }
- p {
- font-size : .9rem;
+    p {
+      font-size: 0.9rem;
       margin: 0;
       text-transform: capitalize;
-      letter-spacing:.8px;
-        line-height: 1.5; 
+      letter-spacing: 0.8px;
+      line-height: 1.5;
       color: var(--text-secondary-color);
     }
   }
 
   .content {
-    padding: 1.5rem 1.5rem;
+  margin-top: auto; /* sticks content to bottom */
+  left: 1rem;
+
+  Link {
+    display: block;
+    margin-bottom: 1.2rem;
   }
+}
 
-  .content-center {
-    display: grid;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    grid-template-columns: 1fr;
-    row-gap: 1.5rem;
-    align-items: center;
+.actions {
+  margin-top: 1rem;
+  display: flex;           /* row layout */
+  flex-direction: row;     /* ensure buttons are side by side */
+  align-items: center;
+  gap: 0.5rem;            /* spacing between buttons */
+}
 
-    @media (min-width: 576px) {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-
-  .actions {
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
 
   .edit-btn,
   .delete-btn {

@@ -24,7 +24,7 @@ const ProductContainer = () => {
       <div className='products-container'>
 
         {products.map(product => {
-          const { _id, name, images, shortDescription, category, popular } = product;
+          const { _id, name, images, shortDescription} = product;
 
 
           return (
@@ -33,25 +33,22 @@ const ProductContainer = () => {
               <header>
 
                 <div className='info'>
-<div className='image-container'>
-  <img
-                    src={images?.[0]?.imageUrl || "/bgimage.jpg"}
-                    alt="product image"
-                  />
-</div>
-                  
+                  <div className='image-container'>
+                    <img
+                      src={images?.[0]?.imageUrl || "/bgimage.jpg"}
+                      alt="product image"
+                    />
+                  </div>
+
 
                   <h5>{name}</h5>
                   <p>{shortDescription}</p>
                 </div>
               </header>
-              <div className='content'> 
-                <div className='content-center'>
+              <div className='content'>
+                
 
-                 
-                </div>
-                <Link to={`./full-description/${_id}`} ><span><MdOutlineFullscreenExit/></span> full description</Link>
-
+                <Link to={`./full-description/${_id}`} ><span><MdOutlineFullscreenExit /></span> full description</Link>
 
                 {user && <footer className='actions'>
                   <Link className='btn edit-btn' to={`./edit-product/${_id}`} >Edit</Link>
@@ -65,7 +62,7 @@ const ProductContainer = () => {
                       Delete
                     </button></Form>
 
-                </footer>}
+                </footer>} 
 
               </div>
 

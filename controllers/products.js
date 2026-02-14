@@ -41,7 +41,7 @@ export const getproducts = async (req, res) => {
 
   const skipped = Number(skip )|| 0;
 
-const products = await Product.find(queryFields).limit(limit).skip(skipped);
+const products = await Product.find(queryFields).limit(limit).skip(skipped).sort({_id : -1});
  
   const totalproducts = await Product.countDocuments(queryFields);
   

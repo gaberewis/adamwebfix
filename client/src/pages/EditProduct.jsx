@@ -16,28 +16,35 @@ const EditProduct = () => {
 
         <h4 className="title">Edit Product</h4>
 
-        <div className='form-raw'>
-          <label htmlFor='images' className='form-label'>
-            <p className="small-text" >- Select product images image less than 1MB</p>
-            <p className="small-text" >- Click Choose Files and select a maximum of 7 images.</p>
-          </label>
+        <div className='form-row'>
           <input type="file" id="images" name="images" accept="image/*" multiple />
           {actionData?.error ? <p className='error'>{actionData.error}</p> : ''}
         </div>
+
         <div className="form-center">
           <FormRow type='text' name='name' defaultValue={name} />
-          
 
-          <textarea
-            maxLength="1000"
-            name="shortDescription" className="short-description"
-            placeholder="Add a brief product description"
-            defaultValue={shortDescription} required ></textarea>
+          <label htmlFor='images' className='form-label'>
+            Edit the short product description
+          </label>
+       <textarea
+    name="shortDescription"
+    className="form-textarea"
+    maxLength={252}   
+    defaultValue={shortDescription}
+    required
+></textarea>
+
+
+          <label htmlFor='images' className='form-label'>
+            Edit the full product description
+          </label>
           <textarea
             maxLength="10000"
-            name="fullDescription" className="full-description"
-            placeholder="Add the full product description"
-            defaultValue={fullDescription}  required ></textarea>
+            name="fullDescription" className="form-textarea"
+            defaultValue={fullDescription} required ></textarea>
+
+
           <FormRowSelect name='category' labelText='category' id='category' list={categoryList} defaultValue={category} />
           <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList} defaultValue={popular} />
           {actionData?.errorMsg ? <p className="error">{actionData.errorMsg} </p> : ''}
