@@ -20,7 +20,7 @@ const CssStl = styled.main`
     background: var(--background-secondary-color);
     border-radius: var(--border-radius);
     display: flex;
-    flex-direction: column; /* makes footer stay at bottom */
+    flex-direction: column; 
     box-shadow: var(--shadow-2);
     text-align: left;
     padding: 1rem;
@@ -32,14 +32,14 @@ const CssStl = styled.main`
 
   .image-container {
     display: flex;
-    justify-content: center; /* center image horizontally */
+    justify-content: center;
     margin-bottom: 1.3rem;
   }
 
   .image-container img {
     display: block;
     height: 330px;
-    width: auto; /* maintain aspect ratio */
+    width: auto; 
     border-radius: var(--border-radius);
   }
 
@@ -60,7 +60,7 @@ const CssStl = styled.main`
   }
 
   .content {
-  margin-top: auto; /* sticks content to bottom */
+  margin-top: auto; 
   left: 1rem;
 
   Link {
@@ -71,10 +71,10 @@ const CssStl = styled.main`
 
 .actions {
   margin-top: 1rem;
-  display: flex;           /* row layout */
-  flex-direction: row;     /* ensure buttons are side by side */
+  display: flex;          
+  flex-direction: row;    
   align-items: center;
-  gap: 0.5rem;            /* spacing between buttons */
+  gap: 0.5rem;          
 }
 
 

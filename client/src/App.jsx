@@ -29,13 +29,13 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <AllProducts />,
-        loader: loader.allproductsLoader
+        loader: loader.allproductsLoader,
+        action : action.LoadMore
       },
       {
         path: 'add-product',
         element: <AddProduct />,
-        action: action.addProductAction,
-
+  
       },
       {
         path: 'edit-product/:id',

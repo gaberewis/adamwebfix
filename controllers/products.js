@@ -32,20 +32,18 @@ export const craeteProduct = async (req, res) => {
 
 
 export const getproducts = async (req, res) => {
-  const { category, search, skip } = req.query;
+  const { category, search, loadMore } = req.query;
   const queryFields = {};
   if (search) queryFields.name = { $regex: search, $options: 'i' };
   if (category) queryFields.category = category;
 
-  const limit = Number(req.query.limit) || 24;
+  const limit = Number(loadMore) || 20;
 
-  const skipped = Number(skip )|| 0;
-
-const products = await Product.find(queryFields).limit(limit).skip(skipped).sort({_id : -1});
+const products = await Product.find(queryFields).limit(limit).sort({_id : -1});
  
   const totalproducts = await Product.countDocuments(queryFields);
   
-  res.status(200).json({ products, totalproducts });
+  res.status(200).json({ products, totalproducts, limit });
 
 };
 
