@@ -12,33 +12,42 @@ const ProductContainer = () => {
   const { data } = useproductsContext();
   const { user } = useDashboardContext();
   const { products, totalproducts, limit } = data;
+  console.log(limit);
   const hasproducts = totalproducts > 0;
 
 const[loadProducts, setLoadPruducts] = useState(true);
 
-  const ispopular = products.map((product)=> product.popular === "yes");
-
-  if (!hasproducts && !ispopular) {
-    return (
+  if (!hasproducts) {
+    return (  
       <h4 className='Product-count'> No products available </h4>
     );
   };
 
-const moreProducts = async()=>{
-if(limit > ispopular.length - 21 ){
-  setLoadPruducts(!loadProducts);
-  return;
-}
-   const loadMore = limit + 20;
-  await axios.get('/api/pnwx/products', { loadMore });
-};
+const moreProducts = async () => {
+  if (limit >= totalproducts) {
+    setLoadPruducts(false);
+    return;
+  }
 
+  const loadMore = limit + 5;
+
+   await axios.get('/api/pnwx/products', 
+    {
+      loadMore,
+    
+    },
+  );
+
+  
+};
 
   return (
 
     <CssStl>
 
       <div className='products-container'>
+
+
 
      { products.map(product => {
           const { _id, name, images, shortDescription} = product;
@@ -92,9 +101,9 @@ if(limit > ispopular.length - 21 ){
 {loadProducts &&
 
       
-      
+      <Form>
 <button type='submit' className='btn' onClick={moreProducts} >Load More</button> 
-
+</Form>
 }
 
       </div>

@@ -37,7 +37,8 @@ export const getproducts = async (req, res) => {
   if (search) queryFields.name = { $regex: search, $options: 'i' };
   if (category) queryFields.category = category;
 
-  const limit = Number(loadMore) || 20;
+   
+  const limit = Number(loadMore) || 3;
 
 const products = await Product.find(queryFields).limit(limit).sort({_id : -1});
  
@@ -46,8 +47,7 @@ const products = await Product.find(queryFields).limit(limit).sort({_id : -1});
   res.status(200).json({ products, totalproducts, limit });
 
 };
-
-
+ 
 
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
