@@ -38,7 +38,7 @@ export const getproducts = async (req, res) => {
   if (category) queryFields.category = category;
 
    
-  const limit = Number(loadMore) || 3;
+  const limit = Number(loadMore) || 20;
 
 const products = await Product.find(queryFields).limit(limit).sort({_id : -1});
  

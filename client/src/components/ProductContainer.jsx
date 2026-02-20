@@ -4,9 +4,6 @@ import { useproductsContext } from '../pages/AllProducts';
 import CssStl from '../css-pocket/ProductContainer';
 import { useDashboardContext } from '../pages/Dashboard';
 import { MdOutlineFullscreenExit } from "react-icons/md";
-import { useState } from 'react';
-import axios from 'axios';
-
 
 const ProductContainer = () => {
   const { data } = useproductsContext();
@@ -15,31 +12,13 @@ const ProductContainer = () => {
   console.log(limit);
   const hasproducts = totalproducts > 0;
 
-const[loadProducts, setLoadPruducts] = useState(true);
-
   if (!hasproducts) {
     return (  
       <h4 className='Product-count'> No products available </h4>
     );
   };
 
-const moreProducts = async () => {
-  if (limit >= totalproducts) {
-    setLoadPruducts(false);
-    return;
-  }
 
-  const loadMore = limit + 5;
-
-   await axios.get('/api/pnwx/products', 
-    {
-      loadMore,
-    
-    },
-  );
-
-  
-};
 
   return (
 
@@ -98,16 +77,18 @@ const moreProducts = async () => {
 
         }
 
-{loadProducts &&
 
-      
-      <Form>
-<button type='submit' className='btn' onClick={moreProducts} >Load More</button> 
-</Form>
-}
 
       </div>
+      {limit < totalproducts &&
+
+      <Form className='load-more'> 
+        <input type="text"  name="loadMore" value={limit + 20} hidden />
+<button type='submit' className='btn' >Load More</button> 
+</Form>
+}
     </CssStl>
+    
   )
 };
 

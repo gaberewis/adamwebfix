@@ -86,6 +86,9 @@ const CssStl = styled.main`
     align-items: center;
     justify-content: center;
   }
+    .load-more{
+    margin-top : 1.3rem;
+    }
 `;
 
 export default CssStl;
