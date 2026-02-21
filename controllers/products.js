@@ -18,6 +18,7 @@ export const craeteProduct = async (req, res) => {
     );
   }
 
+
   req.body.images = uploadedImages.map((img) => ({
     imageUrl: img.secure_url,
     imageId: img.public_id,

@@ -6,10 +6,10 @@ import { useDashboardContext } from '../pages/Dashboard';
 import { MdOutlineFullscreenExit } from "react-icons/md";
 
 const ProductContainer = () => {
-  const { data } = useproductsContext();
+  const { data, searchValues } = useproductsContext();
   const { user } = useDashboardContext();
   const { products, totalproducts, limit } = data;
-  console.log(limit);
+ 
   const hasproducts = totalproducts > 0;
 
   if (!hasproducts) {
@@ -83,7 +83,11 @@ const ProductContainer = () => {
       {limit < totalproducts &&
 
       <Form className='load-more'> 
-        <input type="text"  name="loadMore" value={limit + 20} hidden />
+
+      {searchValues.category &&
+       <input type="hidden"  name="category" defaultValue={searchValues.category}  />
+      }
+        <input type="hidden"  name="loadMore" defaultValue={limit + 20}  />
 <button type='submit' className='btn' >Load More</button> 
 </Form>
 }

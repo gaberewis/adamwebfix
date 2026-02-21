@@ -46,10 +46,10 @@ const currentUrl = pathname + search;
                             })
                            
                         }
-                     {user && ( <NavLink to='/dashboard/add-product' className='nav-link' onClick={ toggleBar} end ><span className='icon' >
+                     {user && ( <NavLink to='/dashboard/add-product' className='nav-link' onClick={ toggleBar}  ><span className='icon' >
                                             < IoAddCircle />
                                         </span>Add product</NavLink>)}  
-                        {user && (<Link className='nav-link' onClick={logoutUser} end >logout</Link>)}
+                        {user && (<Link className='nav-link' onClick={logoutUser}  >logout</Link>)}
 
                     </div>
                 </div>

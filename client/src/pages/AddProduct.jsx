@@ -42,7 +42,7 @@ const AddProduct = () => {
           </label>
           <textarea
             name="fullDescription" className="form-textarea"
-            required ></textarea>
+               ></textarea>
 
           <FormRowSelect name='category' labelText='category' id='category' list={categoryList} defaultValue="equipment" />
           <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList} />

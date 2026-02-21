@@ -43,7 +43,7 @@ const Allproducts = () => {
           className="form-input"
           defaultValue={search}
           onChange={debounce((form) => submit(form)) }
-          placeHolder="search"
+          placeholder="search"
         />
       </Form></div>
 
