@@ -1,17 +1,47 @@
-import { useLoaderData } from "react-router-dom"
+import { useState } from "react";
+import { useLoaderData } from 'react-router-dom';
+import CssStl from "../css-pocket/FullDescription";
 
 
+const FullDescription = () => {
+    const { product } = useLoaderData();
+    const { images, fullDescription } = product;
+    const [active, setActive] = useState(0);
 
-const FullDescription = ()=>{
- const { product } = useLoaderData();
- const { name, images} = product;
+    return (
+        <CssStl>
+            <div className="slide">
 
-return (<>
-<img src={images[0]?.imageUrl || '#'} alt='product image' />
-<h4>full description. {name}</h4>
-</>
 
-)
-}
+                <img
+                    src={
+                        images && images.length > 0
+                            ? images[active].imageUrl
+                            : "/bgimage.jpg"
+                    }
+                    alt="slide"
+                    className="slide-img"
+                />
+
+                <div className="dots">
+                    {images.map((_, index) => (
+                        <button
+                            key={index}
+                            className={`dot ${index === active ? "active" : ""}`}
+                            onClick={() => setActive(index)}
+                        />
+                    ))}
+                </div>
+            </div>
+
+            <div className="description-text">
+                <p>
+                    {fullDescription}
+                </p>
+
+            </div>
+        </CssStl>
+    );
+};
 
 export default FullDescription;

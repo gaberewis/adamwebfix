@@ -43,6 +43,7 @@ const ProductContainer = () => {
                       src={images?.[0]?.imageUrl || "/bgimage.jpg"}
                       alt="product image"
                     />
+                    
                   </div>
 
 

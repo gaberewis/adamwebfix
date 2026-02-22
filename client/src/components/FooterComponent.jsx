@@ -1,4 +1,4 @@
-import CssSTL from "../css-pocket/footer";
+import CssSTL from "../css-pocket/Footer";
 
 
 
