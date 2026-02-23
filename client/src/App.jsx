@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home,
   AddProduct, AllProducts,Dashboard,
   EditProduct,  Login, Register, 
-  Error,FullDescription
+  Error,FullDescription, Methods
   
 } from './pages';
 import { ErrorElement } from "./components";
@@ -55,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: 'delete-product/:id',
         action: action.deleteProductAction
+      },
+          {
+        path: 'methods',
+        element : <Methods />,
       },
    
     ]
