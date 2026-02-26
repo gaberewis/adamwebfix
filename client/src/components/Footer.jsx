@@ -13,7 +13,7 @@ const Footer = ()=>{
         <div className="head-part">
 
               <a href="/public/order-form.pdf" download >
-<p><span><FaDownload />  </span> Download Order Form</p> 
+<p><span><FaDownload />  </span> <b>Download Order Form</b></p> 
    </a>  
 
 
@@ -24,7 +24,13 @@ const Footer = ()=>{
 
 
 <p>Toll-Free (US): 800-827-XRAY (800-827-9729)</p>
-<p><span><IoMdMailUnread /></span> email : SalesD@pnwx.com</p>
+
+<p>
+    <IoMdMailUnread />    <a href="mailto:example@gmail.com" target="_blank" rel="noopener noreferrer">
+ SalesD@pnwx.com
+</a>
+  </p>
+
 
     <h5><span><BsMailbox2Flag /></span > P.O. Box 625 * Gresham, OR  97030 * U.S.A.</h5>
 

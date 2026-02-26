@@ -7,5 +7,5 @@ export { default as ProductContainer } from './ProductContainer'
 export { default as SubmitButton } from './SubmitButton'
 export { default as ErrorElement } from './ErrorElement'
 export { default as Loading } from './Loading'
-export { default as Footer } from './FooterComponent'
+export { default as Footer } from './Footer'
 

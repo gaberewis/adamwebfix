@@ -5,7 +5,7 @@ import { Home,
   Error,FullDescription, Methods
   
 } from './pages';
-import { ErrorElement } from "./components";
+import { ErrorElement } from "./components";//check this in jobify
 
 import * as loader from './loaders';
 
@@ -16,13 +16,14 @@ const router = createBrowserRouter([
   {
      path: '/',
     element: <Home />,
+    errorElement: <Error />,
     
   },
 
   {
     path: '/dashboard',
     element: <Dashboard />,
-     ErrorElement: <Error />,
+   errorElement: <Error />,
     loader: loader.dashboardloader,
     children: [
      

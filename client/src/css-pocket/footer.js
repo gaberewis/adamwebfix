@@ -9,17 +9,16 @@ const CssSTL = styled.section`
   background: #fff;
   color: #333;
   width: 100vw;
-  padding: 2rem;
+  padding: 1.8rem;
   min-height : 10vh;
   margin-top : 3rem;
   line-height : 2;
   box-shadow : 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.01);
 
   .head-part{
-  line-height : 2.5;
   img{
-  max-height : 38px;
-  margin-top : 1.2rem;
+  max-height : 30px;
+  margin-top : 1rem;
   }
 a {
   color: #333;
@@ -40,9 +39,12 @@ margin-top : 2.5rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+   line-height : 1.4;
   p{
   text-align: center; 
+  margin-bottom : 1rem;
  }
+
 }
 .small-text{ font-size: .9rem}
 .tiny-text{ font-size: .7rem}
