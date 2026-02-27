@@ -23,7 +23,7 @@ export const loginAction = async({ request })=>{
   try {
     
     await axios.post('/api/pnwx/auth/login', data);
-    return redirect('/dashboard');
+    return redirect('/dashboard?popular=yes');
 
   } catch (error) {
      console.log('BACKEND ERROR:', error.response?.data.msg);
@@ -46,7 +46,7 @@ for(const File of files ){
 
 try {
   await axios.post('/api/pnwx/products', formData);
-  return redirect('/dashboard');
+  return redirect('/dashboard?popular=yes');
 } catch (error) {
  console.log('BACKEND ERROR:', error.response?.data);
 const errorMsg = error.response?.data?.msg || 'Adding Product failed';
@@ -72,7 +72,7 @@ if(files.length > 7){
 
   try {
     await axios.patch(`/api/pnwx/products/${params.id}`, formData);
-    return redirect('/dashboard');
+    return redirect('/dashboard?popular=yes');
   } catch (err) {
     console.error('EDIT BACKEND ERROR:', err.response?.data);
     return { errorMsg: err.response?.data?.msg || 'Editing Product failed' };
@@ -83,7 +83,7 @@ if(files.length > 7){
 export const deleteProductAction = async({ params })=>{
   try {
     await axios.delete(`/api/pnwx/products/${params.id}`);
-    return redirect('/dashboard');
+    return redirect('/dashboard?popular=yes');
   } catch (error) {
     console.log('BACKEND ERROR', error.response?.data );
     const errorMsg = error.response?.data.msg || 'Product cannot be deleted';

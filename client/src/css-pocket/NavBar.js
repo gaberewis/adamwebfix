@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const CssStl = styled.nav`
-  height: var(--nav-height);
   min-height : 10vh;
   display: flex;
   align-items: center;
@@ -10,9 +9,10 @@ const CssStl = styled.nav`
   background: var(--background-secondary-color);
   .nav-center {
     display: flex;
-    width: 96vw;
+    width: 98vw;
     align-items: center;
     justify-content: space-between;
+  
    
   }
   .toggle-btn {
@@ -24,11 +24,37 @@ const CssStl = styled.nav`
     display: flex;
     align-items: center;
   }
+.head-name{
 
-  .btn-container {
-    display: flex;
-    align-items: center;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  
+
+
+margin-top: 1.7rem;
+margin-bottom: 1rem;
+text-align : center;
+h3{
+color : var(--red-mid);
+font-weight : 600;
+
+}
+h4{
+margin-top : 1rem;
+font-weight : 500;
+color : var(--grey-600);
+  font-weight: 500;
+  font-style: italic;
+}
+  span{
+  opacity : .5;
+  margin-left : 1.5rem;
+  margin-right : 1.5rem;
   }
+
+}
+ 
 
 `;
 export default CssStl;

@@ -1,13 +1,16 @@
 import CssStl from '../css-pocket/Navbar';
 import { useState } from 'react';
-import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
+import { FaAlignLeft, FaXRay} from 'react-icons/fa';
 import { useDashboardContext } from '../pages/Dashboard';
+
+
+
 
 
 const Navbar = () => {
 
-  const [showLogout, setShowLogout] = useState(false);
-  const { user, toggleBar, logoutUser } = useDashboardContext();
+ 
+  const { toggleBar} = useDashboardContext();
 
   return (<CssStl>
 
@@ -15,12 +18,13 @@ const Navbar = () => {
       <button type='button' className='toggle-btn' onClick={toggleBar} >
         < FaAlignLeft />
       </button>
-      <div  >
-    
-        <h3 className='logo-text' >dashboard</h3>
+
+      <div  className='head-name' >
+        <h3>pacifi northwest x-ray inc.</h3>
+         <h4 ><span><FaXRay/></span> simply the best <span><FaXRay/></span></h4>
       </div>
-      <div className='btn-container' >
-      </div>
+      
+     
       <div className='btn-container'>
    
       

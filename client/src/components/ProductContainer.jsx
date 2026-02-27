@@ -8,7 +8,7 @@ import { MdOutlineFullscreenExit } from "react-icons/md";
 const ProductContainer = () => {
   const { data, searchValues } = useproductsContext();
   const { user } = useDashboardContext();
-  const { products, totalproducts, limit } = data;
+  const { products, totalproducts,popular, limit } = data;
  
   const hasproducts = totalproducts > 0;
 
@@ -88,6 +88,10 @@ const ProductContainer = () => {
       {searchValues.category &&
        <input type="hidden"  name="category" defaultValue={searchValues.category}  />
       }
+      {searchValues.popular &&
+      <input type="hidden" name="popular"  defaultValue={popular} />
+      }
+
         <input type="hidden"  name="loadMore" defaultValue={limit + 20}  />
 <button type='submit' className='btn' >Load More</button> 
 </Form>

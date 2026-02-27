@@ -14,7 +14,18 @@ html {
 
 /*16px*/
 
+/*fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitcount+Grid+Double:wght@100..900&family=Lexend+Giga:wght@100..900&family=Pinyon+Script&display=swap');
+
+
 :root {
+
+  /*fonts*/
+  --head-font: "Bitcount Grid Double", system-ui;
+
+
+
+
   /* colors */
   --primary-50: #f1f0ff;
   /* very light */
@@ -50,7 +61,7 @@ html {
 
   --red-light: #fddee0;
   --pink: #ff5173;
-
+  --slogan-yellow: #FFD500;
   --red-mid: #fa4166;
   --red-dark: #842029;
   --green-light: #d1e7dd;
@@ -385,9 +396,7 @@ button:disabled {
   margin: 1rem;
 }
 
-.small-text{
+.small-text {
   font-size: var(---small-text);
 }
-
-
 
