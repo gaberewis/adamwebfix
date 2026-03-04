@@ -2,10 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home,
   AddProduct, AllProducts,Dashboard,
   EditProduct,  Login, Register, 
-  Error,FullDescription, Methods
-  
+  Error,FullDescription, Methods 
 } from './pages';
-import { ErrorElement } from "./components";//check this in jobify
+
 
 import * as loader from './loaders';
 
@@ -23,7 +22,6 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Dashboard />,
-   errorElement: <Error />,
     loader: loader.dashboardloader,
     children: [
      
@@ -37,6 +35,7 @@ const router = createBrowserRouter([
         path: 'add-product',
         element: <AddProduct />,
         action : action.addProductAction
+
         
       },
       {

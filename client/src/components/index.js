@@ -5,7 +5,6 @@ export { default as Navbar } from './Navbar'
 export { default as BigBar } from './BigBar'
 export { default as ProductContainer } from './ProductContainer'
 export { default as SubmitButton } from './SubmitButton'
-export { default as ErrorElement } from './ErrorElement'
 export { default as Loading } from './Loading'
 export { default as Footer } from './Footer'
 

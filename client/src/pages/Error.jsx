@@ -18,16 +18,23 @@ const Error = () => {
         </CssStl>)
     }
 
-    return (
-        <CssStl>
-            <div>
-                <h3>
-                    something went wrong
-                </h3>
-            </div>
-        </CssStl>
-    )
+    if (error?.status === 401) {
+    return <h3>Unauthorized - Please login</h3>;
+  }
+
+  if (error?.status === 403) {
+    return <h3>Forbidden - You don’t have permission</h3>;
+  }
+
+  if (error?.status === 500) {
+    return <h3>Server error. Please try again later.</h3>;
+  }
+  
+  return <h3>Something went wrong...</h3>;
 
 }
 
 export default Error;
+
+
+

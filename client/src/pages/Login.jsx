@@ -12,7 +12,7 @@ const Login = () => {
             <FormRow type='password' name='password' />
             {actionData?.errorMsg && <p className="error" >{actionData.errorMsg}</p>}
             <SubmitButton />
-            <p>Not a member yet? <Link to='/register' className="member-btn" >Register</Link></p>
+            <p className="margin-t"> Not a member yet ? <Link to='/register' className="member-btn" > Register</Link></p>
 
         </Form>
 

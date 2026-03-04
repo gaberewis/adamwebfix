@@ -13,7 +13,7 @@ const Register = () => {
             <FormRow type='password' name='password' />
             {actionData?.errorMsg && <p className="error" >{actionData.errorMsg}</p>}
             <SubmitButton />
-            <p>Aleardy a member<Link to='/login' className="member-btn" >Login</Link>
+            <p className="margin-t">Aleardy a member ? <Link to='/login' className="member-btn" > Login</Link>
 
             </p>
         </Form>

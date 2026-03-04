@@ -26,31 +26,28 @@ const CssStl = styled.nav`
   }
 .head-name{
 
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-  
-
-
 margin-top: 1.7rem;
 margin-bottom: 1rem;
 text-align : center;
-h3{
-color : var(--red-mid);
-font-weight : 600;
+font-family:   sans-serif;
 
+h3{
+ font-weight: 900;
+  font-style: normal;
+    color : var(--red-mid);
 }
+
 h4{
-margin-top : 1rem;
-font-weight : 500;
-color : var(--grey-600);
-  font-weight: 500;
-  font-style: italic;
+ font-weight: 600;
+  margin-top : 1rem;
+  color: #00A86B;
+  
 }
+
   span{
-  opacity : .5;
-  margin-left : 1.5rem;
-  margin-right : 1.5rem;
+  opacity : .7;
+  margin-left : .7em;
+  margin-right : .7rem;
   }
 
 }
