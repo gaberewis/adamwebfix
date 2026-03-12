@@ -29,20 +29,18 @@ const CssStl = styled.nav`
 margin-top: 1.7rem;
 margin-bottom: 1rem;
 text-align : center;
-font-family:   sans-serif;
+font-family: Verdana, "Times New Roman",  serif;
 
-h3{
- font-weight: 900;
-  font-style: normal;
-    color : var(--red-mid);
+  h3{
+  color : var(--red-mid);
+   font-weight: 700;
 }
 
-h4{
+h5{
  font-weight: 600;
   margin-top : 1rem;
   color: #00A86B;
-  
-}
+  }
 
   span{
   opacity : .7;
@@ -50,8 +48,31 @@ h4{
   margin-right : .7rem;
   }
 
+
+
 }
  
 
 `;
 export default CssStl;
+
+
+// Arial
+
+// Helvetica
+
+// Times New Roman
+
+// Times
+
+// Courier New
+
+// Courier
+
+// Verdana
+
+// Georgia
+
+// Tahoma
+
+// Trebuchet MS

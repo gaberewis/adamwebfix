@@ -5,7 +5,9 @@ import CssStl from "../css-pocket/FullDescription";
 
 const FullDescription = () => {
     const { product } = useLoaderData();
-    const { images, fullDescription } = product;
+    const { images, headingone, headingtow, headingthree,
+        textone, texttow, textthree
+    } = product;
     const [active, setActive] = useState(0);
 
     return (
@@ -35,9 +37,12 @@ const FullDescription = () => {
             </div>
 
             <div className="description-text">
-                <p>
-                    {fullDescription}
-                </p>
+                <h5>{headingone}</h5>
+                <p>{textone}</p>
+                <h5>{headingtow}</h5>
+                <p>{texttow}</p>
+                <h5>{headingthree}</h5>
+                <p>{textthree}</p>
 
             </div>
         </CssStl>

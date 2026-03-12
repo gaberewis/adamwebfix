@@ -6,7 +6,10 @@ const EditProduct = () => {
   const popularList = ['yes', 'no'];
   const categoryList = ['equipment', 'accessories', 'supplies', 'parts'];
   const { product } = useLoaderData();
-  const { name, shortDescription, fullDescription, category, popular } = product;
+  const { name, shortDescription,
+     headingone, headingtow, headingthree,
+     textone, texttow, textthree,
+      category, popular } = product;
   const actionData = useActionData();
 
 
@@ -22,7 +25,7 @@ const EditProduct = () => {
         </div>
 
         <div className="form-center">
-          <FormRow type='text' name='name' defaultValue={name} />
+          <FormRow type='text' name='name' defaultValue={name} required />
 
           <label htmlFor='images' className='form-label'>
             Edit the short product description
@@ -36,13 +39,38 @@ const EditProduct = () => {
 ></textarea>
 
 
-          <label htmlFor='images' className='form-label'>
-            Edit the full product description
+       
+
+<p>Edit the full product description </p> <hr/>
+
+<FormRow type='text' name='headingone' labelText="Edit heading" defaultValue={headingone} />
+          <label htmlFor='textone' className='form-label'>
+            Edit text
           </label>
           <textarea
-            maxLength="10000"
-            name="fullDescription" className="form-textarea"
-            defaultValue={fullDescription} required ></textarea>
+            name="textone" className="form-textarea"
+               defaultValue={textone} ></textarea>
+
+
+
+<FormRow type='text' name='headingtow' labelText="Edit heading" defaultValue={headingtow} />
+          <label htmlFor='texttow' className='form-label'>
+            Edit text
+          </label>
+          <textarea
+            name="texttow" className="form-textarea"
+              defaultValue={texttow} ></textarea>
+
+<FormRow type='text' name='headingthree' labelText="Edit heading" defaultValue={headingthree} />
+          <label htmlFor='textthree' className='form-label'>
+            Edit text
+          </label>
+          <textarea
+            name="textthree" className="form-textarea"
+              defaultValue={textthree}></textarea>
+               
+
+
 
 
           <FormRowSelect name='category' labelText='category' id='category' list={categoryList} defaultValue={category} />

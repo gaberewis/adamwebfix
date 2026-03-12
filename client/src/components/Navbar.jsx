@@ -20,7 +20,7 @@ const Navbar = () => {
 
       <div  className='head-name' >
         <h3 >pacifi northwest x-ray inc.</h3>
-         <h4 ><span><FaXRay/></span> simply the best <span><FaXRay/></span></h4>
+         <h5 ><span><FaXRay/></span> simply the best <span><FaXRay/></span></h5>
       </div>
       
      

@@ -59,8 +59,13 @@ export const paramValidation = validateData([
 export const createProductValidation = validateData(
     [
         body('name').notEmpty().withMessage('Product name is required').isLength({ max: 300 }).withMessage('Name is too long'),
+        body('headingone').isLength({ max: 500 }).withMessage('Heading is too long'),
+        body('headingtow').isLength({ max: 500 }).withMessage('Heading is too long'),
+        body('headingthree').isLength({ max: 500 }).withMessage('Heading is too long'),
+        body('textone').isLength({ max: 10000 }).withMessage('Text is too long'),
+        body('texttow').isLength({ max: 10000 }).withMessage('Text is too long'),
+        body('textthree').isLength({ max: 10000 }).withMessage('Text is too long'),
         body('shortDescription').notEmpty().withMessage('Short description is required').isLength({ max: 1000 }).withMessage('Short description is too long'),
-        body('fullDescription').notEmpty().withMessage('Full description is required').isLength({ max: 10000 }).withMessage('Full description is too long'),
         body('category').isIn(['equipment', 'accessories', 'supplies', 'parts']).withMessage('invalid category'),
         body('popular').isIn(['yes', 'no']).withMessage('invalid choice'),
     ]

@@ -27,7 +27,7 @@ const AddProduct = () => {
         </div>
 
         <div className="form-center">
-          <FormRow type='text' name='name' />
+          <FormRow type='text' name='name' required />
 
           <label htmlFor='images' className='form-label'>
             Add the short product description
@@ -37,12 +37,44 @@ const AddProduct = () => {
             maxLength={252}
             required ></textarea>
 
-          <label htmlFor='images' className='form-label'>
-            Add the full product description 
+
+
+
+
+
+
+<p>Add the full product description </p> <hr/>
+
+<FormRow type='text' name='headingone' labelText="Add heading" placeholder="optional" />
+          <label htmlFor='textone' className='form-label'>
+            Add text
           </label>
           <textarea
-            name="fullDescription" className="form-textarea"
-               ></textarea>
+            name="textone" className="form-textarea"
+               placeholder="optional" ></textarea>
+
+
+
+<FormRow type='text' name='headingtow' labelText="Add heading" placeholder="optional" />
+          <label htmlFor='texttow' className='form-label'>
+            Add text
+          </label>
+          <textarea
+            name="texttow" className="form-textarea"
+               placeholder="optional" ></textarea>
+               
+
+
+
+<FormRow type='text' name='headingthree' labelText="Add heading" placeholder="optional" />
+          <label htmlFor='textthree' className='form-label'>
+            Add text
+          </label>
+          <textarea
+            name="textthree" className="form-textarea"
+               placeholder="optional" ></textarea>
+               
+
 
           <FormRowSelect name='category' labelText='category' id='category' list={categoryList} defaultValue="equipment" />
           <FormRowSelect name='popular' labelText='Popular Product' id='popular' list={popularList} />
