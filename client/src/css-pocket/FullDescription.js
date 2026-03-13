@@ -2,24 +2,29 @@ import styled from "styled-components";
 
 const SliderStyles = styled.main`
 
-width : 90vw;
-margin:0 auto;
+width: 100vw;
+margin: 0 auto;
+max-width: 800px;
+background: #fff;
+padding: 2rem;
+position: relative;
+margin-top : 1px;
+margin-bottom :  1px;
 
 
   .slide{
-  max-width: 800px;
+  max-width: 600px;
   margin: 40px auto;
   text-align: center;
   }
 
  .slide-img {
   width: 100%;
-  height: 420px;
+  height: 380px;
   object-fit: contain; /* instead of cover */
   border-radius: 16px;
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
-  background: #ffff; /* optional: gray background for empty space */
-}
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: var(--grey-100); }
 
 
   .dots {
@@ -49,6 +54,13 @@ margin:0 auto;
   }
 .description-text{
 line-height: 1.5;
+}
+h5 {
+font-size : 1.2rem;
+color : var(--red-mid);
+font-weight : 500;
+margin-bottom : .6rem;
+margin-top : 2rem;
 }
 
 `;

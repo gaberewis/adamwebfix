@@ -11,9 +11,9 @@ const CssSTL = styled.section`
   width: 100vw;
   padding: 1.8rem;
   min-height : 10vh;
-  margin-top : 3rem;
   line-height : 2;
   box-shadow : 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.01);
+ 
 
   .head-part{
   img{

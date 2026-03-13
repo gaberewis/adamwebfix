@@ -43,7 +43,8 @@ const AddProduct = () => {
 
 
 
-<p>Add the full product description </p> <hr/>
+ <p className="form-label" >Add the full product description </p> <hr/>
+ <p className="form-label" ></p>
 
 <FormRow type='text' name='headingone' labelText="Add heading" placeholder="optional" />
           <label htmlFor='textone' className='form-label'>

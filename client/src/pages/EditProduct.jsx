@@ -41,7 +41,8 @@ const EditProduct = () => {
 
        
 
-<p>Edit the full product description </p> <hr/>
+<p className="form-label">Edit the full product description </p> <hr />
+<p className="form-label"></p>
 
 <FormRow type='text' name='headingone' labelText="Edit heading" defaultValue={headingone} />
           <label htmlFor='textone' className='form-label'>

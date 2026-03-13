@@ -7,6 +7,7 @@ const CssStl = styled.nav`
   justify-content: center;
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
   background: var(--background-secondary-color);
+
   .nav-center {
     display: flex;
     width: 98vw;
@@ -29,11 +30,12 @@ const CssStl = styled.nav`
 margin-top: 1.7rem;
 margin-bottom: 1rem;
 text-align : center;
-font-family: Verdana, "Times New Roman",  serif;
+font-family: "Times New Roman", Verdana, serif;
 
   h3{
   color : var(--red-mid);
-   font-weight: 700;
+   font-weight: 600;
+   color : var(red-mid);
 }
 
 h5{
