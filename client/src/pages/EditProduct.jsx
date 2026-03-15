@@ -27,7 +27,7 @@ const EditProduct = () => {
         <div className="form-center">
           <FormRow type='text' name='name' defaultValue={name} required />
 
-          <label htmlFor='images' className='form-label'>
+          <label htmlFor='shortDescription' className='form-label'>
             Edit the short product description
           </label>
        <textarea
@@ -42,7 +42,7 @@ const EditProduct = () => {
        
 
 <p className="form-label">Edit the full product description </p> <hr />
-<p className="form-label"></p>
+<div className="form-label"></div>
 
 <FormRow type='text' name='headingone' labelText="Edit heading" defaultValue={headingone} />
           <label htmlFor='textone' className='form-label'>

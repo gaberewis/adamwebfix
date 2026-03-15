@@ -1,40 +1,30 @@
 import { useState } from "react";
 import { useLoaderData } from 'react-router-dom';
+import { Slide } from '../components';
 import CssStl from "../css-pocket/FullDescription";
 
 
 const FullDescription = () => {
     const { product } = useLoaderData();
-    const { images, headingone, headingtow, headingthree,
+    const { images, shortDescription, headingone, headingtow, headingthree,
         textone, texttow, textthree
     } = product;
-    const [active, setActive] = useState(0);
+   
+
+if(!textone && !texttow && !textthree){
+
+    return(
+        <CssStl>
+              <Slide images={ images }/>
+        <p>{shortDescription}</p>
+        </CssStl>
+    )
+}
+
 
     return (
         <CssStl>
-            <div className="slide">
-
-
-                <img
-                    src={
-                        images && images.length > 0
-                            ? images[active].imageUrl
-                            : "/bgimage.jpg"
-                    }
-                    alt="slide"
-                    className="slide-img"
-                />
-
-                <div className="dots">
-                    {images.map((_, index) => (
-                        <button
-                            key={index}
-                            className={`dot ${index === active ? "active" : ""}`}
-                            onClick={() => setActive(index)}
-                        />
-                    ))}
-                </div>
-            </div>
+        <Slide images={ images }/>
 
             <div className="description-text">
                 <h5>{headingone}</h5>

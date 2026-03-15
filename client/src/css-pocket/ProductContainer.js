@@ -56,7 +56,7 @@ const CssStl = styled.main`
       text-transform: capitalize;
       letter-spacing: 0.8px;
       line-height: 1.5;
-      color: var(--text-secondary-color);
+      color: #555;
     }
   }
 
@@ -90,6 +90,13 @@ const CssStl = styled.main`
     .load-more{
     margin-top : 1.3rem;
     }
+    .content .f-description{
+    font-size : .9rem;
+    color : #333;
+    text-transform: capitalize;
+
+    }
+  
 `;
 
 export default CssStl;

@@ -1,5 +1,4 @@
 import { Link, Form } from 'react-router-dom';
-import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { useproductsContext } from '../pages/AllProducts';
 import CssStl from '../css-pocket/ProductContainer';
 import { useDashboardContext } from '../pages/Dashboard';
@@ -56,7 +55,7 @@ const ProductContainer = () => {
               <div className='content'>
                 
 
-                <Link to={`./full-description/${_id}`} ><span><MdOutlineFullscreenExit /></span> full description</Link>
+                <Link to={`./full-description/${_id}`}  className='f-description' ><span><MdOutlineFullscreenExit /></span> full description</Link>
 
                 {user && <footer className='actions'>
                   <Link className='btn edit-btn' to={`./edit-product/${_id}`} >Edit</Link>

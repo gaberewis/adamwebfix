@@ -22,8 +22,8 @@ margin-bottom :  1px;
   width: 100%;
   height: 380px;
   object-fit: contain; /* instead of cover */
-  border-radius: 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
   background: var(--grey-100); }
 
 
@@ -46,22 +46,27 @@ margin-bottom :  1px;
 
   .dot.active {
     width: 16px;
-    background: #111;
+    background: #333;
   }
 
   .dot:hover {
-    background: #111;
+    background: #333;
   }
-.description-text{
-line-height: 1.5;
-}
+
 h5 {
-font-size : 1.2rem;
+font-size : 1rem;
 color : var(--red-mid);
 font-weight : 500;
 margin-bottom : .6rem;
 margin-top : 2rem;
 }
+p {
+line-height: 1.5;
+color : #555;
+font-size : .875rem;
+
+}
+
 
 `;
 

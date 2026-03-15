@@ -29,7 +29,7 @@ const AddProduct = () => {
         <div className="form-center">
           <FormRow type='text' name='name' required />
 
-          <label htmlFor='images' className='form-label'>
+          <label htmlFor='shortDescription' className='form-label'>
             Add the short product description
           </label>
           <textarea
@@ -44,7 +44,7 @@ const AddProduct = () => {
 
 
  <p className="form-label" >Add the full product description </p> <hr/>
- <p className="form-label" ></p>
+ <div className="form-label" ></div>
 
 <FormRow type='text' name='headingone' labelText="Add heading" placeholder="optional" />
           <label htmlFor='textone' className='form-label'>
