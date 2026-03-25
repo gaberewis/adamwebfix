@@ -34,14 +34,14 @@ font-family: "Times New Roman", Verdana, "san serif";
 
   h3{
   color : var(--red-mid);
-   font-weight: 600;
+   font-weight: 900;
    color : var(red-mid);
 }
 
 h5{
  font-weight: 600;
   margin-top : 1rem;
-  color: #00A86B;
+  color: #2C2C2C;
   }
 
   span{

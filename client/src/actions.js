@@ -3,6 +3,8 @@ import axios from 'axios';
 
 export const registerAction = async ({ request }) => {
   const formData = await request.formData();
+  const email  = formData.get('email');
+  formData.set('email', email.toLowerCase());
   const data = Object.fromEntries(formData);
   try {
     await axios.post('/api/pnwx/auth/register', data);
@@ -19,6 +21,8 @@ export const registerAction = async ({ request }) => {
 export const loginAction = async({ request })=>{
 
   const formData = await request.formData();
+   const email  = formData.get('email');
+  formData.set('email', email.toLowerCase());
   const data = Object.fromEntries(formData);
   try {
     
