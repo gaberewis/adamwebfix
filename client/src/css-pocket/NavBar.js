@@ -30,18 +30,18 @@ const CssStl = styled.nav`
 margin-top: 1.7rem;
 margin-bottom: 1rem;
 text-align : center;
-font-family: "Times New Roman", Verdana, "san serif";
+font-family: Verdana, Verdana, "san serif";
 
   h3{
   color : var(--red-mid);
-   font-weight: 900;
+   font-weight: 700;
    color : var(red-mid);
 }
 
 h5{
  font-weight: 600;
   margin-top : 1rem;
-  color: #2C2C2C;
+  color: #1e293b;
   }
 
   span{

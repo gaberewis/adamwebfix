@@ -33,7 +33,7 @@ html {
   --primary-200: #b1adff;
   --primary-300: #8f8aff;
   --primary-400: #7a73ff;
-  --primary-500: #2C2C2C;
+  --primary-500: #1e293b;
 
   /* base color */
   --primary-600: #5a56e6;
@@ -226,8 +226,7 @@ ul {
 }
 
 .btn:hover {
-  background: #999;
-  color: #000;
+  background: #334155;
   box-shadow: var(--shadow-3);
 }
 
@@ -238,8 +237,7 @@ ul {
 
 .btn-hipster:hover {
   color: var(--primary-200);
-  color: #000;
-  background: #999;
+  background: #334155;
 }
 
 .btn-block {
