@@ -40,18 +40,12 @@ font-family: Verdana, Verdana, "san serif";
 
 h5{
  font-weight: 600;
-  margin-top : 1rem;
+  margin-top : .5rem;
   color: #1e293b;
+  font-style : italic;
   }
 
-  span{
-  opacity : .7;
-  margin-left : .7em;
-  margin-right : .7rem;
-  }
-
-
-
+ 
 }
  
 

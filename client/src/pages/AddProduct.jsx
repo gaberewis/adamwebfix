@@ -46,9 +46,9 @@ const AddProduct = () => {
  <p className="form-label" >Add the full product description </p> <hr/>
  <div className="form-label" ></div>
 
-<FormRow type='text' name='headingone' labelText="Add heading" placeholder="optional" />
+<FormRow type='text' name='headingone' labelText="First heading" placeholder="optional" />
           <label htmlFor='textone' className='form-label'>
-            Add text
+            First text
           </label>
           <textarea
             name="textone" className="form-textarea"
@@ -56,9 +56,9 @@ const AddProduct = () => {
 
 
 
-<FormRow type='text' name='headingtow' labelText="Add heading" placeholder="optional" />
+<FormRow type='text' name='headingtow' labelText="Second heading" placeholder="optional" />
           <label htmlFor='texttow' className='form-label'>
-            Add text
+            Second text
           </label>
           <textarea
             name="texttow" className="form-textarea"
@@ -67,9 +67,9 @@ const AddProduct = () => {
 
 
 
-<FormRow type='text' name='headingthree' labelText="Add heading" placeholder="optional" />
+<FormRow type='text' name='headingthree' labelText="Third heading" placeholder="optional" />
           <label htmlFor='textthree' className='form-label'>
-            Add text
+            Third text
           </label>
           <textarea
             name="textthree" className="form-textarea"

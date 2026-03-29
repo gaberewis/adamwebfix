@@ -1,4 +1,4 @@
-import CssStl from '../css-pocket/Navbar';
+import CssStl from '../css-pocket/NavBar';
 import { FaAlignLeft, FaXRay} from 'react-icons/fa';
 import { useDashboardContext } from '../pages/Dashboard';
 
@@ -20,7 +20,7 @@ const Navbar = () => {
 
       <div  className='head-name' >
         <h3 >pacifi northwest x-ray inc.</h3>
-         <h5 ><span><FaXRay/></span> simply the best <span><FaXRay/></span></h5>
+         <h5 > simply the best </h5>
       </div>
       
      

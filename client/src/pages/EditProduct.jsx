@@ -44,9 +44,9 @@ const EditProduct = () => {
 <p className="form-label">Edit the full product description </p> <hr />
 <div className="form-label"></div>
 
-<FormRow type='text' name='headingone' labelText="Edit heading" defaultValue={headingone} />
+<FormRow type='text' name='headingone' labelText="First heading" defaultValue={headingone} />
           <label htmlFor='textone' className='form-label'>
-            Edit text
+            First text
           </label>
           <textarea
             name="textone" className="form-textarea"
@@ -54,17 +54,17 @@ const EditProduct = () => {
 
 
 
-<FormRow type='text' name='headingtow' labelText="Edit heading" defaultValue={headingtow} />
+<FormRow type='text' name='headingtow' labelText="Second heading" defaultValue={headingtow} />
           <label htmlFor='texttow' className='form-label'>
-            Edit text
+            Second text
           </label>
           <textarea
             name="texttow" className="form-textarea"
               defaultValue={texttow} ></textarea>
 
-<FormRow type='text' name='headingthree' labelText="Edit heading" defaultValue={headingthree} />
+<FormRow type='text' name='headingthree' labelText="Third heading" defaultValue={headingthree} />
           <label htmlFor='textthree' className='form-label'>
-            Edit text
+            Third text
           </label>
           <textarea
             name="textthree" className="form-textarea"
