@@ -27,8 +27,6 @@ const ProductContainer = () => {
 
       <div className='products-container'>
 
-
-
      { products.map(product => {
           const { _id, name, images, shortDescription} = product;
 

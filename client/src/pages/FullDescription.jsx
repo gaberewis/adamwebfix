@@ -19,10 +19,8 @@ if(!textone && !texttow && !textthree){
         <p>{shortDescription}</p>
         </CssStl>
     )
-}
-
-
-    return (
+} else{
+       return (
         <CssStl>
         <Slide images={ images }/>
 
@@ -37,6 +35,10 @@ if(!textone && !texttow && !textthree){
             </div>
         </CssStl>
     );
+}
+
+
+ 
 };
 
 export default FullDescription;

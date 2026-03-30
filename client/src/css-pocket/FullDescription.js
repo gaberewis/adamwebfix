@@ -11,20 +11,36 @@ position: relative;
 margin-top : 1px;
 margin-bottom :  1px;
 
-
-  .slide{
+.slide {
   max-width: 600px;
-  margin: 40px auto;
+  margin: 2rem auto;
   text-align: center;
-  }
+  padding: 0 1rem;
+}
 
- .slide-img {
+.slide-img {
   width: 100%;
-  height: 380px;
-  object-fit: contain; /* instead of cover */
-  border-radius: 10px;
+  height: 320px; /* better default */
+  object-fit: contain;
+  border-radius: 12px;
+  background: var(--grey-100);
 
-  background: var(--grey-100); }
+  display: block;
+}
+
+/* Tablet */
+@media (min-width: 576px) {
+  .slide-img {
+    height: 360px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  .slide-img {
+    height: 420px;
+  }
+}
 
 
   .dots {
