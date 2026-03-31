@@ -20,7 +20,7 @@ const CssStl = styled.nav`
     background: transparent;
     border-color: transparent;
     font-size: 1.75rem;
-    color: var(--primary-500);
+    color: var(--grey-600);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -35,13 +35,13 @@ font-family: Verdana, Verdana, "san serif";
   h3{
   color : var(--red-mid);
    font-weight: 700;
-   color : var(red-mid);
+   
 }
 
 h5{
  font-weight: 600;
   margin-top : .5rem;
-  color: #1e293b;
+  color: var(--grey-600);
   font-style : italic;
   }
 
