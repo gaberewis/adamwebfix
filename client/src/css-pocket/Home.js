@@ -1,13 +1,124 @@
-import styled from "styled-components"
-
-
+import styled from "styled-components";
 
 const CssSTL = styled.main`
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #3a2b20;
+  min-height: 100vh;
+  color: #e6d3a3;
+  font-family: "Helvetica", "Verdana", sans-serif;
 
-color : green;
+  .head-part {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .head-part img {
+    max-width: 90px;
+    margin: 2rem auto 1rem;
+  }
+
+  .head-part h4 {
+    font-size: clamp(1rem, 1.6vw, 1.9rem);
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+  .head-part p {
+   font-size: clamp(.9rem, 1.5vw, 1.1rem);
+    line-height: 1.6;
+   
+    
+  }
+
+  .head-part hr {
+    margin-top: 1.5rem;
+    border: 1px solid #ffffff30;
+  }
+
+.cta {
+  margin-top: 1.2rem;
+  padding: 5px 10px;
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
+}
 
 
 
+
+
+  .contact {
+    margin-bottom: 2rem;
+  }
+
+  .contact h5 {
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-item svg {
+    font-size: 1.4rem;
+  }
+
+  .contact a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+  }
+
+  .contact a:hover {
+    color: #ffffff;
+  }
+
+  .payment h5 {
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+
+  .icons {
+    display: flex;
+    gap: 20px;
+    font-size: 1.8rem;
+  }
+
+  .icons svg {
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .icons svg:hover {
+    transform: scale(1.2);
+    color: #ffffff;
+  }
+
+  /* 📱 Mobile */
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+
+    .head-part p {
+      font-size: 0.9rem;
+    }
+
+    .icons {
+      justify-content: center;
+    }
+  }
 `;
 
 export default CssSTL;
+
+
+
+
+

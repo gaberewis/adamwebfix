@@ -30,7 +30,7 @@ const CssStl = styled.nav`
 margin-top: 1.7rem;
 margin-bottom: 1rem;
 text-align : center;
-font-family: Verdana, Verdana, "san serif";
+font-family: Helvetica, Verdana, "san serif";
 
   h3{
   color : var(--red-mid);
