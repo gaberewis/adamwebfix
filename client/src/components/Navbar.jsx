@@ -3,12 +3,8 @@ import { FaAlignLeft, FaXRay} from 'react-icons/fa';
 import { useDashboardContext } from '../pages/Dashboard';
 
 
-
-
-
 const Navbar = () => {
 
- 
   const { toggleBar} = useDashboardContext();
 
   return (<CssStl>
@@ -19,15 +15,12 @@ const Navbar = () => {
       </button>
 
       <div  className='head-name' >
-        <h3 >pacifi northwest x-ray inc.</h3>
+        <h3 >pacific northwest x-ray inc.</h3>
          <h5 > simply the best </h5>
       </div>
       
-     
       <div className='btn-container'>
    
-      
-
       </div>
     </div>
 

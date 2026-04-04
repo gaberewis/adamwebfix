@@ -27,7 +27,7 @@ const Home = () => {
             </div>
 
             <div className="contact">
-                <h5>Contact details:</h5>
+                <p className="c-title">Contact details:</p>
 
                 <div className="contact-item">
                     <RiWhatsappFill />
@@ -43,7 +43,7 @@ const Home = () => {
             </div>
 
             <div className="payment">
-                <h5>Payment options:</h5>
+                <p className="c-title">Payment options:</p>
                 <div className="icons">
                     <FaCcPaypal />
                     <CiBank />

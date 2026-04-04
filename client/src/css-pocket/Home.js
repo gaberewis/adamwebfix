@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const CssSTL = styled.main`
   padding: 2rem;
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 auto;
   background: #3a2b20;
   min-height: 100vh;
@@ -20,17 +20,15 @@ const CssSTL = styled.main`
   }
 
   .head-part h4 {
-    font-size: clamp(1rem, 1.6vw, 1.9rem);
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 1rem;
   }
 
   .head-part p {
-   font-size: clamp(.9rem, 1.5vw, 1.1rem);
-    line-height: 1.6;
    
-    
+    line-height: 1.6;
+     
   }
 
   .head-part hr {
@@ -81,7 +79,7 @@ const CssSTL = styled.main`
     color: #ffffff;
   }
 
-  .payment h5 {
+  .c-title{
     margin-bottom: 1rem;
     color: #fff;
   }
