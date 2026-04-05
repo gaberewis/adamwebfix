@@ -72,7 +72,6 @@ export const updateProduct = async (req, res) => {
 
     const updatedProduct = await Product.findByIdAndUpdate(id, newProduct, { new: true });
     if (!updatedProduct) return res.status(404).json({ msg: 'Product not found' });
-console.log('FILES COUNT:', req.files?.length);
     res.status(200).json({ msg: 'Product updated', product: updatedProduct });
   } catch (err) {
     console.error("Update product error:", err);
