@@ -1,4 +1,5 @@
-
+import { Form } from "react-router-dom";
+import { FormRow, SubmitButton } from "../components";
 import CssSTL from "../css-pocket/Home";
 import { FaCcPaypal } from "react-icons/fa";
 import { CiBank } from "react-icons/ci";
@@ -12,7 +13,7 @@ const Home = () => {
             <div className="head-part">
                 <img src="/coloredlogo.png" alt="colored-logo" />
                 <h4>AdamWebFix — Smart Web Solutions</h4>
-                
+
                 <p>
                     We specialize in crafting premium digital experiences that elevate your brand and position your business for success.
 
@@ -24,6 +25,19 @@ const Home = () => {
 
                 <p className="cta">Contact us today and take your website to the next level.</p>
                 <hr />
+
+
+                <Form method="post" className="form">
+
+                    <FormRow type='text' name='name' />
+                    <FormRow type='email' name='email' />
+                    <FormRow type='text' name='phone' />
+                    <textarea
+                        name="clientmsg" className="form-textarea"
+                       required ></textarea>
+                        <SubmitButton />
+                </Form>    
+
             </div>
 
             <div className="contact">

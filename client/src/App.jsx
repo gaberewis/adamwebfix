@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home,
-  AddProduct, AllProducts,Dashboard,
-  EditProduct,  Login, Register, 
-  Error,FullDescription, Methods 
+import {
+  Home, ClientForm, RequestReceived,
+  AddProduct, AllProducts, Dashboard,
+  EditProduct, Login, Register,
+  Error, FullDescription, Methods
 } from './pages';
 
 
@@ -13,10 +14,11 @@ import * as action from './actions';
 
 const router = createBrowserRouter([
   {
-     path: '/',
+    path: '/',
     element: <Home />,
+    action: action.cleintForm,
     errorElement: <Error />,
-    
+
   },
 
   {
@@ -24,19 +26,18 @@ const router = createBrowserRouter([
     element: <Dashboard />,
     loader: loader.dashboardloader,
     children: [
-     
+
       {
         index: true,
         element: <AllProducts />,
         loader: loader.allproductsLoader,
-        action : action.LoadMore
       },
       {
         path: 'add-product',
         element: <AddProduct />,
-        action : action.addProductAction
+        action: action.addProductAction
 
-        
+
       },
       {
         path: 'edit-product/:id',
@@ -46,24 +47,24 @@ const router = createBrowserRouter([
 
 
       },
-        {
-      path: 'full-description/:id',
-      element : <FullDescription />,
-      loader : loader.fullDescription
-     },
-      
+      {
+        path: 'full-description/:id',
+        element: <FullDescription />,
+        loader: loader.fullDescription
+      },
+
       {
         path: 'delete-product/:id',
         action: action.deleteProductAction
       },
-          {
+      {
         path: 'methods',
-        element : <Methods />,
+        element: <Methods />,
       },
-   
+
     ]
   },
-    {
+  {
     path: 'register',
     element: <Register />,
     action: action.registerAction
@@ -74,6 +75,16 @@ const router = createBrowserRouter([
     element: <Login />,
     action: action.loginAction,
   },
+
+  {
+    path: 'clientform',
+    element: <ClientForm />,
+    loader: loader.clientFormLoader,
+  },
+  {
+    path: 'requestdone',
+    element: <RequestReceived />
+  }
 
 ])
 

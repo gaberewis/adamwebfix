@@ -1,5 +1,6 @@
 
 import User from '../models/User.js';
+import Homeform from '../models/Homeform.js';
 import { hashPassword, comparePassword } from '../middleware/funcs.js';
 import { createToken, varifyToken } from '../middleware/funcs.js';
 import { CustomError } from '../middleware/errorHandler.js';
@@ -50,3 +51,16 @@ export const logout = (req, res) => {
    
 };
 
+export const homeFormFunc = async(req, res)=>{
+
+    const homeFormData = await Homeform.create(req.body);
+    res.status(201).json({msg : 'client request created '});
+
+};
+
+export const getClientRequest = async(req, res)=>{
+    
+    const clientFormData = await Homeform.find({});
+    res.status(200).json({data : clientFormData});
+
+}

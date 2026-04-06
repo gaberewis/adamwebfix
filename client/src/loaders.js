@@ -46,4 +46,20 @@ try {
 }
   
 
+};
+
+export const clientFormLoader = async()=>{
+
+  try{
+const { data } = await axios.get('/api/pnwx/auth/clientform');
+  return data;
+
+  }catch(error){
+
+    console.log("Loader Error : ", error.response.data || error.message);
+     return {error : true , msg : error.response?.data};
+
+  }
+
+  
 }

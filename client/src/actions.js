@@ -1,62 +1,63 @@
 import { redirect } from 'react-router-dom';
 import axios from 'axios';
+import { truncates } from 'bcryptjs';
 
 export const registerAction = async ({ request }) => {
   const formData = await request.formData();
-  const email  = formData.get('email');
+  const email = formData.get('email');
   formData.set('email', email.toLowerCase());
   const data = Object.fromEntries(formData);
   try {
     await axios.post('/api/pnwx/auth/register', data);
     return redirect('/login');
   } catch (error) {
-  console.log(error.response?.data?.msg);
-   console.log('BACKEND ERROR:', error.response?.data);
-   const errorMsg = error.response?.data?.msg || 'Registration failed';
-  return {errorMsg};
-    
-  } 
+    console.log(error.response?.data?.msg);
+    console.log('BACKEND ERROR:', error.response?.data);
+    const errorMsg = error.response?.data?.msg || 'Registration failed';
+    return { errorMsg };
+
+  }
 };
 
-export const loginAction = async({ request })=>{
+export const loginAction = async ({ request }) => {
 
   const formData = await request.formData();
-   const email  = formData.get('email');
+  const email = formData.get('email');
   formData.set('email', email.toLowerCase());
   const data = Object.fromEntries(formData);
   try {
-    
+
     await axios.post('/api/pnwx/auth/login', data);
     return redirect('/dashboard?popular=yes');
 
   } catch (error) {
-     console.log('BACKEND ERROR:', error.response?.data.msg);
-  const  errorMsg = error.response?.data?.msg || 'Login failed';
-  return { errorMsg };
+    console.log('BACKEND ERROR:', error.response?.data.msg);
+    const errorMsg = error.response?.data?.msg || 'Login failed';
+    return { errorMsg };
   }
 
 }
 
-export const addProductAction = async({ request })=>{
+export const addProductAction = async ({ request }) => {
   const formData = await request.formData();
 
   const files = formData.getAll('images').filter(f => f.size > 0);
-for(const File of files ){
-  if(File.size > 1000000){
-    return {error : 'File must be less than 1 MB' };
-     
-  }
-}
+  for (const File of files) {
+    if (File.size > 1000000) {
+      return { error: 'File must be less than 1 MB' };
 
-try {
-  await axios.post('/api/pnwx/products', formData);
-  return redirect('/dashboard?popular=yes');
-} catch (error) {
- console.log('BACKEND ERROR:', error.response?.data);
-const errorMsg = error.response?.data?.msg || 'Adding Product failed';
- return {errorMsg}
- 
-}
+    }
+  }
+
+  try {
+    await axios.post('/api/pnwx/products', formData);
+    return redirect('/dashboard?popular=yes');
+  } catch (error) {
+    console.log('BACKEND ERROR:', error.response?.data);
+    const errorMsg = error.response?.data?.msg || 'Adding Product failed';
+    return { errorMsg }
+
+  }
 };
 
 
@@ -65,9 +66,9 @@ const errorMsg = error.response?.data?.msg || 'Adding Product failed';
 export const editAction = async ({ request, params }) => {
   const formData = await request.formData();
   const files = formData.getAll('images').filter(f => f.size > 0);
-if(files.length > 7){
-   return { error: 'Maximum number of files: 7' };
-}
+  if (files.length > 7) {
+    return { error: 'Maximum number of files: 7' };
+  }
   for (const file of files) {
     if (file.size > 1000000) {
       return { error: 'File must be less than 1 MB' };
@@ -84,15 +85,35 @@ if(files.length > 7){
 };
 
 
-export const deleteProductAction = async({ params })=>{
+export const deleteProductAction = async ({ params }) => {
   try {
     await axios.delete(`/api/pnwx/products/${params.id}`);
     return redirect('/dashboard?popular=yes');
   } catch (error) {
-    console.log('BACKEND ERROR', error.response?.data );
+    console.log('BACKEND ERROR', error.response?.data);
     const errorMsg = error.response?.data.msg || 'Product cannot be deleted';
-    return{errorMsg}
+    return { errorMsg }
   }
 };
+
+
+
+export const cleintForm = async ({ request }) => {
+
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  try {
+
+    await axios.post('/api/pnwx/auth/cleintform', data);
+    return redirect('/requestdone');
+
+  } catch (error) {
+    console.log(error.response?.data?.msg);
+    const errorMsg = error.response?.data?.msg || 'Request faild';
+    return { errorMsg };
+  }
+}
+
 
 

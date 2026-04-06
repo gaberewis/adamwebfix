@@ -91,7 +91,7 @@ const ProductContainer = () => {
       <input type="hidden" name="popular"  defaultValue={popular} />
       }
 
-        <input type="hidden"  name="loadMore" defaultValue={limit + 20}  />
+        <input type="hidden"  name="loadmore" defaultValue={limit + 20}  />
 <button type='submit' className='btn' >Load More</button> 
 </Form>
 }
