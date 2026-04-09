@@ -23,8 +23,9 @@ const Home = () => {
                 </p>
 
 
-                <p className="cta">Contact us today and take your website to the next level.</p>
                 <hr />
+
+                <h5 className="cta">Contact us today and take your website to the next level</h5>
 
 
                 <Form method="post" className="form">
@@ -32,14 +33,21 @@ const Home = () => {
                     <FormRow type='text' name='name' />
                     <FormRow type='email' name='email' />
                     <FormRow type='text' name='phone' />
+                    <label htmlFor='clmsg' className='form-label'>
+                        Type your message here
+                    </label>
                     <textarea
-                        name="clientmsg" className="form-textarea"
-                       required ></textarea>
-                        <SubmitButton />
-                </Form>    
+                        name="clientMsg"
+                        id="clientMsg"
+                        className="form-textarea"
+                        required
+                    ></textarea>
+                    <SubmitButton />
+                </Form>
 
             </div>
 
+            <hr />
             <div className="contact">
                 <p className="c-title">Contact details:</p>
 

@@ -22,7 +22,7 @@ const CssSTL = styled.main`
   .head-part h4 {
     font-weight: 600;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 
   .head-part p {
@@ -31,25 +31,24 @@ const CssSTL = styled.main`
      
   }
 
-  .head-part hr {
-    margin-top: 1.5rem;
+   hr {
+    margin-top: 2 rem;
     border: 1px solid #ffffff30;
   }
 
 .cta {
-  margin-top: 1.2rem;
+  margin-top: 3rem;
   padding: 5px 10px;
   color: #fff;
   text-align: center;
-  font-weight: 500;
+  font-weight: 900;
+  line-height : 1.7;
+  font-size : clamp(1rem, 2vw, 1.4rem);
 }
-
-
-
-
 
   .contact {
     margin-bottom: 2rem;
+    margin-top : 2.5rem;
   }
 
   .contact h5 {
@@ -112,6 +111,16 @@ const CssSTL = styled.main`
       justify-content: center;
     }
   }
+    .head-part .form{
+    color : #3a2b20;
+    max-width : 500px;
+    }
+    .head-part .form-input, textarea{
+    background : #e6d3a3
+    }
+    .head-part .btn{
+     background : #3a2b20
+   }
 `;
 
 export default CssSTL;

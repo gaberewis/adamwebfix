@@ -77,7 +77,7 @@ export const clientMessage = validateData(
         body('name').notEmpty().withMessage('Product name is required').isLength({ max: 300 }).withMessage('Name is too long'),
         body('email').notEmpty().withMessage('email is required').isLength({ max: 300 }).withMessage('email is too long'),
         body('phone').notEmpty().withMessage('phone number is required').isLength({ max: 300 }).withMessage('phone is too long'),
-        body('clientmsg').notEmpty().withMessage('message can not be empty').isLength({max : 1000 }).withMessage('Message is too long'),
+        body('clientMsg').notEmpty().withMessage('message can not be empty').isLength({max : 1000 }).withMessage('Message is too long'),
 
     ]
 );

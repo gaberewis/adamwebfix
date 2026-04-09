@@ -5,7 +5,8 @@ import {
     login,
     logout,  
     currentUser, 
-    homeFormFunc
+    homeFormFunc,
+    getClientRequest
 } from '../controllers/auth.js';
 import { authenticateUser } from '../middleware/funcs.js';
 
@@ -16,7 +17,7 @@ router.get('/clientform', getClientRequest);
 router.get('/logout', authenticateUser, logout);
 router.post('/register', registerValidation, registerUser);
 router.post('/login', loginValidation, login);
-router.post('/cleintform', clientMessage, homeFormFunc);
+router.post('/clientform', clientMessage, homeFormFunc);
 
 
 

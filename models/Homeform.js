@@ -4,7 +4,8 @@ const homeSchema = new Schema({
 name : String,
 email : String,
 phone : String,
-clientmsg : String
-}) 
+clientMsg : String
+
+}, {timestamps : true}); 
 
 export default mongoose.model('Homeform', homeSchema);

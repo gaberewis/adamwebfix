@@ -1,20 +1,21 @@
 import { useLoaderData } from "react-router-dom";
 
+const ClientForm = () => {
+  const { data } = useLoaderData();
 
-const ClientForm = ()=>{
-
-    const { data } = useLoaderData();
-const{name, email, phone, cleintmsg } = data;
-
-   return (
+  return (
     <>
-    <p>{name}</p>
-      <p>{email}</p>
-        <p>{phone}</p>
-          <p>{cleintmsg}</p>
+      {data.map((item) => (
+        <div key={item._id}>
+          <p>{item.name}</p>
+          <p>{item.email}</p>
+          <p>{item.phone}</p>
+          <p>{item.clientMsg}</p>
           <hr />
+        </div>
+      ))}
     </>
-   ) 
-}
+  );
+};
 
 export default ClientForm;

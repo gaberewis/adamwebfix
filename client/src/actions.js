@@ -105,7 +105,7 @@ export const cleintForm = async ({ request }) => {
 
   try {
 
-    await axios.post('/api/pnwx/auth/cleintform', data);
+    await axios.post('/api/pnwx/auth/clientform', data);
     return redirect('/requestdone');
 
   } catch (error) {

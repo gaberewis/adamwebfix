@@ -58,9 +58,11 @@ export const homeFormFunc = async(req, res)=>{
 
 };
 
-export const getClientRequest = async(req, res)=>{
-    
-    const clientFormData = await Homeform.find({});
-    res.status(200).json({data : clientFormData});
-
-}
+export const getClientRequest = async (req, res) => {
+  try {
+    const clientFormData = await Homeform.find({}).sort({ createdAt: -1 });
+    res.status(200).json({ data: clientFormData });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
