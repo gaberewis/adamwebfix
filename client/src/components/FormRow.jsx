@@ -8,7 +8,7 @@ const FormRow = ({ name, labelText, ...rest  }) => {
         id={name}
         name={name}
         className='form-input'
-        required
+        
         {...rest}
       />
     </div>

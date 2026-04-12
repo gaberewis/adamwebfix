@@ -23,6 +23,7 @@ const CssSTL = styled.main`
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 2rem;
+    font-size : clamp(1.3rem, 1.7vw, 1.8rem)
   }
 
   .head-part p {
@@ -32,7 +33,7 @@ const CssSTL = styled.main`
   }
 
    hr {
-    margin-top: 2 rem;
+    margin-top: 2rem;
     border: 1px solid #ffffff30;
   }
 
@@ -43,7 +44,7 @@ const CssSTL = styled.main`
   text-align: center;
   font-weight: 900;
   line-height : 1.7;
-  font-size : clamp(1rem, 2vw, 1.4rem);
+  font-size : clamp(1rem, 1.7vw, 1.5rem);
 }
 
   .contact {
