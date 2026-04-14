@@ -47,7 +47,7 @@ app.use(
 
 
 app.get('/', (req, res) => {
-  res.send('Hello Worllld');
+  res.send('Hello Worllld...');
 });
 
 app.use('/api/pnwx/auth', authRoute);
