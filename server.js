@@ -31,8 +31,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+app.use(express.static(path.resolve(__dirname, './client/dist')));
 
- //app.use(express.static(path.resolve(__dirname, './client/dist')));
 app.use(cookieParser());
 app.use(express.json());
 app.use(
@@ -50,17 +50,13 @@ app.get('/', (req, res) => {
   res.send('Hello Worllld');
 });
 
-app.use('/pnwx/auth', authRoute);
-app.use('/pnwx/products',productRoute);
+app.use('/api/pnwx/auth', authRoute);
+app.use('/api/pnwx/products',productRoute);
 
-// app.get(/.*/, (req, res) => {
-//   res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
-// });
 
 app.use(/.*/, (req, res) => {
   res.status(404).json({ msg: 'not found' });
 });
-
 
 
 app.use(errorHandler);
@@ -80,14 +76,7 @@ app.use(errorHandler);
   }
 
 
-//  PORT=5100
-//  NODE_ENV=development
-//  MONGO_URI=mongodb+srv://pnwx:143212@pnwx.zbjezpr.mongodb.net/pnwx
-//  JWT_SECRET=gaber143adam
-//  JWT_EXPIRE=1d
-//  CLOUDINARY_CLOUD_NAME=dk4ictbos
-//  CLOUDINARY_API_KEY=126768646293766    
-//  CLOUDINARY_API_SECRET=SSWvEtLN1znVkNDs0bVyg87Y_Ek
+
 
 
 

@@ -12,14 +12,20 @@
     "setup-app": "npm i && cd client && npm i && npm run build",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
-  "keywords": [
-    "application",
-    "express",
-    "nodejs",
-    "mongodb",
-    "recruitment",
-    "backend"
-  ],
+"keywords": [
+  "web development services",
+  "website design",
+  "frontend development",
+  "backend development",
+  "full stack development",
+  "ecommerce development",
+  "custom web applications",
+  "api development",
+  "website maintenance",
+  "responsive web design",
+  "seo optimization",
+  "performance optimization"
+],
   "author": "Gaber Ewis",
   "license": "ISC",
   "dependencies": {
