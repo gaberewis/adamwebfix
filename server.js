@@ -53,6 +53,11 @@ app.get('/', (req, res) => {
 app.use('/api/pnwx/auth', authRoute);
 app.use('/api/pnwx/products',productRoute);
 
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
+});
+
+
 
 app.use(/.*/, (req, res) => {
   res.status(404).json({ msg: 'not found' });
