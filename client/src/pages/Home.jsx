@@ -12,7 +12,7 @@ const Home = () => {
         <CssSTL>
             <div className="head-part">
                 <img src="/coloredlogo.png" alt="colored-logo" />
-                <h4>AdamWebFix — Smart Web Solutions</h4>
+                <h4>AdamWebFix</h4>
 
                 <p>
                     We specialize in crafting premium digital experiences that elevate your brand and position your business for success.

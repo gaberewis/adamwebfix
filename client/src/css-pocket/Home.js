@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const CssSTL = styled.main`
+
   padding: 2rem;
   max-width: 650px;
   margin: 0 auto;
@@ -19,16 +20,16 @@ const CssSTL = styled.main`
     margin: 2rem auto 1rem;
   }
 
-  .head-part h4 {
+  .head-part h4{
     font-weight: 600;
     color: #ffffff;
-    margin-bottom: 2rem;
-    font-size : clamp(1.3rem, 1.7vw, 1.8rem)
+    margin-bottom: 1.3rem;
+    font-size : clamp(1.8rem, 3vw, 4rem)
   }
 
   .head-part p {
    
-    line-height: 1.6;
+    line-height: 1.7;
      
   }
 
@@ -38,13 +39,13 @@ const CssSTL = styled.main`
   }
 
 .cta {
-  margin-top: 3rem;
+  margin-top: 2rem;
   padding: 5px 10px;
   color: #fff;
   text-align: center;
-  font-weight: 900;
+  font-weight: 600;
   line-height : 1.7;
-  font-size : clamp(1rem, 1.7vw, 1.5rem);
+  font-size : clamp(1rem, 1.3vw, 1.2rem);
 }
 
   .contact {
@@ -85,12 +86,13 @@ const CssSTL = styled.main`
   }
 
   .icons {
-    display: flex;
-    gap: 20px;
+    display: block;
     font-size: 1.8rem;
+
   }
 
-  .icons svg {
+  .icons svg { 
+    margin-right : 10px;
     cursor: pointer;
     transition: 0.3s;
   }
@@ -105,7 +107,7 @@ const CssSTL = styled.main`
     padding: 1.5rem;
 
     .head-part p {
-      font-size: 0.9rem;
+      font-size: 0.93rem;
     }
 
     .icons {

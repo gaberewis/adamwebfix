@@ -14,12 +14,6 @@ const CssSTL = styled.section`
   line-height : 2;
   box-shadow : 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.01);
 
- @media (max-width: 576px) {
-    .small-text,  p {
-      font-size : .83rem;
-    }
-  }
- 
 
   .head-part{
   img{
@@ -55,7 +49,16 @@ margin-top : 2.5rem;
 .small-text{ font-size: .84rem}
 .tiny-text{ font-size: .7rem}
 
-
+ @media (max-width: 576px) {
+    .small-text {
+      font-size : .75rem;
+    }
+      .tiny-text{ font-size: .6rem}
+      .head-part p {
+       font-size : .87rem;
+      }
+  }
+ 
  
 
 

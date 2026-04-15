@@ -37,7 +37,7 @@ const Footer = ()=>{
      <p>For order methods and policies, <Link to='/dashboard/methods' >click here</Link></p>
 
 
-<img  src="/public/payment-methods.png" alt='payment-methods' />
+<img  src="/payment-methods.png" alt='payment-methods' />
 
 
 

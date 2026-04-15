@@ -36,6 +36,7 @@ font-family : var(--head-font);
   h3{
   color : var(--red-mid);
    font-weight: 700;
+   font-size : clamp(1.1rem, 2.4vw, 3rem)
    
 }
 
