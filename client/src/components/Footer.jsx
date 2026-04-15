@@ -1,7 +1,7 @@
 import CssSTL from "../css-pocket/Footer";
 import {Link } from 'react-router-dom';
 import { IoMdMailUnread } from "react-icons/io";
-import { FaFax, FaDownload, FaXRay} from "react-icons/fa";
+import { FaFax, FaDownload} from "react-icons/fa";
 import { BsMailbox2Flag } from "react-icons/bs";
 import { MdWifiCalling3 } from "react-icons/md";
 
