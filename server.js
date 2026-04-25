@@ -49,16 +49,14 @@ app.use(
     },
   })
 );
-app.get('/test', (req, res) => {
-  res.send('backend...');
-});
+
 
 app.get('/', (req, res) => {
   res.send('backend...');
 });
 
 app.use('/api/pnwx/auth', authRoute);
-app.use('/api/products',productRoute);
+app.use('/api/pnwx/products',productRoute);
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
