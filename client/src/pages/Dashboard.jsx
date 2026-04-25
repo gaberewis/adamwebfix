@@ -21,10 +21,17 @@ const Dashboard = () => {
     setBigBar(!bigBar);
   }
     const logoutUser = async () => {
-         navigate('/');
-        await axios.get('/api/pnwx/auth/logout' , {
+       try {
+            await axios.get('/api/pnwx/auth/logout' , {
       withCredentials: true
     });
+    return navigate('/dashboard');
+        
+       } catch (error) {
+        console.log("Eroor: ", error.response.data.msg);
+       }
+    
+
        
     };
 

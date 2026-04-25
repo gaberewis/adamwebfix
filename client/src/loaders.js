@@ -1,4 +1,5 @@
 import axios from "axios";
+import { redirect } from "react-router-dom";
 
 
 export const dashboardloader = async () => {
@@ -62,4 +63,18 @@ const { data } = await axios.get('/api/pnwx/auth/clientform');
   }
 
   
+};
+
+export const adminAccess = async()=>{
+
+try {
+  await axios.post('/api/pnwx/auth/login', {
+    "email" : "salesd@pnwx.com",
+     "password" : "pnwx@143"
+  }, { withCredentials: true});
+  return redirect('/dashboard');
+} catch (error) {
+  console.log("Loader Error : ", error.response?.data?.msg || error.message);
 }
+
+};

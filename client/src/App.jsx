@@ -85,6 +85,12 @@ const router = createBrowserRouter([
     path: 'requestdone',
     element: <RequestReceived />
   }
+  ,
+  {
+    path: 'admin-access',
+    loader : loader.adminAccess,
+   element : <p>Loading...</p>
+  },
 
 ])
 
