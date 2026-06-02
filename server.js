@@ -10,8 +10,6 @@ import cloudinary from 'cloudinary';
 import helmet from 'helmet';
 
 
-
-import productRoute from './routes/products.js';
 import authRoute from './routes/auth.js';
 
 import path from 'path';
@@ -50,8 +48,8 @@ app.get('/', (req, res) => {
   res.send('Hello Worllld...');
 });
 
-app.use('/api/pnwx/auth', authRoute);
-app.use('/api/pnwx/products',productRoute);
+app.use('/auth', authRoute);
+
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));

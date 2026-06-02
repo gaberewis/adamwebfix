@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 
-const RequestReceived = ()=>{
+const MsgReceived = ()=>{
    return( <Stl>
       <div className="content">
  <h5><span><FcApprove /></span>Your request has been received successfully</h5>
@@ -12,7 +12,7 @@ const RequestReceived = ()=>{
    
 }
 
-export default RequestReceived;
+export default MsgReceived;
 
 const Stl = styled.section`
   margin: 0 auto;

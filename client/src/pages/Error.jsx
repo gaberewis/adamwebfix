@@ -1,6 +1,6 @@
 import { Link, useRouteError } from "react-router-dom";
 import CssStl from '../css-pocket/ErrorPage';
-import img from '../assets/images/not-found.svg'
+import img from '../../public/not-found.svg'
 
 
 const Error = () => {

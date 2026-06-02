@@ -1,6 +1,6 @@
 
 import User from '../models/User.js';
-import Homeform from '../models/Homeform.js';
+import ClientMsg from '../models/ClientMsg.js';
 import { hashPassword, comparePassword } from '../middleware/funcs.js';
 import { createToken, varifyToken } from '../middleware/funcs.js';
 import { CustomError } from '../middleware/errorHandler.js';
@@ -33,34 +33,22 @@ export const login = async (req, res) => {
 
 
 
-export const currentUser = async(req, res)=>{
-   
-
-     const user = await User.findOne({ _id: req.user.userId });
-
- 
-    res.status(200).json({ user });
-}
-
-
-
-
 export const logout = (req, res) => {
     res.clearCookie('token', {httpOnly : true});
     res.status(200).json({msg : 'user logged out!'});
    
 };
 
-export const homeFormFunc = async(req, res)=>{
+export const clientMsg = async(req, res)=>{
 
-    const homeFormData = await Homeform.create(req.body);
+    const homeFormData = await ClientMsg.create(req.body);
     res.status(201).json({msg : 'client request created '});
 
 };
 
 export const getClientRequest = async (req, res) => {
   try {
-    const clientFormData = await Homeform.find({}).sort({ createdAt: -1 });
+    const clientFormData = await ClientMsg.find({}).sort({ createdAt: -1 });
     res.status(200).json({ data: clientFormData });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });

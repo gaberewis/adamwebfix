@@ -1,8 +1,8 @@
 {
-  "name": "pnwx",
+  "name": "adamwebfix",
   "version": "1.0.0",
   "type": "module",
-  "description": "pnwx x-ray pruducts",
+  "description": "Adam web fix",
   "main": "server.js",
   "scripts": {
     "watch": "node --watch server.js ",

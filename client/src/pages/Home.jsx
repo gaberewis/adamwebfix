@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <CssSTL>
             <div className="head-part">
-                <img src="/coloredlogo.png" alt="colored-logo" />
+                <img src="/logo.png" alt="colored-logo" />
                 <h4>AdamWebFix</h4>
 
                 <p>

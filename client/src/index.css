@@ -19,33 +19,7 @@ html {
 
   /*fonts*/
   --head-font: "Bitcount Grid Double", system-ui;
-
-
-
-
 /*
-
-
-*/
-  --primary-50: #f1f0ff;
-  /* very light */
-  --primary-100: #d4cfff;
-  --primary-200: #b1adff;
-  --primary-300: #8f8aff;
-  --primary-400: #7a73ff;
- 
-
-  /* base color */
-  --primary-600: #5a56e6;
-  --primary-700: #4a4cd1;
-  --primary-800: #3a43b5;
-  --primary-900: #2b349b;
-  /* very dark */
-
-
-  /* colors */
-
-
 
   /* grey */
   --grey-50: #f8fafc;
@@ -136,35 +110,7 @@ h5 {
   letter-spacing: var(--letter-spacing);
 }
 
-h1 {
-  font-size: clamp(2rem, 5vw, 5rem);
-  /* Large heading */
-}
-
-h2 {
-  font-size: clamp(1.5rem, 3vw, 3rem);
-  /* Medium heading */
-}
-
-h3 {
-  font-size: clamp(1.4rem, 2.5vw, 2.5rem);
-
-  /* Small heading */
-}
-
-h4 {
-  font-size: clamp(1.25rem, 2vw, 2rem);
-
-  /* Extra small heading */
-}
-
-h5 {
-  font-size: clamp(0.875rem, 1.5vw, 1.5rem);
-  /* Tiny heading */
-}
-
-/* BIGGER FONTS */
-/* h1 {
+ h1 {
   font-size: clamp(3rem, 6vw, 6rem);
 }
 
@@ -183,7 +129,7 @@ h4 {
 h5 {
   font-size: clamp(1rem, 2vw, 2rem);
 }
- */
+ 
 
 .text {
   margin-bottom: 1.5rem;
@@ -335,22 +281,6 @@ button:disabled {
   text-transform: capitalize;
 }
 
-/* alert */
-
-@keyframes spinner {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.loading {
-  width: 6rem;
-  height: 6rem;
-  border: 5px solid var(--grey-400);
-  border-radius: 50%;
-  border-top-color: var(--primary-500);
-  animation: spinner 0.6s linear infinite;
-}
 
 
 /* title */
@@ -391,9 +321,6 @@ button:disabled {
   color: #d66a6a;
 }
 
-.shadow-1 {
-  box-shadow: var(--shadow-1);
-}
 
 .error {
   color: var(--red-mid);
@@ -401,13 +328,6 @@ button:disabled {
   margin: 1rem;
 }
 
-.small-text {
-  font-size: var(---small-text);
-}
-  
-.margin-t{
-  margin-top: 1rem;
-}
 
 
 

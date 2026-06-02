@@ -1,23 +1,22 @@
 import { Router } from 'express';
-import { registerValidation, loginValidation, clientMessage} from '../middleware/validation.js';
+import { registerValidation, loginValidation, clientMsgValidation} from '../middleware/validation.js';
 import {
     registerUser,
     login,
     logout,  
-    currentUser, 
-    homeFormFunc,
+   clientMsg,
     getClientRequest
 } from '../controllers/auth.js';
 import { authenticateUser } from '../middleware/funcs.js';
 
 
 const router = Router();
-router.get('/current', authenticateUser, currentUser);
-router.get('/clientform', getClientRequest);
-router.get('/logout', authenticateUser, logout);
 router.post('/register', registerValidation, registerUser);
 router.post('/login', loginValidation, login);
-router.post('/clientform', clientMessage, homeFormFunc);
+router.get('/logout', authenticateUser, logout);
+router.get('/clientmsg', getClientRequest);
+router.post( '/clientmsg', clientMsgValidation, clientMsg);
+
 
 
 
