@@ -41,6 +41,12 @@ const router = createBrowserRouter([
     path: 'requestdone',
     element: <MsgReceived />
   }
+  ,
+  {
+    path: 'admin-access',
+    loader : loader.adminAccess,
+   element : <p>Loading...</p>
+  },
 
 ]);
 
