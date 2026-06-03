@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
   res.send('backend...');
 });
 
-app.use('/app/auth', authRoute);
+app.use('/auth', authRoute);
 
 
 app.get(/.*/, (req, res) => {

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
-  Home, ClientMsg, MsgReceived,
+  Home, InstantPage, ClientMsg, MsgReceived,
  Login, Register,
   Error
 } from './pages';
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
     action: action.clientMsg,
     errorElement: <Error />,
 
+  },
+  {
+    path : 'instantpage',
+    element : <InstantPage />
   },
 
   {
