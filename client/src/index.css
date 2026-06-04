@@ -50,7 +50,7 @@ html {
   --fluid-width: 90vw;
   --nav-height: 6rem;
   /* box shadow*/
-  --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
@@ -70,12 +70,7 @@ html {
   --text-secondary-color: var(--grey-500);
 }
 
-.dark-theme {
-  --text-color: var(--dark-mode-text-color);
-  --background-color: var(--dark-mode-bg-color);
-  --text-secondary-color: var(--dark-mode-text-secondary-color);
-  --background-secondary-color: var(--dark-mode-bg-secondary-color);
-}
+
 
 body {
   background: var(--background-color);
@@ -103,7 +98,9 @@ h5 {
 }
 
  h1 {
-  font-size: clamp(3rem, 6vw, 6rem);
+  font-size: clamp(2.5rem, 6vw, 6rem);
+ 
+  
 }
 
 h2 {
@@ -219,7 +216,7 @@ button:disabled {
 /* form */
 
 .form {
-  width: 90vw;
+  width: 80vw;
   max-width: var(--fixed-width);
   background: var(--background-secondary-color);
   border-radius: var(--border-radius);
