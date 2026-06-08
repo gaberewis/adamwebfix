@@ -21,7 +21,8 @@ const router = createBrowserRouter([
   },
   {
     path : 'instantpage',
-    element : <InstantPage />
+    element : <InstantPage />,
+    action: action.clientMsg,
   },
 
   {
