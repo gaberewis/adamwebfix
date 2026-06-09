@@ -23,13 +23,11 @@ const validateData = (validationArray) => {
 
 export const registerValidation = validateData([
     body('name').notEmpty().withMessage('name is required'),
-    body('lastName').notEmpty().withMessage('last name is required'),
     body('email').notEmpty().withMessage('email is required').isEmail().withMessage('invalid email adress').custom(async (value) => {
         const user = await User.findOne({ email: value });
         if (user) throw new CustomError(400, 'email already exist');
     }),
     body('password').notEmpty().withMessage('password is required').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
-    body('location').notEmpty().withMessage('location is required'),
 
 ]);
 

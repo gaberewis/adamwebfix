@@ -5,6 +5,8 @@ export {default as Home } from './Home';
 export {default as InstantPage} from './InstantPage'
 export {default as MsgReceived } from './MsgReceived';
 export {default as ClientMsg } from './ClientMsg';
+export {default as Checkout } from './Checkout';
+export {default as Dashboard } from './Dashboard';
 export {default as Error } from './Error';
 
 

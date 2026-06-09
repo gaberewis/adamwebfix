@@ -7,9 +7,27 @@ import { CustomError } from '../middleware/errorHandler.js';
 
 
 export const registerUser = async (req, res) => {
-    req.body.password = await hashPassword(req.body.password);
-    const user = await User.create(req.body);
-    res.status(201).json({ msg: 'user registred', user });
+  req.body.password = await hashPassword(req.body.password);
+
+  const user = await User.create(req.body);
+
+  // Create token
+  const token = createToken({
+    userId: user._id,
+    userRole: user.role,
+    userName: user.name,
+  });
+
+  // Set cookie
+  res.cookie('token', token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    secure: process.env.NODE_ENV === 'production',
+  });
+
+  res.status(201).json({
+    msg: 'user registered and logged in',
+  });
 };
 
 export const login = async (req, res) => {

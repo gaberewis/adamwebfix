@@ -9,7 +9,7 @@ export const registerAction = async ({ request }) => {
   const data = Object.fromEntries(formData);
   try {
     await axios.post('/api/auth/register', data);
-    return redirect('/register');
+    return redirect('/checkout');
   } catch (error) {
     console.log(error.response?.data?.msg);
     console.log('BACKEND ERROR:', error.response?.data);
@@ -28,7 +28,7 @@ export const loginAction = async ({ request }) => {
   try {
 
     await axios.post('/api/auth/login', data);
-    return redirect('/');
+    return redirect('/dashboard');
 
   } catch (error) {
     console.log('BACKEND ERROR:', error.response?.data.msg);
@@ -60,3 +60,8 @@ export const clientMsg = async ({ request }) => {
 
 
 
+export const checkoutAction = async()=>{
+
+  return redirect('/dashboard');
+
+}

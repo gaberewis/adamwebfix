@@ -53,7 +53,7 @@ const InstantPage = () => {
                     Start selling smarter with Instant Page and give your social media followers a professional destination for your product—all from a single shareable link.
 
                 </p>
-<div className="start"><Link to="/login"  className="start"><button className="btn">start now</button></Link></div>
+<div className="start"><Link to="/register"  className="start"><button className="btn">start now</button></Link></div>
                 
                 <hr />
                 <h5 className="cta">Contact us today and take your website to the next level</h5>

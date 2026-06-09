@@ -1,15 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   Home, InstantPage, ClientMsg, MsgReceived,
- Login, Register,
-  Error
-} from './pages';
+ Login, Register, Checkout,  Dashboard,
+  Error,
 
+} from './pages';
 
 import * as loader from './loaders';
 
 import * as action from './actions';
-
 
 const router = createBrowserRouter([
   {
@@ -48,9 +47,13 @@ const router = createBrowserRouter([
   }
   ,
   {
-    path: 'admin-access',
-    loader : loader.adminAccess,
-   element : <p>Loading...</p>
+    path: 'checkout',
+   element : <Checkout />,
+   action : action.checkoutAction,
+  },
+   {
+    path: 'dashboard',
+   element : <Dashboard />
   },
 
 ]);
