@@ -47,8 +47,8 @@ export const paramValidation = validateData([
 
         const isValidId = mongoose.Types.ObjectId.isValid(value);
         if (!isValidId) throw new CustomError(400, "bad request");
-        const product = await Product.findById(value);
-        if (!product) throw new CustomError(404, "Product not found");
+        const user = await User.findById(value);
+        if (!user) throw new CustomError(404, "Product not found");
 
     }),
 ])

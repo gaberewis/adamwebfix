@@ -37,7 +37,7 @@ html {
   --black: #222;
   --white: #fff;
   --blue : #6397c6;
-
+  --red-mid : #FF0000;
   --small-text: 0.875rem;
   --extra-small-text: 0.7em;
   /* rest of the vars */
@@ -217,13 +217,13 @@ button:disabled {
 /* form */
 
 .form {
-  width: 80vw;
   max-width: var(--fixed-width);
+  min-width: 250px;
   background: var(--background-secondary-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-2);
-  padding: 2rem 2.5rem;
-  margin: 3rem auto;
+  padding: 2rem 2rem;
+  margin: 2rem auto;
 }
 
 .form-label {
@@ -249,7 +249,7 @@ button:disabled {
 .form-input,
 .form-select,
 .form-btn {
-  height: 40px;
+  height: 36px;
 }
 
 

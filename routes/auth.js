@@ -5,9 +5,10 @@ import {
     login,
     logout,  
    clientMsg,
-    getClientRequest
+    getClientRequest, 
+    subpayment
 } from '../controllers/auth.js';
-import { authenticateUser } from '../middleware/funcs.js';
+import { authenticateUser, getUser } from '../middleware/funcs.js';
 
 
 const router = Router();
@@ -16,6 +17,8 @@ router.post('/login', loginValidation, login);
 router.get('/logout', authenticateUser, logout);
 router.get('/clientmsg', getClientRequest);
 router.post( '/clientmsg', clientMsgValidation, clientMsg);
+router.get('/user', getUser);
+router.post('/id', subpayment);
 
 
 

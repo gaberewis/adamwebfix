@@ -72,3 +72,18 @@ export const getClientRequest = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+// export const getUser = (req, res)=>{
+//    const { token } = res.cookie;
+//   const { userId } = varifyToken(token);
+//   const user = User.findById(userId);
+//   res.status(200).json(`Hello ${ user }`);
+
+// }
+
+export const subpayment = (req, res)=>{
+
+
+  res.send("payment successd");
+
+}

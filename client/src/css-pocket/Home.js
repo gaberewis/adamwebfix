@@ -18,11 +18,13 @@ const CssSTL = styled.main`
     }
 h1, h5 {
  text-align : center;
-margin : 2rem 0 1rem 0;
+margin : 1.5rem 0 1rem 0;
 line-height : 2;
 }
 p {
 text-align : center;
+max-width : 1000px;
+margin : 0 auto;
 }
 
 a {

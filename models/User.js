@@ -1,16 +1,22 @@
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
-name : String,
-email : String,
-password : String,
-role : {
-    type : String,
-    enum : ['admin', 'user'],
-    default : 'user'
-    }},{ timestamps: true });
+    name: String,
+    email: String,
+    password: String,
+    role: {
+        type: String,
+        default: 'user'
+    },
+   
+    paymentDetails: {
+        type: Array,
+        default: []
+    },
 
-UserSchema.methods.toJSON = function() {
+}, { timestamps: true });
+
+UserSchema.methods.toJSON = function () {
     let userObject = this.toObject();
     delete userObject.password;
     return userObject;
