@@ -9,7 +9,7 @@ const Register = () => {
             <FormRow type='text' name='name' />
             <FormRow type='email' name='email' />
             <FormRow type='password' name='password' />
-            {actionData?.errorMsg && <p className="error" >{actionData.errorMsg}</p>}
+            {actionData?.errMsg && <p className="error" >{actionData.errMsg}</p>}
             <SubmitButton />
             <p className="margin-t">Aleardy a member ? <Link to='/login' className="member-btn" > Login</Link>
 

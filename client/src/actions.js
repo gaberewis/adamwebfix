@@ -13,8 +13,8 @@ export const registerAction = async ({ request }) => {
   } catch (error) {
     console.log(error.response?.data?.msg);
     console.log('BACKEND ERROR:', error.response?.data);
-    const errorMsg = error.response?.data?.msg || 'Registration failed';
-    return { errorMsg };
+    const errMsg = error.response?.data?.msg || 'Registration failed';
+    return { errMsg };
 
   }
 };
@@ -32,8 +32,8 @@ export const loginAction = async ({ request }) => {
 
   } catch (error) {
     console.log('BACKEND ERROR:', error.response?.data.msg);
-    const errorMsg = error.response?.data?.msg || 'Login failed';
-    return { errorMsg };
+    const errMsg = error.response?.data?.msg || 'Login failed';
+    return { errMsg };
   }
 
 }
@@ -53,8 +53,8 @@ export const clientMsg = async ({ request }) => {
 
   } catch (error) {
     console.log(error.response?.data?.msg);
-    const errorMsg = error.response?.data?.msg || 'Request faild';
-    return { errorMsg };
+    const errMsg = error.response?.data?.msg || 'Request faild';
+    return { errMsg };
   }
 }
 

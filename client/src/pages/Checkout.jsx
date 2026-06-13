@@ -1,56 +1,71 @@
-import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { FaCommentDollar } from "react-icons/fa";
 import {
   PayPalScriptProvider,
   PayPalButtons,
 } from "@paypal/react-paypal-js";
+import axios from "axios";
 
 const Checkout = () => {
-  const  data   = useLoaderData();
+  const navigate = useNavigate();
 
-  const [success, setSuccess] = useState(false);
+  const paymentAction = async (paymentDetails) => {
+    try {
+      await axios.post('/api/payments', paymentDetails);
+      return{success : true}
 
-  const mSubscription = "2.99";
+    } catch (error) {
+      console.log(error.response?.data?.msg);
+      const errMsg = error.response?.data?.msg || "something want wrong";
+      return { errMsg };
+    }
+  }
+  const user = useLoaderData();
+  const mSubscription = "00.10";
 
-  const onApprove = async (data, actions) => {
+const onApprove = async (data, actions) => {
+  try {
     const details = await actions.order.capture();
 
     const paymentDetails = {
-      transactionid: data.orderID,
-      pAmount: mSubscription,
+      transactionId: data.orderID,
+      amount: details.purchase_units[0].amount.value,
       pDate: new Date(),
+      userId: user.userId,
     };
 
-    console.log(paymentDetails);
+    const result = await paymentAction(paymentDetails);
 
-    setSuccess(true);
-  };
+    if (!result.success) {
+      console.log(result.errMsg)
+      return;
+    }
+    navigate("/dashboard");
+  } catch (error) {
+    console.error(error);
+    alert("Payment processing failed");
+  }
+};
+
+
+
+
+
+
 
   return (
     <div>
-      <h1>{data}</h1>
-
-      <div
-        className="container col-md-4 offset-md-4 p-5 text-center mt-5 mb-2"
-        style={{ height: "80vh" }}
-      >
-        <p className="mt-5 display-4">
+      <h5>hi {user.userId}</h5>
+      <div>
+        <p >
           <b>Monthly Subscription</b>
         </p>
 
-        <div
-          className="mt-3 mb-3"
-          style={{
-            fontWeight: "600",
-            fontSize: "95px",
-            color: "#2C2E2F",
-          }}
-        >
+        <div>
           <FaCommentDollar
             size={80}
             color="#F2BA36"
-            className="mb-4"
           />
           <em>{mSubscription}</em>
         </div>
@@ -73,21 +88,25 @@ const Checkout = () => {
               });
             }}
             onApprove={onApprove}
+            onError={(err) => {
+              console.error(err);
+            }}
           />
         </PayPalScriptProvider>
-
-        {success && (
-          <div className="alert alert-success mt-3">
-            Payment completed successfully
-          </div>
-        )}
-
-        <p className="text-muted">
-          One Year Subscription, ${mSubscription} Only, No Additional Fees
-        </p>
       </div>
     </div>
   );
 };
 
 export default Checkout;
+
+
+
+
+
+
+
+
+
+
+

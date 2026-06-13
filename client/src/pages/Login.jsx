@@ -10,7 +10,7 @@ const Login = () => {
         
             <FormRow type="email" name="email" />
             <FormRow type='password' name='password' />
-            {actionData?.errorMsg && <p className="error" >{actionData.errorMsg}</p>}
+            {actionData?.errMsg && <p className="error" >{actionData.errMsg}</p>}
             <SubmitButton />
             <p className="margin-t"> Not a member yet ? <Link to='/register' className="member-btn" > Register</Link></p>
 
