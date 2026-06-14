@@ -73,17 +73,11 @@ export const getClientRequest = async (req, res) => {
   }
 };
 
-// export const getUser = (req, res)=>{
-//    const { token } = res.cookie;
-//   const { userId } = varifyToken(token);
-//   const user = User.findById(userId);
-//   res.status(200).json(`Hello ${ user }`);
-
-// }
-
-export const subpayment = (req, res)=>{
-
-
-  res.send("payment successd");
+export const currentUser = async (req, res)=>{
+   
+  const id = req.user.userId;
+  const user = await User.findById(id);
+  res.status(200).json(`Hello ${ user }`);
 
 }
+

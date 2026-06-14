@@ -6,18 +6,19 @@ import {
     logout,  
    clientMsg,
     getClientRequest, 
-    subpayment
+    subpayment,
+    currentUser,
 } from '../controllers/auth.js';
 import { authenticateUser, getUser } from '../middleware/funcs.js';
 
 
 const router = Router();
-router.post('/register', registerValidation, registerUser);
+router.post('/register', registerValidation,  registerUser);
 router.post('/login', loginValidation, login);
 router.get('/logout', authenticateUser, logout);
 router.get('/clientmsg', getClientRequest);
 router.post( '/clientmsg', clientMsgValidation, clientMsg);
-router.get('/user', getUser);
+router.get('/user', getUser, currentUser);
 router.post('/id', subpayment);
 
 

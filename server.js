@@ -11,6 +11,7 @@ import helmet from 'helmet';
 
 
 import authRoute from './routes/auth.js';
+import pagesRoute from './routes/pages';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -54,6 +55,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoute);
+app.use('/api/pages', pagesRoute);
 
 
 app.get(/.*/, (req, res) => {

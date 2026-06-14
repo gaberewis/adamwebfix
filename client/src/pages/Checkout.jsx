@@ -9,11 +9,13 @@ import axios from "axios";
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const user = useLoaderData();
+  const amount = "0.10";
 
   const paymentAction = async (paymentDetails) => {
     try {
       await axios.post('/api/payments', paymentDetails);
-      return{success : true}
+      return { success: true }
 
     } catch (error) {
       console.log(error.response?.data?.msg);
@@ -21,37 +23,25 @@ const Checkout = () => {
       return { errMsg };
     }
   }
-  const user = useLoaderData();
-  const mSubscription = "00.10";
 
-const onApprove = async (data, actions) => {
-  try {
-    const details = await actions.order.capture();
 
-    const paymentDetails = {
-      transactionId: data.orderID,
-      amount: details.purchase_units[0].amount.value,
-      pDate: new Date(),
-      userId: user.userId,
-    };
+  const onApprove = async (data) => {
+    try {
+      const res = await axios.post("/api/pages/payments", {
+        orderId: data.orderID,
+        userId: user.userId,
+      });
 
-    const result = await paymentAction(paymentDetails);
-
-    if (!result.success) {
-      console.log(result.errMsg)
-      return;
+      if (res.data.success) {
+        navigate("/dashboard");
+      } else {
+        console.log(res.data.msg);
+      }
+    } catch (err) {
+      const errMsg = res.data.msg || 'payment faild';
+      return {errMsg}
     }
-    navigate("/dashboard");
-  } catch (error) {
-    console.error(error);
-    alert("Payment processing failed");
-  }
-};
-
-
-
-
-
+  };
 
 
   return (
@@ -80,18 +70,15 @@ const onApprove = async (data, actions) => {
               return actions.order.create({
                 purchase_units: [
                   {
-                    amount: {
-                      value: mSubscription,
-                    },
+                    amount: { value: amount },
                   },
                 ],
               });
             }}
             onApprove={onApprove}
-            onError={(err) => {
-              console.error(err);
-            }}
           />
+
+
         </PayPalScriptProvider>
       </div>
     </div>

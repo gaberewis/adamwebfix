@@ -15,7 +15,6 @@ export const comparePassword = async (password, hashedPassword) => {
   return comparedPassword;
 };
 
-
 export const createToken = (payload) => {
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
@@ -30,37 +29,21 @@ export const varifyToken = (token) => {
   return decoded;
 };
 
-// export const getUser = (req, res, next) => {
-//   const { token } = req.cookies;
-//   //if (!token) throw new CustomError(401, 'authentication invalid ....');
-//   const { userId, userRole, userName } = varifyToken(token);
-//  // const isDemo = userId === '68f29702a2e57c84a596d70e';
-
-//   req.user = { userId, userRole, userName};
-
-//   next();
-// }
-
 export const getUser = (req, res, next) => {
   const { token } = req.cookies;
   
   const { userId, userRole, userName } = varifyToken(token);
   req.user = { userId, userRole, userName};
 
- const data =  req.user;
-
-res.status(200).json('data');
-
+return req.user;
 
 }
-
 
 export const authenticateUser = (req, res, next) => {
   const { token } = req.cookies;
   if (!token) throw new CustomError(401, 'authentication invalid ....');
   const { userId, userRole, userName } = varifyToken(token);
  // const isDemo = userId === '68f29702a2e57c84a596d70e';
-
   req.user = { userId, userRole, userName};
 
   next();
