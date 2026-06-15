@@ -39,7 +39,7 @@ const router = createBrowserRouter([
   { 
     path: 'clientmsg',
     element: <ClientMsg />,
-    loader: loader.clientMsgLoader,
+    loader: loader.clientMsg,
   },
   {
     path: 'requestdone',
@@ -49,11 +49,12 @@ const router = createBrowserRouter([
   {
     path: 'checkout',
    element : <Checkout />,
-   action : action.checkoutAction,
+   loader : loader.getUser,
   },
    {
     path: 'dashboard',
    element : <Dashboard />
+
   },
 
 ]);

@@ -11,7 +11,7 @@ import helmet from 'helmet';
 
 
 import authRoute from './routes/auth.js';
-import pagesRoute from './routes/pages';
+import pagesRoute from './routes/pages.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';

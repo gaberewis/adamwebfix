@@ -9,8 +9,9 @@ import axios from "axios";
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const user = useLoaderData();
-  const amount = "0.10";
+  const  { user }  = useLoaderData();
+  
+  const amount = "2.99";
 
   const paymentAction = async (paymentDetails) => {
     try {
@@ -24,7 +25,7 @@ const Checkout = () => {
     }
   }
 
-
+console.log(useLoaderData());
   const onApprove = async (data) => {
     try {
       const res = await axios.post("/api/pages/payments", {
@@ -46,7 +47,7 @@ const Checkout = () => {
 
   return (
     <div>
-      <h5>hi {user.userId}</h5>
+   
       <div>
         <p >
           <b>Monthly Subscription</b>
@@ -57,7 +58,8 @@ const Checkout = () => {
             size={80}
             color="#F2BA36"
           />
-          <em>{mSubscription}</em>
+          <em>{amount}</em>
+             <h5>hi {user?.name}</h5>
         </div>
 
         <PayPalScriptProvider

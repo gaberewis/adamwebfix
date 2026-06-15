@@ -16,7 +16,7 @@ const { data } = await axios.get('/api/auth/user');
 }
 
 
-export const clientMsgLoader = async()=>{
+export const clientMsg = async()=>{
 
   try{
 const { data } = await axios.get('/api/auth/clientmsg');

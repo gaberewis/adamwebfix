@@ -2,7 +2,7 @@
 import User from '../models/User.js';
 import ClientMsg from '../models/ClientMsg.js';
 import { hashPassword, comparePassword } from '../middleware/funcs.js';
-import { createToken, varifyToken } from '../middleware/funcs.js';
+import { createToken, verifyToken } from '../middleware/funcs.js';
 import { CustomError } from '../middleware/errorHandler.js';
 
 
@@ -77,7 +77,7 @@ export const currentUser = async (req, res)=>{
    
   const id = req.user.userId;
   const user = await User.findById(id);
-  res.status(200).json(`Hello ${ user }`);
+  res.status(200).json({ user });
 
 }
 

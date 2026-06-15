@@ -23,7 +23,7 @@ export const createToken = (payload) => {
   return token;
 };
 
-export const varifyToken = (token) => {
+export const verifyToken = (token) => {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
   return decoded;
@@ -32,17 +32,18 @@ export const varifyToken = (token) => {
 export const getUser = (req, res, next) => {
   const { token } = req.cookies;
   
-  const { userId, userRole, userName } = varifyToken(token);
+  const { userId, userRole, userName } = verifyToken(token);
   req.user = { userId, userRole, userName};
 
-return req.user;
+
+next();
 
 }
 
 export const authenticateUser = (req, res, next) => {
   const { token } = req.cookies;
   if (!token) throw new CustomError(401, 'authentication invalid ....');
-  const { userId, userRole, userName } = varifyToken(token);
+  const { userId, userRole, userName } = verifyToken(token);
  // const isDemo = userId === '68f29702a2e57c84a596d70e';
   req.user = { userId, userRole, userName};
 

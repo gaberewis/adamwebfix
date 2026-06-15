@@ -60,8 +60,3 @@ export const clientMsg = async ({ request }) => {
 
 
 
-export const checkoutAction = async()=>{
-
-  return redirect('/dashboard');
-
-}
