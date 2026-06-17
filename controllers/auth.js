@@ -74,10 +74,8 @@ export const getClientRequest = async (req, res) => {
 };
 
 export const currentUser = async (req, res)=>{
-   
-  const id = req.user.userId;
-  const user = await User.findById(id);
-  res.status(200).json({ user });
+
+  res.status(200).json({ userId : req.user.userId });
 
 }
 

@@ -8,11 +8,17 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: 'user'
     },
-   
+
     paymentDetails: {
         type: Array,
         default: []
     },
+    isBlocked:
+    {
+        type: Boolean,
+        default: false
+    }
+
 
 }, { timestamps: true });
 

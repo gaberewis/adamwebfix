@@ -1,11 +1,10 @@
 import axios from "axios";
-import Pages from '../models/pages.js';
+import Pages from "../models/pages.js";
 
 export const capturePayment = async (req, res) => {
   try {
     const { orderId, userId } = req.body;
 
-    // 1. Get Access Token
     const auth = await axios.post(
       "https://api-m.sandbox.paypal.com/v1/oauth2/token",
       "grant_type=client_credentials",
@@ -22,7 +21,6 @@ export const capturePayment = async (req, res) => {
 
     const accessToken = auth.data.access_token;
 
-    // 2. Capture Payment
     const response = await axios.post(
       `https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderId}/capture`,
       {},
@@ -35,23 +33,33 @@ export const capturePayment = async (req, res) => {
     );
 
     const data = response.data;
-    console.log(data);
 
-    // 3. Save to DB (example)
+    const capture = data?.purchase_units?.[0]?.payments?.captures?.[0];
+
+    if (!capture) {
+      return res.status(400).json({
+        success: false,
+        msg: "No capture found",
+        data,
+      });
+    }
+
     const payment = await Pages.create({
-      user : userId  ,
+      user: userId,
       orderId,
-      transactionId: data.purchase_units[0].payments.captures[0].id,
-      amount: data.purchase_units[0].payments.captures[0].amount.value,
-      date : Date.now(),
+      transactionId: capture.id,
+      amount: capture.amount.value,
+      date: Date.now(),
     });
 
+    return res.json({
+      success: true,
+      payment,
+    });
 
-
-    // 4. Success
-    return res.json({ success: true }, {payment});
   } catch (err) {
     console.log(err.response?.data || err.message);
+
     return res.status(500).json({
       success: false,
       msg: "Payment failed",

@@ -1,6 +1,6 @@
 
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { FaCommentDollar } from "react-icons/fa";
+
 import {
   PayPalScriptProvider,
   PayPalButtons,
@@ -9,7 +9,7 @@ import axios from "axios";
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const  { user }  = useLoaderData();
+  const  { userId }  = useLoaderData();
   
   const amount = "2.99";
 
@@ -25,12 +25,12 @@ const Checkout = () => {
     }
   }
 
-console.log(useLoaderData());
+console.log(userId);
   const onApprove = async (data) => {
     try {
       const res = await axios.post("/api/pages/payments", {
         orderId: data.orderID,
-        userId: user.userId,
+        userId,
       });
 
       if (res.data.success) {
@@ -38,10 +38,11 @@ console.log(useLoaderData());
       } else {
         console.log(res.data.msg);
       }
-    } catch (err) {
-      const errMsg = res.data.msg || 'payment faild';
-      return {errMsg}
-    }
+    }  catch (err) {
+  const errMsg = err.response?.data?.msg || "payment failed";
+  console.log(errMsg);
+  return { errMsg };
+}
   };
 
 
@@ -54,17 +55,14 @@ console.log(useLoaderData());
         </p>
 
         <div>
-          <FaCommentDollar
-            size={80}
-            color="#F2BA36"
-          />
+        
           <em>{amount}</em>
-             <h5>hi {user?.name}</h5>
+           
         </div>
 
         <PayPalScriptProvider
           options={{
-            clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID,
+           clientId: 'AYaqpt7Os8X56eDp_EMHgQNR6HWy2KGSsBhcy5J3dm7ZtjwIGXY_uZofgYIFBBKREW8d_rF7ChSmVzRX'
           }}
         >
           <PayPalButtons
