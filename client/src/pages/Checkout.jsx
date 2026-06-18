@@ -13,22 +13,12 @@ const Checkout = () => {
   
   const amount = "2.99";
 
-  const paymentAction = async (paymentDetails) => {
-    try {
-      await axios.post('/api/payments', paymentDetails);
-      return { success: true }
 
-    } catch (error) {
-      console.log(error.response?.data?.msg);
-      const errMsg = error.response?.data?.msg || "something want wrong";
-      return { errMsg };
-    }
-  }
 
-console.log(userId);
   const onApprove = async (data) => {
     try {
-      const res = await axios.post("/api/pages/payments", {
+     
+      const res = await axios.post('/api/pages/payments', {
         orderId: data.orderID,
         userId,
       });
@@ -38,10 +28,8 @@ console.log(userId);
       } else {
         console.log(res.data.msg);
       }
-    }  catch (err) {
-  const errMsg = err.response?.data?.msg || "payment failed";
-  console.log(errMsg);
-  return { errMsg };
+    } catch (err) {
+  console.log(err.response?.data);
 }
   };
 
@@ -50,6 +38,7 @@ console.log(userId);
     <div>
    
       <div>
+    
         <p >
           <b>Monthly Subscription</b>
         </p>
@@ -62,7 +51,7 @@ console.log(userId);
 
         <PayPalScriptProvider
           options={{
-           clientId: 'AYaqpt7Os8X56eDp_EMHgQNR6HWy2KGSsBhcy5J3dm7ZtjwIGXY_uZofgYIFBBKREW8d_rF7ChSmVzRX'
+           clientId: 'AY0hkrLmuQPwKm9bhx2JGuOQ5WXxkSSuUzKa087G3jGVHJtyIGZwChnysTGfnkF2w4nK_gbdhXZSGiZv'
           }}
         >
           <PayPalButtons

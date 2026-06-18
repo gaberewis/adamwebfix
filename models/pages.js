@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const PagesSchema  = new mongoose.Schema({
 
-transactioId : String,
+transactionId : String,
 orderId : String,
 amount : String,
 
@@ -17,7 +17,8 @@ default : Date.now(),
 isActive : {
 type : Boolean,
 default : true
-}
+},
+paymentDate : String,
 
 },{timestamps : true});
 

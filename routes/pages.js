@@ -1,7 +1,6 @@
 import { Router } from "express";
 
-import { capturePayment } from '../controllers/pages.js'
-
+import { capturePayment } from '../controllers/Pages.js'
 
 
 const router = Router();

@@ -1,5 +1,5 @@
 import axios from "axios";
-import Pages from "../models/pages.js";
+import Pages from "../models/Pages.js";
 
 export const capturePayment = async (req, res) => {
   try {
@@ -10,7 +10,7 @@ export const capturePayment = async (req, res) => {
       "grant_type=client_credentials",
       {
         auth: {
-          username: process.env.PAYPAL_CLIENT_ID,
+          username: 'AY0hkrLmuQPwKm9bhx2JGuOQ5WXxkSSuUzKa087G3jGVHJtyIGZwChnysTGfnkF2w4nK_gbdhXZSGiZv',
           password: process.env.PAYPAL_SECRET,
         },
         headers: {
@@ -49,7 +49,7 @@ export const capturePayment = async (req, res) => {
       orderId,
       transactionId: capture.id,
       amount: capture.amount.value,
-      date: Date.now(),
+      paymentDate: Date.now(),
     });
 
     return res.json({
@@ -61,8 +61,9 @@ export const capturePayment = async (req, res) => {
     console.log(err.response?.data || err.message);
 
     return res.status(500).json({
-      success: false,
-      msg: "Payment failed",
-    });
+  success: false,
+  msg: err.response?.data || err.message,
+});
   }
 };
+
