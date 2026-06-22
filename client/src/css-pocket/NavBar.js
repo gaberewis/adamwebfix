@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CssStl = styled.nav`
+const Stl = styled.nav`
   min-height : 10vh;
   display: flex;
   align-items: center;
@@ -52,7 +52,7 @@ h5{
  
 
 `;
-export default CssStl;
+export default Stl;
 
 
 // Arial

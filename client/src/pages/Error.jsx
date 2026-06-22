@@ -1,5 +1,5 @@
 import { Link, useRouteError } from "react-router-dom";
-import CssStl from '../css-pocket/ErrorPage';
+import Stl from '../css-pocket/ErrorPage';
 import img from '../../public/not-found.svg'
 
 
@@ -8,14 +8,14 @@ const Error = () => {
    
     if (error.status === 404) {
      
-        return (<CssStl>
+        return (<Stl>
             <div>
                 <img src={img} alt='not-found' />
                 <h3>Page not found</h3>
                 <p>We can not find the page you are looking for</p>
                 <Link to='/'>Home Page</Link>
             </div>
-        </CssStl>)
+        </Stl>)
     }
 
     if (error?.status === 401) {

@@ -4,7 +4,7 @@ import Pages from "../models/Pages.js";
 export const capturePayment = async (req, res) => {
   try {
     const { orderId, userId } = req.body;
-
+console.log(userId);
     const auth = await axios.post(
       "https://api-m.sandbox.paypal.com/v1/oauth2/token",
       "grant_type=client_credentials",
@@ -45,11 +45,8 @@ export const capturePayment = async (req, res) => {
     }
 
     const payment = await Pages.create({
-      user: userId,
-      orderId,
+    userId,
       transactionId: capture.id,
-      amount: capture.amount.value,
-      paymentDate: Date.now(),
     });
 
     return res.json({

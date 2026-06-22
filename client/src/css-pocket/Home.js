@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const CssSTL = styled.main`
+const Stl = styled.main`
 
   padding: 2rem;
   margin: 0 auto
@@ -92,7 +92,7 @@ a {
 
 `;
 
-export default CssSTL;
+export default Stl;
 
 
 

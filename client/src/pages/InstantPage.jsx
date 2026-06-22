@@ -1,13 +1,13 @@
 import { Form, Link } from "react-router-dom";
 import { FormRow, SubmitButton } from "../components";
-import CssSTL from "../css-pocket/Home";
+import Stl from "../css-pocket/Home";
 import { TbPointFilled } from "react-icons/tb";
 
 
 
 const InstantPage = () => {
     return (
-        <CssSTL>
+        <Stl>
             <div className="intro">
                 <Link to="/">
                     <img src="/logo.png" alt="colored-logo" />
@@ -76,7 +76,7 @@ const InstantPage = () => {
                 </Form>
 
             </div>
-        </CssSTL>
+        </Stl>
     );
 };
 

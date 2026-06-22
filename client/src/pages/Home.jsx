@@ -1,12 +1,12 @@
 import { Form, Link } from "react-router-dom";
 import { FormRow, SubmitButton } from "../components";
-import CssSTL from "../css-pocket/Home";
+import Stl from "../css-pocket/Home";
 
 
 
 const Home = () => {
     return (
-        <CssSTL>
+        <Stl>
             <div className="intro">
                 <Link to="/">
                     <img src="/logo.png" alt="colored-logo" />
@@ -44,7 +44,7 @@ const Home = () => {
                 </Form>
 
             </div>
-        </CssSTL>
+        </Stl>
     );
 };
 

@@ -1,26 +1,81 @@
+
 import mongoose from "mongoose";
 
-const PagesSchema  = new mongoose.Schema({
+const imageSchema = new mongoose.Schema(
+  {
+    imageUrl: String,
+    imageId: String,
+  },
+  { _id: false }
+);
 
-transactionId : String,
-orderId : String,
-amount : String,
+const sectionSchema = new mongoose.Schema(
+  {
+    title: String,
+    description: String,
+    image: imageSchema,
+  },
+  { _id: false }
+);
 
- user : {
-      type: mongoose.Types.ObjectId,
-      ref: 'User',
+const pagesSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
     },
-paymentDate : {
-type : Date,
-default : Date.now(),
-},
-isActive : {
-type : Boolean,
-default : true
-},
-paymentDate : String,
 
-},{timestamps : true});
+    price: {
+      type: Number,
+    },
+
+    description: String,
+    slid : [ imageSchema ],
+
+    sectionOne: sectionSchema,
+
+    sectionTwo: sectionSchema,
+
+    sectionThree: sectionSchema,
+
+    contact: {
+      email: String,
+      whatsapp: String,
+      phone: String,
+    },
+
+    transactionId: String,
+
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+
+    paymentDate: {
+      type: Date,
+      default: Date.now,
+    },
+
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model("Pages", pagesSchema);
 
 
-export default mongoose.model('Pages', PagesSchema);
+
+
+
+
+
+
+
+
+
+
+
+

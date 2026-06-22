@@ -1,11 +1,11 @@
-import CssStl from '../css-pocket/Loading';
+import Stl from '../css-pocket/Loading';
 
 const Loading = ()=>{
    return (
-   <CssStl>
+   <Stl>
    <div className="orbit">
   <div className="dot"></div>
 </div>
-</CssStl>)
+</Stl>)
 }  
 export default Loading;

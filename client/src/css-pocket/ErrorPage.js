@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CssStl = styled.main`
+const Stl = styled.main`
   min-height: 100vh;
   text-align: center;
   display: flex;
@@ -28,4 +28,4 @@ const CssStl = styled.main`
   }
 `; 
 
-export default CssStl;
+export default Stl;

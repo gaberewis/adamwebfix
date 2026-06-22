@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CssStl = styled.main`
+const Stl = styled.main`
 
 
   position: fixed;
@@ -49,4 +49,4 @@ const CssStl = styled.main`
 }
 
 `;
-export default CssStl;
+export default Stl;
