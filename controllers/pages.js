@@ -47,6 +47,7 @@ export const capturePayment = async (req, res) => {
     const payment = await Pages.create({
     userId,
       transactionId: capture.id,
+      paymentDate : date.now(),
     });
 
     return res.json({

@@ -19,7 +19,7 @@ html {
 
   /*fonts*/
   --head-font: "Bitcount Grid Double", system-ui;
-/*
+  /*
 
   /* grey */
   --grey-50: #f8fafc;
@@ -36,8 +36,8 @@ html {
   /* rest of the colors */
   --black: #222;
   --white: #fff;
-  --blue : #6397c6;
-  --red-mid : #FF0000;
+  --blue: #6397c6;
+  --red-mid: #FF0000;
   --small-text: 0.875rem;
   --extra-small-text: 0.7em;
   /* rest of the vars */
@@ -97,10 +97,10 @@ h5 {
   letter-spacing: var(--letter-spacing);
 }
 
- h1 {
+h1 {
   font-size: clamp(2.5rem, 6vw, 6rem);
- 
-  
+
+
 }
 
 h2 {
@@ -118,7 +118,7 @@ h4 {
 h5 {
   font-size: clamp(1rem, 2vw, 2rem);
 }
- 
+
 
 .text {
   margin-bottom: 1.5rem;
@@ -154,12 +154,13 @@ ul {
   border: transparent;
   border-radius: var(--border-radius);
   letter-spacing: var(--letter-spacing);
-  padding: 0.5rem 0.75rem;
+  padding: 0.7rem 0.75rem;
   box-shadow: var(--shadow-1);
   transition: var(--transition);
   text-transform: capitalize;
   display: inline-block;
   margin: 1rem 0 1rem 0;
+  font-size : 1rem;
 
 }
 
@@ -195,6 +196,25 @@ button:disabled {
   color: var(--white);
   background: var(--red-dark);
 }
+
+.large-btn {
+  max-width: 400px;
+  margin: 2rem auto;
+  font-size: 1.5rem;
+  padding: .7rem 3rem;
+  border-radius: 3rem;
+  text-align: center;
+  box-shadow: var(--shadow-1);
+  display: block;
+}
+
+
+.large-btn:hover {
+  color: var(--grey-800);
+  background: var(--grey-300);
+  box-shadow: none;
+}
+
 
 /* alerts */
 .alert {
@@ -249,13 +269,13 @@ button:disabled {
 .form-input,
 .form-select,
 .form-btn {
-  height: 36px;
+  height: 40px;
 }
 
 
 .form-row {
   margin-bottom: 1rem;
-    
+
 }
 
 .form-textarea {
@@ -320,10 +340,3 @@ button:disabled {
   font-size: var(--small-text);
   margin: 1rem;
 }
-
-
-
-
-
-
-

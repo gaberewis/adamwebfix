@@ -57,32 +57,9 @@ a {
 
   }
 
-
- .start  {
- 
- a{
+ .start a {
  text-decoration : none;
  }
- 
- button {
-  max-width : 400px;
-  margin : 2rem  auto ;
-  font-size: 1.5rem;
-  padding : .3rem 3rem;
-  border-radius : 3rem;
-  text-align : center;
-  box-shadow : var(--shadow-1);
-   display : block;
-  }
-
-  button:hover{
-  color : var(--grey-800);
-  background : var(--grey-300);
-  box-shadow : none;
-  }
- }
-
-
 
   @media(max-width : 798px){
 

@@ -51,10 +51,7 @@ const pagesSchema = new mongoose.Schema(
       ref: "User",
     },
 
-    paymentDate: {
-      type: Date,
-      default: Date.now,
-    },
+    paymentDate: String,
 
     isActive: {
       type: Boolean,
