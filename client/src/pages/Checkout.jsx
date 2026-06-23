@@ -32,6 +32,8 @@ const Checkout = () => {
   return (
     
     <Stl>
+    <img className="logo" src='/public/logo.png' alt="app-logo" />
+    <div className="main">
       <div className='card'>
         <div className="title">Subscription Checkout</div>
 
@@ -67,6 +69,7 @@ const Checkout = () => {
             onApprove={onApprove}
           />
         </PayPalScriptProvider>
+      </div>
       </div>
     </Stl>
   );

@@ -2,18 +2,22 @@ import styled from "styled-components";
 
 const Stl = styled.main`
   min-height: 100vh;
+  background: #f4f7fb;
+  
+
+ 
+.main{
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f4f7fb;
   padding: 2rem;
-
+}
   .card {
     width: 100%;
     max-width: 500px;
     background: #fff;
     padding: 2.5rem;
-    border-radius: 18px;
+ 
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
   }
 
@@ -21,7 +25,7 @@ const Stl = styled.main`
     text-align: center;
     font-size: 2rem;
     font-weight: 700;
-    color: #1f2937;
+    color: #334155;
     margin-bottom: 2rem;
   }
 
@@ -37,14 +41,14 @@ const Stl = styled.main`
   .plan-title {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #374151;
+    color: #334155;
     margin-bottom: 0.75rem;
   }
 
   .price {
     font-size: 3rem;
     font-weight: 700;
-    color: #0070ba;
+    color: var(--light-paypal);
     line-height: 1;
     margin-bottom : .8rem;
   }

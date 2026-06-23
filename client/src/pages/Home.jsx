@@ -9,7 +9,7 @@ const Home = () => {
         <Stl>
             <div className="intro">
                 <Link to="/">
-                    <img src="/logo.png" alt="colored-logo" />
+                    <img  src="/logo.png" alt="colored-logo" />
                 </Link>
                 <h1>Adam Web Fix</h1>
 

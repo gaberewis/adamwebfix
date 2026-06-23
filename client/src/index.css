@@ -36,7 +36,8 @@ html {
   /* rest of the colors */
   --black: #222;
   --white: #fff;
-  --blue: #6397c6;
+  --logo: #6397c6;
+  --light-paypal:#009cde;
   --red-mid: #FF0000;
   --small-text: 0.875rem;
   --extra-small-text: 0.7em;
@@ -70,8 +71,6 @@ html {
   --text-secondary-color: var(--grey-500);
 }
 
-
-
 body {
   background: var(--background-color);
   color: var(--text-color);
@@ -99,7 +98,6 @@ h5 {
 
 h1 {
   font-size: clamp(2.5rem, 6vw, 6rem);
-
 
 }
 
@@ -150,7 +148,7 @@ ul {
 .btn {
   cursor: pointer;
   color: var(--white);
-  background: var(--blue);
+  background: var(--logo);
   border: transparent;
   border-radius: var(--border-radius);
   letter-spacing: var(--letter-spacing);
@@ -161,11 +159,13 @@ ul {
   display: inline-block;
   margin: 1rem 0 1rem 0;
   font-size : 1rem;
+  font-weight: 600;
 
 }
 
 .btn:hover {
-  background: var(--grey-400);
+  background: var(--grey-300);
+  color: var(--grey-600);
   box-shadow: var(--shadow-3);
 }
 
@@ -201,7 +201,7 @@ button:disabled {
   max-width: 400px;
   margin: 2rem auto;
   font-size: 1.5rem;
-  padding: .7rem 3rem;
+  padding: .7rem 2rem;
   border-radius: 3rem;
   text-align: center;
   box-shadow: var(--shadow-1);
@@ -209,11 +209,6 @@ button:disabled {
 }
 
 
-.large-btn:hover {
-  color: var(--grey-800);
-  background: var(--grey-300);
-  box-shadow: none;
-}
 
 
 /* alerts */
@@ -236,13 +231,19 @@ button:disabled {
 
 /* form */
 
+.form-container{
+  padding : 0rem .7rem;
+
+ 
+}
+
 .form {
   max-width: var(--fixed-width);
   min-width: 250px;
   background: var(--background-secondary-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-2);
-  padding: 2rem 2rem;
+  padding: 1.7rem 1.5rem;
   margin: 2rem auto;
 }
 
@@ -339,4 +340,9 @@ button:disabled {
   color: var(--red-mid);
   font-size: var(--small-text);
   margin: 1rem;
+}
+
+.logo{
+      max-width : 40px; 
+      margin : 2.5rem;
 }
