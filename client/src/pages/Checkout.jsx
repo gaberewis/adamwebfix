@@ -32,7 +32,7 @@ const Checkout = () => {
   return (
     
     <Stl>
-    <img className="logo" src='/public/logo.png' alt="app-logo" />
+    <img className="logo" src='/logo.png' alt="app-logo" />
     <div className="main">
       <div className='card'>
         <div className="title">Subscription Checkout</div>

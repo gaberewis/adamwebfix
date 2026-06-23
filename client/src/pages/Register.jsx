@@ -6,7 +6,7 @@ const Register = () => {
     const actionData = useActionData();
     return (
         <>
-            <img className="logo" src="/public/logo.png" alt="app-logo" />
+            <img className="logo" src="/logo.png" alt="app-logo" />
             <div className="form-container">
                 <Form method="post" className="form">
                     <FormRow type='text' name='name' />
