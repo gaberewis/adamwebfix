@@ -60,18 +60,19 @@ export const clientMsg = async ({ request }) => {
 
 
 
-export const forgetPassword = async({ request })=>{
+export const forgetPassword = async ({ request }) => {
 
-    const formData = await request.formData();
+  const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
   try {
     await axios.post('/api/auth/forgetpassword', data);
-     return redirect('/requestdone');
+     const confirmOtp = 'An OTP has been sent to your email';
+     return { confirmOtp }
 
 
   } catch (error) {
-     console.log(error.response?.data?.msg);
+    console.log(error.response?.data?.msg);
     const errMsg = error.response?.data?.msg || 'Request faild';
     return { errMsg };
   }

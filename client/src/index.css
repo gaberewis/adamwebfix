@@ -228,13 +228,15 @@ button:disabled {
   color: var(--green-dark);
   background: var(--green-light);
 }
+.info {
+  color: var(--light-paypal);
+ 
+}
 
 /* form */
 
 .form-container{
-  padding : 0rem .7rem;
-
- 
+  padding : 0rem .7rem; 
 }
 
 .form {

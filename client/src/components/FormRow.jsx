@@ -1,4 +1,4 @@
-const FormRow = ({ name, labelText, ...rest  }) => {
+const FormRow = ({ name, labelText, disabled, ...rest  }) => {
   return (
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>
@@ -8,6 +8,7 @@ const FormRow = ({ name, labelText, ...rest  }) => {
         id={name}
         name={name}
         className='form-input'
+        disabled={disabled}
         
         {...rest}
       />
