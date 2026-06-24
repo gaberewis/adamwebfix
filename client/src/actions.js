@@ -49,7 +49,7 @@ export const clientMsg = async ({ request }) => {
   try {
 
     await axios.post('/api/auth/clientmsg', data);
-    return redirect('/requestdone');
+    return null;
 
   } catch (error) {
     console.log(error.response?.data?.msg);
@@ -60,3 +60,19 @@ export const clientMsg = async ({ request }) => {
 
 
 
+export const forgetPassword = async({ request })=>{
+
+    const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  try {
+    await axios.post('/api/auth/forgetpassword', data);
+     return redirect('/requestdone');
+
+
+  } catch (error) {
+     console.log(error.response?.data?.msg);
+    const errMsg = error.response?.data?.msg || 'Request faild';
+    return { errMsg };
+  }
+}

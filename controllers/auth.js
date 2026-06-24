@@ -79,3 +79,53 @@ export const currentUser = async (req, res)=>{
 
 }
 
+export const forgetPassword = async(req, res)=>{
+  const { email } = req.body;
+const isUser = await User.findOne({email});
+if(!isUser){
+  throw new CustomError(401, 'email not exist');
+  return;
+  }
+ const otp = Math.floor(100000 + Math.random() * 900000);
+const createdOtp = await User.findOneAndUpdate(
+  { email },
+  {
+    otp,
+    otpExpires: Date.now() + 10 * 60 * 1000 // 10 minutes
+  },
+  { new: true }
+);
+
+
+// const user = await User.findOne({
+//   email,
+//   otp,
+//   otpExpires: { $gt: Date.now() }
+// });
+
+// import crypto from "crypto";
+
+// const otp = crypto.randomInt(100000, 1000000);
+
+// const hashedOtp = crypto
+//   .createHash("sha256")
+//   .update(String(otp))
+//   .digest("hex");
+
+// await User.findOneAndUpdate(
+//   { email },
+//   {
+//     otp: hashedOtp,
+//     otpExpires: Date.now() + 10 * 60 * 1000
+//   }
+// );
+
+
+
+
+
+
+  res.send('ok');
+
+}
+

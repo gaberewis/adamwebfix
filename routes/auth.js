@@ -7,6 +7,7 @@ import {
    clientMsg,
     getClientRequest, 
     currentUser,
+    forgetPassword,
 } from '../controllers/auth.js';
 import { authenticateUser, getUser } from '../middleware/funcs.js';
 
@@ -18,6 +19,7 @@ router.get('/logout', authenticateUser, logout);
 router.get('/clientmsg', getClientRequest);
 router.post( '/clientmsg', clientMsgValidation, clientMsg);
 router.get('/user', getUser, authenticateUser, currentUser);
+router.post('/forgetpassword', forgetPassword);
 
 
 
