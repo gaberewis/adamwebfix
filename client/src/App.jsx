@@ -13,17 +13,13 @@ import * as action from './actions';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: <InstantPage />,
+    action: action.clientMsg,
     action: action.clientMsg,
     errorElement: <Error />,
 
   },
-  {
-    path : 'instantpage',
-    element : <InstantPage />,
-    action: action.clientMsg,
-  },
-
+  
   {
     path: 'register',
     element: <Register />,

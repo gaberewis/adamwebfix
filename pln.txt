@@ -1,3 +1,47 @@
-- check wix the free version, the paid version terms and condition the subscribsion period and other important things
+- check wix the free version, the paid version terms and condition
+ the subscribsion period and other important things.
+
+imic wix terms and condation and attached to registration page 
 
 - to be assigned after the first point has been done.
+
+when user login 
+direct  to dash board
+
+dashboard : 
+side bar || nav on wide screen contains  : 
+user pages links list 
+add new page to direct to payment page 
+log out 
+
+hi user name  edit page button 
+
+
+first section:
+your pages as aheadline 
+pages in buttons form named by the page product name
+
+second setion: 
+the first user page 
+
+- the product card 
+slide of the product 
+prudct name 
+product price 
+producr description 
+
+add specification button 
+to open text area and start the specification.
+
+
+ADD  featurs button on the top of the specification to disabled after the featred section open
+ and start with 6 features input as key and value and give the ablity to add feature button (button down)
+ up to 20 features the disabled the button.
+
+add section button 
+each section contains (single picture headline text)disable the button after the third section (button down)
+
+
+
+
+then contact us 

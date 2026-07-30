@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Stl = styled.main`
 
-  padding: 2rem;
+ 
   margin: 0 auto
   max-width: 90vw;
 
@@ -11,11 +11,9 @@ const Stl = styled.main`
   margin : 2rem 2rem;
   }
   .intro {
-   
     margin-bottom: 2rem;
-    img {
-      max-width : 40px; 
-    }
+
+  
 h1, h5 {
  text-align : center;
 margin : 1.5rem 0 1rem 0;

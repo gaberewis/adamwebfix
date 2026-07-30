@@ -348,3 +348,14 @@ button:disabled {
       max-width : 40px; 
       margin : 2.5rem;
 }
+    .slogan {
+   display : flex;
+   gap : .6rem;
+    margin : 1.4rem 1.2rem 0;
+    }
+  span{
+  font-weight : 600;
+  }
+    .slogan img {
+      max-width : 40px; 
+    }

@@ -9,12 +9,12 @@ const InstantPage = () => {
     return (
         <Stl>
             <div className="intro">
+                <div className="slogan">
                 <Link to="/">
-                    <img src="/logo.png" alt="colored-logo" />
-                </Link>
+                    <img src="/logo.png" alt="colored-logo" /> 
+                </Link> <span>adamWebFix</span> </div>
+
                 <h1>Instant Page</h1>
-
-
                 <p>
                     Launch your online business in minutes with Instant Page.
 

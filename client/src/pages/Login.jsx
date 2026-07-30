@@ -6,7 +6,10 @@ const Login = () => {
     const actionData = useActionData();
     return (
         <>
-            <img className="logo" src="/logo.png" alt="app-logo" />
+            <div className="slogan">
+                <Link to="/">
+                    <img src="/logo.png" alt="colored-logo" /> 
+                </Link> <span>adamWebFix</span> </div>
             <div className="form-container">
                 <Form method='post' className="form">
                     <FormRow type="email" name="email" />
