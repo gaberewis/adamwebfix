@@ -22,22 +22,22 @@ const validateData = (validationArray) => {
 
 
 export const registerValidation = validateData([
-    body('name').notEmpty().withMessage('name is required'),
-    body('email').notEmpty().withMessage('email is required').isEmail().withMessage('invalid email adress').custom(async (value) => {
+    body('name').notEmpty().withMessage('Name is required'),
+    body('email').notEmpty().withMessage('Email is required').isEmail().withMessage('invalid email adress').custom(async (value) => {
         const user = await User.findOne({ email: value });
-        if (user) throw new CustomError(400, 'email already exist');
+        if (user) throw new CustomError(400, 'Email already exist');
     }),
-    body('password').notEmpty().withMessage('password is required').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
+    body('password').notEmpty().withMessage('Password is required').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
 
 ]);
 
 export const loginValidation = validateData(
     [
-        body('email').notEmpty().withMessage('email is required').isEmail().custom(async (value) => {
+        body('email').notEmpty().withMessage('Email is required').isEmail().custom(async (value) => {
             const user = await User.findOne({ email: value });
-            if (!user) throw new CustomError(400, 'email not exist');
+            if (!user) throw new CustomError(400, 'Email not exist');
         }),
-        body('password').notEmpty().withMessage('password is required'),
+        body('password').notEmpty().withMessage('Password is required'),
     ]
 );
 
@@ -46,7 +46,7 @@ export const paramValidation = validateData([
     param('id').custom(async (value) => {
 
         const isValidId = mongoose.Types.ObjectId.isValid(value);
-        if (!isValidId) throw new CustomError(400, "bad request");
+        if (!isValidId) throw new CustomError(400, "Bad request");
         const user = await User.findById(value);
         if (!user) throw new CustomError(404, "Product not found");
 
@@ -58,9 +58,9 @@ export const paramValidation = validateData([
 export const clientMsgValidation = validateData(
     [
         body('name').notEmpty().withMessage('Product name is required').isLength({ max: 300 }).withMessage('Name is too long'),
-        body('email').notEmpty().withMessage('email is required').isLength({ max: 300 }).withMessage('email is too long'),
-        body('phone').notEmpty().withMessage('phone number is required').isLength({ max: 300 }).withMessage('phone is too long'),
-        body('clientMsg').notEmpty().withMessage('message can not be empty').isLength({max : 1000 }).withMessage('Message is too long'),
+        body('email').notEmpty().withMessage('Email is required').isLength({ max: 300 }).withMessage('email is too long'),
+        body('phone').notEmpty().withMessage('Phone number is required').isLength({ max: 300 }).withMessage('phone is too long'),
+        body('clientMsg').notEmpty().withMessage('Message can not be empty').isLength({max : 1000 }).withMessage('Message is too long'),
 
     ]
 );

@@ -35,7 +35,7 @@ const Checkout = () => {
    <div className="slogan">
                 <Link to="/">
                     <img src="/logo.png" alt="colored-logo" /> 
-                </Link> <span>adamWebFix</span> </div>
+                </Link> <span>AdamWebFix</span> </div>
     <div className="main">
       <div className='card'>
         <div className="title">Subscription Checkout</div>

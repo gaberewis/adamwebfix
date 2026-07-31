@@ -9,7 +9,7 @@ const Login = () => {
             <div className="slogan">
                 <Link to="/">
                     <img src="/logo.png" alt="colored-logo" /> 
-                </Link> <span>adamWebFix</span> </div>
+                </Link> <span>AdamWebFix</span> </div>
             <div className="form-container">
                 <Form method='post' className="form">
                     <FormRow type="email" name="email" />
