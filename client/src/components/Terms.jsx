@@ -1,5 +1,5 @@
 
-const Terms = ({ Terms }) => {
+const Terms = ({ terms }) => {
 
 
     return (
