@@ -32,7 +32,7 @@ const Register = () => {
                     </p>
                 </Form>
             </div>
-            <Terms />
+            <Terms terms={terms}/>
 
         </Stl>
 
