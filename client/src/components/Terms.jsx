@@ -1,3 +1,4 @@
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const Terms = ({ terms }) => {
 
@@ -64,15 +65,15 @@ You represent and warrant that you own, control, or have obtained all necessary 
 <h5>6. PROHIBITED ACTIVITIES AND ACCEPTABLE USE POLICY</h5>
 <p>6.1
 You agree not to use the Service to:
-(a) Create Instant Pages that promote, sell, or distribute illegal products, substances, or services;<br />
-(b) Violate or infringe any intellectual property rights, privacy rights, or other rights of any third party;<br />
-(c) Send spam, unsolicited communications, or bulk messages in violation of applicable laws;<br />
-(d) Engage in fraudulent, deceptive, misleading, or unlawful activities, including impersonation or false advertising;<br />
-(e) Promote hate speech, violence, discrimination, harassment, or illegal content;<br />
-(f) Upload or distribute malware, viruses, malicious code, or any content designed to damage, disrupt, or interfere with software, hardware, or networks;<br />
-(g) Violate any applicable local, national, or international law or regulation;<br />
-(h) Collect, store, or process personal information from others without proper authorization or consent;<br />
-(i) Use the Service for any unlawful, harmful, abusive, or unethical purpose.</p>
+a- Create Instant Pages that promote, sell, or distribute illegal products, substances, or services;<br />
+b- Violate or infringe any intellectual property rights, privacy rights, or other rights of any third party;<br />
+c- Send spam, unsolicited communications, or bulk messages in violation of applicable laws;<br />
+d- Engage in fraudulent, deceptive, misleading, or unlawful activities, including impersonation or false advertising;<br />
+e- Promote hate speech, violence, discrimination, harassment, or illegal content;<br />
+f- Upload or distribute malware, viruses, malicious code, or any content designed to damage, disrupt, or interfere with software, hardware, or networks;<br />
+g- Violate any applicable local, national, or international law or regulation;<br />
+h- Collect, store, or process personal information from others without proper authorization or consent;<br />
+i- Use the Service for any unlawful, harmful, abusive, or unethical purpose.</p>
 <p>6.2 Enforcement
 We reserve the right, but not the obligation, to monitor User Content and activity. We may suspend or terminate accounts immediately, without prior notice, if we determine that a User has violated these Terms or our Acceptable Use Policy.</p>
 
@@ -182,12 +183,12 @@ We may provide notices to you through email, the Service, or by posting notices 
 <p>Website: https://adamwebfix.com</p>
 
 <h5>18. ACKNOWLEDGMENT</h5>
-<p><B>BY CREATING AN ACCOUNT, ACCESSING THE SERVICE, OR CLICKING THE "SUBMIT" BUTTON, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS AND CONDITIONS OF USE.</B></p>
+<p><b>BY CREATING AN ACCOUNT, ACCESSING THE SERVICE, OR CLICKING THE "SUBMIT" BUTTON, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS AND CONDITIONS OF USE.</b></p>
 
                 <span onClick={() => setTerms(false)}><IoIosCloseCircleOutline size={25}
                     color='#FF0000' /></span>
             </div>}
-        </>
+        </> 
     )
 
 }

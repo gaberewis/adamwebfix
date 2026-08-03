@@ -1,33 +1,36 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema(
+  {
     name: String,
     email: String,
     password: String,
-    otp : String,
+    otp: String,
     otpExpires: Date,
+
     role: {
-        type: String,
-        default: 'user'
+      type: String,
+      default: "user",
     },
 
     paymentDetails: {
-        type: Array,
-        default: []
+      type: Array,
+      default: [],
     },
-    status:
-    {
-        env: ["active", "blocked", "deleted"],
-        default: "active"
-    }
 
-
-}, { timestamps: true });
+    status: {
+      type: String,
+      enum: ["active", "blocked", "deleted"],
+      default: "active",
+    },
+  },
+  { timestamps: true }
+);
 
 UserSchema.methods.toJSON = function () {
-    let userObject = this.toObject();
-    delete userObject.password;
-    return userObject;
-}
+  const userObject = this.toObject();
+  delete userObject.password;
+  return userObject;
+};
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model("User", UserSchema);

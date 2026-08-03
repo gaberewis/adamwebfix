@@ -3,7 +3,7 @@ import { FormRow, SubmitButton, Terms } from '../components';
 import { useActionData } from 'react-router-dom';
 import { useState } from "react";
 import Stl from "../css-pocket/register";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+
 
 
 const Register = () => {
