@@ -52,11 +52,11 @@ const pagesSchema = new mongoose.Schema(
     },
 
     paymentDate: String,
-
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
+  status:
+    {
+        env: ["active", "blocked", "deleted"],
+        default: "active"
+    }
   },
   { timestamps: true }
 );

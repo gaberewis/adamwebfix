@@ -15,10 +15,10 @@ const UserSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
-    isBlocked:
+    status:
     {
-        type: Boolean,
-        default: false
+        env: ["active", "blocked", "deleted"],
+        default: "active"
     }
 
 
