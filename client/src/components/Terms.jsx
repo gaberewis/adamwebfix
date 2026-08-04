@@ -1,12 +1,14 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
-const Terms = ({ terms }) => {
+const Terms = ({ terms, setTerms }) => {
 
 
     return (
         <>
 
             {terms && <div className="terms">
+
+                <div className="content">
 
                 <h4>TERMS AND CONDITIONS OF USE FOR ADAMWEBFIX</h4>
                 <p>Last Updated: August 1, 2026</p>
@@ -183,7 +185,10 @@ We may provide notices to you through email, the Service, or by posting notices 
 <p>Website: https://adamwebfix.com</p>
 
 <h5>18. ACKNOWLEDGMENT</h5>
-<p><b>BY CREATING AN ACCOUNT, ACCESSING THE SERVICE, OR CLICKING THE "SUBMIT" BUTTON, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS AND CONDITIONS OF USE.</b></p>
+<p>BY CREATING AN ACCOUNT, ACCESSING THE SERVICE, OR CLICKING THE "SUBMIT" BUTTON, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS AND CONDITIONS OF USE.</p>
+
+
+</div>
 
                 <span onClick={() => setTerms(false)}><IoIosCloseCircleOutline size={25}
                     color='#FF0000' /></span>

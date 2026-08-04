@@ -32,7 +32,7 @@ const Register = () => {
                     </p>
                 </Form>
             </div>
-            <Terms terms={terms}/>
+            <Terms terms={terms} setTerms={setTerms} />
 
         </Stl>
 
