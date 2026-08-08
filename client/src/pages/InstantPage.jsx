@@ -2,11 +2,18 @@ import { Form, Link } from "react-router-dom";
 import { FormRow, SubmitButton } from "../components";
 import Stl from "../css-pocket/Home";
 import { TbPointFilled } from "react-icons/tb";
+import styled from "styled-components";
 
 
 
 const InstantPage = () => {
+
+
+
+
     return (
+        <>
+        <Conestraction><h2>🚀 Coming Soon</h2></Conestraction>
         <Stl>
             <div className="intro">
                 <div className="slogan">
@@ -76,14 +83,24 @@ const InstantPage = () => {
                 </Form>
 
             </div>
-        </Stl>
+        </Stl></>
     );
 };
 
 export default InstantPage;
 
 
+const Conestraction = styled.section`
 
+width: 100vw;
+margin : 0 auto 2rem auto;
+text-align  : center;
+color : var(--grey-100);
+background : var(--grey-800);
+padding : 2rem;
+
+
+`;
 
 
 
