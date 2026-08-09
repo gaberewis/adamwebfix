@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 const Stl = styled.main`
 
- 
-  margin: 0 auto
-  max-width: 90vw;
+
+  margin: 0 auto;
+  max-width: 90%;
+
 
   
   hr{
@@ -25,11 +26,7 @@ max-width : 1000px;
 margin : 0 auto;
 }
 
-a {
-  text-decoration: underline;
-}
-    
-  }
+ }
 
   .featurs{
   margin : 0 auto;

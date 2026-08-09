@@ -1,15 +1,12 @@
 import { Form, Link, useActionData } from "react-router-dom";
-import { SubmitButton, FormRow } from "../components";
+import { SubmitButton, FormRow, Navbar } from "../components";
 
 
 const Login = () => {
     const actionData = useActionData();
     return (
         <>
-            <div className="slogan">
-                <Link to="/">
-                    <img src="/logo.png" alt="colored-logo" /> 
-                </Link> <span>AdamWebFix</span> </div>
+            <Navbar />
             <div className="form-container">
                 <Form method='post' className="form">
                     <FormRow type="email" name="email" />

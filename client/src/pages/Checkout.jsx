@@ -3,6 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
 import Stl from '../css-pocket/Checkout';
+import { Navbar } from "../components"; 
 
 
 const Checkout = () => {
@@ -32,10 +33,7 @@ const Checkout = () => {
   return (
     
     <Stl>
-   <div className="slogan">
-                <Link to="/">
-                    <img src="/logo.png" alt="colored-logo" /> 
-                </Link> <span>AdamWebFix</span> </div>
+      <Navbar />
     <div className="main">
       <div className='card'>
         <div className="title">Subscription Checkout</div>

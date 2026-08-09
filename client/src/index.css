@@ -43,7 +43,7 @@ html {
   --extra-small-text: 0.7em;
   /* rest of the vars */
 
-  --border-radius: .95rem;
+  --border-radius: 1.5rem;
   --letter-spacing: 1px;
   --transition: 0.3s ease-in-out all;
   --max-width: 1120px;
@@ -94,7 +94,7 @@ a:hover {
 
 p {
   margin: 0;
-  line-height: 1.7  ;
+  line-height: 1.7;
 }
 
 h1,
@@ -163,7 +163,7 @@ ul {
   color: var(--white);
   background: var(--logo);
   border: transparent;
-  border-radius: var(--border-radius);
+  border-radius: 20px;
   letter-spacing: var(--letter-spacing);
   padding: 0.7rem 0.75rem;
   box-shadow: var(--shadow-1);
@@ -213,15 +213,12 @@ button:disabled {
 .large-btn {
   max-width: 400px;
   margin: 2rem auto;
-  font-size: 1.5rem;
-  padding: .7rem 2rem;
+  font-size: 1.2rem;
+  padding: .6rem 1.5rem;
   border-radius: 3rem;
   text-align: center;
-  box-shadow: var(--shadow-1);
   display: block;
 }
-
-
 
 
 /* alerts */
@@ -258,7 +255,6 @@ button:disabled {
   min-width: 250px;
   background: var(--background-secondary-color);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-2);
   padding: 1.7rem 1.5rem;
   margin: 2rem auto;
 }
@@ -361,20 +357,5 @@ button:disabled {
 .logo {
   max-width: 40px;
   margin: 2.5rem;
-}
-
-.slogan {
-  display: flex;
-  gap: .6rem;
-  margin: 1.4rem 1.2rem 0;
-  align-items: center;
-}
-
-span {
-  font-weight: 600;
-}
-
-.slogan img {
-  max-width: 40px;
 }
 

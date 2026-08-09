@@ -14,7 +14,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <InstantPage />,
-    action: action.clientMsg,
+     loader : loader.getUser,
     action: action.clientMsg,
     errorElement: <Error />,
 
@@ -31,6 +31,7 @@ const router = createBrowserRouter([
     element: <Login />,
     action: action.loginAction,
   },
+
 
   { 
     path: 'clientmsg',

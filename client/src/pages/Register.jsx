@@ -1,5 +1,5 @@
 import { Form, Link } from "react-router-dom";
-import { FormRow, SubmitButton, Terms } from '../components';
+import { FormRow, SubmitButton, Terms, Navbar } from '../components';
 import { useActionData } from 'react-router-dom';
 import { useState } from "react";
 import Stl from "../css-pocket/register";
@@ -12,10 +12,7 @@ const Register = () => {
     const [terms, setTerms] = useState(false);
     return (
         <Stl>
-            <div className="slogan">
-                <Link to="/">
-                    <img src="/logo.png" alt="colored-logo" />
-                </Link> <span>AdamWebFix</span> </div>
+          <Navbar />
             <div className="form-container">
                 <Form method="post" className="form">
                     <FormRow type='text' name='name' />

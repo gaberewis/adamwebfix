@@ -9,7 +9,7 @@ const ForgetPassword = () => {
    
     return (
         <>
-            <div className="slogan">
+            <div className="nav-bar">
                 <Link to="/">
                     <img src="/logo.png" alt="colored-logo" /> 
                 </Link> <span>AdamWebFix</span> </div>

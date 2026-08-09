@@ -51,11 +51,7 @@ export const login = async (req, res) => {
 
 
 
-export const logout = (req, res) => {
-    res.clearCookie('token', {httpOnly : true});
-    res.status(200).json({msg : 'user logged out!'});
-   
-};
+
 
 export const clientMsg = async(req, res)=>{
 
@@ -129,3 +125,12 @@ const createdOtp = await User.findOneAndUpdate(
 
 }
 
+
+
+
+
+export const logout = (req, res) => {
+    res.clearCookie('token', {httpOnly : true});
+    res.status(200).json({msg : 'user logged out!'});
+   
+};
