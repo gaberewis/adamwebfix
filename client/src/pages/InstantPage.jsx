@@ -28,7 +28,7 @@ const InstantPage = () => {
         <>
        
             <Conestraction><h2>🚀 Coming Soon</h2></Conestraction>
-           <Navbar logout={ logout } userId={userId} />
+           <Navbar logout={ logout } userId={userId} isLog={true} />
             <Stl>
                 <div className="intro">
 

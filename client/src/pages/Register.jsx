@@ -22,7 +22,7 @@ const Register = () => {
                     <div className="check-t">
                         <input type="checkbox"
                             onChange={() => setIschecked(!isChecked)}
-                        /> <span> Accept <Link to="#" onClick={() => setTerms(true)} >terms and conditions</Link> </span> </div>
+                        /> <span> Accept <Link to="#" onClick={() => setTerms(true)} >Terms and conditions</Link> </span> </div>
                     <SubmitButton disabled={isChecked} />
                     <p className="margin-t">Already a member?{" "}<Link to='/login' className="member-btn" > Login</Link>
 
