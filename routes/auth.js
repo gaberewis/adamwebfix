@@ -7,7 +7,7 @@ import {
    clientMsg,
     getClientRequest, 
     currentUser,
-    forgetPassword,
+    forgetPassword, resetPassword,
 } from '../controllers/auth.js';
 import { authenticateUser, getUser } from '../middleware/funcs.js';
 
@@ -20,6 +20,7 @@ router.get('/clientmsg', getClientRequest);
 router.post( '/clientmsg', clientMsgValidation, clientMsg);
 router.get('/user', getUser, authenticateUser, currentUser);
 router.post('/forgetpassword', forgetPassword);
+router.post('/resetpassword', resetPassword)
 
 
 

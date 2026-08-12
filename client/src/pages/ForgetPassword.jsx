@@ -8,7 +8,7 @@ import { TiTick } from "react-icons/ti";
 const ForgetPassword = () => {
 
     const actionData = useActionData();
-
+ 
     return (
         <>
             <Navbar />

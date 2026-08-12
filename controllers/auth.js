@@ -82,55 +82,38 @@ if(!isUser){
   throw new CustomError(401, 'email not exist');
   return;
   }
- const otp = Math.floor(100000 + Math.random() * 900000);
+ const otp = Math.floor(1000 + Math.random() * 9000);
 const createdOtp = await User.findOneAndUpdate(
   { email },
   {
     otp,
-    otpExpires: Date.now() + 10 * 60 * 1000 // 10 minutes
+    otpExpires: Date.now() + 15 * 60 * 1000 // 15 minutes
   },
   { new: true }
 );
 
+  res.status(201).json({msg : "otp has been created"});
 
-// const user = await User.findOne({
-//   email,
-//   otp,
-//   otpExpires: { $gt: Date.now() }
-// });
-
-// import crypto from "crypto";
-
-// const otp = crypto.randomInt(100000, 1000000);
-
-// const hashedOtp = crypto
-//   .createHash("sha256")
-//   .update(String(otp))
-//   .digest("hex");
-
-// await User.findOneAndUpdate(
-//   { email },
-//   {
-//     otp: hashedOtp,
-//     otpExpires: Date.now() + 10 * 60 * 1000
-//   }
-// );
+};
 
 
+export const resetPassword = async(req, res)=>{
 
 
+  const user = User.findOne({otp : req.body.otp});
 
-
-  res.send('ok');
+  if(!user) {throw new CustomError(401, 'wrong otp');
+    return;
+  }
+  // if(user.otpExpires < Date.now()) throw new  CustomError(401, 'Otp has been expired');
+  req.body.password = await hashPassword(req.body.password);
+  User.findOneAndUpdate({ otp : req.body.otp }, {password :   req.body.password});
+  res.status(201).json({msg : "password has been updated"});
 
 }
-
-
-
-
 
 export const logout = (req, res) => {
     res.clearCookie('token', {httpOnly : true});
     res.status(200).json({msg : 'user logged out!'});
-   
+     
 };

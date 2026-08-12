@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   Home, InstantPage, ClientMsg, MsgReceived,
- Login, Register, Checkout,  Dashboard, ForgetPassword,
-  Error,
+  Login, Register, Checkout, Dashboard, ForgetPassword,
+  Error, ResetPassword,
 
 } from './pages';
 
@@ -14,12 +14,12 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <InstantPage />,
-     loader : loader.getUser,
+    loader: loader.getUser,
     action: action.clientMsg,
     errorElement: <Error />,
 
   },
-  
+
   {
     path: 'register',
     element: <Register />,
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
   },
 
 
-  { 
+  {
     path: 'clientmsg',
     element: <ClientMsg />,
     loader: loader.clientMsg,
@@ -45,18 +45,24 @@ const router = createBrowserRouter([
   ,
   {
     path: 'checkout',
-   element : <Checkout />,
-   loader : loader.getUser,
+    element: <Checkout />,
+    loader: loader.getUser,
   },
-   {
+  {
     path: 'dashboard',
-   element : <Dashboard />
+    element: <Dashboard />
 
   },
   {
-    path : 'forgetpassword',
-    element : <ForgetPassword />,
-    action : action.forgetPassword
+    path: 'forgetpassword',
+    element: <ForgetPassword />,
+    action: action.forgetPassword
+  },
+  {
+    path: 'resetpassword',
+    element : <ResetPassword />,
+    action : action.resetPassword,
+
   }
 
 ]);

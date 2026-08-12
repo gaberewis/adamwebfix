@@ -78,3 +78,23 @@ export const forgetPassword = async ({ request }) => {
   }
 }
 
+export const resetPassword = async({ request })=>{
+
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  try {
+
+    await axios.post('/api/auth/resetpassword', data);
+    return null;
+    
+  } catch (error) {
+    console.log(error.response?.data?.msg || 'Request faild');
+     const errMsg = error.response?.data?.msg || 'Request faild';
+    return { errMsg };
+
+  }
+
+}
+
+
