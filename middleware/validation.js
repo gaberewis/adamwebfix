@@ -65,3 +65,11 @@ export const clientMsgValidation = validateData(
     ]
 );
 
+
+
+
+export const resetValidation = validateData([
+    body('otp').notEmpty().withMessage('Otp is required'),
+    body('password').notEmpty().withMessage('Password is required').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
+
+]);

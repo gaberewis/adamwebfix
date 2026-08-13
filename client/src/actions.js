@@ -86,7 +86,7 @@ export const resetPassword = async({ request })=>{
   try {
 
     await axios.post('/api/auth/resetpassword', data);
-    return null;
+    return redirect('/login');
     
   } catch (error) {
     console.log(error.response?.data?.msg || 'Request faild');

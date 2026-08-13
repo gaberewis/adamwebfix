@@ -47,7 +47,7 @@ html {
   --letter-spacing: 1px;
   --transition: 0.3s ease-in-out all;
   --max-width: 1120px;
-  --fixed-width: 380px;
+  --fixed-width: 480px;
   --fluid-width: 90vw;
   --nav-height: 6rem;
   /* box shadow*/
@@ -165,14 +165,14 @@ ul {
   border: transparent;
   border-radius: 20px;
   letter-spacing: var(--letter-spacing);
-  padding: 0.7rem 0.75rem;
+  padding: .6rem 0.75rem;
   box-shadow: var(--shadow-1);
   transition: var(--transition);
   text-transform: capitalize;
   display: inline-block;
   margin: 1rem 0 1rem 0;
   font-size: 1rem;
-  font-weight: 600;
+  
 
 }
 
@@ -255,8 +255,9 @@ button:disabled {
   min-width: 250px;
   background: var(--background-secondary-color);
   border-radius: var(--border-radius);
-  padding: 1.7rem 1.5rem;
+  padding: 1.7rem 2.2rem;
   margin: 2rem auto;
+  box-shadow: var(--shadow-2);
 }
 
 .form-label {
@@ -282,7 +283,7 @@ button:disabled {
 .form-input,
 .form-select,
 .form-btn {
-  height: 40px;
+  height: 35px;
 }
 
 

@@ -4,6 +4,9 @@ import ClientMsg from '../models/ClientMsg.js';
 import { hashPassword, comparePassword } from '../middleware/funcs.js';
 import { createToken, verifyToken } from '../middleware/funcs.js';
 import { CustomError } from '../middleware/errorHandler.js';
+import sgMail from '@sendgrid/mail';
+
+  sgMail.setApiKey('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');
 
 
 export const registerUser = async (req, res) => {
@@ -31,32 +34,28 @@ export const registerUser = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    const user = await User.findOne({ email: req.body.email });
-    const validPassword = await comparePassword(req.body.password, user.password);
-   if (!validPassword) throw new CustomError(400, 'wrong password');
-   
-    const token = createToken({ userId: user._id, userRole: user.role, userName : user.name });
- 
-    res.cookie(
-        'token', token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-        secure: process.env.NODE_ENV === 'production',
-    }
-    );
+  const user = await User.findOne({ email: req.body.email });
+  const validPassword = await comparePassword(req.body.password, user.password);
+  if (!validPassword) throw new CustomError(400, 'wrong password');
 
-    res.status(201).json({ msg: 'user logged in' });
+  const token = createToken({ userId: user._id, userRole: user.role, userName: user.name });
+
+  res.cookie(
+    'token', token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    secure: process.env.NODE_ENV === 'production',
+  }
+  );
+
+  res.status(201).json({ msg: 'user logged in' });
 };
 
 
+export const clientMsg = async (req, res) => {
 
-
-
-
-export const clientMsg = async(req, res)=>{
-
-    const homeFormData = await ClientMsg.create(req.body);
-    res.status(201).json({msg : 'client request created '});
+  const homeFormData = await ClientMsg.create(req.body);
+  res.status(201).json({ msg: 'client request created ' });
 
 };
 
@@ -69,51 +68,67 @@ export const getClientRequest = async (req, res) => {
   }
 };
 
-export const currentUser = async (req, res)=>{
+export const currentUser = async (req, res) => {
 
-  res.status(200).json({ userId : req.user.userId });
+  res.status(200).json({ userId: req.user.userId });
 
 }
 
-export const forgetPassword = async(req, res)=>{
+export const forgetPassword = async (req, res) => {
   const { email } = req.body;
-const isUser = await User.findOne({email});
-if(!isUser){
-  throw new CustomError(401, 'email not exist');
-  return;
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new CustomError(401, 'email not exist');
+    return;
   }
- const otp = Math.floor(1000 + Math.random() * 9000);
-const createdOtp = await User.findOneAndUpdate(
-  { email },
-  {
-    otp,
-    otpExpires: Date.now() + 15 * 60 * 1000 // 15 minutes
-  },
-  { new: true }
-);
+  const otp = Math.floor(1000 + Math.random() * 9000);
+  const createdOtp = await User.findOneAndUpdate(
+    { email },
+    {
+      otp,
+      otpExpires: Date.now() + 15 * 60 * 1000 // 15 minutes
+    },
+    { new: true }
+  );
 
-  res.status(201).json({msg : "otp has been created"});
+  //send otp by email
+     const emailData = {
+                  to: `${user.email}`,
+                  from: 'noreply@adam-estore.com',
+                  subject: `Reset Password`,
+                  html: `
+                              <h5>Dear ${user.name} :  </h5>
+                             
+                              <h5>Your Otp Code is : ${otp}</h5>
+                              <a href="https://adam-estore.com/resetpassword" >Reset your password.</a>
+                          `
+              };
+  
+              sgMail.send(emailData);
+
+  res.status(201).json({ msg: "otp has been created" });
 
 };
 
 
-export const resetPassword = async(req, res)=>{
+export const resetPassword = async (req, res) => {
+  const otp = req.body.otp;
+  const user = await User.findOne({ otp });
+  console.log(otp);
 
+  if (!user)
+    throw new CustomError(401, 'wrong otp');
 
-  const user = User.findOne({otp : req.body.otp});
+  if (user.otpExpires < Date.now()) throw new CustomError(401, 'Otp has expired');
+  const password = req.body.password = await hashPassword(req.body.password);
+  await User.findOneAndUpdate({ otp }, { password, otp: '' });
+  res.status(201).json({ msg: "password has been updated" });
 
-  if(!user) {throw new CustomError(401, 'wrong otp');
-    return;
-  }
-  // if(user.otpExpires < Date.now()) throw new  CustomError(401, 'Otp has been expired');
-  req.body.password = await hashPassword(req.body.password);
-  User.findOneAndUpdate({ otp : req.body.otp }, {password :   req.body.password});
-  res.status(201).json({msg : "password has been updated"});
+};
 
-}
 
 export const logout = (req, res) => {
-    res.clearCookie('token', {httpOnly : true});
-    res.status(200).json({msg : 'user logged out!'});
-     
+  res.clearCookie('token', { httpOnly: true });
+  res.status(200).json({ msg: 'user logged out!' });
+
 };

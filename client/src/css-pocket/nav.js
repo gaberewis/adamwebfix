@@ -6,7 +6,7 @@ const Stl = styled.main`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1.4rem 2rem ;
+  margin: 1rem ;
 
 
  a:first-child {
@@ -18,12 +18,19 @@ const Stl = styled.main`
 
 .nav-bar span,
 a {
-  font-weight: 600;
+font-weight : 500;
   color: var(--grey-700);
+  font-size : .875rem;
 }
  img {
   max-width: 40px;
 }
+
+.contact{
+display: flex;
+gap : .6rem;
+}
+
 
 `;
 

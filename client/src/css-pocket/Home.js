@@ -17,7 +17,7 @@ const Stl = styled.main`
   
 h1, h5 {
  text-align : center;
-margin : 1.5rem 0 1rem 0;
+margin : 1.2rem 0 rem 0;
 line-height : 2;
 }
 p {
@@ -27,6 +27,8 @@ margin : 0 auto;
 }
 
  }
+
+
 
   .featurs{
   margin : 0 auto;
@@ -46,21 +48,31 @@ margin : 0 auto;
    margin-bottom : 1rem
    
    }
+
    h5{
-   text-decoration : underline;
+   font-weight : 600;
    }
 
+
   }
+
+
 
  .start a {
  text-decoration : none;
  }
+ .cta {
+  margin-bottom : 0;
+  font-weight : 600;
+ 
+  }
 
   @media(max-width : 798px){
 
   .featurs{
   display: block }
-  }
+}
+
 
 `;
 
