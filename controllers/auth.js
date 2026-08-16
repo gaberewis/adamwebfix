@@ -1,12 +1,11 @@
-
 import User from '../models/User.js';
 import ClientMsg from '../models/ClientMsg.js';
 import { hashPassword, comparePassword } from '../middleware/funcs.js';
 import { createToken, verifyToken } from '../middleware/funcs.js';
 import { CustomError } from '../middleware/errorHandler.js';
-import sgMail from '@sendgrid/mail';
+import { sendEmail } from "../middleware/funcs.js";
 
-  sgMail.setApiKey('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');
+
 
 
 export const registerUser = async (req, res) => {
@@ -76,38 +75,44 @@ export const currentUser = async (req, res) => {
 
 export const forgetPassword = async (req, res) => {
   const { email } = req.body;
-  const user = await User.findOne({ email });
-  if (!user) {
+  const isUser = await User.findOne({ email });
+  if (!isUser) {
     throw new CustomError(401, 'email not exist');
     return;
   }
   const otp = Math.floor(1000 + Math.random() * 9000);
-  const createdOtp = await User.findOneAndUpdate(
+  const user = await User.findOneAndUpdate(
     { email },
     {
       otp,
       otpExpires: Date.now() + 15 * 60 * 1000 // 15 minutes
     },
-    { new: true }
+    {new : true}
   );
 
   //send otp by email
-     const emailData = {
-                  to: `${user.email}`,
-                  from: 'noreply@adam-estore.com',
-                  subject: `Reset Password`,
-                  html: `
-                              <h5>Dear ${user.name} :  </h5>
-                             
-                              <h5>Your Otp Code is : ${otp}</h5>
-                              <a href="https://adam-estore.com/resetpassword" >Reset your password.</a>
-                          `
-              };
-  
-              sgMail.send(emailData);
+try {
+    await sendEmail(
+       `${user.email}`,
+        "Reset Your Password",
+        `
+        <h5><b>Hello! ${user.name}</b></h5>
 
-  res.status(201).json({ msg: "otp has been created" });
+        <p>OTP code is: <b>${user.otp}</b></p>
 
+        <p>
+            <a href="https://adamwebfix.com/resetpassword">
+                Click the link to reset your password
+            </a>
+        </p>
+        `
+    );
+
+    res.json({ message: "Email sent successfully" });
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Email failed" });
+}
 };
 
 
