@@ -71,49 +71,106 @@ export const currentUser = async (req, res) => {
 
   res.status(200).json({ userId: req.user.userId });
 
-}
+};
+
+
+
+
+// export const forgetPassword = async (req, res) => {
+//   const { email } = req.body;
+ 
+//   const otp = Math.floor(1000 + Math.random() * 9000);
+//   const user = await User.findOneAndUpdate(
+//     { email },
+//     {
+//       otp,
+//       otpExpires: Date.now() + 15 * 60 * 1000 // 15 minutes
+//     }
+//   );
+
+//     if (!user) {
+//     throw new CustomError(401, 'email not exist');
+    
+//   }
+
+//   //send otp by email
+
+//     await sendEmail(
+//        `${user.email}`,
+//         "Reset Your Password",
+//         `
+//         <h5><b>Hello! ${user.name}</b></h5>
+
+//         <p>OTP code is: <b>${user.otp}</b></p>
+
+//         <p>
+//             <a href="https://adamwebfix.com/resetpassword">
+//                 Click the link to reset your password
+//             </a>
+//         </p>
+//         `
+//     );
+
+//     res.json({ message: "Email sent successfully" });
+
+
+// };
+
 
 export const forgetPassword = async (req, res) => {
   const { email } = req.body;
-  const isUser = await User.findOne({ email });
-  if (!isUser) {
-    throw new CustomError(401, 'email not exist');
-    return;
-  }
-  const otp = Math.floor(1000 + Math.random() * 9000);
-  const user = await User.findOneAndUpdate(
-    { email },
-    {
-      otp,
-      otpExpires: Date.now() + 15 * 60 * 1000 // 15 minutes
-    },
-    {new : true}
-  );
 
-  //send otp by email
-try {
-    await sendEmail(
-       `${user.email}`,
-        "Reset Your Password",
-        `
-        <h5><b>Hello! ${user.name}</b></h5>
+  try {
+    const otp = Math.floor(1000 + Math.random() * 9000);
 
-        <p>OTP code is: <b>${user.otp}</b></p>
-
-        <p>
-            <a href="https://adamwebfix.com/resetpassword">
-                Click the link to reset your password
-            </a>
-        </p>
-        `
+    const user = await User.findOneAndUpdate(
+      { email },
+      {
+        otp,
+        otpExpires: Date.now() + 15 * 60 * 1000,
+      },
+      { new: true }
     );
 
-    res.json({ message: "Email sent successfully" });
-} catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Email failed" });
-}
+    if (!user) {
+      throw new CustomError(401, "Email does not exist");
+    }
+
+    await sendEmail(
+      user.email,
+      "Reset Your Password",
+      `
+        <h5><b>Hello ${user.name},</b></h5>
+
+        <p>Your OTP code is: <b>${user.otp}</b></p>
+
+        <p>This code will expire in 15 minutes.</p>
+
+        <p>
+          <a href="https://adamwebfix.com/resetpassword">
+            Click here to reset your password
+          </a>
+        </p>
+      `
+    );
+
+    res.status(200).json({
+      message: "Email sent successfully",
+    });
+  } catch (error) {
+    console.error("Forgot password error:", error);
+
+    res.status(500).json({
+      message: "Unable to send reset email. Please try again later.",
+    });
+  }
 };
+
+
+
+
+
+
 
 
 export const resetPassword = async (req, res) => {
