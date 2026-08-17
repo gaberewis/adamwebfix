@@ -65,26 +65,37 @@ export const authenticateAdmin = (...roles) => {
 
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
-    },
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
 
 export const sendEmail = async (to, subject, message) => {
   console.log("EMAIL_USER exists:", !!process.env.EMAIL_USER);
   console.log("EMAIL_PASSWORD exists:", !!process.env.EMAIL_PASSWORD);
 
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
-    throw new Error("EMAIL_USER or EMAIL_PASSWORD is missing");
-  }
+  try {
+    await transporter.verify();
 
+    console.log("SMTP connection successful");
 
     await transporter.sendMail({
-        from: `"no-replay@AdamWebFix" <${process.env.EMAIL_USER}>`,
-        to,
-        subject,
-        html: message,
+      from: `"AdamWebFix" <${process.env.EMAIL_USER}>`,
+      to,
+      subject,
+      html: message,
     });
+
+    console.log("Email sent successfully");
+  } catch (error) {
+    console.error("SMTP ERROR:", error);
+    throw error;
+  }
 };
