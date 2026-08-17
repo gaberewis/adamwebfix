@@ -38,16 +38,23 @@ cloudinary.config({
 
 app.use(cookieParser());
 app.use(express.json());
+
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "https://res.cloudinary.com"],
-     
+      scriptSrc: [
+        "'self'",
+        "https://static.cloudflareinsights.com",
+      ],
+      imgSrc: [
+        "'self'",
+        "data:",
+        "https://res.cloudinary.com",
+      ],
     },
   })
 );
-
 
 app.get('/', (req, res) => {
   res.send('backend...');
