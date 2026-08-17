@@ -74,7 +74,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendEmail = async (to, subject, message) => {
     await transporter.sendMail({
-        from: `"no-reply@adamwebfix.com" <${process.env.EMAIL_USER}>`,
+        from: process.env.EMAIL_USER,
         to,
         subject,
         html: message,
