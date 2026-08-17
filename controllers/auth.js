@@ -99,7 +99,7 @@ export const forgetPassword = async (req, res) => {
     }
 
     await sendEmail(
-     await user.email,
+      user.email,
       "Reset Your Password",
       `
         <h5><b>Hello ${user.name},</b></h5>
