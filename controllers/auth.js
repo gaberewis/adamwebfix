@@ -98,23 +98,23 @@ export const forgetPassword = async (req, res) => {
       throw new CustomError(401, "Email does not exist");
     }
 
-    // await sendEmail(
-    //   user.email,
-    //   "Reset Your Password",
-    //   `
-    //     <h5><b>Hello ${user.name},</b></h5>
+    await sendEmail(
+      user.email,
+      "Reset Your Password",
+      `
+        <h5><b>Hello ${user.name},</b></h5>
 
-    //     <p>Your OTP code is: <b>${user.otp}</b></p>
+        <p>Your OTP code is: <b>${user.otp}</b></p>
 
-    //     <p>This code will expire in 15 minutes.</p>
+        <p>This code will expire in 15 minutes.</p>
 
-    //     <p>
-    //       <a href="https://adamwebfix.com/resetpassword">
-    //         Click here to reset your password
-    //       </a>
-    //     </p>
-    //   `
-    // );
+        <p>
+          <a href="https://adamwebfix.com/resetpassword">
+            Click here to reset your password
+          </a>
+        </p>
+      `
+    );
 
     res.status(200).json({
       message: "Email sent successfully",
