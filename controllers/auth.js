@@ -76,45 +76,7 @@ export const currentUser = async (req, res) => {
 
 
 
-// export const forgetPassword = async (req, res) => {
-//   const { email } = req.body;
- 
-//   const otp = Math.floor(1000 + Math.random() * 9000);
-//   const user = await User.findOneAndUpdate(
-//     { email },
-//     {
-//       otp,
-//       otpExpires: Date.now() + 15 * 60 * 1000 // 15 minutes
-//     }
-//   );
 
-//     if (!user) {
-//     throw new CustomError(401, 'email not exist');
-    
-//   }
-
-//   //send otp by email
-
-//     await sendEmail(
-//        `${user.email}`,
-//         "Reset Your Password",
-//         `
-//         <h5><b>Hello! ${user.name}</b></h5>
-
-//         <p>OTP code is: <b>${user.otp}</b></p>
-
-//         <p>
-//             <a href="https://adamwebfix.com/resetpassword">
-//                 Click the link to reset your password
-//             </a>
-//         </p>
-//         `
-//     );
-
-//     res.json({ message: "Email sent successfully" });
-
-
-// };
 
 
 export const forgetPassword = async (req, res) => {
@@ -136,23 +98,23 @@ export const forgetPassword = async (req, res) => {
       throw new CustomError(401, "Email does not exist");
     }
 
-    await sendEmail(
-      user.email,
-      "Reset Your Password",
-      `
-        <h5><b>Hello ${user.name},</b></h5>
+    // await sendEmail(
+    //   user.email,
+    //   "Reset Your Password",
+    //   `
+    //     <h5><b>Hello ${user.name},</b></h5>
 
-        <p>Your OTP code is: <b>${user.otp}</b></p>
+    //     <p>Your OTP code is: <b>${user.otp}</b></p>
 
-        <p>This code will expire in 15 minutes.</p>
+    //     <p>This code will expire in 15 minutes.</p>
 
-        <p>
-          <a href="https://adamwebfix.com/resetpassword">
-            Click here to reset your password
-          </a>
-        </p>
-      `
-    );
+    //     <p>
+    //       <a href="https://adamwebfix.com/resetpassword">
+    //         Click here to reset your password
+    //       </a>
+    //     </p>
+    //   `
+    // );
 
     res.status(200).json({
       message: "Email sent successfully",
