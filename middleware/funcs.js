@@ -1,5 +1,7 @@
+import "dotenv/config";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
+import nodemailer from "nodemailer";
 import { CustomError } from "./errorHandler.js";
 
 export const hashPassword = async (password) => {
@@ -57,4 +59,24 @@ export const authenticateAdmin = (...roles) => {
     }
     next();
   };
+};
+
+
+
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+    },
+});
+
+export const sendEmail = async (to, subject, message) => {
+    await transporter.sendMail({
+        from: 'no-reply@adamwebfix.com',
+        to,
+        subject,
+        html: message,
+    });
 };
