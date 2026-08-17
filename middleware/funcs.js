@@ -73,8 +73,16 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendEmail = async (to, subject, message) => {
+  console.log("EMAIL_USER exists:", !!process.env.EMAIL_USER);
+  console.log("EMAIL_PASSWORD exists:", !!process.env.EMAIL_PASSWORD);
+
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+    throw new Error("EMAIL_USER or EMAIL_PASSWORD is missing");
+  }
+
+
     await transporter.sendMail({
-        from: process.env.EMAIL_USER,
+        from: `"no-replay@AdamWebFix" <${process.env.EMAIL_USER}>`,
         to,
         subject,
         html: message,
