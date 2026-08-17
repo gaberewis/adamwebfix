@@ -68,7 +68,7 @@ export const authenticateAdmin = (...roles) => {
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
+  port: 25,
   secure: false, // false for port 587
   family: 4,
   auth: {
