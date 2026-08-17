@@ -66,43 +66,74 @@ export const authenticateAdmin = (...roles) => {
 
 
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 25,
-  secure: false, // false for port 587
-  family: 4,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-  tls: {
-    ciphers: "SSLv3",
-    rejectUnauthorized: false,
-  },
-  connectionTimeout: 30000,
-  greetingTimeout: 30000,
-  socketTimeout: 30000,
-});
+const createTransporter = () => {
+  return nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    family: 4,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000,
+    debug: process.env.NODE_ENV === 'development',
+  });
+};
 
-export const sendEmail = async (to, subject, message) => {
+let transporter = createTransporter();
+
+export const sendEmail = async (to, subject, message, retries = 3) => {
   console.log("EMAIL_USER exists:", !!process.env.EMAIL_USER);
   console.log("EMAIL_PASSWORD exists:", !!process.env.EMAIL_PASSWORD);
 
-  try {
-    await transporter.verify();
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      // Verify connection
+      await transporter.verify();
+      console.log("SMTP connection successful");
 
-    console.log("SMTP connection successful");
+      // Send email
+      const info = await transporter.sendMail({
+        from: `"AdamWebFix" <${process.env.EMAIL_USER}>`,
+        to,
+        subject,
+        html: message,
+      });
 
-    await transporter.sendMail({
-      from: `"AdamWebFix" <${process.env.EMAIL_USER}>`,
-      to,
-      subject,
-      html: message,
-    });
+      console.log("Email sent successfully:", info.messageId);
+      return info;
+    } catch (error) {
+      console.error(`SMTP ERROR (attempt ${attempt}/${retries}):`, error);
 
-    console.log("Email sent successfully");
-  } catch (error) {
-    console.error("SMTP ERROR:", error);
-    throw error;
+      if (attempt === retries) {
+        throw error;
+      }
+
+      // Wait before retry (exponential backoff)
+      await new Promise(resolve => setTimeout(resolve, 2000 * attempt));
+      
+      // Recreate transporter on failure
+      transporter = createTransporter();
+    }
   }
 };
+
+// Verify transporter on startup
+const verifyTransporter = async () => {
+  try {
+    await transporter.verify();
+    console.log('Transporter verified successfully');
+  } catch (error) {
+    console.error('Transporter verification failed:', error);
+    // Try to recreate
+    transporter = createTransporter();
+  }
+};
+
+verifyTransporter();
