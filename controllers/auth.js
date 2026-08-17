@@ -3,7 +3,7 @@ import ClientMsg from '../models/ClientMsg.js';
 import { hashPassword, comparePassword } from '../middleware/funcs.js';
 import { createToken, verifyToken } from '../middleware/funcs.js';
 import { CustomError } from '../middleware/errorHandler.js';
-import { sendEmail } from "../middleware/funcs.js";
+
 
 
 
