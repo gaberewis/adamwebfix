@@ -82,7 +82,7 @@ export const currentUser = async (req, res) => {
 export const forgetPassword = async (req, res) => {
   const { email } = req.body;
 
-  try {
+ 
     const otp = Math.floor(1000 + Math.random() * 9000);
 
     const user = await User.findOneAndUpdate(
@@ -98,34 +98,9 @@ export const forgetPassword = async (req, res) => {
       throw new CustomError(401, "Email does not exist");
     }
 
-    await sendEmail(
-      user.email,
-      "Reset Your Password",
-      `
-        <h5><b>Hello ${user.name},</b></h5>
-
-        <p>Your OTP code is: <b>${user.otp}</b></p>
-
-        <p>This code will expire in 15 minutes.</p>
-
-        <p>
-          <a href="https://adamwebfix.com/resetpassword">
-            Click here to reset your password
-          </a>
-        </p>
-      `
-    );
-
-    res.status(200).json({
-      message: "Email sent successfully",
-    });
-  } catch (error) {
-    console.error("Forgot password error:", error);
-
-    res.status(500).json({
-      message: "Unable to send reset email. Please try again later.",
-    });
-  }
+res.status(201).json({msg : "otp has updated"});
+   
+ 
 };
 
 

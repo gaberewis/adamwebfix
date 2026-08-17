@@ -1,7 +1,6 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
-import nodemailer from "nodemailer";
 import { CustomError } from "./errorHandler.js";
 
 export const hashPassword = async (password) => {
@@ -65,44 +64,3 @@ export const authenticateAdmin = (...roles) => {
 
 
 
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 25,
-  secure: false, // false for port 587
-  family: 4,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-  tls: {
-    ciphers: "SSLv3",
-    rejectUnauthorized: false,
-  },
-  connectionTimeout: 30000,
-  greetingTimeout: 30000,
-  socketTimeout: 30000,
-});
-
-export const sendEmail = async (to, subject, message) => {
-  console.log("EMAIL_USER exists:", !!process.env.EMAIL_USER);
-  console.log("EMAIL_PASSWORD exists:", !!process.env.EMAIL_PASSWORD);
-
-  try {
-    await transporter.verify();
-
-    console.log("SMTP connection successful");
-
-    await transporter.sendMail({
-      from: `"AdamWebFix" <${process.env.EMAIL_USER}>`,
-      to,
-      subject,
-      html: message,
-    });
-
-    console.log("Email sent successfully");
-  } catch (error) {
-    console.error("SMTP ERROR:", error);
-    throw error;
-  }
-};
