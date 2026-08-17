@@ -28,7 +28,6 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.static(path.resolve(__dirname, './client/dist')));
 
 
-
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -36,15 +35,24 @@ cloudinary.config({
 });
 
 
-
 app.use(cookieParser());
 app.use(express.json());
+
+
+
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "https://res.cloudinary.com"],
-     
+      scriptSrc: [
+        "'self'",
+        "https://static.cloudflareinsights.com",
+      ],
+      imgSrc: [
+        "'self'",
+        "data:",
+        "https://res.cloudinary.com",
+      ],
     },
   })
 );
