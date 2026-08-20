@@ -3,7 +3,7 @@ import ClientMsg from '../models/ClientMsg.js';
 import { hashPassword, comparePassword } from '../middleware/funcs.js';
 import { createToken, verifyToken } from '../middleware/funcs.js';
 import { CustomError } from '../middleware/errorHandler.js';
-import { sendEmail } from "../middleware/funcs.js";
+
 
 
 
@@ -82,7 +82,7 @@ export const currentUser = async (req, res) => {
 export const forgetPassword = async (req, res) => {
   const { email } = req.body;
 
-  try {
+ 
     const otp = Math.floor(1000 + Math.random() * 9000);
 
     const user = await User.findOneAndUpdate(
@@ -98,6 +98,7 @@ export const forgetPassword = async (req, res) => {
       throw new CustomError(401, "Email does not exist");
     }
 
+<<<<<<< HEAD
     await sendEmail({
   to : user.email,
    subject :    "Reset Your Password",
@@ -128,6 +129,11 @@ export const forgetPassword = async (req, res) => {
       message: "Unable to send reset email. Please try again later.",
     });
   }
+=======
+res.status(201).json({msg : "otp has updated"});
+   
+ 
+>>>>>>> 32cafedee2c33a989e29ddad6fdba5b8a4d8bf62
 };
 
 

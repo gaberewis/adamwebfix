@@ -2,7 +2,10 @@ import dotenv from "dotenv";
 dotenv.config();
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
+<<<<<<< HEAD
 import { BrevoClient } from "@getbrevo/brevo";
+=======
+>>>>>>> 32cafedee2c33a989e29ddad6fdba5b8a4d8bf62
 import { CustomError } from "./errorHandler.js";
 
 export const hashPassword = async (password) => {
@@ -66,6 +69,7 @@ export const authenticateAdmin = (...roles) => {
 
 
 
+<<<<<<< HEAD
 
 const brevo = new BrevoClient({
   apiKey: process.env.BREVO_API_KEY,
@@ -100,3 +104,5 @@ export const sendEmail = async ({ to, subject, html }) => {
   }
 };
 
+=======
+>>>>>>> 32cafedee2c33a989e29ddad6fdba5b8a4d8bf62
