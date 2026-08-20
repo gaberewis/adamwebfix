@@ -98,11 +98,11 @@ export const forgetPassword = async (req, res) => {
       throw new CustomError(401, "Email does not exist");
     }
 
-    await sendEmail(
-     await user.email,
-      "Reset Your Password",
-      `
-        <h5><b>Hello ${user.name},</b></h5>
+    await sendEmail({
+  to : user.email,
+   subject :    "Reset Your Password",
+      
+      html :   `<h5><b>Hello ${user.name},</b></h5>
 
         <p>Your OTP code is: <b>${user.otp}</b></p>
 
@@ -114,6 +114,8 @@ export const forgetPassword = async (req, res) => {
           </a>
         </p>
       `
+    }
+    
     );
 
     res.status(200).json({

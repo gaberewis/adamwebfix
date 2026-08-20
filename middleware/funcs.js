@@ -1,7 +1,8 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config();
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
-import nodemailer from "nodemailer";
+import { BrevoClient } from "@getbrevo/brevo";
 import { CustomError } from "./errorHandler.js";
 
 export const hashPassword = async (password) => {
@@ -66,42 +67,36 @@ export const authenticateAdmin = (...roles) => {
 
 
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-
-  family: 4,
-
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
+const brevo = new BrevoClient({
+  apiKey: process.env.BREVO_API_KEY,
 });
 
-export const sendEmail = async (to, subject, message) => {
-  console.log("EMAIL_USER exists:", !!process.env.EMAIL_USER);
-  console.log("EMAIL_PASSWORD exists:", !!process.env.EMAIL_PASSWORD);
-
+export const sendEmail = async ({ to, subject, html }) => {
   try {
-    await transporter.verify();
-
-    console.log("SMTP connection successful");
-
-    await transporter.sendMail({
-      from: `"AdamWebFix" <${process.env.EMAIL_USER}>`,
-      to,
+    const result = await brevo.transactionalEmails.sendTransacEmail({
+      sender: {
+        email: "no-replay@adamwebfix.com",
+        name: "Adam Web Fix",
+      },
+      to: [
+        {
+          email: to,
+        },
+      ],
       subject,
-      html: message,
+      htmlContent: html,
     });
 
-    console.log("Email sent successfully");
+    console.log("Brevo email sent:", result.messageId);
+
+    return result;
   } catch (error) {
-    console.error("SMTP ERROR:", error);
+    console.error(
+      "Brevo email error:",
+      error?.response?.body || error?.message || error
+    );
+
     throw error;
   }
 };
+
