@@ -9,7 +9,7 @@ export const registerAction = async ({ request }) => {
   const data = Object.fromEntries(formData);
   try {
     await axios.post('/api/auth/register', data);
-    return redirect('/checkout');
+    return redirect('/login');
   } catch (error) {
     console.log(error.response?.data?.msg);
     console.log('BACKEND ERROR:', error.response?.data);
