@@ -2,13 +2,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   Home, InstantPage, ClientMsg, MsgReceived,
   Login, Register, Checkout, Dashboard, ForgetPassword,
-  Error, ResetPassword,
+  Error, ResetPassword, Page
 
 } from './pages';
 
 import * as loader from './loaders';
 
 import * as action from './actions';
+import { Children } from "react";
 
 const router = createBrowserRouter([
   {
@@ -21,38 +22,21 @@ const router = createBrowserRouter([
   },
 
   {
-    path: 'register',
-    element: <Register />,
-    action: action.registerAction
-
-  },
-  {
-    path: 'login',
-    element: <Login />,
-    action: action.loginAction,
-  },
-
-
-  {
-    path: 'clientmsg',
-    element: <ClientMsg />,
-    loader: loader.clientMsg,
-  },
-  {
-    path: 'requestdone',
-    element: <MsgReceived />
-  }
-  ,
-  {
     path: 'checkout',
     element: <Checkout />,
     loader: loader.getUser,
   },
   {
     path: 'dashboard',
-    element: <Dashboard />
-
-  },
+    element: <Dashboard />,
+    loader : loader.dashboard,
+    children: [
+      {
+        index : true,
+        element : <Page />,
+      }
+    ]
+},
   {
     path: 'forgetpassword',
     element: <ForgetPassword />,
@@ -63,6 +47,26 @@ const router = createBrowserRouter([
     element : <ResetPassword />,
     action : action.resetPassword,
 
+  },
+    {
+    path: 'register',
+    element: <Register />,
+    action: action.registerAction
+
+  },
+  {
+    path: 'login',
+    element: <Login />,
+    action: action.loginAction,
+  },
+    {
+    path: 'clientmsg',
+    element: <ClientMsg />,
+    loader: loader.clientMsg,
+  },
+  {
+    path: 'requestdone',
+    element: <MsgReceived />
   }
 
 ]);

@@ -1,7 +1,7 @@
 import { Form, Link, useLoaderData, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { FormRow, SubmitButton, Navbar } from "../components";
-import Stl from "../css-pocket/Home";
+import Stl from "../css-pocket/home";
 import { TbPointFilled } from "react-icons/tb";
 import styled from "styled-components";
 

@@ -2,7 +2,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
-import Stl from '../css-pocket/Checkout';
+import Stl from '../css-pocket/checkout';
 import { Navbar } from "../components"; 
 
 

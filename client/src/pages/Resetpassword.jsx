@@ -1,5 +1,5 @@
 import { Form, useActionData } from "react-router-dom";
-import { SubmitButton, FormRow, Navbar  } from "../components";
+import { SubmitButton, FormRow  } from "../components";
 
 
 const ResetPassword = ()=>{

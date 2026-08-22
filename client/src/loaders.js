@@ -31,5 +31,8 @@ const { data } = await axios.get('/api/auth/clientmsg');
 }
 
 
+export const dashboard = async()=>{
 
+  console.log("dashboard");
+};
 
