@@ -18,7 +18,7 @@ const InstantPage = () => {
            <Navbar userId={userId} isLog={true} />
             <Stl>
                 <div className="intro">
-<Link to="/dashboard" >dashboard</Link>
+
 
                     <h1>Instant Page</h1>
                     <p>

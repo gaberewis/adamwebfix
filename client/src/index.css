@@ -80,16 +80,18 @@ body {
   line-height: 1.5;
 }
 
-
+hr{
+  margin: 2rem 0 2rem 0;
+}
 a {
-  color: #009cde;
+  color: var(--grey-700);
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 a:hover {
-  color: blueviolet;
-  text-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
+  opacity: .7;
+
 }
 
 p {
@@ -177,9 +179,7 @@ ul {
 }
 
 .btn:hover {
-  background: var(--grey-300);
-  color: var(--grey-600);
-  box-shadow: var(--shadow-3);
+opacity: .7;
 }
 
 .btn-hipster {
@@ -188,8 +188,7 @@ ul {
 }
 
 .btn-hipster:hover {
-  color: var(--primary-200);
-  background: var(--grey-500)
+opacity: .7;
 }
 
 .btn-block {
@@ -206,8 +205,7 @@ button:disabled {
 }
 
 .danger-btn:hover {
-  color: var(--white);
-  background: var(--red-dark);
+ opacity: .7;
 }
 
 .large-btn {

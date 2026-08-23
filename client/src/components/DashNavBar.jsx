@@ -11,7 +11,7 @@ const DashNavBar = ()=>{
 
         <span onClick={ toggleBar }>< BsMenuApp /></span>
         <h5>Dashboard</h5>
-        <div className="nav-right">Hi user name | <Link to="#contact">Contact us</Link></div>
+        <Link to="#contact">Contact us</Link>
     </div>)
 }
 
