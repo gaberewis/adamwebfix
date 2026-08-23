@@ -1,5 +1,10 @@
+import Stl from "../css-pocket/page";
+
+
 const Page = ()=>{
-    return (<p>page</p>)
+    return (<Stl>
+        page ....
+        </Stl>)
 }
 
 export default Page;

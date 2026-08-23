@@ -1,5 +1,5 @@
-import { Form, Link, useLoaderData, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import { Form, Link, useLoaderData } from "react-router-dom";
+
 import { FormRow, SubmitButton, Navbar } from "../components";
 import Stl from "../css-pocket/homes";
 import { TbPointFilled } from "react-icons/tb";
@@ -9,29 +9,16 @@ import styled from "styled-components";
 const InstantPage = () => {
 
     const { userId } = useLoaderData();
-    const navigate = useNavigate();
 
-    const logout = async () => {
-
-        try {
-
-            await axios.get("/api/auth/logout");
-            navigate("/");
-
-        } catch (error) {
-            console.log(error);
-        }
-
-    };
 
     return (
         <>
        
             <Conestraction><h2>🚀 Coming Soon</h2></Conestraction>
-           <Navbar logout={ logout } userId={userId} isLog={true} />
+           <Navbar userId={userId} isLog={true} />
             <Stl>
                 <div className="intro">
-
+<Link to="/dashboard" >dashboard</Link>
 
                     <h1>Instant Page</h1>
                     <p>

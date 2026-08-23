@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Stl from '../css-pocket/nav';
 
-const Navbar = ({ logout, userId, isLog = false }) => {
+const Navbar = ({ userId, isLog = false }) => {
 
     return (
         <Stl><div>
@@ -9,9 +9,13 @@ const Navbar = ({ logout, userId, isLog = false }) => {
                 <img src="/logo.png" alt="colored-logo" />  <span>AdamWebFix</span></Link>
         </div>
 
-            
-               
-                {isLog && <div className='contact'>  <Link
+
+
+            {isLog && <div className='contact'>
+
+                {userId ? <Link to="/dashboard" >Dashboard</Link> : <Link to="/login" > Login</Link>}
+
+                <Link
                     to="/"
                     onClick={() => {
                         document.getElementById("contact")?.scrollIntoView({
@@ -19,10 +23,10 @@ const Navbar = ({ logout, userId, isLog = false }) => {
                         });
                     }}
                 >
-                    Contact Us
-                </Link> {userId ? <Link to="#" onClick={logout}>| Logout</Link> : <Link to="/login" >| Login</Link>}</div>}
+                  | Contact Us
+                </Link> </div>}
 
-            
+
 
         </Stl>
     )
