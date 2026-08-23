@@ -1,4 +1,4 @@
-import Stl from '../css-pocket/Loading';
+import Stl from '../css-pocket/loadings';
 
 const Loading = ()=>{
    return (
