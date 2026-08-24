@@ -68,8 +68,11 @@ align-items : center;
 }
 
 .btn{
-margin-top : .3rem;
-min-width: 180px;
+margin-top : .2rem;
+width: 160px;
+padding : .6rem 0; 
+font-weight : 600;
+font-size: .875rem;
 }
 
 
@@ -80,7 +83,7 @@ li{
 max-width : 200px;
 margin-top: .8rem;
 overflow-wrap: break-word;
-font-size : .93rem;
+font-size : .875rem;
 font-weight: 400;
 border : 1px solid var(--grey-700);
 padding : .3rem;
@@ -88,6 +91,7 @@ border-radius : 5px;
 color : var(--grey-800);
 text-align: center;
 background-color: var(--grey-100);
+width : 160px;
 
 }
 
