@@ -7,10 +7,11 @@ display: grid;
 grid-template-columns:auto 1fr;
 width : 100%;
 
+
 .dash-nav-bar{
 display : flex;
 justify-content : space-between;
-alighn-items : center;
+align-items: center;
 background : #fff;
 padding :  2.7rem 2rem 1rem 1rem;
 padding-top: 2.7rem;
@@ -50,9 +51,10 @@ font-weight : 500
 
 
 .side-bar{
+
 width : 250px;
-padding: 2rem;
-height : 100vh;
+padding: 2rem 2rem 5rem 2rem;
+border-radius : 0 0 18px 0 ;
 background : #fff;
 margin-left : -250px;
 transition : margin-left .4s ease;
@@ -79,6 +81,20 @@ font-size: .875rem;
 a {
 color: var(--grey-100);
 }
+
+ul {
+  opacity: 0;
+  transform: translateY(-35px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.show-ul {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
 li{
 max-width : 200px;
 margin-top: .8rem;
@@ -102,6 +118,13 @@ color : var(--grey-700);
 
 li:hover{
 background-color : #fff;
+}
+
+
+.my-pages h5 span {
+  font-size: 1.6rem;
+  position: relative;
+  top: .3rem;
 }
 
 h5 {
@@ -154,8 +177,9 @@ margin-top: .15rem;
     .side-bar{
     margin-left : 0;
     }
+}
 
-    }
+
 
 
 `;

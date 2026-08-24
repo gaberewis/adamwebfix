@@ -62,7 +62,7 @@ const InstantPage = () => {
                     <div className="start"><Link to="/register" ><button className="btn large-btn">start now</button></Link></div>
 
                     <hr />
-                    <h5 className="cta">Contact Us </h5>
+                    <h5 >Contact Us </h5>
 
                     <Form method="post" id='contact' className="form"  >
 

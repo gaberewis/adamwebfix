@@ -29,10 +29,11 @@ const Sidebar = () => {
 
                 <div className="my-pages">
                     <h5>My pages {showPages ?  <span onClick={toggleShowPges} ><RiArrowUpSFill /> </span> 
-                    : <span onClick={toggleShowPges} ><RiArrowDownSFill size={22}  /> </span>}
+                    : <span onClick={toggleShowPges} ><RiArrowDownSFill   /> </span>}
                      </h5>
 
-                    <ul>
+
+                    <ul className={`${showPages&& "show-ul"}`}>
                         <li><Link to='#' >first page</Link></li>
                         <li><Link to='#' >second page</Link></li>
                         <li><Link to='#' >third page</Link></li>

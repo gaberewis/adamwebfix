@@ -3,6 +3,7 @@ import { DashboardContext  } from "../pages/Dashboard";
 import { BsMenuApp } from "react-icons/bs";
 
 
+
 const DashNavBar = ()=>{
 
      const { toggleBar } = DashboardContext();  
@@ -11,7 +12,17 @@ const DashNavBar = ()=>{
 
         <span onClick={ toggleBar }>< BsMenuApp /></span>
         <h5>Dashboard</h5>
-        <Link to="#contact">Contact us</Link>
+         <Link
+                    to="#contact"
+                    onClick={() => {
+                        document.getElementById("contact")?.scrollIntoView({
+                            behavior: "smooth",
+                        });
+                    }}
+                >
+                   Contact Us
+                </Link>
+               
     </div>)
 }
 
