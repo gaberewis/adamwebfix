@@ -20,11 +20,10 @@ const Sidebar = () => {
         <div >
             <Link to="/" className="home-logo">
                 <img src="/logo.png" alt="colored-logo" />  <span>AdamWebFix</span></Link>
-            <h5>Hi User Name</h5>
+            
             <div className="content">
                 <button className="btn"><Link to='#'>Cop link</Link> <span><RiLinksFill /></span></button>
                 <button className="btn"><Link to='#'>Preview </Link></button>
-                <button className="btn"><Link to='#'>Edit </Link></button>
                 <button className="btn"><Link to='#'>Add new page</Link></button>
 
                 <div className="my-pages">

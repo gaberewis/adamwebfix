@@ -27,16 +27,16 @@ h5 {
 span{
 font-size : 1.8rem;
 margin-top : -.6rem;
+
 }
 
 
   p{
   font-weight : 500;
+  font-size : .875rem;
+
   }
 
-a{
-color : var(--grey-700);
-}
 
 .nav-right{
 font-size: .85rem;
@@ -51,10 +51,8 @@ font-weight : 500
 
 
 .side-bar{
-
 width : 250px;
 padding: 2rem 2rem 5rem 2rem;
-border-radius : 0 0 18px 0 ;
 background : #fff;
 margin-left : -250px;
 transition : margin-left .4s ease;
@@ -66,6 +64,7 @@ display : flex;
 flex-direction : column;
 justify-content : center;
 align-items : center;
+margin-top : 3rem;
 
 }
 
@@ -125,13 +124,15 @@ background-color : #fff;
   font-size: 1.6rem;
   position: relative;
   top: .3rem;
+  
 }
-
-h5 {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
+ h5 {
+  font-size: clamp(.92rem, 1vw, 1.4rem);
   margin : 2.5rem 0 2rem 0;
+  font-weight : 600;
 
 } 
+
 
  .home-logo{
    display: flex;

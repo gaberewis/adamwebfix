@@ -12,16 +12,7 @@ const DashNavBar = ()=>{
 
         <span onClick={ toggleBar }>< BsMenuApp /></span>
         <h5>Dashboard</h5>
-         <Link
-                    to="#contact"
-                    onClick={() => {
-                        document.getElementById("contact")?.scrollIntoView({
-                            behavior: "smooth",
-                        });
-                    }}
-                >
-                   Contact Us
-                </Link>
+         <p> Hi USER NAME </p>
                
     </div>)
 }

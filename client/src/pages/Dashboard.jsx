@@ -1,6 +1,6 @@
-import { Outlet, useNavigate, Form } from 'react-router-dom';
+import { Outlet, useNavigate,  } from 'react-router-dom';
 import axios from 'axios';
-import { Sidebar, DashNavBar, SubmitButton, FormRow } from '../components'
+import { Sidebar, DashNavBar,  } from '../components'
 import { useState, useContext, createContext } from 'react';
 import Stl from '../css-pocket/dashboard'
 
@@ -44,26 +44,7 @@ const Dashboard = () => {
                 </div>
 
             </Stl>
-            <hr />
-           <div  id='contact' className='contacts'>
-             <h5 >Contact Adam Web Fix </h5>
-
-                    <Form method="post"  className="form"  >
-
-                        <FormRow type='text' name='name' />
-                        <FormRow type='email' name='email' />
-                        <FormRow type='text' name='phone' />
-                        <label htmlFor='clmsg' className='form-label'>
-                            Type your message here
-                        </label>
-                        <textarea
-                            name="clientMsg"
-                            id="clientMsg"
-                            className="form-textarea"
-                            required
-                        ></textarea>
-                        <SubmitButton />
-                    </Form></div>
+      
         </DashContext.Provider>
 
 
