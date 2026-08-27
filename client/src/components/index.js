@@ -5,6 +5,5 @@ export { default as SubmitButton } from './SubmitButton'
 export { default as Slide } from './Slide'
 export { default as Terms } from './Terms'
 export { default as Navbar } from './Navbar'
-export { default as Sidebar } from './Sidebar'
-export { default as DashNavBar } from './DashNavBar'
+
 

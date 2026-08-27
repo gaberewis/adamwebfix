@@ -1,8 +1,7 @@
-import { Outlet, useNavigate,  } from 'react-router-dom';
+import { Outlet, useNavigate, } from 'react-router-dom';
 import axios from 'axios';
-import { Sidebar, DashNavBar,  } from '../components'
-import { useState, useContext, createContext } from 'react';
-import Stl from '../css-pocket/dashboard'
+import { Navbar } from '../components'
+import { useContext, createContext } from 'react';
 
 
 
@@ -10,10 +9,9 @@ const DashContext = createContext();
 
 const Dashboard = () => {
 
-    const [showSideBar, setShowSideBar] = useState(false);
 
     const navigate = useNavigate();
-    const toggleBar = () => { setShowSideBar(pre => !pre) }
+
 
     const logout = async () => {
         try {
@@ -27,24 +25,12 @@ const Dashboard = () => {
     return (
         <DashContext.Provider
             value={{
-                toggleBar,
-                showSideBar,
                 logout,
             }}
         >
+            <Navbar  dashboard={true} logout={ logout } />
+            < Outlet />
 
-            <Stl>
-                <Sidebar />
-
-                <div className='content'>
-                    <DashNavBar />
-                    < Outlet />
-                   
-                   
-                </div>
-
-            </Stl>
-      
         </DashContext.Provider>
 
 
