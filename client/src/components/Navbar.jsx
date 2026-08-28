@@ -1,19 +1,16 @@
 import { Link } from 'react-router-dom';
 import Stl from '../css-pocket/navbars';
 import { useState } from 'react';
-import { RiArrowDownSFill, RiArrowUpSFill, RiLinksFill } from "react-icons/ri";
+import {  RiUserSettingsFill, RiAccountPinCircleFill, RiLogoutCircleRLine  } from "react-icons/ri";
 
 
 
 const Navbar = ({ userId, isLog = false, logout, dashboard = false }) => {
 
-
-
-    const [userSetting, showUserSetting] = useState(false);
-    const toggleList = () => {
-        showUserSetting(pre => !pre);
-    }
-
+   const [showItem, setShowItem] = useState(false);
+        const toggleList = () => {
+            setShowItem(pre => !pre);
+        }
 
     return (
         <Stl>
@@ -42,17 +39,13 @@ const Navbar = ({ userId, isLog = false, logout, dashboard = false }) => {
                 {dashboard &&
 
                     <div className='user-list'>
-                        <div>Hi user.name {userSetting ? <span onClick={toggleList} ><RiArrowUpSFill size={25} /> </span>
-                            : <span onClick={toggleList} ><RiArrowDownSFill size={25} /> </span>}
+                            <div><span>Hi user.name </span> <span onClick={toggleList} >  <RiAccountPinCircleFill size={25} /> </span></div>
+
+                        <div className={`hidden ${showItem ? "show-list" : ""} `}>
+                           <Link to='/account' > <span  >Account <RiUserSettingsFill /></span></Link>
+                            <span className='logout' onClick={logout}> Logout <RiLogoutCircleRLine /></span>
                         </div>
 
-<div className={`hidden ${userSetting ? "show-list" : "hide"} `}>
-
-  <span  ><Link to='/account' >Account</Link></span>
-                        <span onClick={logout  }> Logout </span>
-
-</div>
-                      
                     </div>
 
                 }

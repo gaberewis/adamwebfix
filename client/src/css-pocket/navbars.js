@@ -7,7 +7,7 @@ const Stl = styled.main`
  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.6rem ;
+  padding: 1.6rem  ;
 }
 
 
@@ -40,19 +40,46 @@ gap : .6rem;
 }
 
 
-.user-list div:first-child{
-display : flex;
+.user-list{
 
+position : fixed;
+top : 3rem;
+right : 1.8rem;
+}
+.user-list div:first-child {
+  display: flex;
+  gap : .3rem;
+  justify-content : center;
+  
+}
+.hidden {
+margin-top : .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  align-items: center;
 }
 
-
-.hide{
-display : none;
+.hidden{
+background : #fff;
+box-shadow : var(--shadow-1);
+padding : 1.3rem;
+display : flex;
+flex-direction : column;
+gap : .6rem;
+list-style: none;
+ 
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(3rem);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .show-list{
-display : block;
+ opacity: 1;
+  transform: translateY(0);
 }
+
 
 .logout{
 cursor  : pointer;
