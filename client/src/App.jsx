@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   Home, InstantPage, ClientMsg, MsgReceived,
   Login, Register, Checkout, Dashboard, ForgetPassword,
-  Error, ResetPassword, Page
+  Error, ResetPassword, Landing
 
 } from './pages';
 
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     children: [
       {
         index : true,
-        element : <Page />,
+        element : <Landing />,
       }
     ]
 },

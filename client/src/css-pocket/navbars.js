@@ -45,6 +45,7 @@ display : flex;
 
 }
 
+
 .hide{
 display : none;
 }

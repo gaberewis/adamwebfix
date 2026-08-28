@@ -46,15 +46,13 @@ const Navbar = ({ userId, isLog = false, logout, dashboard = false }) => {
                             : <span onClick={toggleList} ><RiArrowDownSFill size={25} /> </span>}
                         </div>
 
+<div className={`hidden ${userSetting ? "show-list" : "hide"} `}>
 
-                        <span className={`${userSetting ? "show-list" : "hide"}`} ><Link to='/account' >Account</Link></span>
-                        <span
-                            className={userSetting ? "show-list logout" : "hide"}
-                            onClick={logout
-                            }
-                        >
-                            Logout
-                        </span>
+  <span  ><Link to='/account' >Account</Link></span>
+                        <span onClick={logout  }> Logout </span>
+
+</div>
+                      
                     </div>
 
                 }
