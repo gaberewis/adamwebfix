@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Stl from '../css-pocket/navbar';
+import Stl from '../css-pocket/navbars';
 import { useState } from 'react';
 import { RiArrowDownSFill, RiArrowUpSFill, RiLinksFill } from "react-icons/ri";
 
