@@ -16,8 +16,6 @@ const Stl = styled.main`
   box-shadow : var(--shadow-1);
 }
 
-
-
  img {
   max-width: 40px;
 }
@@ -43,7 +41,7 @@ gap : .6rem;
 .user-list{
 
 position : fixed;
-top : 3rem;
+top : 2.8rem;
 right : 1.8rem;
 }
 .user-list div:first-child {
