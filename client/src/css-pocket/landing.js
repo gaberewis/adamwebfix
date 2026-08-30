@@ -6,6 +6,9 @@ width : 90vw;
 margin : 0 auto;
 padding-top : 2rem;
 max-width : 992px;
+
+
+
 .green{
 color : #50C878
 }
@@ -20,15 +23,16 @@ flex-direction : column;
 gap : 2rem;
 margin-top: 3rem;
 align-items : center;
+margin-bottom : 3rem;
 }
 
 .card{
 position : relative;
 display : flex;
 flex-direction : column;
-gap : 3.2rem;
+gap : 2.5rem;
 background-color : #fff;
-padding: 5rem;
+padding: 4rem 2rem 3rem;
 border-radius : 23px;
 width : 100%;
 max-width : 600px;
@@ -73,19 +77,19 @@ cursor : pointer;
 .sub-url{
 position : absolute;
 display : flex;
-gap : .6rem;
+gap : .5rem;
 opacity: 0;
-margin-top : 1rem;
+margin-top : .4rem;
 transform: translateY(3rem);
 transition: opacity 0.5s ease, transform 0.3s ease;
 }
 
 .sub-url li{
 background: var(--grey-100);
-padding : .7rem;
+padding : .3rem 0;
 margin-top : .3rem;
 width : fit-content;
-min-width : 100px;
+min-width : 90px;
 text-align : center;
 font-size : .875rem;
 }

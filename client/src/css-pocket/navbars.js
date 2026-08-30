@@ -17,7 +17,7 @@ const Stl = styled.main`
 }
 
  img {
-  max-width: 40px;
+  max-width: 35px;
 }
 
 a {
@@ -40,7 +40,7 @@ gap : .6rem;
 
 .user-list{
 
-position : fixed;
+position : absolute;
 top : 2.8rem;
 right : 1.8rem;
 }
@@ -67,7 +67,7 @@ flex-direction : column;
 gap : .6rem;
 list-style: none;
  
-  margin-top: 1rem;
+  margin-top: .7rem;
   opacity: 0;
   transform: translateY(3rem);
   transition: opacity 0.3s ease, transform 0.3s ease;
