@@ -17,11 +17,11 @@ const router = Router();
 router.post('/register', registerValidation,  registerUser);
 router.post('/login', loginValidation, login);
 router.get('/logout', authenticateUser, logout);
-router.get('/clientmsg', getClientRequest);
-router.post( '/clientmsg', clientMsgValidation, clientMsg);
+router.get('/client-msg', getClientRequest);
+router.post( '/client-msg', clientMsgValidation, clientMsg);
 router.get('/user', getUser, authenticateUser, currentUser);
-router.post('/forgetpassword', forgetPassword);
-router.post('/resetpassword', resetValidation, resetPassword)
+router.post('/forget-password', forgetPassword);
+router.post('/reset-password', resetValidation, resetPassword)
 
 
 

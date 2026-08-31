@@ -19,7 +19,7 @@ const { data } = await axios.get('/api/auth/user');
 export const clientMsg = async()=>{
 
   try{
-const { data } = await axios.get('/api/auth/clientmsg');
+const { data } = await axios.get('/api/auth/client-msg');
   return data;
 
   }catch(error){

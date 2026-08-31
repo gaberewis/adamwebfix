@@ -170,7 +170,7 @@ exports.updatePassword = (req, res) => {
                             <h5>Dear Client :  </h5>
                            
                             <p>Your Verfication Code is : ${updatedUser.verficationcode}</p>
-                            <a href="https://adam-estore.com/resetpassword" >Click this link to reset your password, just copy and paste the verification code then create a new password.</a>
+                            <a href="https://adam-estore.com/reset-password" >Click this link to reset your password, just copy and paste the verification code then create a new password.</a>
                         `
             };
 

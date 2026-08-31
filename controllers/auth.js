@@ -114,7 +114,7 @@ export const forgetPassword = async (req, res) => {
         <p>This code will expire in 15 minutes.</p>
 
         <p>
-          <a href="https://adamwebfix.com/resetpassword">
+          <a href="https://adamwebfix.com/reset-password">
             Click here to reset your password
           </a>
         </p>

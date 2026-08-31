@@ -12,7 +12,7 @@ const Login = () => {
                     <FormRow type="email" name="email" />
                     <FormRow type='password' name='password' />
                     {actionData?.errMsg && <p className="error" >{actionData.errMsg}</p>}
-                    <Link to={"/forgetpassword"}>forget password?</Link>
+                    <Link to={"/forget-password"}>forget password?</Link>
                     <SubmitButton />
                     <p className="margin-t">
                         Not a member yet?{" "}

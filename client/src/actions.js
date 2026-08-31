@@ -48,7 +48,7 @@ export const clientMsg = async ({ request }) => {
 
   try {
 
-    await axios.post('/api/auth/clientmsg', data);
+    await axios.post('/api/auth/client-msg', data);
     return null;
 
   } catch (error) {
@@ -66,7 +66,7 @@ export const forgetPassword = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await axios.post('/api/auth/forgetpassword', data);
+    await axios.post('/api/auth/forget-password', data);
      const confirmOtp = 'An OTP has been sent to your email';
      return { confirmOtp }
 
@@ -85,7 +85,7 @@ export const resetPassword = async({ request })=>{
 
   try {
 
-    await axios.post('/api/auth/resetpassword', data);
+    await axios.post('/api/auth/reset-password', data);
     return redirect('/login');
     
   } catch (error) {

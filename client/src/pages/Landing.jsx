@@ -15,7 +15,7 @@ const Landing = () => {
 
 
     return (<Stl>
-        <Link to='#' ><button className="btn">Create new page</button></Link>
+      <Link to='/dashboard/create-page' className="btn"  >Create new page</Link>
         <div className="pages">
 
             <div className="card">

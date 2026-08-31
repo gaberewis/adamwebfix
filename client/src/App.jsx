@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
-  Home, InstantPage, ClientMsg, MsgReceived,
-  Login, Register, Checkout, Dashboard, ForgetPassword,
-  Error, ResetPassword, Landing
+  InstantPage, Login, Register,
+  Dashboard,  Landing, CreatePage, Checkout,
+  ResetPassword, ForgetPassword, ClientMsg,
+  MsgReceived, Error,
+  EditPage,
 
 } from './pages';
 
@@ -29,26 +31,34 @@ const router = createBrowserRouter([
   {
     path: 'dashboard',
     element: <Dashboard />,
-    loader : loader.dashboard,
+    loader: loader.dashboard,
     children: [
       {
-        index : true,
-        element : <Landing />,
-      }
+        index: true,
+        element: <Landing />,
+      },
+      {
+        path: 'create-page',
+        element: <CreatePage />
+      },
+      {
+        path : 'edit-page',
+        element : <EditPage />
+      },
     ]
-},
+  },
   {
-    path: 'forgetpassword',
+    path: 'forget-password',
     element: <ForgetPassword />,
     action: action.forgetPassword
   },
   {
-    path: 'resetpassword',
-    element : <ResetPassword />,
-    action : action.resetPassword,
+    path: 'reset-password',
+    element: <ResetPassword />,
+    action: action.resetPassword,
 
   },
-    {
+  {
     path: 'register',
     element: <Register />,
     action: action.registerAction
@@ -59,13 +69,13 @@ const router = createBrowserRouter([
     element: <Login />,
     action: action.loginAction,
   },
-    {
-    path: 'clientmsg',
+  {
+    path: 'client-msg',
     element: <ClientMsg />,
     loader: loader.clientMsg,
   },
   {
-    path: 'requestdone',
+    path: 'request-done',
     element: <MsgReceived />
   }
 
