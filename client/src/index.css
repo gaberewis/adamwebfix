@@ -41,6 +41,7 @@ html {
   --red-mid: #FF0000;
   --red:#E0115F;
   --green: #50C878;
+  --pure-green :#008000; 
   --small-text: 0.875rem;
   --extra-small-text: 0.7em;
   /* rest of the vars */
@@ -369,3 +370,4 @@ button:disabled {
   text-align: center;
   font-size: clamp(1.1rem, 2vw, 1.4rem);
 }
+

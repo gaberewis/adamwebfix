@@ -33,7 +33,7 @@ const Landing = () => {
                 <div className="urls">
 
                     <url className='main-url'>
-                        <li><Link to="#" >Edit |</Link></li>
+                        <li><Link to="/dashboard/edit-page" >Edit |</Link></li>
                         <li><Link to="#" >Preview |</Link></li>
                         <li><span onClick={toggleList} >More...</span></li>
                     </url>

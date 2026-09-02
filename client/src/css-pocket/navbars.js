@@ -3,12 +3,15 @@ import styled from "styled-components";
 
 const Stl = styled.main`
 
+
 .main{
  display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.6rem  ;
 }
+
+
 
 
   .dashboard{

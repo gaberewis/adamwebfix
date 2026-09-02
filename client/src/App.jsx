@@ -1,17 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   InstantPage, Login, Register,
-  Dashboard,  Landing, CreatePage, Checkout,
+  Dashboard, Landing, CreatePage, EditPage, Checkout, Page,
   ResetPassword, ForgetPassword, ClientMsg,
   MsgReceived, Error,
-  EditPage,
+
 
 } from './pages';
 
 import * as loader from './loaders';
 
 import * as action from './actions';
-import { Children } from "react";
+
 
 const router = createBrowserRouter([
   {
@@ -23,11 +23,7 @@ const router = createBrowserRouter([
 
   },
 
-  {
-    path: 'checkout',
-    element: <Checkout />,
-    loader: loader.getUser,
-  },
+
   {
     path: 'dashboard',
     element: <Dashboard />,
@@ -42,10 +38,19 @@ const router = createBrowserRouter([
         element: <CreatePage />
       },
       {
-        path : 'edit-page',
-        element : <EditPage />
+        path: 'checkout',
+        element: <Checkout />,
+        loader: loader.getUser,
+      },
+      {
+        path: 'edit-page',
+        element: <EditPage />
       },
     ]
+  },
+  {
+    path: 'page',
+    element: <Page />
   },
   {
     path: 'forget-password',
