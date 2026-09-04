@@ -44,7 +44,7 @@ const CreatePage = () => {
             }
             <FormRowSelect name='currency' list={currencies} />
 
-            <textarea className='form-textarea' name="description" maxLength={1000}
+            <textarea className='form-textarea' name="details" labelText={'Enter product details'} maxLength={1000}
                 placeholder="Enter product description..."
                 required ></textarea>
 

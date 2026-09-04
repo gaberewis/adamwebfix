@@ -46,8 +46,8 @@ const EditPage = () => {
             }
             <FormRowSelect name='currency' list={currencies} labelText={'Edit Currency'} />
 
-            <textarea className='form-textarea' name="Edit description" maxLength={1000}
-                placeholder="Enter product description..." value={'description'}
+            <textarea className='form-textarea' name="details" labelText={'Edit product details'} maxLength={1000}
+                placeholder="Enter product description..." value={'details'}
                 required ></textarea>
 
 
