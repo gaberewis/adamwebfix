@@ -52,7 +52,7 @@ const CreatePage = () => {
             <FormRow type='text' mame='phone' labelText={'Phone number'} />
             <FormRow type='text' mame='whatsapp' labelText={'Wahts app  number'} />
             <FormRow type='email' mame='email' labelText={'email'} />
-            <FormRowSelect name='order' list={orderContact} labelText={'Select order method'} />
+            <FormRowSelect name='order' list={orderContact} labelText={'How do you prefer receiving order'} />
 
             <textarea className='form-textarea' name="address" maxLength={3000}
                 placeholder="Add business address optional..."

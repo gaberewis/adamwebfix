@@ -15,7 +15,6 @@ const Stl = styled.main`
   .content {
     margin: 0 auto;
     margin-bottom : .2rem;
-    width: 90vw;
     max-width: 992px;
     padding: 3rem 1.6rem;
     background-color: #fff;
