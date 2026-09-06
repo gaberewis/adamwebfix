@@ -46,7 +46,7 @@ html {
   --extra-small-text: 0.7em;
   /* rest of the vars */
 
-  --border-radius: 1.5rem;
+  --border-radius: 1rem;
   --letter-spacing: 1px;
   --transition: 0.3s ease-in-out all;
   --max-width: 1120px;
