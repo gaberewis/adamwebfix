@@ -45,7 +45,7 @@ const CreatePage = () => {
             <FormRow type='text' labelText={'Product price'} maxLength={20} required />
             <FormRow type='text' labelText={'price before discount (optional)'} maxLength={20} />
             <FormRowSelect name='currency' list={currencies} />
-            <textarea className='form-textarea' name="details" labelText={'Enter product details'} maxLength={1000}
+            <textarea className='form-textarea' name="description"   maxLength={1000}
                 placeholder="Enter product description..."
                 required ></textarea>
             <FormRow type='text' mame='phone' labelText={'Phone number'} />
@@ -56,85 +56,38 @@ const CreatePage = () => {
                 placeholder="Add business address optional..."
             ></textarea>
 
-            <div className='p-spec'>
-                <p>Add product specification (optional)</p>
-                <div className='spec'>
-                    <FormRow
-                        name={`spec`}
-                        labelText="Specification"
-                        maxLength={100}
-                    />
-                    <textarea
-                        name={`details`}
-                        labelText="Details"
-                        className='form-textarea'
-                        maxLength={300}
-                        placeholder='specification details'
-                    ></textarea>
-                </div>
 
-                <div className='spec'>
-                    <FormRow
-                        name={`spec`}
-                        labelText="Specification"
-                        maxLength={100}
-                    />
-                    <textarea
-                        name={`details`}
-                        labelText="Details"
-                        className='form-textarea'
-                        maxLength={300}
-                        placeholder='specification details'
-                    ></textarea>
+            {specifications.map((item, index) => (
+                <div key={index}>
 
-                </div>
-                <div className='spec'>
-                    <FormRow
-                        name={`spec`}
-                        labelText="Specification"
-                        maxLength={100}
-                    />
-                    <textarea
-                        name={`details`}
-                        labelText="Details"
-                        className='form-textarea'
-                        maxLength={300}
-                        placeholder='specification details'
-                    ></textarea>
+                    <div className='spec'>
+                        <span onClick={() => deleteSpec(index)} ><TiDelete size={22} /></span>
 
-                </div>
-                {specifications.map((item, index) => (
-                    <div key={index}>
-
-                        <div className='spec'>
-                            <span onClick={() => deleteSpec(index)} ><TiDelete size={22} /></span>
-
-                            <FormRow
-                                name={`specifications[${index}].spec`}
-                                labelText="Specification"
-                                maxLength={100}
-                            />
-                            <textarea
-                                name={`specifications[${index}].details`}
-                                labelText="Details"
-                                className='form-textarea'
-                                maxLength={300}
-                                placeholder='specification details'
-                            ></textarea>
-
-                        </div>
+                        <input
+                            className='form-input'
+                            name={`specifications[${index}].spec`}
+                            maxLength={100}
+                            placeholder='Specification'
+                        />
+                        <textarea
+                            name={`specifications[${index}].details`}
+                            labelText="Details"
+                            className='form-textarea'
+                            maxLength={300}
+                            placeholder='specification details'
+                        ></textarea>
 
                     </div>
 
-                ))}
+                </div>
 
-                {
-                    specifications.length < 7 ? <p className='add-spec'>
-                        <span>Add more</span> <span onClick={addSpecification}>
-                            <RiAddBoxFill size={22} /></span></p> : ""
+            ))}
 
-                }
-            </div>
+            {specifications.length < 10 ?
+                <p className='add-spec'>
+                    <span>{specifications.length < 1 ? 'Add Specification' : 'Add More'}</span> <span onClick={addSpecification}>
+                        <RiAddBoxFill size={22} /></span></p> : ""}
+
             <SubmitButton />
 
         </Form>

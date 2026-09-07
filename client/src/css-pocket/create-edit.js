@@ -17,18 +17,24 @@ margin-bottom : 1rem;
 .spec { 
 position : relative;
 display : flex;
-gap : 1.2rem;
+gap : 2rem;
+align-items : center;
 margin-bottom : 1rem;
 
 .form-input {
-min-width : 150px;
+max-width : 50%;
 border-radius : 10px;
+}
+
+.form-textarea {
+max-height : 80px;
+max-width : 50%;
 }
 
 span{
  color : var(--red);
  position : absolute;
- bottom : 2.5rem;
+ top : .5rem;
  left : .5rem;
 cursor : pointer;
 }
@@ -39,7 +45,7 @@ cursor : pointer;
 .add-spec {
   display: flex;
  align-items: center;
-  gap: 0.3rem;
+  gap: .2rem;
 }
 .add-spec span:nth-child(2){
 color :var(--pure-green);
