@@ -9,54 +9,40 @@ const imageSchema = new mongoose.Schema(
   { _id: false }
 );
 
-const sectionSchema = new mongoose.Schema(
-  {
-    title: String,
-    description: String,
-    image: imageSchema,
-  },
-  { _id: false }
-);
 
 const pagesSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      trim: true,
-    },
-
-    price: {
-      type: Number,
-    },
-
+    company: String,
+    product: String,
+    price: String,
+    discount: String,
+    currency: String,
     description: String,
-    slid : [ imageSchema ],
-
-    sectionOne: sectionSchema,
-
-    sectionTwo: sectionSchema,
-
-    sectionThree: sectionSchema,
-
-    contact: {
-      email: String,
-      whatsapp: String,
-      phone: String,
+    phone: String,
+    email: String,
+    whatsapp: String,
+    address: String,
+    order: {
+      type: String,
+      enum: ["phone", "whatsapp", "email"],
+      default: "whatsapp"
     },
-
-    transactionId: String,
-
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-
+    specification: {
+      type: Array,
+      default: [],
+    },
     paymentDate: String,
-  status: {
+    status: {
       type: String,
       enum: ["active", "blocked", "deleted"],
       default: "active",
     },
+    images: [imageSchema],
+
   },
   { timestamps: true }
 );

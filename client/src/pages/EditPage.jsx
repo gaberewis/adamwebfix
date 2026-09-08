@@ -1,16 +1,10 @@
 import { Form, Link } from 'react-router-dom';
 import { FormRow, FormRowSelect, SubmitButton, currencies } from '../components';
 import Stl from '../css-pocket/create-edit';
-import { useState } from 'react';
-import { RiDashboardFill, RiAddBoxFill } from "react-icons/ri";
-import { TiDelete } from "react-icons/ti";
-
-
-
+import { RiDashboardFill } from "react-icons/ri";
 
 
 const EditPage = () => {
-
 
     const orderContact = ['phone', 'whatsapp', 'email'];
 
@@ -20,7 +14,7 @@ const EditPage = () => {
         <Form method="post" className='form' >
             <FormRow type='file' name='images' labelText={'Edit product images'} accept='images/*' multiple  />
             <FormRow type='text' name="company" labelText={'Edit company / business name'} maxLength={100} defaultValue={'company'} />
-            <FormRow type='text' name="name" labelText={'Edit product Name'} maxLength={100} defaultValue={'product'} />
+            <FormRow type='text' name="product" labelText={'Edit product Name'} maxLength={100} defaultValue={'product'} />
             <FormRow type='text' labelText={'Edit Product price'} maxLength={20} defaultValue={'price'} />
             <FormRow type='text' labelText={'Edit price before discount (optional)'} maxLength={20} defaultValue={'discount'} />
             <FormRowSelect name='currency' labelText={'edit currency'} list={currencies}  defaultValue={'currency'} />
@@ -34,32 +28,12 @@ const EditPage = () => {
             <textarea className='form-textarea' name="address" maxLength={3000}
                defaultValue={'address'}
             ></textarea>
-
-
                    <div className='spec'>
-                       
-                        <input
-                            className='form-input'
-                            name={`spec`}
-                            maxLength={100}
-                           defaultValue={'specification'}
-                        />
-                        <textarea
-                            name={`details`}
-                            labelText="Details"
-                            className='form-textarea'
-                            maxLength={300}
-                            defaultValue={'spec details'}
-                        ></textarea>
-
+                        <input className='form-input' name={`spec`} maxLength={100} defaultValue={'specification'} />
+                        <textarea name={`details`} labelText="Details" className='form-textarea' maxLength={300} defaultValue={'spec details'} ></textarea>
                     </div>
-
-       
-
             <SubmitButton />
-
         </Form>
-
     </Stl>)
 
 }

@@ -6,12 +6,7 @@ import { RiDashboardFill, RiAddBoxFill } from "react-icons/ri";
 import { TiDelete } from "react-icons/ti";
 
 
-
-
-
 const CreatePage = () => {
-
-
 
     const [specifications, setSpecifications] = useState([]);
     const orderContact = ['phone', 'whatsapp', 'email'];
@@ -41,11 +36,11 @@ const CreatePage = () => {
         <Form method="post" className='form' >
             <FormRow type='file' name='images' labelText={'Add product images'} accept='images/*' multiple required />
             <FormRow type='text' name="company" labelText={'company / business name'} maxLength={100} required />
-            <FormRow type='text' name="name" labelText={'product Name'} maxLength={100} required />
+            <FormRow type='text' name="producr" labelText={'product Name'} maxLength={100} required />
             <FormRow type='text' labelText={'Product price'} maxLength={20} required />
             <FormRow type='text' labelText={'price before discount (optional)'} maxLength={20} />
             <FormRowSelect name='currency' list={currencies} />
-            <textarea className='form-textarea' name="description"   maxLength={1000}
+            <textarea className='form-textarea' name="description" maxLength={1000}
                 placeholder="Enter product description..."
                 required ></textarea>
             <FormRow type='text' mame='phone' labelText={'Phone number'} />
@@ -56,27 +51,16 @@ const CreatePage = () => {
                 placeholder="Add business address optional..."
             ></textarea>
 
-
             {specifications.map((item, index) => (
                 <div key={index}>
 
                     <div className='spec'>
                         <span onClick={() => deleteSpec(index)} ><TiDelete size={22} /></span>
 
-                        <input
-                            className='form-input'
-                            name={`specifications[${index}].spec`}
-                            maxLength={100}
-                            placeholder='Specification'
-                        />
-                        <textarea
-                            name={`specifications[${index}].details`}
-                            labelText="Details"
-                            className='form-textarea'
-                            maxLength={300}
-                            placeholder='specification details'
-                        ></textarea>
-
+                        <input className='form-input' name={`specifications[${index}].spec`}
+                            maxLength={100} placeholder='Specification' />
+                        <textarea name={`specifications[${index}].details`} labelText="Details"
+                            className='form-textarea' maxLength={300} placeholder='specification details'  ></textarea>
                     </div>
 
                 </div>
@@ -85,11 +69,11 @@ const CreatePage = () => {
 
             {specifications.length < 10 ?
                 <p className='add-spec'>
-                    <span>{specifications.length < 1 ? 'Add Specification' : 'Add More'}</span> <span onClick={addSpecification}>
+                    <span>{specifications.length < 1 ? 'Add Specification' : 'Add More'}</span>
+                    <span onClick={addSpecification}>
                         <RiAddBoxFill size={22} /></span></p> : ""}
 
             <SubmitButton />
-
         </Form>
 
     </Stl>)
