@@ -73,6 +73,8 @@ const CreatePage = () => {
                     <span onClick={addSpecification}>
                         <RiAddBoxFill size={22} /></span></p> : ""}
 
+            <input type="hidden"  name="specification"  value={JSON.stringify(specifications)} />
+
             <SubmitButton />
         </Form>
 

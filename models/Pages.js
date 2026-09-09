@@ -9,6 +9,14 @@ const imageSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const specificatioNSchema = new mongoose.Schema(
+  {
+    spec: String,
+    details: String,
+  },
+  { _id: false }
+);
+
 
 const pagesSchema = new mongoose.Schema(
   {
@@ -22,25 +30,24 @@ const pagesSchema = new mongoose.Schema(
     email: String,
     whatsapp: String,
     address: String,
+    paymentDate: String,
+    
     order: {
       type: String,
       enum: ["phone", "whatsapp", "email"],
       default: "whatsapp"
+    },    
+    status: {
+      type: String,
+      enum: ["active", "inActive", "blocked", "deleted"],
+      default: "inActive",
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    specification: {
-      type: Array,
-      default: [],
-    },
-    paymentDate: String,
-    status: {
-      type: String,
-      enum: ["active", "blocked", "deleted"],
-      default: "active",
-    },
+
+    specification: [specificatioNSchema],
     images: [imageSchema],
 
   },
