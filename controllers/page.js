@@ -1,5 +1,70 @@
 import axios from "axios";
-import Pages from "../models/Pages.js";
+import Page from "../models/Page.js";
+import cloudinary from 'cloudinary';
+import { formatImage } from '../middleware/multer.js';
+
+
+
+
+export const createPage = async (req, res) => {
+  try {
+   
+ let uploadedImages = [];
+  const files = req.files || []; // always safe
+  if (files && files.length > 0) {
+    uploadedImages = await Promise.all(
+      req.files.map((image) => {
+        return cloudinary.v2.uploader.upload(
+           formatImage(image)
+        );
+      })
+    );
+  }
+
+  req.body.images = uploadedImages.map((img) => ({
+    imageUrl: img.secure_url,
+    imageId: img.public_id,
+  }));
+
+
+    console.log("FILES:", req.files);
+  console.log("BODY:", req.body);
+
+    const page = await Page.create(req.body);
+
+    res.status(201).json({
+      msg: "page created",
+      page,
+    });
+
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      msg: "Failed to create page",
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const capturePayment = async (req, res) => {
   try {
@@ -44,10 +109,10 @@ export const capturePayment = async (req, res) => {
       });
     }
 
-    const payment = await Pages.create({
-    userId,
+    const payment = await Page.create({
+      userId,
       transactionId: capture.id,
-      paymentDate : date.now(),
+      paymentDate: Date.now(),
     });
 
     return res.json({
@@ -59,9 +124,8 @@ export const capturePayment = async (req, res) => {
     console.log(err.response?.data || err.message);
 
     return res.status(500).json({
-  success: false,
-  msg: err.response?.data || err.message,
-});
+      success: false,
+      msg: err.response?.data || err.message,
+    });
   }
-};
-
+}

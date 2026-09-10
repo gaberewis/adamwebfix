@@ -8,7 +8,7 @@ export const registerAction = async ({ request }) => {
   formData.set('email', email.toLowerCase());
   const data = Object.fromEntries(formData);
   try {
-    await axios.post('/api/auth/register', data);
+    await axios.post('/api/user/register', data);
     return redirect('/login');
   } catch (error) {
     console.log(error.response?.data?.msg);
@@ -27,7 +27,7 @@ export const loginAction = async ({ request }) => {
   const data = Object.fromEntries(formData);
   try {
 
-    await axios.post('/api/auth/login', data);
+    await axios.post('/api/user/login', data);
     return redirect('/dashboard');
 
   } catch (error) {
@@ -48,7 +48,7 @@ export const clientMsg = async ({ request }) => {
 
   try {
 
-    await axios.post('/api/auth/client-msg', data);
+    await axios.post('/api/user/client-msg', data);
     return null;
 
   } catch (error) {
@@ -66,7 +66,7 @@ export const forgetPassword = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await axios.post('/api/auth/forget-password', data);
+    await axios.post('/api/user/forget-password', data);
      const confirmOtp = 'An OTP has been sent to your email';
      return { confirmOtp }
 
@@ -85,7 +85,7 @@ export const resetPassword = async({ request })=>{
 
   try {
 
-    await axios.post('/api/auth/reset-password', data);
+    await axios.post('/api/user/reset-password', data);
     return redirect('/login');
     
   } catch (error) {
@@ -95,6 +95,24 @@ export const resetPassword = async({ request })=>{
 
   }
 
+};
+
+export const createPage = async({ request })=>{
+
+  const formData = await request.formData(); 
+ 
+try {
+
+  await axios.post('/api/page/create-page', formData);
+  return redirect('/dashboard');
+  
+} catch (error) {
+  console.log(error.response?.data?.msg || 'Request faild');
+
+  const errMsg = error.response?.data?.msg || 'Request faild';
+  return { errMsg }
+
+}
 }
 
 

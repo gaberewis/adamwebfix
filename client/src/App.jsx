@@ -35,7 +35,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'create-page',
-        element: <CreatePage />
+        element: <CreatePage />,
+        action : action.createPage,
       },
       {
         path: 'checkout',

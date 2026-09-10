@@ -9,7 +9,7 @@ import {
     getClientRequest, 
     currentUser,
     forgetPassword, resetPassword,
-} from '../controllers/auth.js';
+} from '../controllers/user.js';
 
 
 

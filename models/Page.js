@@ -47,7 +47,7 @@ const pagesSchema = new mongoose.Schema(
       ref: "User",
     },
 
-    specification: [specificatioNSchema],
+  
     images: [imageSchema],
 
   },

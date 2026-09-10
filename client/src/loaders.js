@@ -5,7 +5,7 @@ import { redirect } from "react-router-dom";
 
 export const getUser = async()=>{
 try{
-const { data } = await axios.get('/api/auth/user');
+const { data } = await axios.get('/api/user/user');
   return data;
 }
   catch(error){
@@ -19,7 +19,7 @@ const { data } = await axios.get('/api/auth/user');
 export const clientMsg = async()=>{
 
   try{
-const { data } = await axios.get('/api/auth/client-msg');
+const { data } = await axios.get('/api/user/client-msg');
   return data;
 
   }catch(error){

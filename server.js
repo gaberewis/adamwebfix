@@ -10,7 +10,8 @@ import cloudinary from 'cloudinary';
 import helmet from 'helmet';
 
 
-import authRoute from './routes/auth.js';
+import authRoute from './routes/user.js';
+import pageRoute from './routes/page.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -60,7 +61,8 @@ app.get('/', (req, res) => {
   res.send('backend...');
 });
 
-app.use('/api/auth', authRoute);
+app.use('/api/user', authRoute);
+app.use('/api/page', pageRoute);
 
 
 app.get(/.*/, (req, res) => {
