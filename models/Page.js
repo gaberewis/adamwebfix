@@ -9,7 +9,7 @@ const imageSchema = new mongoose.Schema(
   { _id: false }
 );
 
-const specificatioNSchema = new mongoose.Schema(
+const specItem = new mongoose.Schema(
   {
     spec: String,
     details: String,
@@ -47,8 +47,8 @@ const pagesSchema = new mongoose.Schema(
       ref: "User",
     },
 
-  
     images: [imageSchema],
+    specification : [specItem],
 
   },
   { timestamps: true }

@@ -102,7 +102,6 @@ export const createPage = async({ request })=>{
   const formData = await request.formData(); 
  
 try {
-
   await axios.post('/api/page/create-page', formData);
   return redirect('/dashboard');
   

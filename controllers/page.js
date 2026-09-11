@@ -10,7 +10,7 @@ export const createPage = async (req, res) => {
   try {
    
  let uploadedImages = [];
-  const files = req.files || []; // always safe
+  const files = req.files || []; 
   if (files && files.length > 0) {
     uploadedImages = await Promise.all(
       req.files.map((image) => {
@@ -26,9 +26,8 @@ export const createPage = async (req, res) => {
     imageId: img.public_id,
   }));
 
-
-    console.log("FILES:", req.files);
-  console.log("BODY:", req.body);
+req.body.specification = JSON.parse(req.body.specification);
+ 
 
     const page = await Page.create(req.body);
 
