@@ -72,14 +72,9 @@ export const getClientRequest = async (req, res) => {
 };
 
 export const currentUser = async (req, res) => {
-
-  res.status(200).json({ userId: req.user.userId });
-
+  console.log(req.user);
+  res.status(200).json({ user: req.user  });
 };
-
-
-
-
 
 
 

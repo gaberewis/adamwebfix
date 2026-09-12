@@ -33,15 +33,11 @@ export const verifyToken = (token) => {
   return decoded;
 };
 
-export const getUser = (req, res, next) => {
+export const userToken = (req, res, next) => {
   const { token } = req.cookies;
-  
   const { userId, userRole, userName } = verifyToken(token);
   req.user = { userId, userRole, userName};
-
-
 next();
-
 }
 
 export const authenticateUser = (req, res, next) => {
@@ -98,4 +94,4 @@ export const sendEmail = async ({ to, subject, html }) => {
   }
 };
 
-``
+

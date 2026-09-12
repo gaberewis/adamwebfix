@@ -18,8 +18,6 @@ const InstantPage = () => {
            <Navbar userId={userId} isLog={true} />
             <Stl>
                 <div className="intro">
-
-
                     <h1>Instant Page</h1>
                     <p>
                         Launch your online business in minutes with Instant Page.

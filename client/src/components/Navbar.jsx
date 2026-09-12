@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
 import Stl from '../css-pocket/navbars';
 import { useState } from 'react';
+import { DashboardContext } from '../pages/Dashboard';
 
 import {  RiUserSettingsFill, RiAccountPinCircleFill, RiLogoutCircleRLine  } from "react-icons/ri";
 
 
 
 const Navbar = ({ userId, isLog = false, logout, dashboard = false }) => {
+    const { user } = DashboardContext();
+
+
 
    const [showItem, setShowItem] = useState(false);
         const toggleList = () => {
@@ -41,7 +45,7 @@ const Navbar = ({ userId, isLog = false, logout, dashboard = false }) => {
                 {dashboard &&
 
                     <div className='user-list'>
-                            <div><span>Hi user.name </span> <span onClick={toggleList} >  <RiAccountPinCircleFill size={25} /> </span></div>
+                            <div><span> {user && user.userName }</span> <span onClick={toggleList} >  <RiAccountPinCircleFill size={25} /> </span></div>
 
                         <div className={`hidden ${showItem ? "show-list" : ""} `}>
                            <Link to='/account' > <span  >Account <RiUserSettingsFill /></span></Link>
