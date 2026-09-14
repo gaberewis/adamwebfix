@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, } from 'react-router-dom';
+import { Outlet, useNavigate, useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import { Navbar } from '../components'
 import { useContext, createContext } from 'react';
@@ -10,6 +10,7 @@ const DashContext = createContext();
 
 const Dashboard = () => {
 
+const { user, page } = useLoaderData();
 
     const navigate = useNavigate();
 
@@ -27,6 +28,9 @@ const Dashboard = () => {
         <DashContext.Provider
             value={{
                 logout,
+                user,
+                page,
+
             }}
         >
             <Navbar  dashboard={true} logout={ logout } />

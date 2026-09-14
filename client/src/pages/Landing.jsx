@@ -2,9 +2,13 @@ import { Link } from "react-router-dom";
 import Stl from "../css-pocket/landing";
 import { useState } from "react";
 import { RiLinksLine } from "react-icons/ri";
-
+import { DashboardContext } from "./Dashboard";
 
 const Landing = () => {
+
+    const { user, page } = DashboardContext();
+
+    console.log(user, page);
 
     const [showItem, setShowItem] = useState(false);
      const [status, setStatus] = useState(true);
@@ -34,7 +38,7 @@ const Landing = () => {
 
                     <url className='main-url'>
                         <li><Link to="/dashboard/edit-page" >Edit |</Link></li>
-                        <li><Link to="/page" >Preview |</Link></li>
+                        <li><Link to={`/instant-page/${user.userId}`}   >Preview |</Link></li>
                         <li><span onClick={toggleList} >More...</span></li>
                     </url>
 

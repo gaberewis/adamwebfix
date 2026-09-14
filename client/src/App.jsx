@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   InstantPage, Login, Register,
-  Dashboard, Landing, CreatePage, EditPage, Checkout, Page,
+  Dashboard, Landing, CreatePage, EditPage, Checkout, Page, 
   ResetPassword, ForgetPassword, ClientMsg,
   MsgReceived, Error,
 
@@ -50,8 +50,9 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: 'page',
-    element: <Page />
+    path: 'instant-page/:id',
+    element: <Page />,
+    loader : loader.getPage,
   },
   {
     path: 'forget-password',

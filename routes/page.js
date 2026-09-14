@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 
-import { capturePayment, createPage} from '../controllers/page.js'
+import { capturePayment, createPage, getPage } from '../controllers/page.js'
 import upload from "../middleware/multer.js";
 
 
@@ -15,5 +15,6 @@ router.post(
 
 router.post('/payments', capturePayment );
 
+router.get('/:id', getPage);
 
 export default router;

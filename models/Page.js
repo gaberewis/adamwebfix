@@ -42,7 +42,7 @@ const pagesSchema = new mongoose.Schema(
       enum: ["active", "inActive", "blocked", "deleted"],
       default: "inActive",
     },
-    userId: {
+    userid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },

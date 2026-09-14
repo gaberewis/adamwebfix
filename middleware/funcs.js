@@ -33,7 +33,7 @@ export const verifyToken = (token) => {
   return decoded;
 };
 
-export const getUser = (req, res, next) => {
+export const userPayload = (req, res, next) => {
   const { token } = req.cookies;
   
   const { userId, userRole, userName } = verifyToken(token);

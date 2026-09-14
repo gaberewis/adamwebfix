@@ -5,7 +5,7 @@ import { redirect } from "react-router-dom";
 
 export const getUser = async()=>{
 try{
-const { data } = await axios.get('/api/user/user');
+const { data } = await axios.get('/api/user/getuser');
   return data;
 }
   catch(error){
@@ -33,6 +33,26 @@ const { data } = await axios.get('/api/user/client-msg');
 
 export const dashboard = async()=>{
 
-  console.log("dashboard");
+try {
+  const { data } = await axios.get('/api/user/getuser');
+  return data;
+
+} catch (error) {
+  console.log("Loader Error : ", error.response.data || error.message);
+     return {error : true , msg : error.response?.data};
+}
 };
 
+export const getPage = async({ params })=>{
+
+try {
+
+  const { data } = await axios.get(`/api/page/${params.id}`);
+
+  return data;
+  
+} catch (error) {
+  console.log("Loader Error : ", error.response.data || error.message);
+     return {error : true , msg : error.response?.data};
+}
+}

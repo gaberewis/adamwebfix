@@ -47,6 +47,15 @@ req.body.specification = JSON.parse(req.body.specification);
 };
 
 
+export const getPage = async(req, res)=>{
+const{ id } = req.params;
+
+const page = await Page.findById(id);
+
+res.status(200).json({ page });
+
+}
+
 
 
 

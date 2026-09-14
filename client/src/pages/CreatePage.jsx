@@ -4,13 +4,16 @@ import Stl from '../css-pocket/create-edit';
 import { useState } from 'react';
 import { RiDashboardFill, RiAddBoxFill } from "react-icons/ri";
 import { TiDelete } from "react-icons/ti";
+import { DashboardContext  } from './Dashboard';
 
 
 const CreatePage = () => {
 
     const [specification, setSpecification] = useState([]);
     const orderContact = ['whatsapp', 'phone', 'email'];
+    const { user } = DashboardContext();
 
+ 
     const addSpecification = () => {
 
         setSpecification(prev => {
@@ -85,6 +88,7 @@ const CreatePage = () => {
                     <span onClick={addSpecification}>
                         <RiAddBoxFill size={22} /></span></p> : ""}
             <input type="hidden" name="specification" value={JSON.stringify(specification)} />
+            <input type="hidden" name="userid" value={user.userId} />
             
 
             <SubmitButton />

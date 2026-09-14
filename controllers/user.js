@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Page from '../models/Page.js';
 import ClientMsg from '../models/ClientMsg.js';
 import { createToken,
    hashPassword, 
@@ -73,7 +74,11 @@ export const getClientRequest = async (req, res) => {
 
 export const currentUser = async (req, res) => {
 
-  res.status(200).json({ userId: req.user.userId });
+   const user = req.user || null;
+
+   const page = await Page.findById(user.userId);
+   
+  res.status(201).json({ user, page });
 
 };
 
