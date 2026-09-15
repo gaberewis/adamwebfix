@@ -6,28 +6,30 @@ import { formatImage } from '../middleware/multer.js';
 
 
 
+
+
 export const createPage = async (req, res) => {
   try {
-   
- let uploadedImages = [];
-  const files = req.files || []; 
-  if (files && files.length > 0) {
-    uploadedImages = await Promise.all(
-      req.files.map((image) => {
-        return cloudinary.v2.uploader.upload(
-           formatImage(image)
-        );
-      })
-    );
-  }
 
-  req.body.images = uploadedImages.map((img) => ({
-    imageUrl: img.secure_url,
-    imageId: img.public_id,
-  }));
+    let uploadedImages = [];
+    const files = req.files || [];
+    if (files && files.length > 0) {
+      uploadedImages = await Promise.all(
+        req.files.map((image) => {
+          return cloudinary.v2.uploader.upload(
+            formatImage(image)
+          );
+        })
+      );
+    }
 
-req.body.specification = JSON.parse(req.body.specification);
- 
+    req.body.images = uploadedImages.map((img) => ({
+      imageUrl: img.secure_url,
+      imageId: img.public_id,
+    }));
+
+    req.body.specification = JSON.parse(req.body.specification);
+
 
     const page = await Page.create(req.body);
 
@@ -47,14 +49,21 @@ req.body.specification = JSON.parse(req.body.specification);
 };
 
 
-export const getPage = async(req, res)=>{
-const{ id } = req.params;
+export const getPage = async (req, res) => {
+  const { id } = req.params;
+  const page = await Page.findById(id);
+const pages = await Page.find({userid : page.userid});
 
-const page = await Page.findById(id);
+  res.status(200).json({ page, pages });
+};
 
-res.status(200).json({ page });
 
-}
+
+
+
+
+
+
 
 
 

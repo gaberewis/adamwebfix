@@ -43,16 +43,22 @@ try {
 }
 };
 
-export const getPage = async({ params })=>{
+export const getPage = async ({ params }) => {
+  try {
+    const { data } = await axios.get(`/api/page/${params.id}`);
+    console.log(data);
 
-try {
+    return data;
 
-  const { data } = await axios.get(`/api/page/${params.id}`);
+  } catch (error) {
+    console.log(
+      "Loader Error:",
+      error.response?.data || error.message
+    );
 
-  return data;
-  
-} catch (error) {
-  console.log("Loader Error : ", error.response.data || error.message);
-     return {error : true , msg : error.response?.data};
-}
-}
+    return {
+      error: true,
+      msg: error.response?.data || error.message
+    };
+  }
+};

@@ -10,7 +10,8 @@ const DashContext = createContext();
 
 const Dashboard = () => {
 
-const { user, page } = useLoaderData();
+const { user, pages } = useLoaderData();
+console.log(pages);
 
     const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ const { user, page } = useLoaderData();
             value={{
                 logout,
                 user,
-                page,
+              pages,
 
             }}
         >

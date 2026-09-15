@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Stl from "../css-pocket/page";
 import { FaCircleDot } from "react-icons/fa6";
 import { MdEmail, MdLocationOn } from "react-icons/md";
@@ -10,52 +10,52 @@ import { RiWhatsappFill, RiPhoneFill } from "react-icons/ri";
 
 const Page = () => {
 
+ 
+    const { page, pages } = useLoaderData();
+
+console.log('this is pages', pages);
+
     const [current, setCurrent] = useState(0);
 
-    const imageSlide = [
-        "/bgimage.jpg",
-        "/not-found.svg",
-        "/logo.png"];
-
-    const specification = [{ "color": "red" }, { "size": "large" }, { "status": "new" }];
-
+    const { company, product, price, discount,
+        currency, description, phone, email, whatsapp,
+        address, order, specification, images
+    } = page;
 
 
     return (
         <Stl>
+
             <h5 className="brand" >company name</h5>
             <div className="content">
                 <div className="head">
                     <div className="slide">
-                        <img src={imageSlide[current]} alt="slide" />
+                        <img src={images[current].imageUrl} alt="product-image" />
                     </div>
 
                     <div className="dots">
-                        {
-                            imageSlide.map((item, index) => (
-                                <span key={index}
-                                    className={current === index ? "active" : ""}
-                                    onClick={() => setCurrent(index)} ><FaCircleDot /> </span>
-                            )
-                            )
-                        }
+                        {images.map((image, index) => (
+                            <span
+                                key={index}
+                                className={current === index ? "active" : ""}
+                                onClick={() => setCurrent(index)}
+                            >
+                                <FaCircleDot />
+                            </span>
+                        ))}
                     </div>
 
-                    <div className="name">Product Name</div>
-                    <div className="price"><span><del>200KD</del></span> <span>160KD</span></div>
+
+                    <div className="name">{product}</div>
+                    <div className="price"><span><del>{discount} {currency}</del></span> <span>{price}{currency}</span></div>
 
                 </div>
 
                 <div className="details">
                     <h5>Product Details:</h5>
                     <p>
-                        "Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
+                        {`${description}.`}
                     </p>
 
                 </div>
@@ -84,7 +84,7 @@ const Page = () => {
                 <div
                     className="order"
                     onClick={() =>
-                        window.open(`https://wa.me/96597264747`, "_blank")
+                        window.open(`https://wa.me/${whatsapp}`, "_blank")
                     }
                 >
                     <span>Order Now</span>
@@ -96,21 +96,21 @@ const Page = () => {
 
                     <div className="more">
 
-                        {
+                        {/* {
                             imageSlide.map((item, index) => {
                                 return (
                                     <Link to={'#'} >
-                                     <div key={index}><img src={item} alt='more-product-image' />
-                                        <div className="name">Product Name</div>
-                                        <div className="price"><span><del>200KD</del></span> <span>160KD</span></div>
+                                        <div key={index}><img src={item} alt='more-product-image' />
+                                            <div className="name">Product Name</div>
+                                            <div className="price"><span><del>200KD</del></span> <span>160KD</span></div>
 
-                                    </div>
+                                        </div>
                                     </Link>
-                                   
+
                                 )
 
                             })
-                        }
+                        } */}
 
 
                     </div>
@@ -124,10 +124,10 @@ const Page = () => {
 
             <div className="contact">
 
-                <p><span>< RiPhoneFill /> </span> <span>Phone: 000000000000</span></p>
-                <p><span>< RiWhatsappFill /> </span><span>WhatsApp: 0000000000 </span></p>
-                <p><span>< MdEmail /> </span><span>Email: email@send.com</span></p>
-                <p><span>< MdLocationOn /> </span><span>Address: physical business location to be located in here</span></p>
+                <p><span>< RiPhoneFill /> </span> <span>{phone}</span></p>
+                <p><span>< RiWhatsappFill /> </span><span>{whatsapp}</span></p>
+                <p><span>< MdEmail /> </span><span>{email}</span></p>
+                <p><span>< MdLocationOn /> </span><span>Address: {address}</span></p>
 
             </div>
 

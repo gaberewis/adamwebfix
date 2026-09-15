@@ -76,9 +76,9 @@ export const currentUser = async (req, res) => {
 
    const user = req.user || null;
 
-   const page = await Page.findById(user.userId);
+   const pages = await Page.find({userid : user.userId });
    
-  res.status(201).json({ user, page });
+  res.status(201).json({ user, pages });
 
 };
 
