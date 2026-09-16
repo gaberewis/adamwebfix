@@ -26,7 +26,7 @@ console.log('this is pages', pages);
     return (
         <Stl>
 
-            <h5 className="brand" >company name</h5>
+            <h5 className="brand" >{company}</h5>
             <div className="content">
                 <div className="head">
                     <div className="slide">
@@ -88,7 +88,7 @@ console.log('this is pages', pages);
                     }
                 >
                     <span>Order Now</span>
-                    <span><RiWhatsappFill /></span>
+                    <span>{order === email ?  < MdEmail /> : order === phone ? < RiPhoneFill />  : <RiWhatsappFill />   }</span>
                 </div>
 
                 <div className="show-more">
