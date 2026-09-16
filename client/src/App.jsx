@@ -44,8 +44,10 @@ const router = createBrowserRouter([
         loader: loader.getUser,
       },
       {
-        path: 'edit-page',
-        element: <EditPage />
+        path: 'edit-page/:id',
+        element: <EditPage />,
+        loader : loader.getPage,
+        action : action.editPage,
       },
     ]
   },

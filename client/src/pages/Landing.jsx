@@ -30,7 +30,7 @@ const Landing = () => {
 
             <div className="card" key={index} >
                 <div className="head">
-                    <img src={page.images[0].imageUrl} alt='Product-Thumbling' />
+                    <img src={page.images[0]?.imageUrl} alt='Product-Thumbling' />
                     <p>{page.product}</p>
                 </div>
 

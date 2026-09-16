@@ -1,5 +1,5 @@
 import axios from "axios";
-import { redirect } from "react-router-dom";
+
 
 
 
@@ -46,10 +46,7 @@ try {
 export const getPage = async ({ params }) => {
   try {
     const { data } = await axios.get(`/api/page/${params.id}`);
-    console.log(data);
-
     return data;
-
   } catch (error) {
     console.log(
       "Loader Error:",

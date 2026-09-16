@@ -112,6 +112,19 @@ try {
   return { errMsg }
 
 }
-}
+};
+
+export const editPage = async({ request, params })=>{
+  const formData = await request.formData();
+  try {
+    await axios.post(`/api/page/${params.id}`, formData);
+    return redirect('/dashboard');
+  } catch (error) {
+    console.log(error.response?.data?.msg || "Request faild");
+     const errMsg = error.response?.data?.msg || 'Request faild';
+  return { errMsg }
+  
+  }
+};
 
 

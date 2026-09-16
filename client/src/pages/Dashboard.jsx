@@ -11,7 +11,7 @@ const DashContext = createContext();
 const Dashboard = () => {
 
 const { user, pages } = useLoaderData();
-console.log(pages);
+
 
     const navigate = useNavigate();
 

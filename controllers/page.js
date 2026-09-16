@@ -2,6 +2,7 @@ import axios from "axios";
 import Page from "../models/Page.js";
 import cloudinary from 'cloudinary';
 import { formatImage } from '../middleware/multer.js';
+import { param } from "express-validator";
 
 
 
@@ -49,10 +50,77 @@ export const createPage = async (req, res) => {
 };
 
 
+
+export const editPage = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    let updateData = { ...req.body };
+
+    // Parse specification
+    if (updateData.specification) {
+      updateData.specification = JSON.parse(updateData.specification);
+    }
+
+    // Only update images if new images were uploaded
+    const files = req.files || [];
+
+    if (files.length > 0) {
+      const uploadedImages = await Promise.all(
+        files.map((image) =>
+          cloudinary.v2.uploader.upload(formatImage(image))
+        )
+      );
+
+      updateData.images = uploadedImages.map((img) => ({
+        imageUrl: img.secure_url,
+        imageId: img.public_id,
+      }));
+    }
+
+    const page = await Page.findByIdAndUpdate(
+      id,
+      updateData,
+      {
+        new: true,
+      
+      }
+    );
+
+    if (!page) {
+      return res.status(404).json({
+        msg: "Page not found",
+      });
+    }
+
+    res.status(200).json({
+      msg: "Page updated",
+      page,
+    });
+
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      msg: "Failed to update page",
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+
 export const getPage = async (req, res) => {
   const { id } = req.params;
   const page = await Page.findById(id);
-const pages = await Page.find({userid : page.userid});
+  const pages = await Page.find({ userid: page.userid });
 
   res.status(200).json({ page, pages });
 };
