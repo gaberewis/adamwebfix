@@ -144,19 +144,24 @@ color : var(--red);
      font-size : 3rem;
      }
 
-  .show-more {
-  margin-top: 3rem;
-  padding: 1.6rem;
-  width :100%;
+.more-h5{
+margin-top : 3rem;
+}
 
-  .more {
-    margin-top: 1.6rem;
+  .more { 
     display: flex;
-    gap: 2rem;
+    gap : 2rem;
     padding : 1rem;
 
     overflow-x: auto;
     overflow-y: hidden;
+
+.content{
+display : flex;
+flex-direction : column;
+gap : .4rem;
+  max-width : 120px;
+}
 
     .price span:nth-child(1) {
     color : var(--red);
@@ -175,9 +180,7 @@ color : var(--red);
       flex-shrink: 0;
     }
   }
-}
-   
-    //  end of show more
+    //  end of  more
   
 
       }

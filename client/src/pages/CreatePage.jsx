@@ -4,12 +4,13 @@ import Stl from '../css-pocket/create-edit';
 import { useState } from 'react';
 import { RiDashboardFill, RiAddBoxFill } from "react-icons/ri";
 import { TiDelete } from "react-icons/ti";
-
+import { DashboardContext } from './Dashboard';
 
 const CreatePage = () => {
 
+    const { user } = DashboardContext();
     
-
+const orderContact = ["whatsapp", "phone", "email"]
     const [specification, setSpecification] = useState([]);
  
     const addSpecification = () => {

@@ -10,10 +10,11 @@ import { RiWhatsappFill, RiPhoneFill } from "react-icons/ri";
 
 const Page = () => {
 
- 
-    const { page, pages } = useLoaderData();
 
-console.log('this is pages', pages);
+    const { page, pages } = useLoaderData();
+    const notCurrent = pages.filter((pgs) => pgs._id !== page._id);
+
+  
 
     const [current, setCurrent] = useState(0);
 
@@ -32,19 +33,21 @@ console.log('this is pages', pages);
                     <div className="slide">
                         <img src={images[current].imageUrl} alt="product-image" />
                     </div>
-
-                    <div className="dots">
-                        {images.map((image, index) => (
-                            <span
-                                key={index}
-                                className={current === index ? "active" : ""}
-                                onClick={() => setCurrent(index)}
-                            >
-                                <FaCircleDot />
-                            </span>
-                        ))}
-                    </div>
-
+                    {
+                        images && images.length > 1 && (
+                            <div className="dots">
+                                {images.map((image, index) => (
+                                    <span
+                                        key={index}
+                                        className={current === index ? "active" : ""}
+                                        onClick={() => setCurrent(index)}
+                                    >
+                                        <FaCircleDot />
+                                    </span>
+                                ))}
+                            </div>
+                        )
+                    }
 
                     <div className="name">{product}</div>
                     <div className="price"><span><del>{discount} {currency}</del></span> <span>{price}{currency}</span></div>
@@ -65,18 +68,14 @@ console.log('this is pages', pages);
 
                     {specification.map((item, index) => {
 
-                        const [key, value] = Object.entries(item)[0];
-
                         return (
 
                             <div className="spec-items" key={index}>
-                                <span>{key}</span>
-                                <span>{value}</span>
+                                <span>{item.spec}</span>
+                                <span>{item.details}</span>
                             </div>
-
                         )
                     })
-
                     }
                 </div>
 
@@ -88,35 +87,38 @@ console.log('this is pages', pages);
                     }
                 >
                     <span>Order Now</span>
-                    <span>{order === email ?  < MdEmail /> : order === phone ? < RiPhoneFill />  : <RiWhatsappFill />   }</span>
+                    <span>{order === email ? < MdEmail /> : order === phone ? < RiPhoneFill /> : <RiWhatsappFill />}</span>
                 </div>
 
-                <div className="show-more">
-                    <h5>More products: </h5>
 
-                    <div className="more">
 
-                        {/* {
-                            imageSlide.map((item, index) => {
-                                return (
-                                    <Link to={'#'} >
-                                        <div key={index}><img src={item} alt='more-product-image' />
-                                            <div className="name">Product Name</div>
-                                            <div className="price"><span><del>200KD</del></span> <span>160KD</span></div>
+
+ {notCurrent && <h5 className="more-h5">More products: </h5>}
+            {notCurrent && <div className="more"> 
+
+                {
+                    notCurrent &&
+                    notCurrent.map(page => {
+
+                        return (
+                                 
+                                    <Link to={`/instant-page/${page._id}`} key={page._id} >
+                                        <div  className="content"><img src={page.images[0].imageUrl} alt='more-product-image' />
+                                            <div className="name">{page.product}</div>
+                                            <div className="price"><span><del>{page.discount}</del></span> <span>{page.price}</span></div>
 
                                         </div>
                                     </Link>
-
-                                )
-
-                            })
-                        } */}
-
-
-                    </div>
+                              
+                        )
+                    })
+                }  </div>}
 
 
-                </div>
+
+
+
+
 
 
 

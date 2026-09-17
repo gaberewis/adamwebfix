@@ -8,7 +8,15 @@ import { useState } from 'react';
 
 const EditPage = () => {
 
-    const [specs, setSpecs] = useState ([]);
+
+    const { page } = useLoaderData();
+    const { company, product, price, discount,
+        currency, description, phone, email, whatsapp,
+        address, order, specification, images
+    } = page;
+
+
+    const [specs, setSpecs] = useState(specification);
 
     const addSpecification = () => {
         setSpecs(prev => {
@@ -22,12 +30,6 @@ const EditPage = () => {
     };
 
 
-    const { page } = useLoaderData();
-    const { company, product, price, discount,
-        currency, description, phone, email, whatsapp,
-        address, order, specification, images
-    } = page;
-
 
 
     const orderContact = ['phone', 'whatsapp', 'email'];
@@ -35,7 +37,7 @@ const EditPage = () => {
     return (<Stl>
         <Link to="/dashboard" ><RiDashboardFill /> dashboard</Link>
 
-        <Form method="post" className='form'  encType="multipart/form-data" >
+        <Form method="post" className='form' encType="multipart/form-data" >
             <FormRow type='file' name='images' labelText={'Edit product images'} accept='images/*' multiple />
             <FormRow type='text' name="company" labelText={'Edit company / business name'} maxLength={100} defaultValue={company} />
             <FormRow type='text' name="product" labelText={'Edit product Name'} maxLength={100} defaultValue={product} />
@@ -53,21 +55,40 @@ const EditPage = () => {
                 defaultValue={address}
             ></textarea>
 
+
+
             {
 
-                specification.map((spec, index) =>
+                specs.map((sp, index) =>
                 (
                     <div className='spec' key={index} >
-                         <span onClick={() => deleteSpec(index)} ><TiDelete size={22} /></span>
-                        <input className='form-input' name={`spec${index}`} maxLength={100} defaultValue={spec.spec} />
-                        <textarea name={`details${index}`} className='form-textarea' maxLength={300} defaultValue={spec.details} ></textarea>
+                        <span onClick={() => deleteSpec(index)} ><TiDelete size={22} /></span>
+                        <input className='form-input' name={`spec${index}`} maxLength={100}
+                            onChange={(e) => {
+                                setSpecs(pre => (
+                                    pre.map((item, i) => (
+                                        i === index ? { ...item, spec: e.target.value } : item
+                                    ))))
+                            }}
+
+                             defaultValue={sp.spec}
+                        />
+                        <textarea name={`details${index}`} className='form-textarea' maxLength={300}
+                            onChange={(e) => {
+                                setSpecs(pre => (
+                                    pre.map((item, i) => (
+                                        i === index ? { ...item, details: e.target.value } : item
+                                    ))))
+                            }}
+
+                     defaultValue={sp.details}
+                     ></textarea>
                     </div>
                 )
-
-
                 )
             }
-            {specification.length < 10 ?
+
+            {specs.length < 10 ?
                 <p className='add-spec'>
                     <span>{specification.length < 1 ? 'Add Specification' : 'Add More'}</span>
                     <span onClick={addSpecification}>
