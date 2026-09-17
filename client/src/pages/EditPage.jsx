@@ -1,10 +1,26 @@
 import { Form, Link, useLoaderData } from 'react-router-dom';
 import { FormRow, FormRowSelect, SubmitButton, currencies } from '../components';
 import Stl from '../css-pocket/create-edit';
-import { RiDashboardFill } from "react-icons/ri";
+import { RiDashboardFill, RiAddBoxFill } from "react-icons/ri";
+import { TiDelete } from "react-icons/ti";
+import { useState } from 'react';
 
 
 const EditPage = () => {
+
+    const [specs, setSpecs] = useState ([]);
+
+    const addSpecification = () => {
+        setSpecs(prev => {
+            if (prev.length >= 10) { return prev; }
+            return [...prev, { spec: '', details: '' }];
+        });
+    };
+    const deleteSpec = (i) => {
+        setSpecs(prev => prev.filter((_, index) => index !== i)
+        );
+    };
+
 
     const { page } = useLoaderData();
     const { company, product, price, discount,
@@ -12,21 +28,21 @@ const EditPage = () => {
         address, order, specification, images
     } = page;
 
- 
+
 
     const orderContact = ['phone', 'whatsapp', 'email'];
 
     return (<Stl>
         <Link to="/dashboard" ><RiDashboardFill /> dashboard</Link>
 
-        <Form method="post" className='form' >
+        <Form method="post" className='form'  encType="multipart/form-data" >
             <FormRow type='file' name='images' labelText={'Edit product images'} accept='images/*' multiple />
             <FormRow type='text' name="company" labelText={'Edit company / business name'} maxLength={100} defaultValue={company} />
             <FormRow type='text' name="product" labelText={'Edit product Name'} maxLength={100} defaultValue={product} />
             <FormRow type='text' name="price" labelText={'Edit Product price'} maxLength={20} defaultValue={price} />
             <FormRow type='text' name="discount" labelText={'Edit price before discount (optional)'} maxLength={20} defaultValue={discount} />
             <FormRowSelect name='currency' labelText={'edit currency'} list={currencies} defaultValue={currency} />
-            <textarea className='form-textarea' name="description" labelText={'edit product description'} maxLength={1000}
+            <textarea className='form-textarea' name="description" placeholder={'edit product description'} maxLength={1000}
                 defaultValue={description}
             ></textarea>
             <FormRow type='text' name='phone' labelText={'Edit phone number'} defaultValue={phone} />
@@ -42,15 +58,21 @@ const EditPage = () => {
                 specification.map((spec, index) =>
                 (
                     <div className='spec' key={index} >
+                         <span onClick={() => deleteSpec(index)} ><TiDelete size={22} /></span>
                         <input className='form-input' name={`spec${index}`} maxLength={100} defaultValue={spec.spec} />
-                        <textarea name={`details${index}`} labelText="Details" className='form-textarea' maxLength={300} defaultValue={spec.details} ></textarea>
+                        <textarea name={`details${index}`} className='form-textarea' maxLength={300} defaultValue={spec.details} ></textarea>
                     </div>
                 )
 
 
                 )
             }
-
+            {specification.length < 10 ?
+                <p className='add-spec'>
+                    <span>{specification.length < 1 ? 'Add Specification' : 'Add More'}</span>
+                    <span onClick={addSpecification}>
+                        <RiAddBoxFill size={22} /></span></p> : ""}
+            <input type="hidden" name="specification" value={JSON.stringify(specs)} />
             <SubmitButton />
         </Form>
     </Stl>)

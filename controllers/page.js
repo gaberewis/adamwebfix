@@ -14,14 +14,18 @@ export const createPage = async (req, res) => {
 
     let uploadedImages = [];
     const files = req.files || [];
+
     if (files && files.length > 0) {
+
       uploadedImages = await Promise.all(
+
         req.files.map((image) => {
           return cloudinary.v2.uploader.upload(
             formatImage(image)
-          );
-        })
-      );
+          )
+        }
+
+        ))
     }
 
     req.body.images = uploadedImages.map((img) => ({
@@ -31,21 +35,13 @@ export const createPage = async (req, res) => {
 
     req.body.specification = JSON.parse(req.body.specification);
 
+    await Page.create(req.body);
 
-    const page = await Page.create(req.body);
-
-    res.status(201).json({
-      msg: "page created",
-      page,
-    });
+    res.status(201).json({ msg: "page created" });
 
   } catch (error) {
     console.log(error);
-
-    res.status(500).json({
-      msg: "Failed to create page",
-      error: error.message,
-    });
+    res.status(500).json({ msg: "Failed to create page", error: error.message, });
   }
 };
 
@@ -57,13 +53,11 @@ export const editPage = async (req, res) => {
 
     let updateData = { ...req.body };
 
-    // Parse specification
-    if (updateData.specification) {
-      updateData.specification = JSON.parse(updateData.specification);
-    }
+    updateData.specification = JSON.parse(updateData.specification);
 
-    // Only update images if new images were uploaded
     const files = req.files || [];
+
+    let oldImages = [];
 
     if (files.length > 0) {
       const uploadedImages = await Promise.all(
@@ -81,22 +75,22 @@ export const editPage = async (req, res) => {
     const page = await Page.findByIdAndUpdate(
       id,
       updateData,
-      {
-        new: true,
-      
-      }
+      { new: false }
     );
 
     if (!page) {
-      return res.status(404).json({
-        msg: "Page not found",
-      });
+      return res.status(404).json({ msg: "Page not found" });
     }
 
-    res.status(200).json({
-      msg: "Page updated",
-      page,
-    });
+    if (files.length > 0 && page.images?.length > 0) {
+      await Promise.all(
+        page.images.map((image) =>
+          cloudinary.v2.uploader.destroy(image.imageId)
+        )
+      );
+    }
+
+    res.status(200).json({ msg: "Page updated" });
 
   } catch (error) {
     console.log(error);
@@ -107,10 +101,6 @@ export const editPage = async (req, res) => {
     });
   }
 };
-
-
-
-
 
 
 
