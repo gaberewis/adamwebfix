@@ -34,7 +34,7 @@ const pagesSchema = new mongoose.Schema(
     
     order: {
       type: String,
-      enum: ["phone", "whatsapp", "email"],
+      enum: [ "whatsapp", "phone", "email"],
       default: "whatsapp"
     },    
     status: {

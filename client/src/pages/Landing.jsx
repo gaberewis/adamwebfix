@@ -34,10 +34,15 @@ const Landing = () => {
                     <p>{page.product}</p>
                 </div>
 
-                <p className={`${page.status === 'active' ? "green" : "red"}`} >Active</p>
+                <p className={`${page.status === 'active' ? "green" : "red"}`} >{page.status}</p>
 
                 <url className='side-url'>
-                    <li><Link to={`/instant-page/${page._id}`} >Copy Link <RiLinksLine color='E0115F' /> </Link></li>
+                    <li className="btn" ><Link to={`/instant-page/${page._id}`} >Copy Link <RiLinksLine color='E0115F' /> </Link></li>
+                 {
+                    page.status === "inActive"  && 
+                    <li className="btn"  ><Link to={`/chechout/${page._id}`}  >Publish <RiLinksLine color='E0115F' /> </Link></li>
+                 }    
+
                 </url>
 
                 <div className="urls">

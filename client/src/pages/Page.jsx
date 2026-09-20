@@ -78,17 +78,43 @@ const Page = () => {
                     })
                     }
                 </div>
+{
+     order && order === "phone" ? (
+        <div
+            className="order"
+            onClick={() =>
+                window.open(`tel:${phone}`, "_blank")
+            }
+        >
+            <span>Order Now</span>
+            <span><RiPhoneFill /></span>
+        </div>
+    ) : order && order === "email" ?   (
+        <div
+            className="order"
+            onClick={() =>
+                window.open(`mailto:${email}`, "_blank")
+            }
+        >
+            <span>Order Now</span>
+            <span><MdEmail /></span>
+        </div>
+    ) : 
+    (
+        <div
+            className="order"
+            onClick={() =>
+                window.open(`https://wa.me/${whatsapp}`, "_blank")
+            }
+        >
+            <span>Order Now</span>
+            <span><RiWhatsappFill /></span>
+        </div>
+    )
+}
 
 
-                <div
-                    className="order"
-                    onClick={() =>
-                        window.open(`https://wa.me/${whatsapp}`, "_blank")
-                    }
-                >
-                    <span>Order Now</span>
-                    <span>{order === email ? < MdEmail /> : order === phone ? < RiPhoneFill /> : <RiWhatsappFill />}</span>
-                </div>
+          
 
 
 
@@ -113,14 +139,6 @@ const Page = () => {
                         )
                     })
                 }  </div>}
-
-
-
-
-
-
-
-
 
             </div>
 
