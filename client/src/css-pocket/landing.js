@@ -104,8 +104,31 @@ font-size : .875rem;
 
 }
 
+.side-url  li{
+padding : .3rem .3rem;
+min-width : 80px;
+text-align : center;
+background : var(--grey-200);
+color : var(--grey-500);
+border-radius : 7px;
+font-size : .9rem;
+font-weight : 600;
+cursor : pointer;
+box-shadow : var(--shadow-1);
+
+}
+.side-url a{
+color : var(--grey-500);
+}
+.side-url  li:hover{
+opacity : .8;
+}
+
+
 }
 //  end of the card
+
+
 
 `;
 
