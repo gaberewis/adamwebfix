@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         action : action.createPage,
       },
       {
-        path: 'checkout',
+        path: 'checkout/:id',
         element: <Checkout />,
         loader: loader.getUser,
       },

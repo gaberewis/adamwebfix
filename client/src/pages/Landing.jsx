@@ -10,13 +10,15 @@ const Landing = () => {
 
     console.log(user);
 
-    const [showItem, setShowItem] = useState(false);
+    const [pageId, setPageId] = useState(null);
+    const [menuId, setMenuId] = useState(null);
+    
 
-    const [copied, setCopied] = useState(null);
+     const toggleList = (id) => {
+      setMenuId(pre=> pre === id ? null : id);
+     }
 
-    const toggleList = () => {
-        setShowItem(pre => !pre);
-    }
+   
 
 
 
@@ -29,8 +31,6 @@ const Landing = () => {
 
                 pages.map((page, index) => (
 
-
-
                     <div className="card" key={page._id} >
                         <div className="head">
                             <img src={page.images[0]?.imageUrl} alt='Product-Thumbling' />
@@ -40,19 +40,19 @@ const Landing = () => {
                         <p className={`${page.status === 'active' ? "green" : "red"}`} >{page.status}</p>
 
                         <url className='side-url'  >
-                            <li 
-                                onClick={(e) => {
+                            <li
+                                onClick={() => {
                                     navigator.clipboard.writeText(
                                         `${window.location.origin}/instant-page/${page._id}`
                                     );
-                                    setCopied(page._id);
+                                    setPageId(page._id);
                                 }}
                             >
 
-                               {copied === page._id ? 'copied' : <span>Copy Link <RiLinksLine color='#64748b' /></span>  } </li>
+                                {pageId === page._id ? 'copied' : <span>Copy Link <RiLinksLine color='#64748b' /></span>} </li>
                             {
                                 page.status === "inActive" &&
-                                <li  ><Link to={`/chechout/${page._id}`}  >Publish</Link></li>
+                                <li  ><Link to={`/dashboard/checkout/${page._id}`}  >Publish</Link></li>
                             }
 
                         </url>
@@ -62,10 +62,21 @@ const Landing = () => {
                             <url className='main-url'>
                                 <li><Link to={`/dashboard/edit-page/${page._id}`} >Edit |</Link></li>
                                 <li><Link to={`/instant-page/${page._id}`}   >Preview |</Link></li>
-                                <li><span onClick={toggleList} >More...</span></li>
+                                {page.status === "active" ? (
+                                    <li>
+                                        <Link className="red" to={`/delet-page/${page._id}`}>Delete</Link>
+                                    </li>
+                                ) : (
+                                    <li>
+                                        <span onClick={() => 
+                                           toggleList(page._id) }>
+                                            More...
+                                        </span>
+                                    </li>
+                                )}
                             </url>
 
-                            <ul className={`sub-url ${showItem ? "show-ul" : ""}`}>
+                            <ul className={`sub-url ${menuId === page._id &&  "show-ul" }`}>
                                 <li >
                                     <Link to={`/deactivate/${page._id}`}>Deactivate </Link>
                                 </li>

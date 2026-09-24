@@ -33,7 +33,6 @@ const Checkout = () => {
   return (
     
     <Stl>
-      <Navbar />
     <div className="main">
       <div className='card'>
         <div className="title">Subscription Checkout</div>

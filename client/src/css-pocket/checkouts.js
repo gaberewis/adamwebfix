@@ -6,11 +6,13 @@ const Stl = styled.main`
   
 
  
-.main{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+.main {
+    display: flex;
+    flex-direction: column;
+margin-top : 4rem;
+    align-items: center;     /* horizontal */
+    min-height: 100vh;
+    padding: 2rem;
 }
   .card {
     width: 100%;
