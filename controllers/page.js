@@ -119,38 +119,16 @@ export const getPage = async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const capturePayment = async (req, res) => {
   try {
-    const { orderId, userId } = req.body;
-
+    const { orderId, pageId } = req.body;
+   
     const auth = await axios.post(
       "https://api-m.sandbox.paypal.com/v1/oauth2/token",
       "grant_type=client_credentials",
       {
         auth: {
-          username: 'AY0hkrLmuQPwKm9bhx2JGuOQ5WXxkSSuUzKa087G3jGVHJtyIGZwChnysTGfnkF2w4nK_gbdhXZSGiZv',
+          username: process.env.PAYPAL_CLIENT_ID,
           password: process.env.PAYPAL_SECRET,
         },
         headers: {
@@ -173,6 +151,7 @@ export const capturePayment = async (req, res) => {
     );
 
     const data = response.data;
+   
 
     const capture = data?.purchase_units?.[0]?.payments?.captures?.[0];
 
@@ -183,16 +162,22 @@ export const capturePayment = async (req, res) => {
         data,
       });
     }
+ console.log("capture",  capture, "page id", pageId, "order id", orderId);
 
-    const payment = await Page.create({
-      userId,
-      transactionId: capture.id,
-      paymentDate: Date.now(),
-    });
+
+    const page = await Page.findById({ _id: pageId });
+    if(!page){
+      res.status(404).json({success : false ,msg : "page not found"});
+    }
+    const newPayment = [...(page.paymentData || []), capture]
+
+
+    const addPayment = await Page.findByIdAndUpdate({ _id: pageId },
+      { status: "activ", paymentData: newPayment }, { new: true })
 
     return res.json({
       success: true,
-      payment,
+      addPayment,
     });
 
   } catch (err) {

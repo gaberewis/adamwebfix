@@ -30,7 +30,11 @@ const pagesSchema = new mongoose.Schema(
     email: String,
     whatsapp: String,
     address: String,
-    paymentDate: String,
+
+    paymentData:{
+      type : Array,
+      default : []
+    },
     
     order: {
       type: String,

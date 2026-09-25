@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: 'checkout/:id',
         element: <Checkout />,
-        loader: loader.getUser,
+        loader: loader.getPage,
       },
       {
         path: 'edit-page/:id',
