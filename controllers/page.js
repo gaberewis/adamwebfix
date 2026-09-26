@@ -128,7 +128,7 @@ export const capturePayment = async (req, res) => {
       "grant_type=client_credentials",
       {
         auth: {
-          username: process.env.PAYPAL_CLIENT_ID,
+          username: "AY0hkrLmuQPwKm9bhx2JGuOQ5WXxkSSuUzKa087G3jGVHJtyIGZwChnysTGfnkF2w4nK_gbdhXZSGiZv",
           password: process.env.PAYPAL_SECRET,
         },
         headers: {

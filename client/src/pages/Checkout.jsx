@@ -50,7 +50,7 @@ console.log(page._id);
 
         <PayPalScriptProvider
           options={{
-           clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID,
+           clientId: "AY0hkrLmuQPwKm9bhx2JGuOQ5WXxkSSuUzKa087G3jGVHJtyIGZwChnysTGfnkF2w4nK_gbdhXZSGiZv",
             }}
         >
           <PayPalButtons
