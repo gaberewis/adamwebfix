@@ -184,3 +184,19 @@ export const capturePayment = async (req, res) => {
     });
   }
 }
+
+
+export const delPage = async (req, res) => {
+    try {
+        await Page.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({
+            msg: "Page deleted"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            msg: error.message
+        });
+    }
+};

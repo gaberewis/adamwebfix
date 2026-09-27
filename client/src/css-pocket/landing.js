@@ -38,7 +38,7 @@ width : 100%;
 max-width : 600px;
 
 
-url {
+ul {
 list-style: none;
 }
 
@@ -51,7 +51,7 @@ margin-bottom : 1rem;
 
 }
 
-.side-url{
+.side-ul{
 position : absolute;
 top : 2rem;
 right : 2rem;
@@ -61,20 +61,20 @@ gap : .8rem;
 
 }
 
-.urls{
+.uls{
 position : relative;
 }
 
-.main-url{
+.main-ul{
 display : flex;
 gap : .4rem;
 }
 
-.main-url li:nth-child(3){
+.main-ul li:nth-child(3){
 cursor : pointer;
 }
 
-.sub-url{
+.sub-ul{
 position : absolute;
 display : flex;
 gap : .5rem;
@@ -84,7 +84,7 @@ transform: translateY(3rem);
 transition: opacity 0.5s ease, transform 0.3s ease;
 }
 
-.sub-url li{
+.sub-ul li{
 background: var(--grey-100);
 padding : .3rem 0;
 margin-top : .3rem;
@@ -94,7 +94,7 @@ text-align : center;
 font-size : .875rem;
 }
 
-.sub-url li:last-child a{
+.sub-ul li:last-child a{
   color: var(--red);
 }
 
@@ -104,7 +104,7 @@ font-size : .875rem;
 
 }
 
-.side-url  li{
+.side-ul  li{
 padding : .3rem .3rem;
 min-width : 80px;
 text-align : center;
@@ -117,13 +117,18 @@ cursor : pointer;
 box-shadow : var(--shadow-1);
 
 }
-.side-url a{
+.side-ul a{
 color : var(--grey-500);
 }
-.side-url  li:hover{
+.side-ul  li:hover{
 opacity : .8;
 }
-
+.red{
+cursor : pointer;
+}
+.red:hover {
+opacity : .7;
+}
 
 }
 //  end of the card

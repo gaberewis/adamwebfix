@@ -1,21 +1,34 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Stl from "../css-pocket/landing";
 import { useState } from "react";
 import { RiLinksLine } from "react-icons/ri";
-import { DashboardContext } from "./Dashboard";
+import axios from "axios";
 
 
 const Landing = () => {
-    
-    const { pages } = useLoaderData();
-    const {user } = DashboardContext();
-    console.log(user);
-    const [pageId, setPageId] = useState(null);
-    const [menuId, setMenuId] = useState(null);
-     const toggleList = (id) => {
-      setMenuId(pre=> pre === id ? null : id);
-     }
 
+    const navigate = useNavigate();
+
+    const { pages } = useLoaderData();
+    const [pageId, setPageId] = useState(null);
+
+    const [menuId, setMenuId] = useState(null);
+    const toggleList = (id) => {
+        setMenuId(pre => pre === id ? null : id);
+    }
+
+    const deletePage = async (id) => {
+        try {
+            await axios.delete(`/api/page/${id}`);
+            return navigate('/dashboard');
+
+        } catch (error) {
+            console.log(
+                "Delete page error:",
+                error.response?.data?.msg || "Something went wrong."
+            );
+        }
+    };
 
     return (<Stl>
         <Link to='/dashboard/create-page' className="btn"  >Create new page</Link>
@@ -28,7 +41,7 @@ const Landing = () => {
                             <p>{page.product}</p>
                         </div>
                         <p className={`${page.status === 'active' ? "green" : "red"}`} >{page.status}</p>
-                        <url className='side-url'  >
+                        <ul className='side-ul'  >
                             <li
                                 onClick={() => {
                                     navigator.clipboard.writeText(
@@ -43,35 +56,53 @@ const Landing = () => {
                                 <li  ><Link to={`/dashboard/checkout/${page._id}`}  >Publish</Link></li>
                             }
 
-                        </url>
+                        </ul>
 
-                        <div className="urls">
+                        <div className="uls">
 
-                            <url className='main-url'>
+                            <ul className='main-ul'>
                                 <li><Link to={`/dashboard/edit-page/${page._id}`} >Edit |</Link></li>
                                 <li><Link to={`/instant-page/${page._id}`}   >Preview |</Link></li>
                                 {page.status === "active" ?
-                                 (
-                                    <li>
-                                        <span onClick={() => 
-                                           toggleList(page._id) }>
-                                            More...
-                                        </span>
-                                    </li>
-                                ) :  (
-                                    <li>
-                                        <Link className="red" to={`/delet-page/${page._id}`}>Delete</Link>
-                                    </li>
-                                ) }
-                            </url>
+                                    (
+                                        <li>
+                                            <span onClick={() =>
+                                                toggleList(page._id)}>
+                                                More...
+                                            </span>
+                                        </li>
+                                    ) : (
+                                        <li >
+                                            <div
+                                                className="red"
+                                                onClick={() => {
+                                                    if (window.confirm("Are you sure you want to delete this page?")) {
+                                                        deletePage(page._id);
+                                                    }
+                                                }}
+                                            >
+                                                Delete
+                                            </div>
+                                        </li>
+                                    )}
+                            </ul>
 
-                            <ul className={`sub-url ${menuId === page._id &&  "show-ul" }`}>
+                            <ul className={`sub-ul ${menuId === page._id && "show-ul"}`}>
                                 <li >
                                     <Link to={`/deactivate/${page._id}`}>Deactivate </Link>
                                 </li>
 
                                 <li >
-                                    <Link to={`/delet-page/${page._id}`}>Delete </Link>
+                                    <div
+                                        className="red"
+                                        onClick={() => {
+                                            if (window.confirm("Are you sure you want to delete this page?")) {
+                                                deletePage(page._id);
+                                            }
+                                        }}
+                                    >
+                                        Delete
+                                    </div>
                                 </li>
 
                             </ul>
