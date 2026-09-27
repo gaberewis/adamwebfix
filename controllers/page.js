@@ -2,7 +2,7 @@ import axios from "axios";
 import Page from "../models/Page.js";
 import cloudinary from 'cloudinary';
 import { formatImage } from '../middleware/multer.js';
-import { param } from "express-validator";
+
 
 
 
@@ -57,8 +57,6 @@ export const editPage = async (req, res) => {
 
     const files = req.files || [];
 
-    let oldImages = [];
-
     if (files.length > 0) {
       const uploadedImages = await Promise.all(
         files.map((image) =>
@@ -110,9 +108,7 @@ export const editPage = async (req, res) => {
 export const getPage = async (req, res) => {
   const { id } = req.params;
   const page = await Page.findById(id);
-  const pages = await Page.find({ userid: page.userid });
-
-  res.status(200).json({ page, pages });
+  res.status(200).json({ page });
 };
 
 
@@ -167,13 +163,12 @@ export const capturePayment = async (req, res) => {
 
     const page = await Page.findById({ _id: pageId });
     if(!page){
-      res.status(404).json({success : false ,msg : "page not found"});
     }
     const newPayment = [...(page.paymentData || []), capture]
 
 
-    const addPayment = await Page.findByIdAndUpdate({ _id: pageId },
-      { status: "activ", paymentData: newPayment }, { new: true })
+    const addPayment = await Page.findByIdAndUpdate( pageId ,
+      { status: "active", paymentData: newPayment }, { new: true })
 
     return res.json({
       success: true,

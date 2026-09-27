@@ -13,6 +13,8 @@ const Dashboard = () => {
 const { user, pages } = useLoaderData();
 
 
+
+
     const navigate = useNavigate();
 
 
@@ -36,8 +38,6 @@ const { user, pages } = useLoaderData();
         >
             <Navbar  dashboard={true} logout={ logout } />
             < Outlet />
-          
-
         </DashContext.Provider>
 
 
