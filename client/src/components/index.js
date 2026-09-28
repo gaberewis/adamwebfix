@@ -5,6 +5,7 @@ export { default as SubmitButton } from './SubmitButton'
 export { default as Slide } from './Slide'
 export { default as Terms } from './Terms'
 export { default as Navbar } from './Navbar'
-export { default as currencies } from './currencies';
+export { default as Card } from './Card'
+export { default as currencies } from './currencies'
 
 

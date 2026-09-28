@@ -2,6 +2,7 @@ import axios from "axios";
 import Page from "../models/Page.js";
 import cloudinary from 'cloudinary';
 import { formatImage } from '../middleware/multer.js';
+import { stat } from "fs";
 
 
 
@@ -108,7 +109,8 @@ export const editPage = async (req, res) => {
 export const getPage = async (req, res) => {
   const { id } = req.params;
   const page = await Page.findById(id);
-  res.status(200).json({ page });
+   const pages = await Page.find({userid : page.userid });
+  res.status(200).json({ page, pages });
 };
 
 
@@ -185,6 +187,13 @@ export const capturePayment = async (req, res) => {
   }
 }
 
+
+
+export const deactivate = async(req, res)=>{
+await Page.findByIdAndUpdate(req.params.id, {status : "inactive"});
+res.status(200).json({msg : "Page deactivated"});
+
+}
 
 export const delPage = async (req, res) => {
     try {

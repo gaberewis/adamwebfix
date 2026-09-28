@@ -12,6 +12,7 @@ const Page = () => {
 
 
     const { page, pages } = useLoaderData();
+  
     const notCurrent = pages.filter((pgs) => pgs._id !== page._id);
 
   

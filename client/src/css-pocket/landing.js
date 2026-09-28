@@ -6,11 +6,22 @@ width : 90vw;
 margin : 0 auto;
 padding-top : 2rem;
 max-width : 992px;
+color :  var(--grey-700); 
+font-weight : 600;
+.btn {
+background :var(--grey-700); 
+color : var(--grey-100);
+border-radius :  3px;
+font-weight : 600;
+cursor : pointer; 
+font-size : clamp(.9rem, 1.2vw, 1.1rem);
+padding : .3rem .5rem;
 
+}
 
 
 .green{
-color : #50C878
+color : green;
 }
 .red{
 color:  #E0115F
@@ -33,9 +44,10 @@ flex-direction : column;
 gap : 2.5rem;
 background-color : #fff;
 padding: 4rem 2rem 3rem;
-border-radius : 23px;
+border-radius : 7px;
 width : 100%;
 max-width : 600px;
+box-shadow: var(--shadow-1);
 
 
 ul {
@@ -60,6 +72,9 @@ flex-direction : column;
 gap : .8rem;
 
 }
+.side-ul li{
+cursor : pointer;
+}
 
 .uls{
 position : relative;
@@ -67,7 +82,8 @@ position : relative;
 
 .main-ul{
 display : flex;
-gap : .4rem;
+gap : .8rem;
+
 }
 
 .main-ul li:nth-child(3){
@@ -75,28 +91,28 @@ cursor : pointer;
 }
 
 .sub-ul{
+
 position : absolute;
 display : flex;
-gap : .5rem;
+gap : .3rem;
 opacity: 0;
 margin-top : .4rem;
 transform: translateY(3rem);
 transition: opacity 0.5s ease, transform 0.3s ease;
 }
-
 .sub-ul li{
-background: var(--grey-100);
-padding : .3rem 0;
-margin-top : .3rem;
-width : fit-content;
-min-width : 90px;
+background :var(--grey-200);
+padding : .3rem;
+border-radius : 5px;
+min-width : 80px;
 text-align : center;
-font-size : .875rem;
+cursor : pointer;
+
+
 }
 
-.sub-ul li:last-child a{
-  color: var(--red);
-}
+
+
 
  .show-ul {
   opacity: 1;
@@ -104,22 +120,7 @@ font-size : .875rem;
 
 }
 
-.side-ul  li{
-padding : .3rem .3rem;
-min-width : 80px;
-text-align : center;
-background : var(--grey-200);
-color : var(--grey-500);
-border-radius : 7px;
-font-size : .9rem;
-font-weight : 600;
-cursor : pointer;
-box-shadow : var(--shadow-1);
 
-}
-.side-ul a{
-color : var(--grey-500);
-}
 .side-ul  li:hover{
 opacity : .8;
 }
@@ -129,6 +130,12 @@ cursor : pointer;
 .red:hover {
 opacity : .7;
 }
+
+.icon{
+font-size : 18px;
+ transform: translateY(3px);
+}
+
 
 }
 //  end of the card

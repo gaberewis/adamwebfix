@@ -43,8 +43,8 @@ const pagesSchema = new mongoose.Schema(
     },    
     status: {
       type: String,
-      enum: ["active", "inActive", "blocked", "deleted"],
-      default: "inActive",
+      enum: ["active", "inactive", "blocked"],
+      default: "inactive",
     },
     userid: {
       type: mongoose.Schema.Types.ObjectId,

@@ -3,7 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
 import Stl from '../css-pocket/checkouts';
-import { Navbar } from "../components"; 
+
 
 
 const Checkout = () => {
