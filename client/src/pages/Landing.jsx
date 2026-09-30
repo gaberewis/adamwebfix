@@ -2,13 +2,15 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Stl from "../css-pocket/landing";
 import { Card } from '../components';
 import axios from "axios";
-import { DashboardContext  } from "./Dashboard";
+
 
 
 const Landing = () => {
 
     const navigate = useNavigate();
     const { pages } = useLoaderData();
+    
+
     const deletePage = async (id) => {
         try {
             await axios.delete(`/api/page/${id}`);

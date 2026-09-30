@@ -6,16 +6,20 @@ width : 90vw;
 margin : 0 auto;
 padding-top : 2rem;
 max-width : 992px;
-color :  var(--grey-700); 
+color :  var(--grey-600); 
 font-weight : 600;
+
+li, a {
+cursor : pointer;
+}
 .btn {
 background :var(--grey-700); 
-color : var(--grey-100);
-border-radius :  3px;
+color : var(--grey-50);
+border-radius :  20px;
 font-weight : 600;
 cursor : pointer; 
-font-size : clamp(.9rem, 1.2vw, 1.1rem);
-padding : .3rem .5rem;
+font-size : clamp(.9rem, 1vw, 1rem);
+padding : .2rem .7rem;
 
 }
 
@@ -25,6 +29,10 @@ color : green;
 }
 .red{
 color:  #E0115F
+}
+.under{
+text-decoration : underline;
+cursor : pointer;
 }
 
 
@@ -50,9 +58,7 @@ max-width : 600px;
 box-shadow: var(--shadow-1);
 
 
-ul {
-list-style: none;
-}
+
 
 
 
@@ -72,12 +78,13 @@ flex-direction : column;
 gap : .8rem;
 
 }
-.side-ul li{
-cursor : pointer;
-}
+
 
 .uls{
 position : relative;
+opacity : .9;
+list-style: none;
+font-size:  clamp(.9rem, 1vw, 1rem);
 }
 
 .main-ul{
@@ -90,46 +97,7 @@ gap : .8rem;
 cursor : pointer;
 }
 
-.sub-ul{
 
-position : absolute;
-display : flex;
-gap : .3rem;
-opacity: 0;
-margin-top : .4rem;
-transform: translateY(3rem);
-transition: opacity 0.5s ease, transform 0.3s ease;
-}
-.sub-ul li{
-background :var(--grey-200);
-padding : .3rem;
-border-radius : 5px;
-min-width : 80px;
-text-align : center;
-cursor : pointer;
-
-
-}
-
-
-
-
- .show-ul {
-  opacity: 1;
-  transform: translateY(0);
-
-}
-
-
-.side-ul  li:hover{
-opacity : .8;
-}
-.red{
-cursor : pointer;
-}
-.red:hover {
-opacity : .7;
-}
 
 .icon{
 font-size : 18px;
