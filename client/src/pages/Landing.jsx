@@ -22,10 +22,10 @@ const Landing = () => {
         }
     };
 
-    const deactivate = async(id)=>{
+    const changeStatus = async(id, status)=>{
 
         try {
-            await  axios.get(`/api/page/deactivate/${id}`);
+            await  axios.get(`/api/page/change-status/${id}`,{params : { status } } );
             return navigate('/dashboard');
         } catch (error) {
             console.log("Deactivate error: ", error.response?.data?.msg || 'Somthing went wrong');
@@ -37,9 +37,7 @@ const Landing = () => {
 
         <Card pages={pages}
          deletePage={deletePage} 
-         deactivate={deactivate}
-       
-         
+         changeStatus={changeStatus}
         />
 
     </Stl>)

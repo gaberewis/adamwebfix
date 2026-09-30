@@ -2,7 +2,7 @@ import { Router } from "express";
 
 
 import { capturePayment, createPage, getPage, editPage, delPage,
-  deactivate,
+  changeStatus,
  } from '../controllers/page.js'
 import upload from "../middleware/multer.js";
 
@@ -17,7 +17,7 @@ router.post('/payments', capturePayment);
 
 router.get('/:id', getPage);
 router.post('/:id', upload.array("images", 7), editPage);
-router.get("/deactivate/:id", deactivate)
+router.get("/change-status/:id", changeStatus)
 router.delete('/:id', delPage);
 
 export default router;

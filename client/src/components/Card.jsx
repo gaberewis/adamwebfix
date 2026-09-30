@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-const Card = ({ pages, deletePage, deactivate }) => {
+const Card = ({ pages, deletePage, changeStatus }) => {
 
     const [pageId, setPageId] = useState(null);
     const [menuId, setMenuId] = useState(null);
@@ -24,7 +24,7 @@ const Card = ({ pages, deletePage, deactivate }) => {
 
                             {page.status === "active" &&
                                 <li
-className="btn"
+                                    className="btn"
                                     onClick={() => {
                                         navigator.clipboard.writeText(
                                             `${window.location.origin}/instant-page/${page._id}`
@@ -35,21 +35,28 @@ className="btn"
                                     {pageId === page._id ? 'copied' : <span>Copy Link <RiLinksLine color='#fff' /></span>} </li>
                             }
 
+
+
                             {
-                                page.status === "inactive" &&
-                                <li  ><Link className="btn" to={`/dashboard/checkout/${page._id}`}  >Publish</Link></li>
+                                page.status === "inactive" ?
+                                    <li  ><Link className="btn" to={`/dashboard/checkout/${page._id}`}  >Publish</Link></li> :
+                                    page.status === "deactivated" ?
+                                        <li  ><span onClick={()=>{
+                                            changeStatus(page._id, "active");
+                                        }}  >Activate</span></li> :
+                                        ""
                             }
                         </ul>
                         <div className="uls">
                             <ul className='main-ul'>
-                                <li><Link to={`/dashboard/edit-page/${page._id}`} >Edit <RiEdit2Fill className="icon"  /> </Link></li>
-                                <li><Link to={`/instant-page/${page._id}`}   >Preview <RiEyeFill  className="icon" /></Link></li>
+                                <li><Link to={`/dashboard/edit-page/${page._id}`} >Edit <RiEdit2Fill className="icon" /> </Link></li>
+                                <li><Link to={`/instant-page/${page._id}`}   >Preview <RiEyeFill className="icon" /></Link></li>
                                 {page.status === "active" ?
                                     (
                                         <li >
-                                            <span   onClick={() =>
+                                            <span onClick={() =>
                                                 toggleList(page._id)}>
-                                               More  <RiArrowDownCircleFill className="icon" />
+                                                More  <RiArrowDownCircleFill className="icon" />
                                             </span>
                                         </li>
                                     ) : (
@@ -69,7 +76,7 @@ className="btn"
                             </ul>
                             <ul className={`sub-ul ${menuId === page._id && "show-ul"}`}>
                                 <li >
-                                    <div onClick={()=> deactivate(page._id) } >Deactivate </div>
+                                    <div onClick={() => changeStatus(page._id, "deactivated")} >Deactivate </div>
                                 </li>
 
                                 <li >

@@ -189,9 +189,12 @@ export const capturePayment = async (req, res) => {
 
 
 
-export const deactivate = async(req, res)=>{
-await Page.findByIdAndUpdate(req.params.id, {status : "inactive"});
-res.status(200).json({msg : "Page deactivated"});
+export const changeStatus = async(req, res)=>{
+
+  const { status } = req.query; 
+  console.log(status);
+const page = await Page.findByIdAndUpdate(req.params.id, { status }, {new:true});
+res.status(200).json({msg : "Page status changed"});
 
 }
 
