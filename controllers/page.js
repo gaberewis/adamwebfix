@@ -102,15 +102,47 @@ export const editPage = async (req, res) => {
 };
 
 
-
-
-
-
 export const getPage = async (req, res) => {
   const { id } = req.params;
   const page = await Page.findById(id);
    const pages = await Page.find({userid : page.userid });
   res.status(200).json({ page, pages });
+};
+
+
+export const changeStatus = async(req, res)=>{
+
+  const { status } = req.query; 
+  console.log(status);
+const page = await Page.findByIdAndUpdate(req.params.id, { status }, {new:true});
+res.status(200).json({msg : "Page status changed"});
+
+}
+
+export const delPage = async (req, res) => {
+    try {
+const files  = req.files || [];
+
+const page = await Page.findById(req.params.id);
+
+if(files.length > 0 && page.images?.length > 0){
+
+  await Promise.all(
+    page.images.map(image=> cloudinary.v2.uploader.destroy(image.imageId))
+  )
+}
+
+        await Page.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({
+            msg: "Page deleted"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            msg: error.message
+        });
+    }
 };
 
 
@@ -160,7 +192,7 @@ export const capturePayment = async (req, res) => {
         data,
       });
     }
- console.log("capture",  capture, "page id", pageId, "order id", orderId);
+
 
 
     const page = await Page.findById({ _id: pageId });
@@ -186,29 +218,3 @@ export const capturePayment = async (req, res) => {
     });
   }
 }
-
-
-
-export const changeStatus = async(req, res)=>{
-
-  const { status } = req.query; 
-  console.log(status);
-const page = await Page.findByIdAndUpdate(req.params.id, { status }, {new:true});
-res.status(200).json({msg : "Page status changed"});
-
-}
-
-export const delPage = async (req, res) => {
-    try {
-        await Page.findByIdAndDelete(req.params.id);
-
-        res.status(200).json({
-            msg: "Page deleted"
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            msg: error.message
-        });
-    }
-};

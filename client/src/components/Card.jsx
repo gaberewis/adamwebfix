@@ -6,7 +6,19 @@ import { Link } from "react-router-dom";
 const Card = ({ pages, deletePage, changeStatus }) => {
 
     const [pageId, setPageId] = useState(null);
-  
+
+    const createTime = (page) => page.paymentData?.at(-1)?.create_time;
+    const subscriptionEnd = (page) => Date.parse(createTime(page)) + 2592000000;
+    const expire = (page) => subscriptionEnd(page) < Date.now();
+
+    const toInActive = (id, status, page) => {
+        if (page.status == "active" && subscriptionEnd(page) + 345600000 < Date.now()) {
+            changeStatus()
+        }
+
+    }
+
+
     const displayStatus = (status, id) => {
         switch (status) {
             case "active":
@@ -15,7 +27,7 @@ const Card = ({ pages, deletePage, changeStatus }) => {
             case "deactivated":
                 return (<>Page deactivated by the user {" "}<span className="red under" onClick={() => {
                     changeStatus(id, "active");
-                }}  >Activate page</span> </> );
+                }}  >Activate page</span> </>);
 
             case "blocked":
                 return (
@@ -31,15 +43,36 @@ const Card = ({ pages, deletePage, changeStatus }) => {
     return (
         <div className="pages">
             {
-                pages.map((page, index) => (
+                pages.map((page) => (
+
                     <div className="card" key={page._id} >
+
+                        {toInActive(page._id, "inactive", page)}
                         <div className="head">
                             <img src={page.images[0]?.imageUrl} alt='Product-Thumbling' />
                             <p>{page.product}</p>
                         </div>
-                        <p className={`${page.status === 'active' ? "green" : 
-                            page.status === 'inactive'? 
-                            "red" : ""}`} >{displayStatus(page.status, page._id)}</p>
+                        <p className={`${page.status === 'active' ? "green" :
+                            page.status === 'inactive' ?
+                                "red" : ""}`} >{displayStatus(page.status, page._id)}</p>
+                        {
+
+                            createTime(page) && page.status !== "blocked" &&
+                            <p>
+                                Subscription ends on{" "}<b>
+                                    <span className={expire(page) && "red"}>
+                                        {new Date(
+                                            subscriptionEnd(page)
+                                        ).toLocaleDateString()}
+                                    </span> {" "}
+                                    {expire(page) &&
+                                        <div><Link className="red under" to={`/dashboard/checkout/${page._id}`}  >Renew subscription</Link></div>
+                                    }
+
+                                </b>
+                            </p>
+                        }
+
 
                         <ul className='side-ul'  >
 
@@ -59,45 +92,47 @@ const Card = ({ pages, deletePage, changeStatus }) => {
 
 
                             {
-                                page.status === "inactive" &&
+                                page.status === "inactive" && !createTime(page) &&
                                 <li  ><Link className="btn" to={`/dashboard/checkout/${page._id}`}  >Publish</Link></li>
 
                             }
                         </ul>
 
-                        {page.status !== "blocked" && 
-                        
-                           <div className="uls">
-                            <ul className='main-ul'>
-                                <li><Link to={`/dashboard/edit-page/${page._id}`} >Edit <RiEdit2Fill className="icon" /> </Link></li>
-                                <li><Link to={`/instant-page/${page._id}`}   >Preview <RiEyeFill className="icon" /></Link></li>
+                        {
+                            page.status !== "blocked" &&
+
+                            <div className="uls">
+                                <ul className='main-ul'>
+                                    <li><Link to={`/dashboard/edit-page/${page._id}`} >Edit <RiEdit2Fill className="icon" /> </Link></li>
+                                    <li><Link to={`/instant-page/${page._id}`}   >Preview <RiEyeFill className="icon" /></Link></li>
 
 
-                                {page.status === "active" &&
-                                    <li onClick={() => changeStatus(page._id, "deactivated")} >Deactivate </li>
-                                }
+                                    {page.status === "active" &&
+                                        <li onClick={() => changeStatus(page._id, "deactivated")} >Deactivate </li>
+                                    }
 
-                                <li
-                                    className="red"
-                                    onClick={() => {
-                                        if (window.confirm("Are you sure you want to delete this page?")) {
-                                            deletePage(page._id);
-                                        }
-                                    }}
-                                >
-                                    Delete
-                                </li>
+                                    <li
+                                        className="red"
+                                        onClick={() => {
+                                            if (window.confirm("Are you sure you want to delete this page?")) {
+                                                deletePage(page._id);
+                                            }
+                                        }}
+                                    >
+                                        Delete
+                                    </li>
 
 
-                            </ul>
+                                </ul>
 
-                        </div>                       
+                            </div>
+
                         }
                     </div>
 
                 ))
             }
-        </div>
+        </div >
     )
 }
 
