@@ -6,18 +6,19 @@ import { Link } from "react-router-dom";
 const Card = ({ pages, deletePage, changeStatus }) => {
 
     const [pageId, setPageId] = useState(null);
-
+    
     const createTime = (page) => page.paymentData?.at(-1)?.create_time;
-    const subscriptionEnd = (page) => Date.parse(createTime(page)) + 2592000000;
+
+    const subscriptionEnd = (page) => Date.parse(createTime(page)) + 2678400000;
 
     const expire = (page) => subscriptionEnd(page) < Date.now();
 
     const toInActive = (id, status, page) => {
         if (page.status == "active" && subscriptionEnd(page) + 345600000 < Date.now()) {
-            changeStatus()
+            changeStatus(id, status)
         }
     }
-
+     
 
     const displayStatus = (status, id) => {
         switch (status) {
