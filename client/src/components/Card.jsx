@@ -9,13 +9,13 @@ const Card = ({ pages, deletePage, changeStatus }) => {
 
     const createTime = (page) => page.paymentData?.at(-1)?.create_time;
     const subscriptionEnd = (page) => Date.parse(createTime(page)) + 2592000000;
+
     const expire = (page) => subscriptionEnd(page) < Date.now();
 
     const toInActive = (id, status, page) => {
         if (page.status == "active" && subscriptionEnd(page) + 345600000 < Date.now()) {
             changeStatus()
         }
-
     }
 
 

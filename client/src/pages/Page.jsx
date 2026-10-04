@@ -13,8 +13,6 @@ const Page = () => {
 
     const { page, pages } = useLoaderData();
     
-    // console.log(  Date.parse(page.paymentData.at(-1).create_time));
-  
     const notCurrent = pages.filter((pgs) => pgs._id !== page._id);
 
   
@@ -122,7 +120,7 @@ const Page = () => {
 
 
 
- {notCurrent && <h5 className="more-h5">More products: </h5>}
+ {notCurrent && pages.length > 1 && <h5 className="more-h5">More products: </h5>}
             {notCurrent && <div className="more"> 
 
                 {
