@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useLoaderData } from 'react-router-dom';
+import NotFound from "../css-pocket/errorpages";
 import Stl from "../css-pocket/page";
 import { FaCircleDot } from "react-icons/fa6";
 import { MdEmail, MdLocationOn } from "react-icons/md";
 import { RiWhatsappFill, RiPhoneFill } from "react-icons/ri";
-
+import img from '../../public/not-found.svg';
 
 
 
@@ -12,10 +13,11 @@ const Page = () => {
 
 
     const { page, pages } = useLoaderData();
-    
-    const notCurrent = pages.filter((pgs) => pgs._id !== page._id);
 
-  
+    const morePages = pages.filter((pgs) => pgs._id !== page._id && pgs.status === "active");
+
+
+
 
     const [current, setCurrent] = useState(0);
 
@@ -23,6 +25,23 @@ const Page = () => {
         currency, description, phone, email, whatsapp,
         address, order, specification, images
     } = page;
+
+
+
+    if(page.status !== "active"){
+
+        return (
+        <NotFound>
+            <div>
+                <img src={img} alt='not-found' />
+                <h3>Page not found</h3>
+                <p>We can not find the page you are looking for</p>
+                <Link  to='/' className="underline" >Home Page</Link>
+            </div>
+        </NotFound>)
+    }
+
+
 
 
     return (
@@ -79,67 +98,67 @@ const Page = () => {
                     })
                     }
                 </div>
-{
-     order && order === "phone" ? (
-        <div
-            className="order"
-            onClick={() =>
-                window.open(`tel:${phone}`, "_blank")
-            }
-        >
-            <span>Order Now</span>
-            <span><RiPhoneFill /></span>
-        </div>
-    ) : order && order === "email" ?   (
-        <div
-            className="order"
-            onClick={() =>
-                window.open(`mailto:${email}`, "_blank")
-            }
-        >
-            <span>Order Now</span>
-            <span><MdEmail /></span>
-        </div>
-    ) : 
-    (
-        <div
-            className="order"
-            onClick={() =>
-                window.open(`https://wa.me/${whatsapp}`, "_blank")
-            }
-        >
-            <span>Order Now</span>
-            <span><RiWhatsappFill /></span>
-        </div>
-    )
-}
-
-
-          
+                {
+                    order && order === "phone" ? (
+                        <div
+                            className="order"
+                            onClick={() =>
+                                window.open(`tel:${phone}`, "_blank")
+                            }
+                        >
+                            <span>Order Now</span>
+                            <span><RiPhoneFill /></span>
+                        </div>
+                    ) : order && order === "email" ? (
+                        <div
+                            className="order"
+                            onClick={() =>
+                                window.open(`mailto:${email}`, "_blank")
+                            }
+                        >
+                            <span>Order Now</span>
+                            <span><MdEmail /></span>
+                        </div>
+                    ) :
+                        (
+                            <div
+                                className="order"
+                                onClick={() =>
+                                    window.open(`https://wa.me/${whatsapp}`, "_blank")
+                                }
+                            >
+                                <span>Order Now</span>
+                                <span><RiWhatsappFill /></span>
+                            </div>
+                        )
+                }
 
 
 
 
- {notCurrent && pages.length > 1 && <h5 className="more-h5">More products: </h5>}
-            {notCurrent && <div className="more"> 
 
                 {
-                    notCurrent &&
-                    notCurrent.map(page => {
-
-                        return (
-                                 
-                                    <Link to={`/instant-page/${page._id}`} key={page._id} >
-                                        <div  className="content"><img src={page.images[0].imageUrl} alt='more-product-image' />
-                                            <div className="name">{page.product}</div>
-                                            <div className="price"><span><del>{page.discount}</del></span> <span>{page.price}</span></div>
-
-                                        </div>
-                                    </Link>
-                              
-                        )
-                    })
-                }  </div>}
+                    morePages.length > 0 &&
+                    <>
+                    <h5>More Products</h5>
+                       <div className="more">
+                       
+                        {morePages.map(page => {
+                            return (
+                                <div  key={page._id}  >
+                                <Link to={`/instant-page/${page._id}`} >
+                                    <div className="content"><img src={page.images[0].imageUrl} alt='more-product-image' />
+                                        <div className="name">{page.product}</div>
+                                        <div className="price"><span><del>{page.discount}</del></span> <span>{page.price}</span></div>
+                                    </div>
+                                </Link>
+                                </div>
+                            )
+                        })
+                        }
+                    </div>
+                    </>
+                }
 
             </div>
 

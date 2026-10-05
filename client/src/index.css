@@ -135,6 +135,9 @@ h5 {
   font-size: clamp(1rem, 2vw, 2rem);
 }
 
+.underline{
+  text-decoration: underline;
+}
 
 .text {
   margin-bottom: 1.5rem;

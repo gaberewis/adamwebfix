@@ -21,9 +21,9 @@ const Stl = styled.main`
     margin-top: .1rem;
 
 h5{
-font-weight : 500;
-font-size : clamp(1.2rem, 1.5vw, 1.4rem);
+font-weight : 700;
 color : var(--red);
+font-size : 1.1rem;
 }
 
 
@@ -129,13 +129,13 @@ color : var(--red);
 
     .order{
     cursor : pointer;
-    margin : 3.5rem auto 0 ;
+    margin : 3.5rem auto 4rem ;
     display : flex;
     justify-content : center;
     align-items : center;
     gap : .4rem;
-    font-size : 1.8rem;
-    font-weight : 500;
+    font-size : 1.4rem;
+    font-weight : 700;
     color : var(--pure-green);
   
     }
@@ -148,18 +148,19 @@ color : var(--red);
 margin-top : 3rem;
 }
 
+
+
   .more { 
     display: flex;
-    gap : 2rem;
+    gap : 1rem;
     padding : 1rem;
-
     overflow-x: auto;
     overflow-y: hidden;
 
 .content{
 display : flex;
 flex-direction : column;
-gap : .4rem;
+ gap : .4rem;
   max-width : 120px;
 }
 
@@ -182,6 +183,9 @@ gap : .4rem;
   }
     //  end of  more
   
+
+
+
 
       }
     // end of content
