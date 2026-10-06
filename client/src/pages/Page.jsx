@@ -75,7 +75,7 @@ const Page = () => {
                 </div>
 
                 <div className="details">
-                    <h5>Product Details:</h5>
+                    <h5>Product Details</h5>
                     <p>
 
                         {`${description}.`}

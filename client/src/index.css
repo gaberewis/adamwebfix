@@ -326,8 +326,10 @@ button:disabled {
   background: var(--primary-500);
   width: 7rem;
   height: 0.25rem;
-  margin: 0 auto;
-  margin-top: 1rem;
+  margin: 1rem auto 2.5rem ;
+  font-weight: 600;
+  font-size : 1.2rem
+ 
 }
 
 .container {

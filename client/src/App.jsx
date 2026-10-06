@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   InstantPage, Login, Register,
-  Dashboard, Landing, CreatePage, EditPage, Checkout, Page, 
+  Dashboard, Landing, CreatePage, EditPage, Checkout, Page, EditUser,
   ResetPassword, ForgetPassword, ClientMsg,
   MsgReceived, Error,
 
@@ -50,6 +50,12 @@ const router = createBrowserRouter([
         loader : loader.getPage,
         action : action.editPage,
       },
+       {
+    path : 'edit-user/:id',
+    element : <EditUser />,
+    action : action.editUser,
+
+  },
     ]
   },
   {
@@ -57,6 +63,7 @@ const router = createBrowserRouter([
     element: <Page />,
     loader : loader.getPage,
   },
+ 
   {
     path: 'forget-password',
     element: <ForgetPassword />,

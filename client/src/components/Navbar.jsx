@@ -47,7 +47,7 @@ const Navbar = ({ userId, isLog = false, logout, dashboard = false }) => {
                             <div><span>  { user.userName } </span> <span onClick={toggleList} >  <RiAccountPinCircleFill size={25} /> </span></div>
 
                         <div className={`hidden ${showItem ? "show-list" : ""} `}>
-                           <Link to='/account' > <span  >Account <RiUserSettingsFill /></span></Link>
+                           <Link to={`/dashboard/edit-user/${user.userId}`} > <span  >Account <RiUserSettingsFill /></span></Link>
                             <span className='logout' onClick={logout}> Logout <RiLogoutCircleRLine /></span>
                         </div>
 

@@ -42,7 +42,8 @@ export const login = async (req, res) => {
   const token = createToken({
     userId: user._id,
     userRole: user.role,
-    userName: user.name
+    userName: user.name,
+    userEmail : user.email
   });
 
   res.cookie('token', token, {
@@ -83,7 +84,23 @@ export const currentUser = async (req, res) => {
 };
 
 
+export const editUser = async(req, res)=> {
+let newUser = req.body;
+if(!newUser.password) {delete newUser.password;}else{
+newUser.password = await hashPassword(newUser.password );
 
+}
+ 
+
+const updateUser = await User.findByIdAndUpdate(req.params.id, newUser, {new : true});
+
+
+res.status(200).json({
+    msg: "user updated",
+    user: updateUser
+});
+
+}
 
 
 
@@ -144,10 +161,6 @@ export const forgetPassword = async (req, res) => {
 
 
 
-
-
-
-
 export const resetPassword = async (req, res) => {
   const otp = req.body.otp;
   const user = await User.findOne({ otp });
@@ -167,5 +180,4 @@ export const resetPassword = async (req, res) => {
 export const logout = (req, res) => {
   res.clearCookie('token', { httpOnly: true });
   res.status(200).json({ msg: 'user logged out!' });
-
 };

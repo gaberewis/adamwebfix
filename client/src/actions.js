@@ -38,7 +38,18 @@ export const loginAction = async ({ request }) => {
 
 }
 
-
+export const editUser = async({ request, params })=>{
+const formData = await request.formData();
+const data = Object.fromEntries(formData);
+try {
+  await axios.post(`/api/user/edit-user/${params.id}`, data);  
+  return redirect('/login');
+} catch (error) {
+   console.log('BACKEND ERROR:', error.response?.data.msg);
+    const errMsg = error.response?.data?.msg || 'update failed';
+    return { errMsg };
+}
+}
 
 
 export const clientMsg = async ({ request }) => {
@@ -126,5 +137,6 @@ export const editPage = async({ request, params })=>{
   
   }
 };
+
 
 

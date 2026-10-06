@@ -8,6 +8,7 @@ import {
    clientMsg,
     getClientRequest, 
     currentUser,
+    editUser,
     forgetPassword, resetPassword,
 } from '../controllers/user.js';
 
@@ -16,12 +17,11 @@ import {
 const router = Router();
 router.post('/register', registerValidation,  registerUser);
 router.post('/login', loginValidation, login);
-router.get('/logout', authenticateUser, logout);
+router.get('/logout',  logout);
 router.get('/client-msg', getClientRequest);
 router.post( '/client-msg', clientMsgValidation, clientMsg);
-
+router.post('/edit-user/:id', editUser);
 router.get('/getuser', userPayload, currentUser);
-
 router.post('/forget-password', forgetPassword);
 router.post('/reset-password', resetValidation, resetPassword)
 

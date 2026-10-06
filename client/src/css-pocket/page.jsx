@@ -34,7 +34,6 @@ font-size : 1.1rem;
     margin: 0 auto;
    
 
-
 .slide {
   height: 320px;
   display: flex;
@@ -94,6 +93,7 @@ font-size : 1.1rem;
     display : flex;
     flex-direction : column;
     gap : 1.3rem;
+    padding : 2rem;
 
 
     }
@@ -121,9 +121,6 @@ font-size : 1.1rem;
        .spec-items span{
        width : 50%;
        }
-    
-
-    
     }
     // end of spec
 
@@ -143,12 +140,6 @@ font-size : 1.1rem;
      .order span:nth-child(2){
      font-size : 3rem;
      }
-
-.more-h5{
-margin-top : 3rem;
-}
-
-
 
   .more { 
     display: flex;

@@ -12,7 +12,7 @@ const Dashboard = () => {
 
 const { user, pages } = useLoaderData();
 
-
+console.log(user);
 
 
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const { user, pages } = useLoaderData();
 
     const logout = async () => {
         try {
-            await axios.get("/api/auth/logout");
+            await axios.get("/api/user/logout");
             navigate("/");
         } catch (error) {
             console.log(error);

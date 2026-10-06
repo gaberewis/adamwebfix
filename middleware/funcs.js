@@ -36,10 +36,8 @@ export const verifyToken = (token) => {
 export const userPayload = (req, res, next) => {
   const { token } = req.cookies;
   
-  const { userId, userRole, userName } = verifyToken(token);
-  req.user = { userId, userRole, userName};
-
-
+  const { userId, userRole, userName, userEmail } = verifyToken(token);
+  req.user = { userId, userRole, userName, userEmail};
 next();
 
 }
@@ -47,8 +45,7 @@ next();
 export const authenticateUser = (req, res, next) => {
   const { token } = req.cookies;
   if (!token) throw new CustomError(401, 'authentication invalid ....');
-  const { userId, userRole, userName } = verifyToken(token);
- // const isDemo = userId === '68f29702a2e57c84a596d70e';
+  const { userId, userRole, userName, userEmail } = verifyToken(token);
   req.user = { userId, userRole, userName};
 
   next();
