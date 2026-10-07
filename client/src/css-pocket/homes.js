@@ -70,7 +70,11 @@ margin : 0 auto;
   @media(max-width : 798px){
 
   .featurs{
-  display: block }
+  display: block;
+  max-width: 420px;
+  margin : 0 auto;
+  
+  }
 }
 
 

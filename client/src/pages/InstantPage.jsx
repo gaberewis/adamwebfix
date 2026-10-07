@@ -8,14 +8,14 @@ import styled from "styled-components";
 
 const InstantPage = () => {
 
-    const { userId } = useLoaderData();
+    const { user } = useLoaderData();
 
 
     return (
         <>
        
             <Conestraction><h2>🚀 Coming Soon</h2></Conestraction>
-           <Navbar userId={userId} isLog={true} />
+           <Navbar  userId={user?.userId} isHome={true} />
             <Stl>
                 <div className="intro">
 

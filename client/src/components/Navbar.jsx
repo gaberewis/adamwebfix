@@ -7,7 +7,7 @@ import {  RiUserSettingsFill, RiAccountPinCircleFill, RiLogoutCircleRLine  } fro
 
 
 
-const Navbar = ({ userId, isLog = false, logout, dashboard = false }) => {
+const Navbar = ({ userId, isHome = false, logout, dashboard = false }) => {
 
     const  user  = DashboardContext()?.user || null;
 
@@ -25,7 +25,7 @@ const Navbar = ({ userId, isLog = false, logout, dashboard = false }) => {
                         <img src="/logo.png" alt="colored-logo" />  <span>AdamWebFix</span></Link>
                 </div>
 
-                {isLog && <div className='contact'>
+                {isHome && <div className='contact'>
 
                     {userId ? <Link to="/dashboard" >Dashboard</Link> : <Link to="/login" > Login</Link>}
 
