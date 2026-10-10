@@ -116,7 +116,7 @@ export const forgetPassword = async (req, res) => {
       });
     }
 
-    const otp = randomInt(1000, 10000);
+    const otp = randomInt(100000, 1000000);
 
     await sendEmail({
       to: user.email,

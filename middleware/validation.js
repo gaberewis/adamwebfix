@@ -36,7 +36,7 @@ export const registerValidation = validateData([
     body('name').notEmpty().withMessage('Name is required')
     .isLength({ max: 100 }).withMessage('Name is too long'),
     body('email').notEmpty().withMessage('Email is required')
-    .isEmail().withMessage('invalid email adress').custom(async (value) => {
+    .isEmail().withMessage('Invalid email adress').custom(async (value) => {
         const user = await User.findOne({ email: value });
         if (user) throw new CustomError(400, 'Email already exist');
     })
@@ -63,9 +63,9 @@ export const clientMsgValidation = validateData(
         body('name').notEmpty().withMessage('Product name is required')
         .isLength({ max: 100 }).withMessage('Name is too long'),
         body('email').notEmpty().withMessage('Email is required')
-        .isLength({ max: 100 }).withMessage('email is too long'),
+        .isLength({ max: 100 }).withMessage('Email is too long'),
         body('phone').notEmpty().withMessage('Phone number is required')
-        .isLength({ max: 50 }).withMessage('phone is too long'),
+        .isLength({ max: 50 }).withMessage('Phone is too long'),
         body('clientMsg').notEmpty().withMessage('Message can not be empty')
         .isLength({max : 1000 }).withMessage('Message is too long'),
 
@@ -73,7 +73,7 @@ export const clientMsgValidation = validateData(
 );
 
 export const resetValidation = validateData([
-    body('otp').notEmpty().withMessage('Otp is required').isLength({ max: 50 }).withMessage('Otp is too long'),
+    body('otp').notEmpty().withMessage('Otp is required'),
     body('password').notEmpty().withMessage('Password is required').isLength({ min: 8 })
     .withMessage('Password must be at least 8 characters long')
     .isLength({ max: 100 }).withMessage('Password is too long'),
@@ -81,8 +81,3 @@ export const resetValidation = validateData([
 ]);
 
 
-export const  forgetPasswordValidation = validateData([
-    body('email').notEmpty().withMessage('Email is required ')
-    .isLength({ max: 100 }).withMessage('Email is too long'),
-   
-]);

@@ -70,7 +70,7 @@ export const sendEmail = async ({ to, subject, html }) => {
   try {
     const result = await brevo.transactionalEmails.sendTransacEmail({
       sender: {
-        email: "no-replay@adamwebfix.com",
+        email: "no-reply@adamwebfix.com",
         name: "Adam Web Fix",
       },
       to: [
