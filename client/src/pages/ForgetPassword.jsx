@@ -15,11 +15,14 @@ const ForgetPassword = () => {
 
             <div className="form-container">
                 <Form method='post' className="form">
-                    {actionData?.confirmOtp ? <div className="confirmed"><p className="info"><span><TiTick color="#009cde" size={30} /></span>{actionData.confirmOtp}</p></div> : <p>insert your registred email</p>}
+                    {actionData?.confirmOtp ? <div className="confirmed">
+                        <p className="info"><span><TiTick color="#009cde" size={30} />
+                        </span>{actionData.confirmOtp}</p></div> : <p>insert your registred email</p>}
                     <FormRow
                         type="email"
                         name="email"
                         labelText=" "
+                        maxLength={100}
                         required
                         value={actionData?.confirmOtp && ''}
                     />

@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { registerValidation, loginValidation, clientMsgValidation, resetValidation} from '../middleware/validation.js';
-import { authenticateUser, userPayload } from '../middleware/funcs.js';
+import { registerValidation, loginValidation, 
+    clientMsgValidation, resetValidation, forgetPasswordValidation} from '../middleware/validation.js';
+import {userPayload } from '../middleware/funcs.js';
 import {
     registerUser,
     login,
@@ -22,7 +23,7 @@ router.get('/client-msg', getClientRequest);
 router.post( '/client-msg', clientMsgValidation, clientMsg);
 router.post('/edit-user/:id', editUser);
 router.get('/getuser', userPayload, currentUser);
-router.post('/forget-password', forgetPassword);
+router.post('/forget-password', forgetPasswordValidation, forgetPassword);
 router.post('/reset-password', resetValidation, resetPassword)
 
 

@@ -93,8 +93,6 @@ newUser.password = await hashPassword(newUser.password );
  
 
 const updateUser = await User.findByIdAndUpdate(req.params.id, newUser, {new : true});
-
-
 res.status(200).json({
     msg: "user updated",
     user: updateUser
@@ -104,58 +102,56 @@ res.status(200).json({
 
 
 
+import { randomInt } from "node:crypto";
 
 export const forgetPassword = async (req, res) => {
   const { email } = req.body;
 
-
-  const otp = Math.floor(1000 + Math.random() * 9000);
   try {
-    const user = await User.findOneAndUpdate(
-      { email },
-      {
-        otp,
-        otpExpires: Date.now() + 15 * 60 * 1000,
-      },
-      { new: true }
-    );
+    const user = await User.findOne({ email });
 
     if (!user) {
-      throw new CustomError(401, "Email does not exist");
+      return res.status(404).json({
+        message: "Email does not exist",
+      });
     }
 
+    const otp = randomInt(1000, 10000);
 
     await sendEmail({
       to: user.email,
       subject: "Reset Your Password",
-
-      html: `<h5><b>Hello ${user.name},</b></h5>
-
-        <p>Your OTP code is: <b>${user.otp}</b></p>
-
+      html: `
+        <h5>Hello ${user.name},</h5>
+        <p>Your OTP code is: <b>${otp}</b></p>
         <p>This code will expire in 15 minutes.</p>
-
         <p>
           <a href="https://adamwebfix.com/reset-password">
             Click here to reset your password
           </a>
         </p>
-      `
-    }
+      `,
+    });
 
-    );
+    user.otp = otp;
+    user.otpExpires = Date.now() + 15 * 60 * 1000;
+    await user.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Email sent successfully",
     });
   } catch (error) {
-    console.error("Forgot password error:", error);
+    console.error("Forgot password error:", {
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+      code: error.code,
+    });
 
-    res.status(500).json({
+    return res.status(500).json({
       message: "Unable to send reset email. Please try again later.",
     });
   }
-
 };
 
 
