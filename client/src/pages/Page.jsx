@@ -170,6 +170,7 @@ const Page = () => {
                 <p><span>< MdLocationOn /> </span><span>Address: {address}</span></p>
 
             </div>
+            <p>powred by adamwebfix.com</p>
 
         </Stl>
     )
