@@ -62,6 +62,7 @@ const router = createBrowserRouter([
     path: 'instant-page/:id',
     element: <Page />,
     loader : loader.getPage,
+    action : action.reportPage,
   },
  
   {

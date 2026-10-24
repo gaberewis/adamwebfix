@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Link, useLoaderData } from 'react-router-dom';
+import { Form, Link, useLoaderData, useActionData } from 'react-router-dom';
 import NotFound from "../css-pocket/errorpages";
 import Stl from "../css-pocket/page";
 import { FaCircleDot } from "react-icons/fa6";
@@ -14,38 +14,22 @@ import axios from "axios";
 
 const Page = () => {
 
-
-
-
+    const actionData = useActionData();
     const [showReport, setShowReport] = useState(false);
-    const [confirmReport, setConfirmReport] = useState(false);
     const [current, setCurrent] = useState(0);
 
 
-    const report = async ({ request }) => {
-        setShowReport(!showReport);
-        const formData = await request.formData();
-        const data = Object.fromEntries(formData);
-        try {
-            await axios.post('/api/page/report', data);
-            setShowReport(false);
-            return setConfirmReport(true);
-
-        } catch (error) {
-
-            console.error('Report Faild :', error.respose?.data.msg);
-            return { errMsg } = error.respose?.data.msg || "Somthing want wrong";
-
-        }
-
+    const hadelReportForm = () => {
+        return setShowReport(!showReport);
     }
+
 
     const { page, pages } = useLoaderData();
 
     const morePages = pages.filter((pgs) => pgs._id !== page._id && pgs.status === "active");
 
 
-    const { company, product, price, discount,
+    const { _id, company, product, price, discount,
         currency, description, phone, email, whatsapp,
         address, order, specification, images
     } = page;
@@ -188,25 +172,29 @@ const Page = () => {
 
             <div className="contact">
 
-                {showReport && (
+                {showReport && !actionData?.reported && (
                     <Form className="form" method="post">
                         <textarea
+                            name="report"
                             className="form-textarea"
                             placeholder="Why are you reporting this page?"
-                        /><SubmitButton />
-
+                            required
+                        />
+                        <SubmitButton />
                     </Form>
-
                 )}
-
-                {
-                    confirmReport && (
-                        <span>Page has been reported</span>
-                    )
-                }
-                <Link to='#' className="report"
-                    onClick={report}
-                ><RiFlagFill size={18} />Report this page</Link>
+                {actionData?.reported ? (
+                    <span className="powered">{actionData.reported}</span>
+                ) : (
+                    <Link
+                        to="#"
+                        className="report"
+                        onClick={hadelReportForm}
+                    >
+                        <RiFlagFill size={18} />
+                        Report this page
+                    </Link>
+                )}
 
                 <p><span>< RiPhoneFill /> </span> <span>{phone}</span></p>
                 <p><span>< RiWhatsappFill /> </span><span>{whatsapp}</span></p>

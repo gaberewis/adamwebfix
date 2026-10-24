@@ -218,3 +218,35 @@ export const capturePayment = async (req, res) => {
     });
   }
 }
+
+
+export const reportpage = async (req, res) => {
+    try {
+        const page = await Page.findByIdAndUpdate(
+            req.params.id,
+            {
+                $push: { report: req.body.reason },
+                $inc: { reported: 1 }
+            },
+            { new: true }
+        );
+
+        if (!page) {
+            return res.status(404).json({
+                msg: "Page not found"
+            });
+        }
+
+        console.log("Page has been reported");
+
+        return res.status(200).json({
+            msg: "Page has been reported"
+        });
+    } catch (error) {
+        console.error("Report error:", error);
+
+        return res.status(500).json({
+            msg: "Failed to report page"
+        });
+    }
+};

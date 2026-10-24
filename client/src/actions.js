@@ -38,17 +38,17 @@ export const loginAction = async ({ request }) => {
 
 }
 
-export const editUser = async({ request, params })=>{
-const formData = await request.formData();
-const data = Object.fromEntries(formData);
-try {
-  await axios.post(`/api/user/edit-user/${params.id}`, data);  
-  return redirect('/login');
-} catch (error) {
-   console.log('BACKEND ERROR:', error.response?.data.msg);
+export const editUser = async ({ request, params }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await axios.post(`/api/user/edit-user/${params.id}`, data);
+    return redirect('/login');
+  } catch (error) {
+    console.log('BACKEND ERROR:', error.response?.data.msg);
     const errMsg = error.response?.data?.msg || 'update failed';
     return { errMsg };
-}
+  }
 }
 
 
@@ -78,8 +78,8 @@ export const forgetPassword = async ({ request }) => {
 
   try {
     await axios.post('/api/user/forget-password', data);
-     const confirmOtp = 'An OTP has been sent to your email';
-     return { confirmOtp }
+    const confirmOtp = 'An OTP has been sent to your email';
+    return { confirmOtp }
 
 
   } catch (error) {
@@ -89,7 +89,7 @@ export const forgetPassword = async ({ request }) => {
   }
 }
 
-export const resetPassword = async({ request })=>{
+export const resetPassword = async ({ request }) => {
 
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
@@ -98,45 +98,64 @@ export const resetPassword = async({ request })=>{
 
     await axios.post('/api/user/reset-password', data);
     return redirect('/login');
-    
+
   } catch (error) {
     console.log(error.response?.data?.msg || 'Request faild');
-     const errMsg = error.response?.data?.msg || 'Request faild';
+    const errMsg = error.response?.data?.msg || 'Request faild';
     return { errMsg };
 
   }
 
 };
 
-export const createPage = async({ request })=>{
+export const createPage = async ({ request }) => {
 
-  const formData = await request.formData(); 
- 
-try {
-  await axios.post('/api/page/create-page', formData);
-  return redirect('/dashboard');
-  
-} catch (error) {
-  console.log(error.response?.data?.msg || 'Request faild');
+  const formData = await request.formData();
 
-  const errMsg = error.response?.data?.msg || 'Request faild';
-  return { errMsg }
+  try {
+    await axios.post('/api/page/create-page', formData);
+    return redirect('/dashboard');
 
-}
+  } catch (error) {
+    console.log(error.response?.data?.msg || 'Request faild');
+
+    const errMsg = error.response?.data?.msg || 'Request faild';
+    return { errMsg }
+
+  }
 };
 
-export const editPage = async({ request, params })=>{
+export const editPage = async ({ request, params }) => {
   const formData = await request.formData();
   try {
     await axios.post(`/api/page/${params.id}`, formData);
     return redirect('/dashboard');
   } catch (error) {
     console.log(error.response?.data?.msg || "Request faild");
-     const errMsg = error.response?.data?.msg || 'Request faild';
-  return { errMsg }
-  
+    const errMsg = error.response?.data?.msg || 'Request faild';
+    return { errMsg }
+
   }
 };
+
+export const reportPage = async ({ request, params }) => {
+
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await axios.post(`/api/page/report/${params.id}`, data);
+const reported = "Page has been reported";
+return { reported };
+
+  } catch (error) {
+
+    console.error('Report Faild :', error.response?.data.msg);
+    const errMsg = error.response?.data.msg || "Somthing want wrong";
+    return { errMsg }
+  }
+
+}
+
 
 
 
