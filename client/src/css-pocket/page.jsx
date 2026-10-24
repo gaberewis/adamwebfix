@@ -175,18 +175,16 @@ flex-direction : column;
     //  end of  more
   
 
-
-
-
       }
     // end of content
 
 .contact {
+position : relative;
 background-color: var(--grey-600);
 color : var(--grey-50);
 display : flex;
 flex-direction : column;
-gap : 1.6rem;    
+gap : 1.1rem;    
 padding : 2.3rem;
 border-top : solid 4px var(--grey-700);
 }
@@ -194,6 +192,35 @@ border-top : solid 4px var(--grey-700);
 .contact p{
 max-width : 385px;
 
+}
+
+.report{
+position : absolute;
+right: .7rem;
+top : .7rem;
+ font-size: 0.8rem;
+ display : flex;
+ gap : .3rem;
+ align-items : center;
+ flex-direction : column;
+ font-weight : 600;
+ color : var(--grey-300)
+}
+
+.form{
+position : absolute;
+right: .7rem;
+top : -20rem;
+}
+
+.powered {
+  padding: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  text-decoration: none;
 }
 
 

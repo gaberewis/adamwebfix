@@ -1,25 +1,49 @@
 import { useState } from "react";
-import { Link, useLoaderData } from 'react-router-dom';
+import { Form, Link, useLoaderData } from 'react-router-dom';
 import NotFound from "../css-pocket/errorpages";
 import Stl from "../css-pocket/page";
 import { FaCircleDot } from "react-icons/fa6";
 import { MdEmail, MdLocationOn } from "react-icons/md";
-import { RiWhatsappFill, RiPhoneFill } from "react-icons/ri";
+import { RiWhatsappFill, RiPhoneFill, RiFlagFill } from "react-icons/ri";
+import { LuLayers } from "react-icons/lu";
 import img from '../../public/not-found.svg';
+import { SubmitButton } from "../components";
+import axios from "axios";
 
 
 
 const Page = () => {
 
 
+
+
+    const [showReport, setShowReport] = useState(false);
+    const [confirmReport, setConfirmReport] = useState(false);
+    const [current, setCurrent] = useState(0);
+
+
+    const report = async ({ request }) => {
+        setShowReport(!showReport);
+        const formData = await request.formData();
+        const data = Object.fromEntries(formData);
+        try {
+            await axios.post('/api/page/report', data);
+            setShowReport(false);
+            return setConfirmReport(true);
+
+        } catch (error) {
+
+            console.error('Report Faild :', error.respose?.data.msg);
+            return { errMsg } = error.respose?.data.msg || "Somthing want wrong";
+
+        }
+
+    }
+
     const { page, pages } = useLoaderData();
 
     const morePages = pages.filter((pgs) => pgs._id !== page._id && pgs.status === "active");
 
-
-
-
-    const [current, setCurrent] = useState(0);
 
     const { company, product, price, discount,
         currency, description, phone, email, whatsapp,
@@ -28,17 +52,17 @@ const Page = () => {
 
 
 
-    if(page.status !== "active"){
+    if (page.status !== "active") {
 
         return (
-        <NotFound>
-            <div>
-                <img src={img} alt='not-found' />
-                <h3>Page not found</h3>
-                <p>We can not find the page you are looking for</p>
-                <Link  to='/' className="underline" >Home Page</Link>
-            </div>
-        </NotFound>)
+            <NotFound>
+                <div>
+                    <img src={img} alt='not-found' />
+                    <h3>Page not found</h3>
+                    <p>We can not find the page you are looking for</p>
+                    <Link to='/' className="underline" >Home Page</Link>
+                </div>
+            </NotFound>)
     }
 
 
@@ -140,23 +164,23 @@ const Page = () => {
                 {
                     morePages.length > 0 &&
                     <>
-                    <h5>More Products</h5>
-                       <div className="more">
-                       
-                        {morePages.map(page => {
-                            return (
-                                <div  key={page._id}  >
-                                <Link to={`/instant-page/${page._id}`} >
-                                    <div className="content"><img src={page.images[0].imageUrl} alt='more-product-image' />
-                                        <div className="name">{page.product}</div>
-                                        <div className="price"><span><del>{page.discount}</del></span> <span>{page.price}</span></div>
+                        <h5>More Products</h5>
+                        <div className="more">
+
+                            {morePages.map(page => {
+                                return (
+                                    <div key={page._id}  >
+                                        <Link to={`/instant-page/${page._id}`} >
+                                            <div className="content"><img src={page.images[0].imageUrl} alt='more-product-image' />
+                                                <div className="name">{page.product}</div>
+                                                <div className="price"><span><del>{page.discount}</del></span> <span>{page.price}</span></div>
+                                            </div>
+                                        </Link>
                                     </div>
-                                </Link>
-                                </div>
-                            )
-                        })
-                        }
-                    </div>
+                                )
+                            })
+                            }
+                        </div>
                     </>
                 }
 
@@ -164,14 +188,37 @@ const Page = () => {
 
             <div className="contact">
 
+                {showReport && (
+                    <Form className="form" method="post">
+                        <textarea
+                            className="form-textarea"
+                            placeholder="Why are you reporting this page?"
+                        /><SubmitButton />
+
+                    </Form>
+
+                )}
+
+                {
+                    confirmReport && (
+                        <span>Page has been reported</span>
+                    )
+                }
+                <Link to='#' className="report"
+                    onClick={report}
+                ><RiFlagFill size={18} />Report this page</Link>
+
                 <p><span>< RiPhoneFill /> </span> <span>{phone}</span></p>
                 <p><span>< RiWhatsappFill /> </span><span>{whatsapp}</span></p>
                 <p><span>< MdEmail /> </span><span>{email}</span></p>
                 <p><span>< MdLocationOn /> </span><span>Address: {address}</span></p>
 
             </div>
-            <p>powred by adamwebfix.com</p>
 
+            <Link to="/" className="powered">
+                <LuLayers />
+                <span>Created with AdamWebFix</span>
+            </Link>
         </Stl>
     )
 
