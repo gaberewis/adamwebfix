@@ -53,9 +53,9 @@ const pagesSchema = new mongoose.Schema(
 
     images: [imageSchema],
     specification : [specItem],
-    report : Array,
     reported : Number,
-
+    report : Array,
+    
   },
   { timestamps: true }
 );

@@ -225,7 +225,7 @@ export const reportpage = async (req, res) => {
         const page = await Page.findByIdAndUpdate(
             req.params.id,
             {
-                $push: { report: req.body.reason },
+                $push: { report: req.body.report },
                 $inc: { reported: 1 }
             },
             { new: true }

@@ -184,7 +184,7 @@ background-color: var(--grey-600);
 color : var(--grey-50);
 display : flex;
 flex-direction : column;
-gap : 1.1rem;    
+gap : 1rem;    
 padding : 2.3rem;
 border-top : solid 4px var(--grey-700);
 }
@@ -223,7 +223,10 @@ top : -20rem;
   text-decoration: none;
 }
 
-
+.confirm {
+color: var(--grey-50);
+ }
+ 
 
 `;
 

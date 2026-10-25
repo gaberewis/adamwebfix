@@ -4,7 +4,7 @@ import NotFound from "../css-pocket/errorpages";
 import Stl from "../css-pocket/page";
 import { FaCircleDot } from "react-icons/fa6";
 import { MdEmail, MdLocationOn } from "react-icons/md";
-import { RiWhatsappFill, RiPhoneFill, RiFlagFill } from "react-icons/ri";
+import { RiWhatsappFill, RiPhoneFill, RiFlagFill, RiShieldCheckFill  } from "react-icons/ri";
 import { LuLayers } from "react-icons/lu";
 import img from '../../public/not-found.svg';
 import { SubmitButton } from "../components";
@@ -184,7 +184,7 @@ const Page = () => {
                     </Form>
                 )}
                 {actionData?.reported ? (
-                    <span className="powered">{actionData.reported}</span>
+                    <p className="report confirm" ><span><RiShieldCheckFill size={18} /></span><span> {actionData.reported}</span></p>
                 ) : (
                     <Link
                         to="#"
