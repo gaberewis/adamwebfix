@@ -5,6 +5,7 @@ console.log(err);
 const statusCd = err.statusCode || 500;
 const msg = err.message || 'somthing wont wrong';
 res.status(statusCd).json({ msg });
+next();
 
 
 }

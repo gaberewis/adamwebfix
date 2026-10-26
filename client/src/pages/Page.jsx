@@ -1,40 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Link, useLoaderData, useActionData } from 'react-router-dom';
 import NotFound from "../css-pocket/errorpages";
 import Stl from "../css-pocket/page";
 import { FaCircleDot } from "react-icons/fa6";
 import { MdEmail, MdLocationOn } from "react-icons/md";
-import { RiWhatsappFill, RiPhoneFill, RiFlagFill, RiShieldCheckFill  } from "react-icons/ri";
+import { RiWhatsappFill, RiPhoneFill, RiFlagFill, RiShieldCheckFill } from "react-icons/ri";
 import { LuLayers } from "react-icons/lu";
 import img from '../../public/not-found.svg';
 import { SubmitButton } from "../components";
-import axios from "axios";
-
 
 
 const Page = () => {
-
     const actionData = useActionData();
     const [showReport, setShowReport] = useState(false);
     const [current, setCurrent] = useState(0);
-
-
     const hadelReportForm = () => {
         return setShowReport(!showReport);
     }
 
-
     const { page, pages } = useLoaderData();
 
     const morePages = pages.filter((pgs) => pgs._id !== page._id && pgs.status === "active");
-
 
     const { _id, company, product, price, discount,
         currency, description, phone, email, whatsapp,
         address, order, specification, images
     } = page;
 
-
+   
+    useEffect(() => {
+        console.log('ID: ', _id);
+        setShowReport(false);
+    }, [_id]);
 
     if (page.status !== "active") {
 
@@ -48,9 +45,6 @@ const Page = () => {
                 </div>
             </NotFound>)
     }
-
-
-
 
     return (
         <Stl>
@@ -140,10 +134,6 @@ const Page = () => {
                             </div>
                         )
                 }
-
-
-
-
 
                 {
                     morePages.length > 0 &&
