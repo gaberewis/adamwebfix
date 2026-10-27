@@ -202,7 +202,7 @@ export const capturePayment = async (req, res) => {
 
 
     const addPayment = await Page.findByIdAndUpdate( pageId ,
-      { status: "active", paymentData: newPayment }, { new: true })
+      { status: "active",$push : {paymentData: newPayment}  }, { new: true })
 
     return res.json({
       success: true,

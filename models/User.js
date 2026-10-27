@@ -13,11 +13,6 @@ const UserSchema = new mongoose.Schema(
       default: "user",
     },
 
-    paymentDetails: {
-      type: Array,
-      default: [],
-    },
-
     status: {
       type: String,
       enum: ["active", "blocked", "deleted"],
@@ -30,6 +25,8 @@ const UserSchema = new mongoose.Schema(
 UserSchema.methods.toJSON = function () {
   const userObject = this.toObject();
   delete userObject.password;
+  delete userObject.otp;
+  delete userObject.otpExpires;
   return userObject;
 };
 

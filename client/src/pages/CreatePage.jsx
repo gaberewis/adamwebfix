@@ -35,8 +35,8 @@ const orderContact = ["whatsapp", "phone", "email"]
             <FormRow type='file' name='images' labelText={'Add product images'} accept="images/*" multiple required />
             <FormRow type='text' name="company" labelText={'company / business name'} maxLength={100} required />
             <FormRow type='text' name="product" labelText={'product Name'} maxLength={100} required />
-            <FormRow type='text' name='price' labelText={'Product price'} maxLength={20} required />
-            <FormRow type='text' name='discount' labelText={'price before discount (optional)'} maxLength={20} />
+            <FormRow type='number' name='price' labelText={'Product price'} maxLength={20} required />
+            <FormRow type='number' name='discount' labelText={'price before discount (optional)'} maxLength={20} />
             <FormRowSelect name='currency' list={currencies} />
             <textarea className='form-textarea' name="description" maxLength={1000}
                 placeholder="Enter product description..."

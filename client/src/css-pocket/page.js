@@ -197,7 +197,7 @@ max-width : 385px;
 .report{
 position : absolute;
 right: .7rem;
-top : .7rem;
+bottom : .7rem;
  font-size: 0.8rem;
  display : flex;
  gap : .3rem;
@@ -210,7 +210,7 @@ top : .7rem;
 .form{
 position : absolute;
 right: .7rem;
-top : -20rem;
+bottom : 2rem;
 }
 
 .powered {

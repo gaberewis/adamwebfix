@@ -41,8 +41,8 @@ const EditPage = () => {
             <FormRow type='file' name='images' labelText={'Edit product images'} accept='images/*' multiple />
             <FormRow type='text' name="company" labelText={'Edit company / business name'} maxLength={100} defaultValue={company} />
             <FormRow type='text' name="product" labelText={'Edit product Name'} maxLength={100} defaultValue={product} />
-            <FormRow type='text' name="price" labelText={'Edit Product price'} maxLength={20} defaultValue={price} />
-            <FormRow type='text' name="discount" labelText={'Edit price before discount (optional)'} maxLength={20} defaultValue={discount} />
+            <FormRow type='number' name="price" labelText={'Edit Product price'} maxLength={20} defaultValue={price} />
+            <FormRow type='number' name="discount" labelText={'Edit price before discount (optional)'} maxLength={20} defaultValue={discount} />
             <FormRowSelect name='currency' labelText={'edit currency'} list={currencies} defaultValue={currency} />
             <textarea className='form-textarea' name="description" placeholder={'edit product description'} maxLength={1000}
                 defaultValue={description}

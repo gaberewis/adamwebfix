@@ -1,5 +1,5 @@
 
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
 const imageSchema = new mongoose.Schema(
   {
@@ -17,13 +17,12 @@ const specItem = new mongoose.Schema(
   { _id: false }
 );
 
-
 const pagesSchema = new mongoose.Schema(
   {
     company: String,
     product: String,
-    price: String,
-    discount: String,
+    price: Number,
+    discount: Number,
     currency: String,
     description: String,
     phone: String,
@@ -49,12 +48,19 @@ const pagesSchema = new mongoose.Schema(
     userid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required : true,
     },
 
     images: [imageSchema],
     specification : [specItem],
-    reported : Number,
-    report : Array,
+    reported : {
+      type : Number,
+      default : 0,
+    },
+    report : {
+      type : [String],
+      default : []
+    },
     
   },
   { timestamps: true }
