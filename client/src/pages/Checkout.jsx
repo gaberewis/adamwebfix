@@ -15,7 +15,7 @@ console.log(page._id);
 
   const onApprove = async (data) => {
     try {
-      const res = await axios.post("/api/page/payments", {
+      const res = await axios.patch("/api/page/payments", {
         orderId: data.orderID,
         pageId : page._id,
       });

@@ -27,7 +27,7 @@ const Landing = () => {
     const changeStatus = async(id, status)=>{
 
         try {
-            await  axios.get(`/api/page/change-status/${id}`,{params : { status } } );
+            await  axios.patch(`/api/page/change-status/${id}`, { status }  );
             return navigate('/dashboard');
         } catch (error) {
             console.log("Deactivate error: ", error.response?.data?.msg || 'Somthing went wrong');

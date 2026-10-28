@@ -20,7 +20,7 @@ console.log(user);
 
     const logout = async () => {
         try {
-            await axios.get("/api/user/logout");
+            await axios.post("/api/user/logout");
             navigate("/");
         } catch (error) {
             console.log(error);

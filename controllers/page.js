@@ -112,7 +112,7 @@ export const getPage = async (req, res) => {
 
 export const changeStatus = async(req, res)=>{
 
-  const { status } = req.query; 
+  const { status } = req.body; 
   console.log(status);
 const page = await Page.findByIdAndUpdate(req.params.id, { status }, {new:true});
 res.status(200).json({msg : "Page status changed"});

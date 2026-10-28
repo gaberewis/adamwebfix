@@ -1,6 +1,5 @@
 import { redirect } from 'react-router-dom';
 import axios from 'axios';
-import { truncates } from 'bcryptjs';
 
 export const registerAction = async ({ request }) => {
   const formData = await request.formData();
@@ -38,20 +37,6 @@ export const loginAction = async ({ request }) => {
 
 }
 
-export const editUser = async ({ request, params }) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  try {
-    await axios.post(`/api/user/edit-user/${params.id}`, data);
-    return redirect('/login');
-  } catch (error) {
-    console.log('BACKEND ERROR:', error.response?.data.msg);
-    const errMsg = error.response?.data?.msg || 'update failed';
-    return { errMsg };
-  }
-}
-
-
 export const clientMsg = async ({ request }) => {
 
   const formData = await request.formData();
@@ -69,7 +54,36 @@ export const clientMsg = async ({ request }) => {
   }
 }
 
+export const createPage = async ({ request }) => {
 
+  const formData = await request.formData();
+
+  try {
+    await axios.post('/api/page/create-page', formData);
+    return redirect('/dashboard');
+
+  } catch (error) {
+    console.log(error.response?.data?.msg || 'Request faild');
+
+    const errMsg = error.response?.data?.msg || 'Request faild';
+    return { errMsg }
+
+  }
+};
+
+
+export const editUser = async ({ request, params }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await axios.patch(`/api/user/edit-user/${params.id}`, data);
+    return redirect('/login');
+  } catch (error) {
+    console.log('BACKEND ERROR:', error.response?.data.msg);
+    const errMsg = error.response?.data?.msg || 'update failed';
+    return { errMsg };
+  }
+}
 
 export const forgetPassword = async ({ request }) => {
 
@@ -96,7 +110,7 @@ export const resetPassword = async ({ request }) => {
 
   try {
 
-    await axios.post('/api/user/reset-password', data);
+    await axios.patch('/api/user/reset-password', data);
     return redirect('/login');
 
   } catch (error) {
@@ -108,27 +122,10 @@ export const resetPassword = async ({ request }) => {
 
 };
 
-export const createPage = async ({ request }) => {
-
-  const formData = await request.formData();
-
-  try {
-    await axios.post('/api/page/create-page', formData);
-    return redirect('/dashboard');
-
-  } catch (error) {
-    console.log(error.response?.data?.msg || 'Request faild');
-
-    const errMsg = error.response?.data?.msg || 'Request faild';
-    return { errMsg }
-
-  }
-};
-
 export const editPage = async ({ request, params }) => {
   const formData = await request.formData();
   try {
-    await axios.post(`/api/page/${params.id}`, formData);
+    await axios.patch(`/api/page/${params.id}`, formData);
     return redirect('/dashboard');
   } catch (error) {
     console.log(error.response?.data?.msg || "Request faild");
@@ -143,9 +140,9 @@ export const reportPage = async ({ request, params }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
-    await axios.post(`/api/page/report/${params.id}`, data);
-const reported = "Page has been reported";
-return { reported };
+    await axios.patch(`/api/page/report/${params.id}`, data);
+    const reported = "Page has been reported";
+    return { reported };
 
   } catch (error) {
 

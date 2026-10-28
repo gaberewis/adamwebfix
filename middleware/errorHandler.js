@@ -1,11 +1,9 @@
 
 const errorHandler = (err, req, res, next)=>{
-console.log(err);
-
+console.log(err.message);
 const statusCd = err.statusCode || 500;
 const msg = err.message || 'somthing wont wrong';
 res.status(statusCd).json({ msg });
-next();
 
 
 }
