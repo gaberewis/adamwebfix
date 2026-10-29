@@ -2,7 +2,7 @@ import axios from "axios";
 import Page from "../models/Page.js";
 import cloudinary from 'cloudinary';
 import { formatImage } from '../middleware/multer.js';
-import { stat } from "fs";
+
 
 
 
@@ -17,18 +17,14 @@ export const createPage = async (req, res) => {
     const files = req.files || [];
 
     if (files && files.length > 0) {
-
       uploadedImages = await Promise.all(
-
-        req.files.map((image) => {
+        files.map((image) => {
           return cloudinary.v2.uploader.upload(
             formatImage(image)
           )
         }
-
         ))
     }
-
     req.body.images = uploadedImages.map((img) => ({
       imageUrl: img.secure_url,
       imageId: img.public_id,
