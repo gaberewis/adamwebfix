@@ -33,15 +33,13 @@ export const verifyToken = (token) => {
   return decoded;
 };
 
-export const userPayload = (req, res, next) => {
+
+export const authenticateUser = (req, res, next) => {
   const { token } = req.cookies;
   if(!token) throw CustomError(401, 'Invalid authentication credentials')
-  const { userId, userRole, userName, userEmail } = verifyToken(token);
-  req.user = { userId, userRole, userName, userEmail};
 next();
 
 }
-
 
 export const authenticateAdmin = (...roles) => {
   return (req, res, next) => {
@@ -51,6 +49,18 @@ export const authenticateAdmin = (...roles) => {
     next();
   };
 };
+
+
+export const userPayload = (req, res, next) => {
+  const { token } = req.cookies;
+  if(!token) throw new CustomError(401, 'Invalid authentication credentials')
+  const { userId, userRole, userName, userEmail } = verifyToken(token);
+  req.user = { userId, userRole, userName, userEmail};
+next();
+
+}
+
+
 
 
 
