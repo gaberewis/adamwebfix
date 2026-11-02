@@ -1,40 +1,37 @@
 import User from '../models/User.js';
 import Page from '../models/Page.js';
 import ClientMsg from '../models/ClientMsg.js';
-import { createToken,
-   hashPassword, 
-   comparePassword, 
-   sendEmail } from '../middleware/funcs.js';
+import {
+  createToken,
+  hashPassword,
+  comparePassword,
+  sendEmail
+} from '../middleware/funcs.js';
 import { CustomError } from '../middleware/errorHandler.js';
 
 
-
-
 export const registerUser = async (req, res) => {
+
   req.body.password = await hashPassword(req.body.password);
 
   try {
     const user = await User.create(req.body);
-
     res.status(201).json({
-      msg: 'user registered and logged in',
+      msg: 'user registered ',
     });
   } catch (error) {
     console.error('Register Error', error);
   }
-
 };
+
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  // Validate input
-  if (!email || !password) {
-    throw new CustomError(400, 'Email and password required');
-  }
-
   const user = await User.findOne({ email });
-  if (!user) throw new CustomError(401, 'Invalid credentials');
+
+  if (user.status === "blocked") throw new
+    CustomError(401, 'Your account has been blocked. Please contact us for further clarification.');
 
   const validPassword = await comparePassword(password, user.password);
   if (!validPassword) throw new CustomError(401, 'Invalid credentials');
@@ -43,7 +40,7 @@ export const login = async (req, res) => {
     userId: user._id,
     userRole: user.role,
     userName: user.name,
-    userEmail : user.email
+    userEmail: user.email
   });
 
   res.cookie('token', token, {
@@ -52,51 +49,35 @@ export const login = async (req, res) => {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict'
   });
-
   res.status(200).json({ msg: 'User logged in successfully' });
 };
 
 
-export const clientMsg = async (req, res) => {
-
-  const homeFormData = await ClientMsg.create(req.body);
-  res.status(201).json({ msg: 'client request created ' });
-
-};
-
-export const getClientRequest = async (req, res) => {
-  try {
-    const clientFormData = await ClientMsg.find({}).sort({ createdAt: -1 });
-    res.status(200).json({ data: clientFormData });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-};
 
 export const currentUser = async (req, res) => {
 
-   const user = req.user || null;
+  const user = req.user || null;
 
-   const pages = await Page.find({userid : user.userId }).sort({createdAt : -1});
-   
+  const pages = await Page.find({ userid: user.userId }).sort({ createdAt: -1 });
+
   res.status(201).json({ user, pages });
 
 };
 
 
-export const editUser = async(req, res)=> {
-let newUser = req.body;
-if(!newUser.password) {delete newUser.password;}else{
-newUser.password = await hashPassword(newUser.password );
+export const editUser = async (req, res) => {
+  let newUser = req.body;
+  if (!newUser.password) { delete newUser.password; } else {
+    newUser.password = await hashPassword(newUser.password);
 
-}
- 
+  }
 
-const updateUser = await User.findByIdAndUpdate(req.params.id, newUser, {new : true});
-res.status(200).json({
+
+  const updateUser = await User.findByIdAndUpdate(req.params.id, newUser, { new: true });
+  res.status(200).json({
     msg: "user updated",
     user: updateUser
-});
+  });
 
 }
 
@@ -172,8 +153,22 @@ export const resetPassword = async (req, res) => {
 
 };
 
-
 export const logout = (req, res) => {
   res.clearCookie('token', { httpOnly: true });
   res.status(200).json({ msg: 'user logged out!' });
+};
+
+
+export const clientMsg = async (req, res) => {
+  const homeFormData = await ClientMsg.create(req.body);
+  res.status(201).json({ msg: 'client request created ' });
+};
+
+export const getClientRequest = async (req, res) => {
+  try {
+    const clientFormData = await ClientMsg.find({}).sort({ createdAt: -1 });
+    res.status(200).json({ data: clientFormData });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 };

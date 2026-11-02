@@ -2,7 +2,6 @@
   "name": "adamwebfix",
   "version": "1.0.0",
   "type": "module",
-  "description": "Adam web fix",
   "main": "server.js",
   "scripts": {
     "watch": "node --watch server.js ",
@@ -12,20 +11,7 @@
     "setup-app": "npm i && cd client && npm i && npm run build",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
-  "keywords": [
-    "web development services",
-    "website design",
-    "frontend development",
-    "backend development",
-    "full stack development",
-    "ecommerce development",
-    "custom web applications",
-    "api development",
-    "website maintenance",
-    "responsive web design",
-    "seo optimization",
-    "performance optimization"
-  ],
+
   "author": "Gaber Ewis",
   "license": "ISC",
   "dependencies": {
@@ -35,7 +21,6 @@
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
     "datauri": "^4.1.0",
-    "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
@@ -46,9 +31,7 @@
     "mongoose": "^8.0.0",
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
-    "nanoid": "^5.1.5",
-    "nodemon": "^3.1.10",
-    "react-toastify": "^11.0.5"
+    "nodemon": "^3.1.10"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

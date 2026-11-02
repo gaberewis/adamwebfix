@@ -9,8 +9,8 @@ const Login = () => {
             <Navbar />
             <div className="form-container">
                 <Form method='post' className="form">
-                    <FormRow type="email" name="email" />
-                    <FormRow type='password' name='password' />
+                    <FormRow type="email" name="email" required />
+                    <FormRow type='password' name='password' required />
                     {actionData?.errMsg && <p className="error" >{actionData.errMsg}</p>}
                     <Link to={"/forget-password"}>forget password?</Link>
                     <SubmitButton />

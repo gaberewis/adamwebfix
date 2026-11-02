@@ -37,12 +37,12 @@ export const registerValidation = validateData([
     body('password').notEmpty().withMessage('Password is required')
         .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
         .isLength({ max: 100 }).withMessage('Password is too long'),
-
 ]);
 
 export const loginValidation = validateData(
     [
-        body('email').notEmpty().withMessage('Email is required').isEmail().custom(async (value) => {
+        body('email').notEmpty().withMessage('Email is required').isEmail()
+        .custom(async (value) => {
             const user = await User.findOne({ email: value });
             if (!user) throw new Error('Email not exist');
         }),

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { registerValidation, 
+import { registerValidation, loginValidation,
     clientMsgValidation, resetValidation} from '../middleware/validation.js';
 import {userPayload, authenticateUser } from '../middleware/funcs.js';
 import {
@@ -19,7 +19,7 @@ const router = Router();
 router.get('/client-msg', getClientRequest);
 router.get('/getuser', authenticateUser, userPayload,  currentUser);
 router.post('/register', registerValidation,  registerUser);
-router.post('/login',  login);
+router.post('/login', loginValidation,  login);
 router.post('/logout', authenticateUser, logout);
 router.post( '/client-msg', clientMsgValidation, clientMsg);
 router.post('/forget-password', forgetPassword);

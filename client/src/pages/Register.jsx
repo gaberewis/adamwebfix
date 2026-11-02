@@ -15,9 +15,9 @@ const Register = () => {
           <Navbar />
             <div className="form-container">
                 <Form method="post" className="form">
-                    <FormRow type='text' name='name' />
-                    <FormRow type='email' name='email' />
-                    <FormRow type='password' name='password' />
+                    <FormRow type='text' name='name' required />
+                    <FormRow type='email' name='email' required />
+                    <FormRow type='password' name='password' required />
                     {actionData?.errMsg && <p className="error" >{actionData.errMsg}</p>}
                     <div className="check-t">
                         <input type="checkbox"
