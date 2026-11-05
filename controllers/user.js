@@ -55,25 +55,22 @@ export const login = async (req, res) => {
 
 
 export const currentUser = async (req, res) => {
-
-  const user = req.user || null;
-
+  const user = req.user 
   const pages = await Page.find({ userid: user.userId }).sort({ createdAt: -1 });
-
-  res.status(201).json({ user, pages });
-
+  res.status(200).json({ user, pages  });
 };
 
 
 export const editUser = async (req, res) => {
-  let newUser = req.body;
-  if (!newUser.password) { delete newUser.password; } else {
-    newUser.password = await hashPassword(newUser.password);
-
+  const { name, email, password } = req.body;
+  const updatedData = {name, email}
+  const id = req.params.id;
+  if (password) { delete newUser.password; } else {
+    updatedData.password = await hashPassword(newUser.password);
   }
-
-
-  const updateUser = await User.findByIdAndUpdate(req.params.id, newUser, { new: true });
+  const updateUser = await User.findByIdAndUpdate(id, updatedData, 
+    { new: true, runValidators : true }).select('-password');
+  if(!updateUser) throw new CustomError(404, 'User not found');
   res.status(200).json({
     msg: "user updated",
     user: updateUser
