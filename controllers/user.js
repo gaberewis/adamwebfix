@@ -61,6 +61,7 @@ export const currentUser = async (req, res) => {
 };
 
 
+
 export const editUser = async (req, res) => {
   const { name, email, password } = req.body;
   const updatedData = {name, email}
@@ -79,9 +80,6 @@ export const editUser = async (req, res) => {
 }
 
 
-
-import { randomInt } from "node:crypto";
-
 export const forgetPassword = async (req, res) => {
   const { email } = req.body;
 
@@ -96,11 +94,15 @@ export const forgetPassword = async (req, res) => {
 
     const otp = randomInt(100000, 1000000);
 
+    user.otp = otp;
+    user.otpExpires = Date.now() + 15 * 60 * 1000;
+    await user.save();
+
     await sendEmail({
       to: user.email,
       subject: "Reset Your Password",
       html: `
-        <h5>Hello ${user.name},</h5>
+        <h5>Dear Customer,</h5>
         <p>Your OTP code is: <b>${otp}</b></p>
         <p>This code will expire in 15 minutes.</p>
         <p>
@@ -111,23 +113,17 @@ export const forgetPassword = async (req, res) => {
       `,
     });
 
-    user.otp = otp;
-    user.otpExpires = Date.now() + 15 * 60 * 1000;
-    await user.save();
-
+  
     return res.status(200).json({
-      message: "Email sent successfully",
+       msg: "If the email exists, a reset code will be sent.",
     });
   } catch (error) {
     console.error("Forgot password error:", {
-      message: error.message,
-      status: error.response?.status,
-      data: error.response?.data,
-      code: error.code,
+      msg: error.message,
     });
 
     return res.status(500).json({
-      message: "Unable to send reset email. Please try again later.",
+      msg: "Unable to send reset email. Please try again later.",
     });
   }
 };
@@ -135,10 +131,10 @@ export const forgetPassword = async (req, res) => {
 
 
 
+
 export const resetPassword = async (req, res) => {
   const otp = req.body.otp;
   const user = await User.findOne({ otp });
-  console.log(otp);
 
   if (!user)
     throw new CustomError(401, 'wrong otp');
