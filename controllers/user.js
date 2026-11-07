@@ -129,37 +129,36 @@ export const forgetPassword = async (req, res) => {
 };
 
 
-
-
-
 export const resetPassword = async (req, res) => {
-  const otp = req.body.otp;
-  const user = await User.findOne({ otp });
-
-  if (!user)
-    throw new CustomError(401, 'wrong otp');
-
-  if (user.otpExpires < Date.now()) throw new CustomError(401, 'Otp has expired');
-  const password = req.body.password = await hashPassword(req.body.password);
-  await User.findOneAndUpdate({ otp }, { password, otp: '' });
-  res.status(201).json({ msg: "password has been updated" });
-
+  const user = await User.findOne({ otp : req.body.otp});
+  if (!user) throw new CustomError(401, 'wrong otp');
+  if (!user.otpExpires || user.otpExpires  < Date.now()) throw new CustomError(401, 'Otp has expired');
+  const password =  await hashPassword(req.body.password);
+  user.password = password;
+  user.otp = '';
+  user.otpExpires = null;
+  await user.save();
+  res.status(200).json({ msg: "password has been updated" });
 };
+
+
 
 export const logout = (req, res) => {
-  res.clearCookie('token', { httpOnly: true });
-  res.status(200).json({ msg: 'user logged out!' });
+ res.cookie('token', token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'strict',
+});
 };
 
-
 export const clientMsg = async (req, res) => {
-  const homeFormData = await ClientMsg.create(req.body);
-  res.status(201).json({ msg: 'client request created ' });
+   await ClientMsg.create(req.body);
+  res.status(201).json({ msg: 'client request created' });
 };
 
 export const getClientRequest = async (req, res) => {
   try {
-    const clientFormData = await ClientMsg.find({}).sort({ createdAt: -1 });
+    const clientFormData = await ClientMsg.find().sort({ createdAt: -1 });
     res.status(200).json({ data: clientFormData });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
