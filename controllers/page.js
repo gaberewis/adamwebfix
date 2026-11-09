@@ -2,64 +2,82 @@ import axios from "axios";
 import Page from "../models/Page.js";
 import cloudinary from 'cloudinary';
 import { formatImage } from '../middleware/multer.js';
-
-
-
-
-
-
+import { CustomError } from "../middleware/errorHandler.js";
 
 
 export const createPage = async (req, res) => {
+let uploadedImages = [];
   try {
-
-    let uploadedImages = [];
+    
     const files = req.files || [];
 
     if (files && files.length > 0) {
-      uploadedImages = await Promise.all(
+      const results = await Promise.allSettled(
         files.map((image) => {
           return cloudinary.v2.uploader.upload(
             formatImage(image)
-          )
-        }
-        ))
-    }
+          )}))}
+
+uploadedImages = results.filter(result => result.status === "fulfilled")
+.map(result => result.value);
+
+if(uploadedImages.length !== files.length) throw new Error("Some images faild to upload");
+          
     req.body.images = uploadedImages.map((img) => ({
       imageUrl: img.secure_url,
       imageId: img.public_id,
     }));
 
-    req.body.specification = JSON.parse(req.body.specification);
+    if (updateData.specification !== undefined) {
+  updateData.specification = JSON.parse(updateData.specification);
+}
 
     await Page.create(req.body);
 
     res.status(201).json({ msg: "page created" });
 
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: "Failed to create page", error: error.message, });
+    if (uploadedImages.length > 0) {
+      await Promise.allSettled(
+        uploadedImages.map(image => cloudinary.v2.uploader.destroy(image.public_id)));
+    };
+
+    console.log(error.message);
+    res.status(error.statusCode || 500)
+    .json({ msg: "Failed to create page", error: error.message, });
   }
 };
 
 
 
+
+
 export const editPage = async (req, res) => {
+    let uploadedImages = [];
+      let updateSucceeded = false;
   try {
     const { id } = req.params;
 
     let updateData = { ...req.body };
 
-    updateData.specification = JSON.parse(updateData.specification);
+   if (updateData.specification !== undefined) {
+  updateData.specification = JSON.parse(updateData.specification);
+}
 
     const files = req.files || [];
 
     if (files.length > 0) {
-      const uploadedImages = await Promise.all(
+      const results = await Promise.allSettled(
         files.map((image) =>
           cloudinary.v2.uploader.upload(formatImage(image))
         )
       );
+
+      uploadedImages = results.filter(result => result.status === "fulfilled")
+      .map(result => result.value); 
+
+if(uploadedImages.length !== files.length)
+   throw new Error("Some images faild to upload");
 
       updateData.images = uploadedImages.map((img) => ({
         imageUrl: img.secure_url,
@@ -70,15 +88,17 @@ export const editPage = async (req, res) => {
     const page = await Page.findByIdAndUpdate(
       id,
       updateData,
-      { new: false }
+      { new: false, runValidators: true }
     );
 
     if (!page) {
-      return res.status(404).json({ msg: "Page not found" });
+      throw new CustomError(404, "Page not found");
     }
 
+    updateSucceeded = true;
+
     if (files.length > 0 && page.images?.length > 0) {
-      await Promise.all(
+      await Promise.allSettled(
         page.images.map((image) =>
           cloudinary.v2.uploader.destroy(image.imageId)
         )
@@ -88,9 +108,15 @@ export const editPage = async (req, res) => {
     res.status(200).json({ msg: "Page updated" });
 
   } catch (error) {
-    console.log(error);
 
-    res.status(500).json({
+    if(!updateSucceeded && uploadedImages.length > 0){
+      await Promise.allSettled(uploadedImages.map(image => 
+        cloudinary.v2.uploader.destroy(image.public_id)
+      ))
+    }
+
+    console.log(error.message);
+    res.status(error.statusCode || 500).json({
       msg: "Failed to update page",
       error: error.message,
     });
@@ -98,47 +124,50 @@ export const editPage = async (req, res) => {
 };
 
 
+
+
+
 export const getPage = async (req, res) => {
   const { id } = req.params;
   const page = await Page.findById(id);
-   const pages = await Page.find({userid : page.userid });
+  const pages = await Page.find({ userid: page.userid });
   res.status(200).json({ page, pages });
 };
 
 
-export const changeStatus = async(req, res)=>{
+export const changeStatus = async (req, res) => {
 
-  const { status } = req.body; 
+  const { status } = req.body;
   console.log(status);
-const page = await Page.findByIdAndUpdate(req.params.id, { status }, {new:true});
-res.status(200).json({msg : "Page status changed"});
+  const page = await Page.findByIdAndUpdate(req.params.id, { status }, { new: true });
+  res.status(200).json({ msg: "Page status changed" });
 
 }
 
 export const delPage = async (req, res) => {
-    try {
-const files  = req.files || [];
+  try {
+    const files = req.files || [];
 
-const page = await Page.findById(req.params.id);
+    const page = await Page.findById(req.params.id);
 
-if(files.length > 0 && page.images?.length > 0){
+    if (files.length > 0 && page.images?.length > 0) {
 
-  await Promise.all(
-    page.images.map(image=> cloudinary.v2.uploader.destroy(image.imageId))
-  )
-}
-
-        await Page.findByIdAndDelete(req.params.id);
-
-        res.status(200).json({
-            msg: "Page deleted"
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            msg: error.message
-        });
+      await Promise.all(
+        page.images.map(image => cloudinary.v2.uploader.destroy(image.imageId))
+      )
     }
+
+    await Page.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      msg: "Page deleted"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      msg: error.message
+    });
+  }
 };
 
 
@@ -148,7 +177,7 @@ if(files.length > 0 && page.images?.length > 0){
 export const capturePayment = async (req, res) => {
   try {
     const { orderId, pageId } = req.body;
-   
+
     const auth = await axios.post(
       "https://api-m.sandbox.paypal.com/v1/oauth2/token",
       "grant_type=client_credentials",
@@ -177,7 +206,7 @@ export const capturePayment = async (req, res) => {
     );
 
     const data = response.data;
-   
+
 
     const capture = data?.purchase_units?.[0]?.payments?.captures?.[0];
 
@@ -192,13 +221,13 @@ export const capturePayment = async (req, res) => {
 
 
     const page = await Page.findById({ _id: pageId });
-    if(!page){
+    if (!page) {
     }
     const newPayment = [...(page.paymentData || []), capture]
 
 
-    const addPayment = await Page.findByIdAndUpdate( pageId ,
-      { status: "active",$push : {paymentData: newPayment}  }, { new: true })
+    const addPayment = await Page.findByIdAndUpdate(pageId,
+      { status: "active", $push: { paymentData: newPayment } }, { new: true })
 
     return res.json({
       success: true,
@@ -217,32 +246,32 @@ export const capturePayment = async (req, res) => {
 
 
 export const reportpage = async (req, res) => {
-    try {
-        const page = await Page.findByIdAndUpdate(
-            req.params.id,
-            {
-                $push: { report: req.body.report },
-                $inc: { reported: 1 }
-            },
-            { new: true }
-        );
+  try {
+    const page = await Page.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: { report: req.body.report },
+        $inc: { reported: 1 }
+      },
+      { new: true }
+    );
 
-        if (!page) {
-            return res.status(404).json({
-                msg: "Page not found"
-            });
-        }
-
-        console.log("Page has been reported");
-
-        return res.status(200).json({
-            msg: "Page has been reported"
-        });
-    } catch (error) {
-        console.error("Report error:", error);
-
-        return res.status(500).json({
-            msg: "Failed to report page"
-        });
+    if (!page) {
+      return res.status(404).json({
+        msg: "Page not found"
+      });
     }
+
+    console.log("Page has been reported");
+
+    return res.status(200).json({
+      msg: "Page has been reported"
+    });
+  } catch (error) {
+    console.error("Report error:", error);
+
+    return res.status(500).json({
+      msg: "Failed to report page"
+    });
+  }
 };
