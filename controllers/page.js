@@ -6,13 +6,15 @@ import { CustomError } from "../middleware/errorHandler.js";
 
 
 export const createPage = async (req, res) => {
+const updateData = req.body;
 let uploadedImages = [];
+let results;
   try {
     
     const files = req.files || [];
 
     if (files && files.length > 0) {
-      const results = await Promise.allSettled(
+       results = await Promise.allSettled(
         files.map((image) => {
           return cloudinary.v2.uploader.upload(
             formatImage(image)
@@ -32,7 +34,7 @@ if(uploadedImages.length !== files.length) throw new Error("Some images faild to
   updateData.specification = JSON.parse(updateData.specification);
 }
 
-    await Page.create(req.body);
+    await Page.create(updateData);
 
     res.status(201).json({ msg: "page created" });
 

@@ -12,7 +12,7 @@ const Dashboard = () => {
 
 const { user, pages } = useLoaderData();
 
-console.log(user);
+
 
 
     const navigate = useNavigate();

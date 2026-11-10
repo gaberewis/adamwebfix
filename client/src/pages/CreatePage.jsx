@@ -43,7 +43,7 @@ const orderContact = ["whatsapp", "phone", "email"]
                 required ></textarea>
             <FormRow type='text' name='phone' labelText={'Phone number'} required />
             <FormRow type='text' name='whatsapp' labelText={'Wahts app  number'} required />
-            <FormRow type='text' name='email' labelText={'email'} required />
+            <FormRow type='email' name='email' labelText={'email'} required />
             <FormRowSelect name='order' list={orderContact} labelText={'recieve order by: '} />
             <textarea className='form-textarea' name="address" maxLength={3000}
                 placeholder="Add business address optional..."
