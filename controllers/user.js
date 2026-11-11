@@ -56,7 +56,7 @@ export const login = async (req, res) => {
 
 export const currentUser = async (req, res) => {
   const user = req.user 
-  const pages = await Page.find({ userid: user.userId }).sort({ createdAt: -1 });
+  const pages = await Page.find({ userid: user.userId }).sort({ createdAt: -1 }).lean();
   res.status(200).json({ user, pages  });
 };
 

@@ -78,4 +78,8 @@ body('password').notEmpty().withMessage('Password is required').isLength({ min: 
 
 ]);
 
-
+export const repoerValidator = ([
+    body('report')
+            .notEmpty().withMessage('A reason for reporting is required')
+            .isLength({ max: 1000 }).withMessage('Too long'),
+])
