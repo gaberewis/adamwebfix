@@ -201,7 +201,6 @@ export const capturePayment = async (req, res) => {
 
     const data = response.data;
 
-
     const capture = data?.purchase_units?.[0]?.payments?.captures?.[0];
 
     if (!capture) {
@@ -213,21 +212,57 @@ export const capturePayment = async (req, res) => {
     }
 
 
+    if (capture.status !== "COMPLETED") {
+  return res.status(400).json({
+    success: false,
+    msg: "Payment was not completed"
+  });
+}
 
-    const page = await Page.findById({ _id: pageId });
+const breakdown = capture.seller_receivable_breakdown;
+
+const paymentData = {
+  orderId: data.id,
+  captureId: capture.id,
+  status: capture.status,
+
+  currency: capture.amount.currency_code,
+
+  grossAmount: Number(
+    breakdown?.gross_amount?.value || capture.amount.value
+  ),
+
+  paypalFee: Number(
+    breakdown?.paypal_fee?.value || 0
+  ),
+
+  netAmount: Number(
+    breakdown?.net_amount?.value || capture.amount.value
+  ),
+
+  payerId: data.payer?.payer_id,
+  payerEmail: data.payer?.email_address,
+
+  payerName: data.payer?.name
+    ? `${data.payer.name.given_name || ""} ${data.payer.name.surname || ""}`.trim()
+    : undefined,
+
+  sellerProtection: capture.seller_protection?.status,
+
+  captureDate: new Date(capture.create_time)
+};
+
+console.log(paymentData);
+    const page = await Page.findById(pageId);
     if (!page) {
        throw new CustomError(404, 'Page not found');
     }
-    const newPayment = [...(page.paymentData || []), capture]
+ 
+    const addPayment = await Page.findByIdAndUpdate
+    ({_id : pageId, "paymentData.captureId": { $ne: capture.id }},
+      { status: "active", $push: { paymentData } }, { new: true })
 
-
-    const addPayment = await Page.findByIdAndUpdate(pageId,
-      { status: "active", $push: { paymentData: newPayment } }, { new: true })
-
-      console.log('this is the cuptured ', capture);
-      console.log('this is the the full data  ', data);
-
-
+      
     return res.json({
       success: true,
       addPayment,
@@ -236,12 +271,16 @@ export const capturePayment = async (req, res) => {
   } catch (err) {
     console.log(err.response?.data || err.message);
 
-    return res.status(500).json({
+    return res.status(err.statusCode || 500).json({
       success: false,
       msg: err.response?.data || err.message,
     });
   }
 }
+
+
+
+
 
 
 export const reportpage = async (req, res) => {

@@ -17,6 +17,24 @@ const specItem = new mongoose.Schema(
   { _id: false }
 );
 
+const paymenSchema = new mongoose.Schema(
+  {
+orderId: String,
+  captureId: String,
+  status: String,
+  currency: String,
+  grossAmount: Number,
+  paypalFee: Number,
+  netAmount: Number,
+  payerId: String,
+  payerEmail: String,
+  payerName: String,
+  sellerProtection: String,
+  captureDate: Date
+  } 
+);
+
+
 const pagesSchema = new mongoose.Schema(
   {
     company: String,
@@ -29,12 +47,7 @@ const pagesSchema = new mongoose.Schema(
     email: String,
     whatsapp: String,
     address: String,
-
-    paymentData:{
-      type : Array,
-      default : []
-    },
-    
+    paymentData:[paymenSchema], 
     order: {
       type: String,
       enum: [ "whatsapp", "phone", "email"],

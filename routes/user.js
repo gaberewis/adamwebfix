@@ -26,7 +26,7 @@ router.post('/logout', authenticateUser, logout);
 router.post( '/client-msg', clientMsgValidation, clientMsg);
 router.post('/forget-password', forgetPassword);
 router.patch('/reset-password', resetValidation, resetPassword)
-router.patch('/edit-user/:id', paramValidation,  authenticateUser, editUser);
+router.patch('/edit-user/:id',   authenticateUser, editUser);
 
 
 
