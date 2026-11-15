@@ -27,7 +27,7 @@ export const createPage = async (req, res) => {
 
     if (uploadedImages.length !== files.length) throw new Error("Some images faild to upload");
 
-    req.body.images = uploadedImages.map((img) => ({
+    updateData.images = uploadedImages.map((img) => ({
       imageUrl: img.secure_url,
       imageId: img.public_id,
     }));
@@ -168,118 +168,6 @@ export const delPage = async (req, res) => {
 };
 
 
-export const capturePayment = async (req, res) => {
-  try {
-    const { orderId, pageId } = req.body;
-
-    const auth = await axios.post(
-      "https://api-m.sandbox.paypal.com/v1/oauth2/token",
-      "grant_type=client_credentials",
-      {
-        auth: {
-          username: "AY0hkrLmuQPwKm9bhx2JGuOQ5WXxkSSuUzKa087G3jGVHJtyIGZwChnysTGfnkF2w4nK_gbdhXZSGiZv",
-          password: process.env.PAYPAL_SECRET,
-        },
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    );
-
-    const accessToken = auth.data.access_token;
-
-    const response = await axios.post(
-      `https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderId}/capture`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const data = response.data;
-
-    const capture = data?.purchase_units?.[0]?.payments?.captures?.[0];
-
-    if (!capture) {
-      return res.status(400).json({
-        success: false,
-        msg: "No capture found",
-        data,
-      });
-    }
-
-
-    if (capture.status !== "COMPLETED") {
-  return res.status(400).json({
-    success: false,
-    msg: "Payment was not completed"
-  });
-}
-
-const breakdown = capture.seller_receivable_breakdown;
-
-const paymentData = {
-  orderId: data.id,
-  captureId: capture.id,
-  status: capture.status,
-
-  currency: capture.amount.currency_code,
-
-  grossAmount: Number(
-    breakdown?.gross_amount?.value || capture.amount.value
-  ),
-
-  paypalFee: Number(
-    breakdown?.paypal_fee?.value || 0
-  ),
-
-  netAmount: Number(
-    breakdown?.net_amount?.value || capture.amount.value
-  ),
-
-  payerId: data.payer?.payer_id,
-  payerEmail: data.payer?.email_address,
-
-  payerName: data.payer?.name
-    ? `${data.payer.name.given_name || ""} ${data.payer.name.surname || ""}`.trim()
-    : undefined,
-
-  sellerProtection: capture.seller_protection?.status,
-
-  captureDate: new Date(capture.create_time)
-};
-
-console.log(paymentData);
-    const page = await Page.findById(pageId);
-    if (!page) {
-       throw new CustomError(404, 'Page not found');
-    }
- 
-    const addPayment = await Page.findByIdAndUpdate
-    ({_id : pageId, "paymentData.captureId": { $ne: capture.id }},
-      { status: "active", $push: { paymentData } }, { new: true })
-
-      
-    return res.json({
-      success: true,
-      addPayment,
-    });
-
-  } catch (err) {
-    console.log(err.response?.data || err.message);
-
-    return res.status(err.statusCode || 500).json({
-      success: false,
-      msg: err.response?.data || err.message,
-    });
-  }
-}
-
-
-
 
 
 
@@ -313,3 +201,224 @@ export const reportpage = async (req, res) => {
     });
   }
 };
+
+
+
+
+export const capturePayment = async (req, res) => {
+  try {
+    const { orderId, pageId } = req.body;
+
+    if (!orderId || !pageId) {
+      throw new CustomError(400, "Order ID and Page ID are required");
+    }
+
+    // 1. Get PayPal access token
+    const auth = await axios.post(
+      "https://api-m.sandbox.paypal.com/v1/oauth2/token",
+      "grant_type=client_credentials",
+      {
+        auth: {
+          username: "AY0hkrLmuQPwKm9bhx2JGuOQ5WXxkSSuUzKa087G3jGVHJtyIGZwChnysTGfnkF2w4nK_gbdhXZSGiZv",
+          password: process.env.PAYPAL_SECRET,
+        },
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    const accessToken = auth.data.access_token;
+
+    const paypalHeaders = {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    };
+
+    // 2. Check the PayPal order status
+    const existingOrder = await axios.get(
+      `https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderId}`,
+      {
+        headers: paypalHeaders,
+      }
+    );
+
+    let data;
+
+    // 3. Handle an already completed payment
+    if (existingOrder.data.status === "COMPLETED") {
+      data = existingOrder.data;
+
+    } else if (existingOrder.data.status === "APPROVED") {
+
+      // 4. Capture the payment
+      try {
+        const response = await axios.post(
+          `https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderId}/capture`,
+          {},
+          {
+            headers: {
+              ...paypalHeaders,
+
+              // Same ID for retries of this order
+              "PayPal-Request-Id": `capture-${orderId}`,
+            },
+          }
+        );
+
+        data = response.data;
+
+      } catch (captureError) {
+
+        // 5. Capture request failed.
+        // Check whether PayPal actually completed the payment.
+
+        const recovery = await axios.get(
+          `https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderId}`,
+          {
+            headers: paypalHeaders,
+          }
+        ).catch(() => null);
+
+        if (recovery?.data?.status === "COMPLETED") {
+          data = recovery.data;
+
+        } else {
+          throw captureError;
+        }
+      }
+
+    } else {
+      throw new CustomError(
+        400,
+        `Order cannot be captured. Current status: ${existingOrder.data.status}`
+      );
+    }
+
+    // 6. Extract capture information
+    const capture =
+      data?.purchase_units?.[0]?.payments?.captures?.[0];
+
+    if (!capture) {
+      throw new CustomError(400, "No capture found");
+    }
+
+    // 7. Verify capture status
+    if (capture.status !== "COMPLETED") {
+      throw new CustomError(400, "Payment was not completed");
+    }
+
+    // 8. Extract payment breakdown
+    const breakdown = capture.seller_receivable_breakdown;
+
+    const paymentData = {
+      orderId: data.id,
+      captureId: capture.id,
+      status: capture.status,
+
+      currency: capture.amount.currency_code,
+
+      grossAmount: Number(
+        breakdown?.gross_amount?.value || capture.amount.value
+      ),
+
+      paypalFee: Number(
+        breakdown?.paypal_fee?.value || 0
+      ),
+
+      netAmount: Number(
+        breakdown?.net_amount?.value || capture.amount.value
+      ),
+
+      payerId: data.payer?.payer_id,
+      payerEmail: data.payer?.email_address,
+
+      payerName: data.payer?.name
+        ? `${data.payer.name.given_name || ""} ${
+            data.payer.name.surname || ""
+          }`.trim()
+        : undefined,
+
+      sellerProtection: capture.seller_protection?.status,
+
+      captureDate: new Date(capture.create_time),
+    };
+
+    // 9. Save payment and activate page
+    const addPayment = await Page.findOneAndUpdate(
+      {
+        _id: pageId,
+
+        // Prevent duplicate capture
+        "paymentData.captureId": {
+          $ne: capture.id,
+        },
+      },
+      {
+        $set: {
+          status: "active",
+        },
+
+        $push: {
+          paymentData,
+        },
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    // 10. Handle failed update or duplicate capture
+    if (!addPayment) {
+
+      // Check whether the page exists
+      const pageExists = await Page.exists({
+        _id: pageId,
+      });
+
+      if (!pageExists) {
+        throw new CustomError(404, "Page not found");
+      }
+
+      // Payment was already recorded
+      const duplicate = await Page.findOne({
+        _id: pageId,
+        "paymentData.captureId": capture.id,
+      });
+
+      if (duplicate) {
+        return res.json({
+          success: true,
+          msg: "Payment already recorded",
+          addPayment: duplicate,
+        });
+      }
+
+      throw new CustomError(
+        500,
+        "Payment completed but database update failed"
+      );
+    }
+
+    // 11. Successful payment
+    return res.json({
+      success: true,
+      msg: "Payment completed successfully",
+      addPayment,
+    });
+
+  } catch (err) {
+
+    console.log(
+      err.response?.data || err.message
+    );
+
+    return res.status(err.statusCode || 500).json({
+      success: false,
+      msg: err.response?.data || err.message,
+    });
+  }
+};
+
+
