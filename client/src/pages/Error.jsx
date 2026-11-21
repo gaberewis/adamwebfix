@@ -30,7 +30,7 @@ const Error = () => {
     return <h3>Server error. Please try again later.</h3>;
   }
   
-  return <h3>Something went wrong...</h3>;
+  return <p>Something went wrong...</p>;
 
 }
 

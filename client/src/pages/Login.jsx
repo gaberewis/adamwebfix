@@ -16,7 +16,7 @@ const Login = () => {
                     <SubmitButton />
                     <p className="margin-t">
                         Not a member yet?{" "}
-                        <Link to="/register" className="member-btn">
+                        <Link to="/register" >
                             Register
                         </Link>
                     </p>

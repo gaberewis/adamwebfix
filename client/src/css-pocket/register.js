@@ -2,15 +2,13 @@ import styled from "styled-components";
 
 const Stl = styled.main`
 
+
 .check-t {
   display: flex;
   align-items: center;
   gap: .6rem;
 
-  a {
-    color: #009cde;
-    text-decoration: underline;
-  }
+ 
 
   /* Hide default checkbox */
   input[type="checkbox"] {

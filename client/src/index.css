@@ -312,7 +312,10 @@ button:disabled {
   text-transform: capitalize;
 }
 
-
+.form a {
+    color: #009cde;
+    text-decoration: underline;
+  }
 
 /* title */
 
