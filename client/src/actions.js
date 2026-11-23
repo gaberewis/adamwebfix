@@ -45,7 +45,7 @@ export const clientMsg = async ({ request }) => {
   try {
 
     await axios.post('/api/user/client-msg', data);
-    return null;
+    return redirect('/request-done');
 
   } catch (error) {
     console.log(error.response?.data?.msg);

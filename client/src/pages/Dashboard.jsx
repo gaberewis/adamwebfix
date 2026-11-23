@@ -4,20 +4,11 @@ import { Navbar } from '../components'
 import { useContext, createContext } from 'react';
 
 
-
-
 const DashContext = createContext();
-
 const Dashboard = () => {
-
-const { user, pages } = useLoaderData();
-
-
-
+    const { user, pages } = useLoaderData();
 
     const navigate = useNavigate();
-
-
     const logout = async () => {
         try {
             await axios.post("/api/user/logout");
@@ -26,21 +17,17 @@ const { user, pages } = useLoaderData();
             console.log(error);
         }
     };
-
     return (
         <DashContext.Provider
             value={{
                 logout,
                 user,
-              pages,
-
+                pages,
             }}
         >
-            <Navbar  dashboard={true} logout={ logout } />
+            <Navbar dashboard={true} logout={logout} />
             < Outlet />
         </DashContext.Provider>
-
-
     )
 }
 

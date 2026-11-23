@@ -8,7 +8,7 @@ import {
     logout,  
    clientMsg,
     getClientRequest, 
-    currentUser,
+    getUser,
     editUser,
     forgetPassword, resetPassword,
 } from '../controllers/user.js';
@@ -19,7 +19,7 @@ import {
 
 const router = Router();
 router.get('/client-msg', getClientRequest);
-router.get('/getuser', authenticateUser, userPayload,  currentUser);
+router.get('/getuser', authenticateUser, userPayload,  getUser);
 router.post('/register', registerValidation,  registerUser);
 router.post('/login', loginValidation,  login);
 router.post('/logout', authenticateUser, logout);

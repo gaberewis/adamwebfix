@@ -54,10 +54,12 @@ export const login = async (req, res) => {
 
 
 
-export const currentUser = async (req, res) => {
+export const getUser = async (req, res) => {
   const user = req.user 
-  const pages = await Page.find({ userid: user.userId }).sort({ createdAt: -1 }).lean();
-  res.status(200).json({ user, pages  });
+  
+  if(!user) throw new CustomError(401, 'Invalid credentials');
+  const pages = await Page.find({ userid: user.userId }).sort({ createdAt: -1 });
+  res.status(200).json({ user, pages : pages || null  });
 };
 
 
@@ -144,11 +146,16 @@ export const resetPassword = async (req, res) => {
 
 
 export const logout = (req, res) => {
- res.cookie('token', token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: 'strict',
-});
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+  });
+
+  return res.status(200).json({
+    success: true,
+    message: 'Logged out successfully',
+  });
 };
 
 export const clientMsg = async (req, res) => {

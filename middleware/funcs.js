@@ -35,19 +35,11 @@ export const verifyToken = (token) => {
 
 export const authenticateUser = (req, res, next) => {
   const { token } = req.cookies;
-  if(!token) throw CustomError(401, 'Invalid authentication credentials')
+  if(!token) throw new CustomError(401, 'Invalid authentication credentials')
 next();
 
 }
 
-export const authenticateAdmin = (...roles) => {
-  return (req, res, next) => {
-    if (!roles.includes(req.user.userRole)) {
-      throw new CustomError(403, 'Unauthorized to access this route');
-    }
-    next();
-  };
-};
 
 
 export const userPayload = (req, res, next) => {
@@ -93,3 +85,11 @@ export const sendEmail = async ({ to, subject, html }) => {
 };
 
 
+export const authenticateAdmin = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.userRole)) {
+      throw new CustomError(403, 'Unauthorized to access this route');
+    }
+    next();
+  };
+};
