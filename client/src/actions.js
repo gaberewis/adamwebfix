@@ -4,13 +4,12 @@ import axios from 'axios';
 export const registerAction = async ({ request }) => {
   const formData = await request.formData();
   const email = formData.get('email');
-  formData.set('email', email.toLowerCase());
+  formData.set('email', email.trim().toLowerCase());
   const data = Object.fromEntries(formData);
   try {
     await axios.post('/api/user/register', data);
     return redirect('/login');
   } catch (error) {
-    console.log(error.response?.data?.msg);
     console.log('BACKEND ERROR:', error.response?.data);
     const errMsg = error.response?.data?.msg || 'Registration failed';
     return { errMsg };
@@ -18,41 +17,24 @@ export const registerAction = async ({ request }) => {
   }
 };
 
-export const loginAction = async ({ request }) => {
 
+export const loginAction = async ({ request }) => {
   const formData = await request.formData();
-  const email = formData.get('email');
-  formData.set('email', email.toLowerCase());
+
+  const email = formData.get('email')?.trim().toLowerCase() || '';
+  formData.set('email', email);
   const data = Object.fromEntries(formData);
   try {
-
     await axios.post('/api/user/login', data);
     return redirect('/dashboard');
-
   } catch (error) {
-    console.log('BACKEND ERROR:', error.response?.data.msg);
-    const errMsg = error.response?.data?.msg || 'Login failed';
+    console.error('Login Error:', error.response?.data || error.message);
+    const errMsg =
+      error.response?.data?.msg || 'Login failed';
     return { errMsg };
   }
+};
 
-}
-
-export const clientMsg = async ({ request }) => {
-
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-
-  try {
-
-    await axios.post('/api/user/client-msg', data);
-    return redirect('/request-done');
-
-  } catch (error) {
-    console.log(error.response?.data?.msg);
-    const errMsg = error.response?.data?.msg || 'Request faild';
-    return { errMsg };
-  }
-}
 
 export const createPage = async ({ request }) => {
 
@@ -63,11 +45,8 @@ export const createPage = async ({ request }) => {
     return redirect('/dashboard');
 
   } catch (error) {
-    console.log(error.response?.data?.msg || 'Request faild');
-
     const errMsg = error.response?.data?.msg || 'Request faild';
     return { errMsg }
-
   }
 };
 
@@ -97,7 +76,6 @@ export const forgetPassword = async ({ request }) => {
 
 
   } catch (error) {
-    console.log(error.response?.data?.msg);
     const errMsg = error.response?.data?.msg || 'Request faild';
     return { errMsg };
   }
@@ -114,7 +92,6 @@ export const resetPassword = async ({ request }) => {
     return redirect('/login');
 
   } catch (error) {
-    console.log(error.response?.data?.msg || 'Request faild');
     const errMsg = error.response?.data?.msg || 'Request faild';
     return { errMsg };
 
@@ -128,7 +105,6 @@ export const editPage = async ({ request, params }) => {
     await axios.patch(`/api/page/${params.id}`, formData);
     return redirect('/dashboard');
   } catch (error) {
-    console.log(error.response?.data?.msg || "Request faild");
     const errMsg = error.response?.data?.msg || 'Request faild';
     return { errMsg }
 
@@ -145,14 +121,27 @@ export const reportPage = async ({ request, params }) => {
     return { reported };
 
   } catch (error) {
-
-    console.error('Report Faild :', error.response?.data.msg);
     const errMsg = error.response?.data.msg || "Somthing want wrong";
     return { errMsg }
   }
 
 }
 
+export const clientMsg = async ({ request }) => {
+
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  try {
+
+    await axios.post('/api/user/client-msg', data);
+    return redirect('/request-done');
+
+  } catch (error) {
+    const errMsg = error.response?.data?.msg || 'Request faild';
+    return { errMsg };
+  }
+}
 
 
 

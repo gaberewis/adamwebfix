@@ -1,5 +1,5 @@
 
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const imageSchema = new mongoose.Schema(
   {
@@ -19,40 +19,39 @@ const specItem = new mongoose.Schema(
 
 const paymenSchema = new mongoose.Schema(
   {
-orderId: String,
-  captureId: String,
-  status: String,
-  currency: String,
-  grossAmount: Number,
-  paypalFee: Number,
-  netAmount: Number,
-  payerId: String,
-  payerEmail: String,
-  payerName: String,
-  sellerProtection: String,
-  captureDate: Date
-  } 
+    orderId: String,
+    captureId: String,
+    status: String,
+    currency: String,
+    grossAmount: Number,
+    paypalFee: Number,
+    netAmount: Number,
+    payerId: String,
+    payerEmail: String,
+    payerName: String,
+    sellerProtection: String,
+    captureDate: Date
+  }
 );
-
 
 const pagesSchema = new mongoose.Schema(
   {
-    company: String,
-    product: String,
+    company: { type: String, trim: true },
+    product: { type: String, trim: true },
     price: Number,
     discount: Number,
     currency: String,
-    description: String,
-    phone: String,
-    email: String,
-    whatsapp: String,
-    address: String,
-    paymentData:[paymenSchema], 
+    description: { type: String, trim: true },
+    phone: { type: String, trim: true },
+    email: { type: String, trim: true },
+    whatsapp: { type: String, trim: true },
+    address: { type: String, trim: true },
+    paymentData: [paymenSchema],
     order: {
       type: String,
-      enum: [ "whatsapp", "phone", "email"],
+      enum: ["whatsapp", "phone", "email"],
       default: "whatsapp"
-    },    
+    },
     status: {
       type: String,
       enum: ["active", "inactive", "deactivated", "blocked"],
@@ -61,20 +60,20 @@ const pagesSchema = new mongoose.Schema(
     userid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required : true,
+      required: true,
     },
 
     images: [imageSchema],
-    specification : [specItem],
-    reported : {
-      type : Number,
-      default : 0,
+    specification: [specItem],
+    reported: {
+      type: Number,
+      default: 0,
     },
-    report : {
-      type : [String],
-      default : []
+    report: {
+      type: [String],
+      default: []
     },
-    
+
   },
   { timestamps: true }
 );
