@@ -1,4 +1,4 @@
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useActionData } from 'react-router-dom';
 import { FormRow, FormRowSelect, SubmitButton, currencies } from '../components';
 import Stl from '../css-pocket/create-edit';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ import { DashboardContext } from './Dashboard';
 const CreatePage = () => {
 
     const { user } = DashboardContext();
-    
+    const action = useActionData();
 const orderContact = ["whatsapp", "phone", "email"]
     const [specification, setSpecification] = useState([]);
  
@@ -79,6 +79,7 @@ const orderContact = ["whatsapp", "phone", "email"]
                         <RiAddBoxFill size={22} /></span></p> : ""}
             <input type="hidden" name="specification" value={JSON.stringify(specification)} />
             <input type="hidden" name="userid" value={user.userId} />
+            {action?.errMsg && (<p className='error'>{ action.errMsg }</p>) }
             <SubmitButton />
         </Form>
 

@@ -1,4 +1,4 @@
-import { Form, Link, useLoaderData } from 'react-router-dom';
+import { Form, Link, useActionData, useLoaderData } from 'react-router-dom';
 import { FormRow, FormRowSelect, SubmitButton, currencies } from '../components';
 import Stl from '../css-pocket/create-edit';
 import { RiDashboardFill, RiAddBoxFill } from "react-icons/ri";
@@ -10,6 +10,7 @@ const EditPage = () => {
 
 
     const { page } = useLoaderData();
+    const action = useActionData();
     const { company, product, price, discount,
         currency, description, phone, email, whatsapp,
         address, order, specification, images
@@ -94,6 +95,7 @@ const EditPage = () => {
                     <span onClick={addSpecification}>
                         <RiAddBoxFill size={22} /></span></p> : ""}
             <input type="hidden" name="specification" value={JSON.stringify(specs)} />
+            {action?.errMsg && (<p className='error'>{action.errMsg}</p>)}
             <SubmitButton />
         </Form>
     </Stl>)
